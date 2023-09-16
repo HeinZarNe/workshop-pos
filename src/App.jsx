@@ -26,6 +26,8 @@ import Daily from "./pages/finance/Daily";
 import Monthly from "./pages/finance/Monthly";
 import Yearly from "./pages/finance/Yearly";
 import Custom from "./pages/finance/Custom";
+import StockReport from "./pages/report/StockReport";
+import SaleReport from "./pages/report/SaleReport";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -200,6 +202,23 @@ const App = () => {
         }
       />
       <Route
+        path="/stock-report"
+        element={
+          <Guard>
+            {" "}
+            <StockReport />{" "}
+          </Guard>
+        }
+      />
+      <Route
+        path="/sale-report"
+        element={
+          <Guard>
+            <SaleReport />
+          </Guard>
+        }
+      />
+      <Route
         path="/custom"
         element={
           <Guard>
@@ -208,7 +227,6 @@ const App = () => {
           </Guard>
         }
       />
-      
     </Routes>
   );
 };

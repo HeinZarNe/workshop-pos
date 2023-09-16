@@ -46,7 +46,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui", "flowbite/plugin")],
+  plugins: [
+    require("daisyui", "flowbite/plugin")
+  ],
   colors: {
     primary: "#B19777",
   },

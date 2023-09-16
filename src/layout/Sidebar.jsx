@@ -103,10 +103,10 @@ const Sidebar = () => {
           </div>
           <div className="collapse-content">
             <ul className="text-[18px]">
-              <NavLink to={"/sale/cashier"}>
+              <NavLink to={"/stock-report"}>
                 <li className=" text-white ml-10 mb-3">Stock</li>
               </NavLink>
-              <NavLink to={"/sale/recent"}>
+              <NavLink to={"/sale-report"}>
                 <li className=" text-white ml-10 mb-3">Sale</li>
               </NavLink>
             </ul>
