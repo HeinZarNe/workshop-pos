@@ -3,21 +3,20 @@
 @tailwind utilities;
 
 .active {
-  color: #B19777;
-  ;
+  color: #b19777;
 }
 
 .button {
   transition: all;
-  background-color: #B19777;
+  background-color: #b19777;
   color: white;
-  border: 1px solid #B19777;
+  border: 1px solid #b19777;
 }
 
 .button:hover {
   background-color: #323232;
-  color: #B19777;
-  border: 1px solid #B19777;
+  color: #b19777;
+  border: 1px solid #b19777;
 }
 
 .modal {
@@ -27,17 +26,65 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000080;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.number-btn{
-  border-top: 1px solid #B19777;
-  border-right: 1px solid #B19777;
+.number-btn {
+  border-top: 1px solid #b19777;
+  border-right: 1px solid #b19777;
 }
 
-.prodInCartActive{
+.prodInCartActive {
   background-color: #323232;
+}
+
+div[data-saleAction="true"] {
+  border: 1px solid white;
+  padding: 2px 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.sale td {
+  border: 0px;
+  border-top: 1px solid #535353 !important;
+  color: white !important;
+}
+.sale th {
+  border-bottom: 1px solid #535353 !important;
+  color: white !important;
+}
+.mantine-1hhswje[data-hover] > tbody > tr:hover {
+  background-color: #323232;
+}
+
+.mantine-1hhswje {
+  border: 1px solid #535353;
+}
+
+.sale .bottom-section button {
+  color: white !important;
+}
+.sale .bottom-section button:hover {
+  background-color: #535353;
+}
+.mantine-1wc3ure[data-active] {
+  border-color: transparent;
+  color: #fff;
+  background-color: #b19777;
+}
+
+button:disabled {
+  background: transparent;
+  color: #848484;
+  border: 1px solid #848484;
+}
+
+button:disabled:hover {
+  background: transparent;
+  color: #848484;
+  border: 1px solid #848484;
 }

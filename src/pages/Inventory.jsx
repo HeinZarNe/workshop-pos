@@ -17,7 +17,7 @@ const Inventory = () => {
             <p className=" text-gray-500">Inventory/ Products</p>
           </div>
           <div className=" flex gap-3">
-            <Link to={"/"}>
+            <Link to={"/sale/cashier"}>
               <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
                 {" "}
                 Go To Shop

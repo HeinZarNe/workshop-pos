@@ -10,7 +10,7 @@ import { Navbar } from "flowbite-react";
 
 const Sidebar = () => {
   return (
-    <div className=" inline-block w-1/5 bg-[#323232] h-screen overflow-auto">
+    <div className=" inline-block w-1/5 bg-[#323232] h-[calc(100vh-57px)] overflow-auto">
       {/* <Navbar /> */}
       <div className="">
         {/* overview */}
@@ -44,7 +44,9 @@ const Sidebar = () => {
               <NavLink to={"/sale/cashier"}>
                 <li className=" text-white ml-10 mb-3">Cashier</li>
               </NavLink>
-              <li className=" text-white ml-10 mb-3">Recent</li>
+              <NavLink to={"/sale/recent"}>
+                <li className=" text-white ml-10 mb-3">Recent</li>
+              </NavLink>
             </ul>
           </div>
         </div>
@@ -76,7 +78,7 @@ const Sidebar = () => {
               <NavLink to={"/stock"}>
                 <li className=" text-white ml-10 mb-3">Stock Control</li>
               </NavLink>
-              <NavLink to={'/brand'}>
+              <NavLink to={"/brand"}>
                 <li className=" text-white ml-10 mb-3">Manage Brands</li>
               </NavLink>
             </ul>
@@ -102,7 +104,7 @@ const Sidebar = () => {
           <div className="collapse-content">
             <ul className="text-[18px]">
               <NavLink to={"/users"}>
-                <li className=" text-white ml-10 mb-3">OverView</li>
+                <li className=" text-white ml-10 mb-3">Overview</li>
               </NavLink>
               <Link to={"/users/create"}>
                 <li className=" text-white ml-10 mb-3">Create User</li>

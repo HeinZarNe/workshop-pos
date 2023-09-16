@@ -1,20 +1,40 @@
-import React from 'react'
-import Rootlayout from '../layout/Rootlayout'
-import BrandTable from '../components/brand/BrandTable'
-import { Link } from 'react-router-dom'
-import { AiOutlinePlus } from 'react-icons/ai'
-import AddBrand from '../components/brand/AddBrand'
-import { useState } from 'react'
-import ModalPhoto from '../components/ModalPhoto'
+import React from "react";
+import Rootlayout from "../layout/Rootlayout";
+import BrandTable from "../components/brand/BrandTable";
+import { Link } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
+import AddBrand from "../components/brand/AddBrand";
+import { useState } from "react";
+import ModalPhoto from "../components/ModalPhoto";
 
 const ManageBrand = () => {
-  const [showSidebar,setShowSideBar] = useState(false)
-  const [showPhotoModal,setShowPhotoModal] = useState(false)
-
+  const [showSidebar, setShowSideBar] = useState(false);
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [tableData, setTableData] = useState([]);
   return (
     <Rootlayout>
-            {showSidebar && <AddBrand showPhotoModal={showPhotoModal} setShowPhotoModal={setShowPhotoModal} showSidebar={showSidebar} setShowSideBar={setShowSideBar} /> }
-            {showPhotoModal ? (<ModalPhoto setShowPhotoModal={setShowPhotoModal} showPhotoModal={showPhotoModal} />) : '' }
+      {showSidebar && (
+        <AddBrand
+          showPhotoModal={showPhotoModal}
+          setShowPhotoModal={setShowPhotoModal}
+          showSidebar={showSidebar}
+          setTableData={setTableData}
+          setShowSideBar={setShowSideBar}
+          selectedPhoto={selectedPhoto}
+          setSelectedPhoto={setSelectedPhoto}
+        />
+      )}
+      {showPhotoModal ? (
+        <ModalPhoto
+          setShowPhotoModal={setShowPhotoModal}
+          showPhotoModal={showPhotoModal}
+          setSelectedPhoto={setSelectedPhoto}
+          selectedPhoto={selectedPhoto}
+        />
+      ) : (
+        ""
+      )}
 
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
@@ -29,8 +49,11 @@ const ManageBrand = () => {
                 Go To Shop
               </button>
             </Link>
-            <Link to={''}>
-              <button onClick={() => setShowSideBar(true)} className=" px-4 py-2 rounded-lg flex items-center gap-2 button">
+            <Link to={""}>
+              <button
+                onClick={() => setShowSideBar(true)}
+                className=" px-4 py-2 rounded-lg flex items-center gap-2 button"
+              >
                 {" "}
                 <AiOutlinePlus />
                 Add Brand
@@ -40,9 +63,7 @@ const ManageBrand = () => {
         </div>
         {/* product overview */}
         <div className=" my-5">
-          <h1 className="text-[21px] font-[500] text-white">
-            Brands Overview
-          </h1>
+          <h1 className="text-[21px] font-[500] text-white">Brands Overview</h1>
           {/* search */}
           <div className="flex justify-between">
             <div class="relative my-3">
@@ -72,12 +93,11 @@ const ManageBrand = () => {
               />
             </div>
           </div>
-          <BrandTable />
+          <BrandTable tableData={tableData} setTableData={setTableData} />
         </div>
       </div>
     </Rootlayout>
-  )
-}
+  );
+};
 
-export default ManageBrand
-
+export default ManageBrand;

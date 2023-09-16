@@ -1,0 +1,6 @@
+.img-container .action-btns {
+  display: none;
+}
+.img-container:hover .action-btns {
+  display: flex;
+}

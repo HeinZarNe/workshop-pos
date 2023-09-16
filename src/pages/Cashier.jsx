@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useGetProductQuery } from "../services/authApi";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Cashier = () => {
   const navigate = useNavigate();
@@ -9,8 +9,8 @@ const Cashier = () => {
   const { data } = useGetProductQuery(token);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
-  const [currentSelectedProductId, setCurrentSelectedProductId] = useState(null);
-
+  const [currentSelectedProductId, setCurrentSelectedProductId] =
+    useState(null);
 
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
@@ -47,7 +47,7 @@ const Cashier = () => {
     setSelectedQuantities((prevQuantities) => {
       const productId = currentSelectedProductId;
       const currentQuantity = prevQuantities[productId] || 0;
-      const newQuantity = Math.floor(currentQuantity / 10); 
+      const newQuantity = Math.floor(currentQuantity / 10);
       const updatedQuantities = {
         ...prevQuantities,
         [productId]: newQuantity >= 1 ? newQuantity : 0,
@@ -80,7 +80,6 @@ const Cashier = () => {
     return total;
   };
 
-
   const handleProductInCartSelect = (productId) => {
     setCurrentSelectedProductId(productId);
     setSelectedProducts((prevSelected) => {
@@ -92,22 +91,28 @@ const Cashier = () => {
   };
 
   const handlePaymentClick = () => {
-    const total = calculateTotal(); 
+    const total = calculateTotal();
     const checkoutData = {
       selectedProducts,
       selectedQuantities,
       total,
       data,
     };
-    navigate('/checkout', { state: { checkoutData } });
+    navigate("/checkout", { state: { checkoutData } });
   };
 
+  const handleGoBack = () => {
+    window.history.back();
+  };
   return (
     <div className="bg-[#272727]">
       <div className="flex gap-5 ">
         <div className="w-3/4  min-h-screen">
           <div className="flex justify-between mx-5 my-5">
             <div className="">
+              <p className="cursor-pointer " onClick={handleGoBack}>
+                {"<"} Back
+              </p>
               <h1 className="text-2xl text-[#B19777]">Sale</h1>
               <p className="text-white">Sale / Cashier</p>
             </div>
@@ -137,22 +142,26 @@ const Cashier = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
             {data?.data?.map((product) => (
               <div
                 key={product.id}
-                className={`product cursor-pointer h-[280px] w-[250px] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
+                className={`product cursor-pointer h-[280px] w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
                   selectedProducts.includes(product.id) ? "active" : ""
                 }`}
                 onClick={() => handleProductClick(product.id)}
               >
-                <img src={product.photo} className=" rounded-t-lg w-full h-2/3" alt="" />
-                <div className="p-5">
+                <img
+                  src={product.photo}
+                  className=" rounded-t-lg w-full h-2/3"
+                  alt=""
+                />
+                <div className="p-5 text-right">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#B19777]">
                     {product.name}
                   </h5>
                   <p className="mb-3 font-normal  text-gray-400">
-                    {product.price}
+                    {product.price} ကျပ်
                   </p>
                 </div>
               </div>
@@ -171,9 +180,9 @@ const Cashier = () => {
                 );
 
                 if (!selectedProduct) {
-                  return null; 
+                  return null;
                 }
-                const quantity = selectedQuantities[productId] || 0; 
+                const quantity = selectedQuantities[productId] || 0;
                 const totalPrice = selectedProduct.price * quantity;
 
                 return (
@@ -184,7 +193,7 @@ const Cashier = () => {
                         ? "prodInCartActive"
                         : ""
                     }`}
-                    onClick={()=>handleProductInCartSelect(productId)}
+                    onClick={() => handleProductInCartSelect(productId)}
                   >
                     <div className="">
                       <h5 className="mb-2 text-2xl tracking-tight text-[#B19777]">
@@ -207,19 +216,19 @@ const Cashier = () => {
             <div className="buttons text-gray-400">
               <div className="grid grid-cols-3 h-20">
                 <button
-                  onClick={() => handleNumberClick( "7")}
+                  onClick={() => handleNumberClick("7")}
                   className="col-span-1 number-btn"
                 >
                   7
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "8")}
+                  onClick={() => handleNumberClick("8")}
                   className="col-span-1 number-btn"
                 >
                   8
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "9")}
+                  onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   9
@@ -233,19 +242,19 @@ const Cashier = () => {
               </div>
               <div className="grid grid-cols-3 h-20">
                 <button
-                  onClick={() => handleNumberClick( "4")}
+                  onClick={() => handleNumberClick("4")}
                   className="col-span-1 number-btn"
                 >
                   4
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "5")}
+                  onClick={() => handleNumberClick("5")}
                   className="col-span-1 number-btn"
                 >
                   5
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "6")}
+                  onClick={() => handleNumberClick("6")}
                   className="col-span-1 number-btn"
                 >
                   6
@@ -259,19 +268,19 @@ const Cashier = () => {
               </div>
               <div className="grid grid-cols-3 h-20">
                 <button
-                 onClick={() => handleNumberClick( "1")}
+                  onClick={() => handleNumberClick("1")}
                   className="col-span-1 number-btn"
                 >
                   1
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "2")}
+                  onClick={() => handleNumberClick("2")}
                   className="col-span-1 number-btn"
                 >
                   2
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "3")}
+                  onClick={() => handleNumberClick("3")}
                   className="col-span-1 number-btn"
                 >
                   3
@@ -291,7 +300,7 @@ const Cashier = () => {
                   +/-
                 </button>
                 <button
-                  onClick={() => handleNumberClick( "0")}
+                  onClick={() => handleNumberClick("0")}
                   className="col-span-1 number-btn"
                 >
                   0
@@ -312,7 +321,7 @@ const Cashier = () => {
             </div>
             <div className="grid grid-cols-1 bg-[#B19777]  text-white">
               <button
-                onClick={ handlePaymentClick}
+                onClick={handlePaymentClick}
                 className=" number-btn h-[49px]"
               >
                 Payment
