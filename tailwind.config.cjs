@@ -3,7 +3,9 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/flowbite/**/*.js"
+    // "node_modules/daisyui/dist/**/*.js",
+    // "node_modules/react-daisyui/dist/**/*.js",
   ],
   theme: {
     extend: {
@@ -18,7 +20,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui", "flowbite/plugin")],
+  plugins: [require( "flowbite/plugin","daisyui")],
   colors: {
     primary: "#B19777",
   },

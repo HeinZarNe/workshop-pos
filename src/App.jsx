@@ -22,6 +22,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addphoto } from "./services/mediaSlice";
 import { useGetPhotoQuery } from "./services/authApi";
 import { useState } from "react";
+import Daily from "./pages/finance/Daily";
+import Monthly from "./pages/finance/Monthly";
+import Yearly from "./pages/finance/Yearly";
+import Custom from "./pages/finance/Custom";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -168,6 +172,43 @@ const App = () => {
           </Guard>
         }
       />
+      <Route
+        path="/daily"
+        element={
+          <Guard>
+            {" "}
+            <Daily />{" "}
+          </Guard>
+        }
+      />
+      <Route
+        path="/monthly"
+        element={
+          <Guard>
+            {" "}
+            <Monthly />{" "}
+          </Guard>
+        }
+      />
+      <Route
+        path="/yearly"
+        element={
+          <Guard>
+            {" "}
+            <Yearly />{" "}
+          </Guard>
+        }
+      />
+      <Route
+        path="/custom"
+        element={
+          <Guard>
+            {" "}
+            <Custom />{" "}
+          </Guard>
+        }
+      />
+      
     </Routes>
   );
 };

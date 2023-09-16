@@ -1,9 +1,9 @@
 import React from "react";
 import { BiHomeCircle } from "react-icons/bi";
-import { BsChevronDown, BsShopWindow, BsClipboard } from "react-icons/bs";
+import { BsChevronDown, BsShopWindow, BsClipboard, BsCashCoin } from "react-icons/bs";
 import { BiUserPlus, BiLogOut } from "react-icons/bi";
 import { TfiGallery } from "react-icons/tfi";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaChartPie, FaRegUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
 import { Navbar } from "flowbite-react";
@@ -80,6 +80,68 @@ const Sidebar = () => {
               </NavLink>
               <NavLink to={"/brand"}>
                 <li className=" text-white ml-10 mb-3">Manage Brands</li>
+              </NavLink>
+            </ul>
+          </div>
+        </div>
+        {/* Report */}
+        <div className="collapse border-b border-stone-500 rounded-none">
+          <input type="checkbox" />
+          <div className="collapse-title">
+            <div className="flex justify-between items-center  px-2">
+              {/* <div className="  border-b border-stone-500"> */}
+              <span className=" text-xl mr-2 text-white flex items-center gap-2">
+                <FaChartPie />
+                <h1 className=" text-[18px]">Report</h1>
+              </span>
+              <span className=" mt-3 text-white ml-10">
+                <BsChevronDown />{" "}
+              </span>
+
+              {/* </div> */}
+            </div>
+          </div>
+          <div className="collapse-content">
+            <ul className="text-[18px]">
+              <NavLink to={"/sale/cashier"}>
+                <li className=" text-white ml-10 mb-3">Stock</li>
+              </NavLink>
+              <NavLink to={"/sale/recent"}>
+                <li className=" text-white ml-10 mb-3">Sale</li>
+              </NavLink>
+            </ul>
+          </div>
+        </div>
+        {/* finance */}
+        <div className="collapse border-b border-stone-500 rounded-none">
+          <input type="checkbox" />
+          <div className="collapse-title">
+            <div className="flex justify-between items-center  px-2">
+              {/* <div className="  border-b border-stone-500"> */}
+              <span className=" text-xl mr-2 text-white flex items-center gap-2">
+                <BsCashCoin />
+                <h1 className=" text-[18px]">Finance</h1>
+              </span>
+              <span className=" mt-3 text-white ml-10">
+                <BsChevronDown />{" "}
+              </span>
+
+              {/* </div> */}
+            </div>
+          </div>
+          <div className="collapse-content">
+            <ul className="text-[18px]">
+              <NavLink to={"/daily"}>
+                <li className=" text-white ml-10 mb-3">Daily</li>
+              </NavLink>
+              <NavLink to={"/monthly"}>
+                <li className=" text-white ml-10 mb-3">Monthly</li>
+              </NavLink>
+              <NavLink to={"/yearly"}>
+                <li className=" text-white ml-10 mb-3">Yearly</li>
+              </NavLink>
+              <NavLink to={"/custom"}>
+                <li className=" text-white ml-10 mb-3">Custom</li>
               </NavLink>
             </ul>
           </div>
