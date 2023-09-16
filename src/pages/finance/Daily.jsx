@@ -1,10 +1,9 @@
 import React from "react";
 import Rootlayout from "../../layout/Rootlayout";
 import { Link, NavLink } from "react-router-dom";
-// import { Dropdown } from "react-daisyui";
+import { Dropdown } from "react-daisyui";
 import "../../main.jsx";
 import { PiExportBold } from "react-icons/pi";
-// import DatePicker from "../../components/DatePicker";
 const Daily = () => {
   return (
     <Rootlayout>
@@ -45,15 +44,14 @@ const Daily = () => {
               Go to Shop
             </button>
           </NavLink> */}
-          {/* dropdown  */}
           <div className="">
             <button
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
-              class=" text-gray-300 border-2 gap-2  border-secondary font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class=" border-2 border-secondary gap-2 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center "
               type="button"
             >
-              <PiExportBold className="text-xl text-blue-400" /> Export
+              <PiExportBold className="text-lg text-blue-400"/> Export
               <svg
                 class="w-2.5 h-2.5 ml-2.5"
                 aria-hidden="true"
@@ -113,31 +111,6 @@ const Daily = () => {
                 </li>
               </ul>
             </div>
-          </div>
-          {/* date picker */}
-
-          {/* <div class="relative max-w-sm">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-              </svg>
-            </div>
-            <input
-              datepicker
-              datepicker-orientation="bottom right"
-              type="text"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Select date"
-            />
-          </div> */}
-          <div className="">
-            {/* <DatePicker/> */}
           </div>
         </div>
       </div>
