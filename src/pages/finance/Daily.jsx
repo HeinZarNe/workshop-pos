@@ -5,11 +5,21 @@ import { PiExportBold, PiFilePdf } from "react-icons/pi";
 import DatePicker from "../../components/DatePicker";
 import { FiCopy, FiSearch } from "react-icons/fi";
 import { BiPrinter } from "react-icons/bi";
-import { Pagination } from "@mantine/core";
+import { Loader, Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useGetDailySalesQuery } from "../../services/authApi";
 const Daily = () => {
-  const [activePage, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const token = localStorage.getItem("token");
+
+  const {
+    data: dailySalesData,
+    isLoading,
+    isSuccess,
+    isError,
+    refetch,
+  } = useGetDailySalesQuery(token);
 
   const tableData = [
     {
@@ -91,7 +101,7 @@ const Daily = () => {
                 Go To Shop
               </button>
             </Link> */}
-            <Link to={"/products/create"}>
+            <Link to={"/products"}>
               <button className=" px-4 py-2 mt-1 text-black rounded-lg flex items-center  button">
                 Go To Shop
               </button>
@@ -212,18 +222,18 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((data) => {
+                {dailySalesData?.daily_sales.map((data) => {
                   return (
                     <tr key={data.id} class=" border-b hover:bg-white/10 ">
                       <th
                         scope="row"
                         class="px-6 py-4 font-medium text-white whitespace-nowra"
                       >
-                        {data.no}
+                        {data.id}
                       </th>
-                      <td class="px-6 py-4">{data.vouncher}</td>
+                      <td class="px-6 py-4">{data.voucher_number}</td>
                       <td class="px-6 py-4">{data.time}</td>
-                      <td class="px-6 py-4  text-end">{data.qty}</td>
+                      <td class="px-6 py-4  text-end">{data.item_count}</td>
                       <td class="px-6 py-4  text-end">{data.cash}</td>
                       <td class="px-6 py-4  text-end">{data.tax}</td>
                       <td class="px-6 py-4  text-end">{data.total}</td>
@@ -244,32 +254,41 @@ const Daily = () => {
         </div>
         {/* last  */}
         <div className="">
-          <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
-            <div className="flex flex-row items-center border rounded">
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
+          {dailySalesData && (
+            <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
+              <div className="flex flex-row items-center border rounded">
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {dailySalesData.total_vouchers}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r py-2 px-6  border-white">
+                  <p className="text-sm text-base">Total Cash</p>
+                  <p className="text-xl font-bold text-white">
+                    {dailySalesData.total_cash}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Tax</p>
+                  <p className="text-xl font-bold text-white">
+                    {dailySalesData.total_tax}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total</p>
+                  <p className="text-xl font-bold text-white">
+                    {dailySalesData.total}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
-              </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
-              </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
-              </div>
-            </div>
-            {/* <Pagination
+              {/* <Pagination
               value={activePage}
               onChange={setPage}
               total={5}
               siblings={1}
             /> */}
-            <nav aria-label="Page navigation example">
+              {/* <nav aria-label="Page navigation example">
               <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
                 <li>
                   <a
@@ -344,8 +363,27 @@ const Daily = () => {
                   </a>
                 </li>
               </ul>
-            </nav>
-          </div>
+            </nav> */}
+              {/* <Pagination
+              total={dailySalesData?.meta?.last_page}
+              onChange={(e) => {
+                setPage(e);
+                refetch();
+              }}
+              onPreviousPage={(e) => {
+                setPage(page - 1);
+                refetch();
+              }}
+              onNextPage={(e) => {
+                setPage(page + 1);
+                refetch();
+              }}
+              boundaries={1}
+              defaultValue={1}
+              on
+            /> */}
+            </div>
+          )}
         </div>
       </div>
     </Rootlayout>

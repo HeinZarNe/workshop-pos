@@ -6,6 +6,7 @@ import { RiEdit2Fill } from "react-icons/ri";
 import Xbox from "../assets/images/XboxSeriesXController_HERO.jpg";
 import Swal from "sweetalert2";
 import {
+  useGetBrandQuery,
   useGetProductQuery,
   useStoreProductMutation,
   useUpdateProductMutation,
@@ -17,7 +18,7 @@ import {
 } from "react-icons/ai";
 import { useEffect } from "react";
 import ModalPhoto from "../components/ModalPhoto";
-import { Loader } from "@mantine/core";
+import { Loader, Select } from "@mantine/core";
 
 const AddProduct = ({ editState = false, setEditState }) => {
   const [section, setSection] = useState("info");
@@ -31,6 +32,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
     detailId: editState.id,
     token,
   });
+
+  const { data: brands } = useGetBrandQuery({ token, page: 0 });
 
   //for Photo Gallery
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -65,13 +68,15 @@ const AddProduct = ({ editState = false, setEditState }) => {
   );
 
   useEffect(() => {
-    setName(product?.data.name);
-    setBrand_name(product?.data.brand_name);
-    setActurl_price(product?.data.actual_price);
-    setSale_price(product?.data.sale_price);
-    setUnit(product?.data.unit);
-    setMoreInformation(product?.data.more_information);
-    setSelectedPhoto(product?.data.photo);
+    if (editState) {
+      setName(product?.data.name);
+      setBrand_name(product?.data.brand_name);
+      setActurl_price(product?.data.actual_price);
+      setSale_price(product?.data.sale_price);
+      setUnit(product?.data.unit);
+      setMoreInformation(product?.data.more_information);
+      setSelectedPhoto(product?.data.photo);
+    }
   }, [editState, product]);
 
   const navigate = useNavigate();
@@ -82,7 +87,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
       const res = updateProduct({
         productData: {
           name,
-          brand_name,
+          brand_id: brand_name,
           actual_price,
           sale_price,
           more_information,
@@ -106,10 +111,11 @@ const AddProduct = ({ editState = false, setEditState }) => {
         }));
       return;
     }
-    const res = storeProduct({
+    const res = await storeProduct({
       productData: {
         name,
-        brand_name,
+        brand_id: brand_name,
+        total_stock,
         actual_price,
         sale_price,
         more_information,
@@ -118,19 +124,19 @@ const AddProduct = ({ editState = false, setEditState }) => {
       },
       token,
     });
-    isSuccess &&
-      (await Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "A new product has been added!",
-        showConfirmButton: true,
 
-        confirmButtonText: "Go to Products",
-        preConfirm: () => {
-          navigate("/products");
-        },
-        allowOutsideClick: false,
-      }));
+    await Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "A new product has been added!",
+      showConfirmButton: true,
+
+      confirmButtonText: "Go to Products",
+      preConfirm: () => {
+        navigate("/products");
+      },
+      allowOutsideClick: false,
+    });
   };
   const GoToThisStep = (current) => {
     if (current === 1) {
@@ -144,9 +150,9 @@ const AddProduct = ({ editState = false, setEditState }) => {
         setSection("photo");
     }
   };
-
+  console.log(brand_name);
   return detailLoading ? (
-    <div className="w-[50vw] flex items-center justify-between h-[300px]">
+    <div className="w-full flex items-center justify-center h-[300px]">
       <Loader />
     </div>
   ) : editState && detailSuccess ? (
@@ -208,14 +214,22 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 <span className=" text-[17px] text-stone-300 font-bold">
                   Brand *
                 </span>
-                <input
-                  required
-                  value={brand_name}
-                  onChange={(e) => setBrand_name(e.target.value)}
-                  placeholder=""
-                  type="text"
+                <select
+                  onChange={(e) => {
+                    setBrand_name(Number(e.target.value));
+                  }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                />
+                >
+                  {brands?.data.map((item) => (
+                    <option
+                      key={item.id}
+                      value={item.id}
+                      selected={item.brand_name === brand_name && "selected"}
+                    >
+                      {item.brand_name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className=" flex justify-between">
@@ -284,6 +298,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                     Actual Price *
                   </span>
                   <input
+                    type="number"
                     required
                     value={actual_price}
                     onChange={(e) => {
@@ -292,7 +307,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    type="text"
                     className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
@@ -301,6 +315,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                     Sale Price *
                   </span>
                   <input
+                    type="number"
                     required
                     value={sale_price}
                     onChange={(e) => {
@@ -309,7 +324,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    type="text"
                     className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
@@ -407,14 +421,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 <div className="space-y-4 text-white">
                   <p>Name</p>
                   <p>Brand</p>
-                  <p>Stock</p>
                   <p>Unit</p>
                   <p>More Information</p>
                 </div>
                 <div className="space-y-4 text-white">
                   <p>: {name}</p>
                   <p>: {brand_name}</p>
-                  <p>: {total_stock}</p>
                   <p>: {unit || "-"}</p>
                   <p>: {more_information || "-"}</p>
                 </div>
@@ -535,6 +547,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              console.log(name, brand_name, total_stock, unit);
               name && brand_name && total_stock && unit && setSection("price");
             }}
             action=""
@@ -558,14 +571,21 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 <span className=" text-[17px] text-stone-300 font-bold">
                   Brand *
                 </span>
-                <input
-                  required
+                <select
+                  name="brand_name"
                   value={brand_name}
-                  onChange={(e) => setBrand_name(e.target.value)}
-                  placeholder=""
-                  type="text"
+                  onChange={(e) => {
+                    setBrand_name(Number(e.target.value));
+                    console.log(e.target.value);
+                  }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                />
+                >
+                  {brands?.data.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.brand_name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className=" flex justify-between">
                 <span className=" text-[17px] text-stone-300 font-bold">
@@ -575,7 +595,11 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   required
                   value={total_stock}
                   onChange={(e) => {
-                    if (e.target.value.length === 0 || e.target.value > 0) {
+                    if (
+                      (e.target.value.length === 0 &&
+                        !Number.isNaN(e.target.value)) ||
+                      e.target.value > 0
+                    ) {
                       setTotalStock(Number(e.target.value));
                     }
                   }}
@@ -627,7 +651,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               )}
               <button
                 disabled={[name, brand_name, total_stock, unit].some(
-                  (item) => item == false
+                  (item) => item === false
                 )}
                 type="submit"
                 className=" self-end py-2 px-4 rounded-lg button w-24 m-5"
@@ -659,7 +683,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    type="text"
+                    type="number"
                     className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
@@ -676,7 +700,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    type="text"
+                    type="number"
                     className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
