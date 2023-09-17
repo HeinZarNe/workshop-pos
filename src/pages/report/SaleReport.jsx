@@ -306,7 +306,6 @@ const SaleReport = () => {
               </div>
             </div>
           </div>
-          <div className="">sdsdfdsfds</div>
         </div>
       </div>
     </Rootlayout>
