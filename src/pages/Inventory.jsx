@@ -5,11 +5,24 @@ import { BsGrid } from "react-icons/bs";
 import ProductTables from "../components/products/ProductTables";
 import ProductCard from "../components/products/ProductCard";
 import { Link } from "react-router-dom";
+import AddStock from "../components/stock/AddStock";
 
 const Inventory = () => {
   const [view, setView] = useState("list");
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [stockData, setStockData] = useState({});
+  const [addStock, setAddStock] = useState(false);
   return (
     <Rootlayout>
+      {showSidebar && (
+        <AddStock
+          showSidebar={showSidebar}
+          setShowSideBar={setShowSidebar}
+          stockData={stockData}
+          setStockData={setStockData}
+          setAddStock={setAddStock}
+        />
+      )}
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
           <div className="">
@@ -90,7 +103,15 @@ const Inventory = () => {
               </button>
             </div>
           </div>
-          {view === "list" ? <ProductTables /> : <ProductCard />}
+          {view === "list" ? (
+            <ProductTables
+              setShowSidebar={setShowSidebar}
+              addStock={addStock}
+              setStockData={setStockData}
+            />
+          ) : (
+            <ProductCard />
+          )}
         </div>
       </div>
     </Rootlayout>

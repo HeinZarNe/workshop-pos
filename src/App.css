@@ -88,3 +88,33 @@ button:disabled:hover {
   color: #848484;
   border: 1px solid #848484;
 }
+
+.pagination {
+}
+.pagination button {
+  color: white;
+}
+.pagination button:disabled {
+  color: #262626 !important;
+  background-color: #414141 !important;
+  border: 0;
+}
+
+.pagination button:disabled:hover {
+  color: #262626 !important;
+  background-color: #414141 !important;
+}
+.pagination button:hover {
+  background-color: #535353 !important;
+}
+
+.edit-product {
+  position: fixed;
+  z-index: 99;
+  height: calc(100vh - 57px);
+  top: 57px;
+  right: 0;
+  background: #272727;
+  overflow-y: auto;
+  width: calc(100vw - 271.19px);
+}

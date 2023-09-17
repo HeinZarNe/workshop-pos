@@ -54,8 +54,13 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getProduct: build.query({
-      query: (token) => ({
-        url: "product",
+      query: ({ detailId, token, page }) => ({
+        url: detailId
+          ? "product/" + detailId
+          : page
+          ? `product?page=${page}`
+          : "product",
+
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -63,6 +68,19 @@ export const authApi = createApi({
     getStock: build.query({
       query: (token) => ({
         url: "stock",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    updateStock: build.mutation({
+      query: ({ data, token }) => ({
+        url: "stock/" + data?.id,
+        method: "PATCH",
+        body: {
+          product_id: data?.id,
+          quantity: data?.quantity,
+          more: data?.message,
+        },
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -89,7 +107,7 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     storeProduct: build.mutation({
-      query: (productData, token) => ({
+      query: ({ productData, token }) => ({
         url: "product",
         method: "POST",
         body: productData,
@@ -97,9 +115,22 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    updateProduct: build.mutation({
+      query: ({ productData, token }) => ({
+        url: "product",
+        method: "PATCH",
+        body: productData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getBrand: build.query({
-      query: (token) => ({
-        url: "brand",
+      query: ({ token, page, detail, id }) => ({
+        url: detail
+          ? "brand/" + id
+          : page === 0
+          ? "brand"
+          : `brand?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -116,7 +147,24 @@ export const authApi = createApi({
     deleteBrand: build.mutation({
       query: ({ id, token }) => ({
         url: "brand/" + id,
-        method: "Delete",
+        method: "DELETE",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    //need to fix
+    updateBrand: build.mutation({
+      query: ({ brandInfo, token }) => ({
+        url: "brand/" + id,
+        method: "PATCH",
+        body: brandInfo,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    customFetch: build.query({
+      query: (url, token) => ({
+        url,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -128,6 +176,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useGetStockQuery,
+  useCustomFetchQuery,
   useGetPhotoQuery,
   useStorePhotoMutation,
   useGetProductQuery,
@@ -136,8 +185,11 @@ export const {
   useGetDailySalesQuery,
   useCreateUserMutation,
   useStoreProductMutation,
+  useUpdateProductMutation,
   useGetUserQuery,
   useGetBrandQuery,
   useStoreBrandMutation,
   useDeleteBrandMutation,
+  useUpdateBrandMutation,
+  useUpdateStockMutation,
 } = authApi;

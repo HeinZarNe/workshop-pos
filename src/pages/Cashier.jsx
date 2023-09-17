@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const { data } = useGetProductQuery(token);
+  const { data } = useGetProductQuery({ token });
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [currentSelectedProductId, setCurrentSelectedProductId] =

@@ -1,61 +1,88 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useStoreBrandMutation } from "../../services/authApi";
+import {
+  useGetBrandQuery,
+  useStoreBrandMutation,
+  useUpdateBrandMutation,
+} from "../../services/authApi";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { RiEdit2Fill } from "react-icons/ri";
 import { isValidPhoneNumber, isValidUrl } from "../../utils/check";
-//Brand Table delete, detail
+
 const AddBrand = ({
   selectedPhoto,
+  setEditBrand,
   setSelectedPhoto,
   setShowSideBar,
   setTableData,
   showSideBar,
   showPhotoModal,
   setShowPhotoModal,
+  editBrand,
 }) => {
   const token = localStorage.getItem("token");
-  const [storeBrand] = useStoreBrandMutation();
-  const [brandData, setBrandData] = useState({
-    name: "",
-    company: "",
-    agent: "",
-    phone_number: "",
-    information: "",
-    photo: "",
-  });
+  const [storeBrand, { isLoading: uploading }] = useStoreBrandMutation();
+  const [updateBrand, { isLoading: updating }] = useUpdateBrandMutation();
+  const { data } = useGetBrandQuery(
+    editBrand
+      ? { token, detail: true, id: editBrand.id }
+      : { token, detail: false }
+  );
+  const [brandData, setBrandData] = useState({});
   const [valid, setValid] = useState(false);
   useEffect(() => {
     return () => {
       setSelectedPhoto(null);
+      setEditBrand({ state: false });
     };
   }, []);
 
   const handleImageChange = () => {
     setBrandData((prevData) => ({ ...prevData, photo: selectedPhoto.url }));
-    CanUserSubmit();
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBrandData((prevData) => ({ ...prevData, [name]: value })); //good point :)
-    CanUserSubmit();
   };
-
+  useEffect(() => {
+    if (editBrand && data) {
+      setBrandData({
+        ...data?.data,
+        name: data?.data.brand_name,
+        phone_number: data?.data.contact,
+      });
+      setSelectedPhoto(data?.data.photo);
+    }
+    return () => {
+      setBrandData({});
+    };
+  }, [editBrand, data]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!valid) {
-      alert("Please fill form correctly");
+    const valid = CanUserSubmit();
+    if (!valid || uploading || updating) {
       return;
     }
-    const data = await storeBrand({ brandData, token });
-    if (data?.data?.brand) {
-      const { brand } = data.data;
-      setTableData((prev) => [{ brand_name: brand.name, ...brand }, ...prev]);
-      setShowSideBar(false);
-    }
-  };
 
+    if (editBrand.state) {
+      const editedData = await updateBrand({ brandInfo: brandData, token });
+      const { brand } = editedData?.data;
+
+      setTableData((prev) =>
+        prev.map((item) => item.id === brand?.id && { brand }).slice(0, 4)
+      );
+    } else {
+      const data = await storeBrand({ brandData, token });
+      if (data?.data?.brand) {
+        const { brand } = data.data;
+        setTableData((prev) =>
+          [{ brand_name: brand.name, ...brand }, ...prev].slice(0, 4)
+        );
+      }
+    }
+    setShowSideBar(false);
+  };
   const CanUserSubmit = () => {
     const { name, company, agent, photo, phone_number, information } =
       brandData;
@@ -82,8 +109,10 @@ const AddBrand = ({
       isPhoneNumberValid
     ) {
       setValid(true);
+      return true;
     } else {
       setValid(false);
+      return false;
     }
   };
 
@@ -99,7 +128,7 @@ const AddBrand = ({
           <div className="  px-10 py-6 flex flex-col gap-[10px]">
             <div className="">
               <h1 className=" text-white font-[600] text-[20px] mb-5">
-                Add New Brand
+                {editBrand?.state ? "Edit" : " Add New Brand"}
               </h1>
               <div className="">
                 <span className=" text-[15px] text-stone-300 font-bold">
@@ -202,6 +231,7 @@ const AddBrand = ({
                 SAVE
               </button>
               <button
+                type="reset"
                 onClick={() => setShowSideBar(false)}
                 className=" text-white border border-stone-400 tracking-wider px-5 py-2 rounded-lg"
               >

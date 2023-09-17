@@ -6,16 +6,33 @@ import { AiOutlinePlus } from "react-icons/ai";
 import AddBrand from "../components/brand/AddBrand";
 import { useState } from "react";
 import ModalPhoto from "../components/ModalPhoto";
+import { useEffect } from "react";
 
 const ManageBrand = () => {
   const [showSidebar, setShowSideBar] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [tableData, setTableData] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const [editBrand, setEditBrand] = useState({
+    state: false,
+    id: 0,
+  });
+  useEffect(() => {
+    if (editBrand.state) setShowSideBar(true);
+
+    return () => {
+      setShowSideBar(false);
+    };
+  }, [editBrand]);
+
   return (
     <Rootlayout>
       {showSidebar && (
         <AddBrand
+          editBrand={editBrand}
+          setEditBrand={setEditBrand}
           showPhotoModal={showPhotoModal}
           setShowPhotoModal={setShowPhotoModal}
           showSidebar={showSidebar}
@@ -23,6 +40,8 @@ const ManageBrand = () => {
           setShowSideBar={setShowSideBar}
           selectedPhoto={selectedPhoto}
           setSelectedPhoto={setSelectedPhoto}
+          page={page}
+          setPage={setPage}
         />
       )}
       {showPhotoModal ? (
@@ -93,7 +112,14 @@ const ManageBrand = () => {
               />
             </div>
           </div>
-          <BrandTable tableData={tableData} setTableData={setTableData} />
+          <BrandTable
+            setEditBrand={setEditBrand}
+            editBrand={editBrand}
+            tableData={tableData}
+            setTableData={setTableData}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </Rootlayout>
