@@ -46,9 +46,34 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["authapi"],
     }),
+    banUser: build.mutation({
+      query: ({ id, token }) => ({
+        url: "user/ban",
+        method: "POST",
+        body: { id },
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["authapi"],
+    }),
+    unbanUser: build.mutation({
+      query: ({ id, token }) => ({
+        url: "user/unban",
+        method: "POST",
+        body: { id },
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["authapi"],
+    }),
     getUser: build.query({
-      query: ({ token }) => ({
-        url: "user",
+      query: ({ token, page, keyword }) => ({
+        url: `user${page ? "?page=" + page : keyword && "?keyword=" + keyword}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getUserDetail: build.query({
+      query: ({ token, id }) => ({
+        url: `user/details/` + id,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -117,7 +142,7 @@ export const authApi = createApi({
     }),
     updateProduct: build.mutation({
       query: ({ productData, token }) => ({
-        url: "product",
+        url: "product/" + productData.id,
         method: "PATCH",
         body: productData,
         headers: { authorization: `Bearer ${token}` },
@@ -155,7 +180,7 @@ export const authApi = createApi({
     //need to fix
     updateBrand: build.mutation({
       query: ({ brandInfo, token }) => ({
-        url: "brand/" + id,
+        url: "brand/" + brandInfo.id,
         method: "PATCH",
         body: brandInfo,
         headers: { authorization: `Bearer ${token}` },
@@ -183,10 +208,13 @@ export const {
   useGetMonthlySalesQuery,
   useGetYearlySalesQuery,
   useGetDailySalesQuery,
+  useBanUserMutation,
+  useUnbanUserMutation,
   useCreateUserMutation,
   useStoreProductMutation,
   useUpdateProductMutation,
   useGetUserQuery,
+  useGetUserDetailQuery,
   useGetBrandQuery,
   useStoreBrandMutation,
   useDeleteBrandMutation,

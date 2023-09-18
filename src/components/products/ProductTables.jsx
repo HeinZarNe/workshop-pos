@@ -14,7 +14,6 @@ const ProductTables = ({ setShowSidebar, addStock, setStockData }) => {
   const [editstate, setEditState] = useState(false);
   useEffect(() => {
     refetch();
-
     return () => {};
   }, [addStock]);
 
@@ -65,7 +64,7 @@ const ProductTables = ({ setShowSidebar, addStock, setStockData }) => {
                         >
                           <TbEdit />
                         </button>
-                        <Link to={"/product/details"}>
+                        <Link to={"/products/details"} state={{ id: item.id }}>
                           <button className=" bg-[#B19777] rounded-full p-2">
                             <BsArrowRight />
                           </button>

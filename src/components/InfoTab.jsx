@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "./InfoTab.css"
+import "./InfoTab.css";
 
-const InfoTab = ({onTabClick}) => {
+const InfoTab = ({ onTabClick, detail }) => {
   const [activeTab, setActiveTab] = useState("tab1");
-
+  const { phone_number, date_of_birth, gender, address, position, email } =
+    detail;
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -24,10 +25,10 @@ const InfoTab = ({onTabClick}) => {
                 <p>Date Of Birth</p>
               </div>
               <div className="space-y-4 text-white">
-                <p>: 09-123456789</p>
-                <p>: No 1, Lan St, Earth</p>
-                <p>: Female</p>
-                <p>: 25/02/2003</p>
+                <p>: {phone_number}</p>
+                <p>: {address}</p>
+                <p>: {gender}</p>
+                <p>: {date_of_birth}</p>
               </div>
             </div>
           </div>
@@ -41,8 +42,8 @@ const InfoTab = ({onTabClick}) => {
                 <p>Email</p>
               </div>
               <div className="space-y-4 text-white">
-                <p>: Admin</p>
-                <p>: example@gmail.com</p>
+                <p>: {position}</p>
+                <p>: {email}</p>
               </div>
             </div>
           </div>
@@ -56,16 +57,30 @@ const InfoTab = ({onTabClick}) => {
     <div>
       <ul className="flex gap-20 mx-5 text-lg border-b-[1px]">
         <li
-          className={`tab-item mb-2  text-white ${activeTab === "tab1" ? "active-tab" : ""}`}
+          className={`tab-item mb-2  text-white ${
+            activeTab === "tab1" ? "active-tab" : ""
+          }`}
           onClick={handleParaClick}
         >
-          <p className="cursor-pointer hover:text-[#B19777] " onClick={()=> handleTabClick("tab1")} >Personal Information</p>
+          <p
+            className="cursor-pointer hover:text-[#B19777] "
+            onClick={() => handleTabClick("tab1")}
+          >
+            Personal Information
+          </p>
         </li>
         <li
-          className={`tab-item mb-2 text-white ${activeTab === "tab2" ? "active-tab" : ""}`}
+          className={`tab-item mb-2 text-white ${
+            activeTab === "tab2" ? "active-tab" : ""
+          }`}
           onClick={handleParaClick}
         >
-          <p className="cursor-pointer hover:text-[#B19777]" onClick={()=> handleTabClick("tab2")} >Login Information</p>
+          <p
+            className="cursor-pointer hover:text-[#B19777]"
+            onClick={() => handleTabClick("tab2")}
+          >
+            Login Information
+          </p>
         </li>
       </ul>
       <div className="tab-content mt-3 mx-5">{renderActiveTab()}</div>

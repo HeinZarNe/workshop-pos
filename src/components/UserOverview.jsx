@@ -5,15 +5,36 @@ import { Card, Modal } from "flowbite-react";
 import Admin from "../assets/images/admin.jpg";
 import "./UserOverview.css";
 import { Link } from "react-router-dom";
-import { useGetUserQuery } from "../services/authApi";
+import { MdCancel } from "react-icons/md";
+import {
+  useBanUserMutation,
+  useGetUserDetailQuery,
+  useGetUserQuery,
+} from "../services/authApi";
+import UserTable from "./UserTable";
+import { Loader, Pagination } from "@mantine/core";
 
 const UserOverview = () => {
   const token = localStorage.getItem("token");
-  const { data } = useGetUserQuery({ token });
+  const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState("");
+  const [openModal, setOpenModal] = useState({ state: false, id: 0 });
 
-  const [openModal, setOpenModal] = useState(false);
+  const {
+    data: users,
+    refetch,
+    isLoading,
+  } = useGetUserQuery({ token, keyword, page });
+  const { data: userDetail, isLoading: detailLoading } = useGetUserDetailQuery({
+    token,
+    id: openModal.id,
+  });
+  const [banUser, { isSuccess, isError }] = useBanUserMutation();
   const toggleModal = () => {
-    setOpenModal(!openModal);
+    setOpenModal(!openModal.state);
+  };
+  const handleBanUser = (id) => {
+    const res = banUser({ token, id });
   };
   const handleTabClick = (event) => {
     event.stopPropagation();
@@ -29,50 +50,110 @@ const UserOverview = () => {
           <button className=" py-2 px-4 rounded-lg button">Create User</button>
         </Link>
       </div>
-      <div className="grid grid-cols-3 gap-5 mx-5 mt-5 ">
-        {data?.data?.map((user) => {
-          return (
-            <Card
-              className="col-span-1 bg-[#323232] dark:bg-[#323232] border border-[#B19777] dark:border-[#B19777] cursor-pointer"
-              onClick={toggleModal}
-            >
-              <div className="flex flex-col items-center pb-10">
-                <img
-                  src={Admin}
-                  alt="Bonnie image"
-                  className="mb-3 rounded-full shadow-lg"
-                  height="96"
-                  width="96"
-                />
-                <h5 className="mb-1 text-xl font-medium text-[#B19777]">
-                  {user.name}
-                </h5>
-                <span className="text-sm text-gray-300 mb-5">Admin</span>
-                <span className="text-sm text-gray-300 ">
-                  example@gmail.com
-                </span>
-              </div>
-            </Card>
-          );
-        })}
 
-        <Modal show={openModal} onClose={toggleModal}>
-          <Modal.Header style={{ backgroundColor: "#323232" }}>
-            <div className="flex items-center gap-5">
-              <img
-                src={Admin}
-                alt="admin"
-                className=" h-[150px] w-[150px] rounded-full"
-              />
-              <div className=" text-[#B19777]">
-                <h2 className="text-3xl mb-2">Vanny Taylor</h2>
-                <p className=" text-gray-300 text-sm">Admin</p>
-              </div>
+      <div className=" p-5 text-white flex flex-col gap-3">
+        <h1 className="text-[21px] font-[500] text-white">Staff Overview</h1>
+        <div className="flex flex-row items-center gap-3">
+          <div class="relative my-3">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
             </div>
-          </Modal.Header>
-          <Modal.Body style={{ backgroundColor: "#323232" }}>
-            <InfoTab onTabClick={handleTabClick} />
-          </Modal.Body>
+            <input
+              type="search"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              id="default-search"
+              class="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Search ..."
+              required
+            />
+          </div>
+          {keyword.length > 0 && (
+            <div onClick={(_) => setKeyword("")}>
+              <MdCancel size={25} className="text-gray-500 cursor-pointer" />
+            </div>
+          )}
+        </div>
+        {isLoading ? (
+          <div className="w-full flex h-[300px] justify-center ">
+            {" "}
+            <Loader />{" "}
+          </div>
+        ) : (
+          <UserTable
+            users={users?.data}
+            setOpenModal={setOpenModal}
+            banUser={handleBanUser}
+          />
+        )}
+        {users?.meta?.last_page > 1 && (
+          <div className="pagination absolute bottom-[30px] right-[40px] ">
+            <Pagination
+              total={users?.meta?.last_page}
+              onChange={(e) => {
+                setPage(e);
+                refetch();
+              }}
+              onPreviousPage={(e) => {
+                setPage(page - 1);
+                refetch();
+              }}
+              onNextPage={(e) => {
+                setPage(page + 1);
+                refetch();
+              }}
+              boundaries={1}
+              defaultValue={1}
+              on
+            />
+          </div>
+        )}
+        <Modal show={openModal.state} onClose={toggleModal}>
+          {detailLoading ? (
+            <div className="w-full flex items-center justify-center h-[300px]">
+              <Loader />
+            </div>
+          ) : (
+            userDetail && (
+              <>
+                <Modal.Header style={{ backgroundColor: "#323232" }}>
+                  <div className="flex items-center gap-5">
+                    <img
+                      src={userDetail.data.photo}
+                      alt="admin"
+                      className=" h-[150px] w-[150px] rounded-full"
+                    />
+                    <div className=" text-[#B19777]">
+                      <h2 className="text-3xl mb-2">{userDetail.data.name}</h2>
+                      <p className=" text-gray-300 text-sm">
+                        {userDetail.data.position}
+                      </p>
+                    </div>
+                  </div>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: "#323232" }}>
+                  <InfoTab
+                    onTabClick={handleTabClick}
+                    detail={userDetail.data}
+                  />
+                </Modal.Body>
+              </>
+            )
+          )}
         </Modal>
       </div>
     </div>

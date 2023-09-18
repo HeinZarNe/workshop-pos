@@ -19,6 +19,7 @@ import {
 import { useEffect } from "react";
 import ModalPhoto from "../components/ModalPhoto";
 import { Loader, Select } from "@mantine/core";
+import { BaseUrl } from "../utils/constant";
 
 const AddProduct = ({ editState = false, setEditState }) => {
   const [section, setSection] = useState("info");
@@ -66,18 +67,23 @@ const AddProduct = ({ editState = false, setEditState }) => {
   const [more_information, setMoreInformation] = useState(
     editState ? product?.data.more_information : ""
   );
-
+  console.log(brand_name);
   useEffect(() => {
     if (editState) {
+      brands?.data.map(
+        (brand) =>
+          brand.brand_name == product?.data.brand_name &&
+          setBrand_name(brand?.id)
+      );
       setName(product?.data.name);
-      setBrand_name(product?.data.brand_name);
+
       setActurl_price(product?.data.actual_price);
       setSale_price(product?.data.sale_price);
       setUnit(product?.data.unit);
       setMoreInformation(product?.data.more_information);
       setSelectedPhoto(product?.data.photo);
     }
-  }, [editState, product]);
+  }, [editState, product, brands]);
 
   const navigate = useNavigate();
   const submitHandler = async (e) => {
@@ -86,29 +92,30 @@ const AddProduct = ({ editState = false, setEditState }) => {
     if (editState) {
       const res = updateProduct({
         productData: {
+          id: product?.data.id,
           name,
           brand_id: brand_name,
           actual_price,
           sale_price,
           more_information,
-          photo: selectedPhoto.url || selectedPhoto,
+          photo: selectedPhoto.path || selectedPhoto,
           unit,
         },
         token,
       });
-      productUpdateSuccess &&
-        (await Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Product has been updated!",
-          showConfirmButton: true,
 
-          confirmButtonText: "Go to Products",
-          preConfirm: () => {
-            navigate("/products");
-          },
-          allowOutsideClick: false,
-        }));
+      await Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Product has been updated!",
+        showConfirmButton: true,
+
+        confirmButtonText: "Go to Products",
+        preConfirm: () => {
+          setEditState(false);
+        },
+        allowOutsideClick: false,
+      });
       return;
     }
     const res = await storeProduct({
@@ -119,7 +126,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
         actual_price,
         sale_price,
         more_information,
-        photo: selectedPhoto.url || selectedPhoto,
+        photo: selectedPhoto.path || selectedPhoto,
         unit,
       },
       token,
@@ -224,7 +231,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                     <option
                       key={item.id}
                       value={item.id}
-                      selected={item.brand_name === brand_name && "selected"}
+                      selected={item.id === brand_name && "selected"}
                     >
                       {item.brand_name}
                     </option>
@@ -350,7 +357,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   <img
                     src={
                       !selectedPhoto.url
-                        ? selectedPhoto
+                        ? BaseUrl + selectedPhoto
                         : selectedPhoto.url || ""
                     }
                     alt="Selected"
@@ -405,7 +412,11 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 {selectedPhoto && (
                   <img
                     className="w-[150px] h-[150px] rounded-full"
-                    src={selectedPhoto.url || selectedPhoto || ""}
+                    src={
+                      !selectedPhoto.url
+                        ? selectedPhoto
+                        : selectedPhoto.url || ""
+                    }
                     alt=""
                   />
                 )}
@@ -436,7 +447,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               type="submit"
               className="self-end py-2 px-4 rounded-lg button m-5"
             >
-              Add Product
+              Edit Product
             </button>
           </form>
         )}

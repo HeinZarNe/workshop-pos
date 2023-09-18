@@ -9,6 +9,7 @@ import {
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { RiEdit2Fill } from "react-icons/ri";
 import { isValidPhoneNumber, isValidUrl } from "../../utils/check";
+import { BaseUrl } from "../../utils/constant";
 
 const AddBrand = ({
   selectedPhoto,
@@ -31,6 +32,7 @@ const AddBrand = ({
   );
   const [brandData, setBrandData] = useState({});
   const [valid, setValid] = useState(false);
+
   useEffect(() => {
     return () => {
       setSelectedPhoto(null);
@@ -39,7 +41,7 @@ const AddBrand = ({
   }, []);
 
   const handleImageChange = () => {
-    setBrandData((prevData) => ({ ...prevData, photo: selectedPhoto.url }));
+    setBrandData((prevData) => ({ ...prevData, photo: selectedPhoto.path }));
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,30 +58,18 @@ const AddBrand = ({
     }
     return () => {
       setBrandData({});
+      setSelectedPhoto(null);
     };
   }, [editBrand, data]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const valid = CanUserSubmit();
-    if (!valid || uploading || updating) {
-      return;
-    }
 
     if (editBrand.state) {
+      console.log(valid);
       const editedData = await updateBrand({ brandInfo: brandData, token });
       const { brand } = editedData?.data;
-
-      setTableData((prev) =>
-        prev.map((item) => item.id === brand?.id && { brand }).slice(0, 4)
-      );
     } else {
       const data = await storeBrand({ brandData, token });
-      if (data?.data?.brand) {
-        const { brand } = data.data;
-        setTableData((prev) =>
-          [{ brand_name: brand.name, ...brand }, ...prev].slice(0, 4)
-        );
-      }
     }
     setShowSideBar(false);
   };
@@ -88,16 +78,16 @@ const AddBrand = ({
       brandData;
 
     // Validation for name, company, agent, and information
-    const isNameValid = name.length >= 2;
-    const isCompanyValid = company.length >= 2;
-    const isAgentValid = agent.length >= 2;
-    const isInformationValid = information.length >= 2;
+    const isNameValid = name?.length >= 2;
+    const isCompanyValid = company?.length >= 2;
+    const isAgentValid = agent?.length >= 2;
+    const isInformationValid = information?.length >= 2;
+    const isPhotoValid = photo?.length >= 2;
 
     // Validation for photo (checking if it's a valid URL)
-    const isPhotoValid = isValidUrl(photo);
 
     // Validation for phone number (checking if it's a valid phone number)
-    const isPhoneNumberValid = isValidPhoneNumber(phone_number);
+    const isPhoneNumberValid = phone_number?.length >= 5;
 
     // Check if any validation condition is not met
     if (
@@ -109,12 +99,13 @@ const AddBrand = ({
       isPhoneNumberValid
     ) {
       setValid(true);
-      return true;
     } else {
       setValid(false);
-      return false;
     }
   };
+  useEffect(() => {
+    CanUserSubmit();
+  }, [brandData]);
 
   return (
     <div>
@@ -206,7 +197,7 @@ const AddBrand = ({
                   <div className="mb-6 relative w-[180px] h-[150px] rounded-lg border-2 border-dashed border-[#B19777] bg-[#272727] flex justify-center items-center">
                     {selectedPhoto ? (
                       <img
-                        src={selectedPhoto.url}
+                        src={selectedPhoto.url || selectedPhoto}
                         alt=""
                         onLoad={handleImageChange}
                       />
@@ -214,6 +205,7 @@ const AddBrand = ({
                       <BsPersonBoundingBox className="text-6xl" />
                     )}
                     <button
+                      type="button"
                       onClick={() => {
                         setShowPhotoModal(true);
                       }}
@@ -226,10 +218,12 @@ const AddBrand = ({
               </div>
             </div>
             <div className=" flex gap-4 flex-col">
-              <button type="submit" className=" px-6 py-2 rounded-lg button">
-                {" "}
-                SAVE
-              </button>
+              {valid && (
+                <button type="submit" className=" px-6 py-2 rounded-lg button">
+                  {" "}
+                  SAVE
+                </button>
+              )}
               <button
                 type="reset"
                 onClick={() => setShowSideBar(false)}
