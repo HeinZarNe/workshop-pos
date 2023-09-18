@@ -11,7 +11,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { useGetMonthlySalesQuery } from "../../services/authApi";
 const Daily = () => {
   const token = localStorage.getItem("token");
-  const { data: monthlySaleData, refetch } = useGetMonthlySalesQuery(token);
+  const { data: monthlySaleData } = useGetMonthlySalesQuery(token);
   // console.log(monthlySaleData.this_month_sales);
 
   const [activePage, setPage] = useState(1);
@@ -222,7 +222,7 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {monthlySaleData.this_month_sales?.map((data) => {
+                {monthlySaleData?.this_month_sales?.map((data) => {
                   return (
                     <tr key={data.id} class=" border-b hover:bg-white/10 ">
                       <th

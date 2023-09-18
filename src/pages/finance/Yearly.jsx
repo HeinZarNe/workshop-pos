@@ -167,7 +167,7 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {yearlySaleData.yearly_sales?.map((data) => {
+                {yearlySaleData?.yearly_sales?.map((data) => {
                   return (
                     <tr key={data.id} class=" border-b hover:bg-white/10 ">
                       <th
