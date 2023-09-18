@@ -213,27 +213,29 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((data) => {
+                {yearlySaleData.yearly_sales?.map((data) => {
                   return (
                     <tr key={data.id} class=" border-b hover:bg-white/10 ">
                       <th
                         scope="row"
                         class="px-6 py-4 font-medium text-white whitespace-nowra"
                       >
-                        {data.no}
+                        {data.id}
                       </th>
-                      <td class="px-6 py-4">{data.vouncher}</td>
-                      <td class="px-6 py-4">{data.time}</td>
-                      <td class="px-6 py-4  text-end">{data.qty}</td>
+                      <td class="px-6 py-4">{data.month}</td>
+                      <td class="px-6 py-4  text-end">{data.year}</td>
+                      <td class="px-6 py-4">{data.vouchers}</td>
                       <td class="px-6 py-4  text-end">{data.cash}</td>
                       <td class="px-6 py-4  text-end">{data.tax}</td>
                       <td class="px-6 py-4  text-end">{data.total}</td>
-                      <td class="px-6 py-4 text-right">
+                      <td class="px-6 py-4 text-center">
                         <NavLink
                           to={"/profile"}
                           class="font-medium flex justify-center text-blue-600  hover:underline"
                         >
-                          {data.btn}
+                          <button className="flex items-center mx-auto justify-center w-7 h-7 rounded-full bg-base text-black">
+                            <AiOutlineArrowRight />
+                          </button>
                         </NavLink>
                       </td>
                     </tr>

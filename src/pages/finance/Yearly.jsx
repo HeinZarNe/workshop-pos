@@ -8,72 +8,12 @@ import { BiPrinter, BiSolidCalendarWeek } from "react-icons/bi";
 import { Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useGetYearlySalesQuery } from "../../services/authApi";
 const Daily = () => {
+    const token = localStorage.getItem("token");
+    const { data: yearlySaleData, refetch } = useGetYearlySalesQuery(token);
   const [activePage, setPage] = useState(1);
 
-
-  const tableData = [
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-  ];
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -188,7 +128,6 @@ const Daily = () => {
                 </option>
               </select>
               {/* second menu  */}
-            
               <div className="flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base">
                 <FiSearch />
               </div>
@@ -205,13 +144,13 @@ const Daily = () => {
                     NO
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    VOUNCHER
+                    MONTH
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    TIME
+                    YEAR
                   </th>
-                  <th scope="col" class="px-6 text-end py-3">
-                    ITEM COUNT
+                  <th scope="col" class="px-6 py-3">
+                    VOUNCHER
                   </th>
                   <th scope="col" class="px-6  text-end py-3">
                     CASH
@@ -228,27 +167,29 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((data) => {
+                {yearlySaleData.yearly_sales?.map((data) => {
                   return (
                     <tr key={data.id} class=" border-b hover:bg-white/10 ">
                       <th
                         scope="row"
                         class="px-6 py-4 font-medium text-white whitespace-nowra"
                       >
-                        {data.no}
+                        {data.id}
                       </th>
-                      <td class="px-6 py-4">{data.vouncher}</td>
-                      <td class="px-6 py-4">{data.time}</td>
-                      <td class="px-6 py-4  text-end">{data.qty}</td>
+                      <td class="px-6 py-4">{data.month}</td>
+                      <td class="px-6 py-4  text-end">{data.year}</td>
+                      <td class="px-6 py-4">{data.vouchers}</td>
                       <td class="px-6 py-4  text-end">{data.cash}</td>
                       <td class="px-6 py-4  text-end">{data.tax}</td>
                       <td class="px-6 py-4  text-end">{data.total}</td>
-                      <td class="px-6 py-4 text-right">
+                      <td class="px-6 py-4 text-center">
                         <NavLink
                           to={"/profile"}
                           class="font-medium flex justify-center text-blue-600  hover:underline"
                         >
-                          {data.btn}
+                          <button className="flex items-center mx-auto justify-center w-7 h-7 rounded-full bg-base text-black">
+                            <AiOutlineArrowRight />
+                          </button>
                         </NavLink>
                       </td>
                     </tr>
@@ -262,21 +203,35 @@ const Daily = () => {
         <div className="">
           <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
             <div className="flex flex-row items-center border rounded">
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
-              </div>
               <div className="flex flex-col items-end border-r py-2 px-6  border-white">
                 <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
+                <p className="text-xl font-bold text-white">
+                  {yearlySaleData.total_months}
+                </p>
               </div>
               <div className="flex flex-col items-end border-r px-6 py-2  border-white">
                 <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
+                <p className="text-xl font-bold text-white">
+                  {yearlySaleData.total_vouchers}
+                </p>
               </div>
               <div className="flex flex-col items-end border-r px-6 py-2  border-white">
                 <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">1234456</p>
+                <p className="text-xl font-bold text-white">
+                  {yearlySaleData.total_cash}
+                </p>
+              </div>
+              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                <p className="text-sm text-base">Total Vouchers</p>
+                <p className="text-xl font-bold text-white">
+                  {yearlySaleData.total_tax}
+                </p>
+              </div>
+              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                <p className="text-sm text-base">Total Vouchers</p>
+                <p className="text-xl font-bold text-white">
+                  {yearlySaleData.total}
+                </p>
               </div>
             </div>
             {/* <Pagination

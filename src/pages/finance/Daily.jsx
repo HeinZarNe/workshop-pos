@@ -21,68 +21,68 @@ const Daily = () => {
     refetch,
   } = useGetDailySalesQuery(token);
 
-  const tableData = [
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-      btn: (
-        <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-          <AiOutlineArrowRight />
-        </button>
-      ),
-    },
-  ];
+  // const tableData = [
+  //   {
+  //     id: 1,
+  //     no: "2",
+  //     vouncher: "09573",
+  //     time: "11:11AM",
+  //     qty: "20",
+  //     cash: "200,300",
+  //     tax: "200",
+  //     total: "200,500",
+  //     btn: (
+  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
+  //         <AiOutlineArrowRight />
+  //       </button>
+  //     ),
+  //   },
+  //   {
+  //     id: 1,
+  //     no: "2",
+  //     vouncher: "09573",
+  //     time: "11:11AM",
+  //     qty: "20",
+  //     cash: "200,300",
+  //     tax: "200",
+  //     total: "200,500",
+  //     btn: (
+  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
+  //         <AiOutlineArrowRight />
+  //       </button>
+  //     ),
+  //   },
+  //   {
+  //     id: 1,
+  //     no: "2",
+  //     vouncher: "09573",
+  //     time: "11:11AM",
+  //     qty: "20",
+  //     cash: "200,300",
+  //     tax: "200",
+  //     total: "200,500",
+  //     btn: (
+  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
+  //         <AiOutlineArrowRight />
+  //       </button>
+  //     ),
+  //   },
+  //   {
+  //     id: 1,
+  //     no: "2",
+  //     vouncher: "09573",
+  //     time: "11:11AM",
+  //     qty: "20",
+  //     cash: "200,300",
+  //     tax: "200",
+  //     total: "200,500",
+  //     btn: (
+  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
+  //         <AiOutlineArrowRight />
+  //       </button>
+  //     ),
+  //   },
+  // ];
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
