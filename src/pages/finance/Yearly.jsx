@@ -9,9 +9,9 @@ import { Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useGetYearlySalesQuery } from "../../services/authApi";
-const Daily = () => {
-    const token = localStorage.getItem("token");
-    const { data: yearlySaleData, refetch } = useGetYearlySalesQuery(token);
+const Yearly = () => {
+  const token = localStorage.getItem("token");
+  const { data: yearlySaleData, refetch } = useGetYearlySalesQuery(token);
   const [activePage, setPage] = useState(1);
 
   return (
@@ -323,4 +323,4 @@ const Daily = () => {
   );
 };
 
-export default Daily;
+export default Yearly;
