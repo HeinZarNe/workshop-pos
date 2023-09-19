@@ -15,15 +15,17 @@ const Cashier = () => {
     useState(null);
   const [keyBoardShow, setKeyBoadShow] = useState(false);
 
-  console.log(data);
+  // console.log(data);
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
-      if (prevSelected.includes(productId)) {
+      if (prevSelected.includes(productId)) 
+      {
         const updatedQuantities = { ...selectedQuantities };
         updatedQuantities[productId] = (updatedQuantities[productId] || 0) + 1;
         setSelectedQuantities(updatedQuantities);
         return prevSelected;
-      } else {
+      } else
+       {
         const updatedSelected = [...prevSelected, productId];
         const updatedQuantities = { ...selectedQuantities };
         updatedQuantities[productId] = 1;
@@ -36,13 +38,23 @@ const Cashier = () => {
   const handleNumberClick = (number) => {
     if (currentSelectedProductId !== null) {
       setSelectedQuantities((prevQuantities) => {
-        const currentQuantity = prevQuantities[currentSelectedProductId] || 0;
-        const newQuantity = parseInt(`${currentQuantity}${number}`);
-        const updatedQuantities = {
-          ...prevQuantities,
-          [currentSelectedProductId]: newQuantity,
-        };
-        return updatedQuantities;
+        if (prevQuantities[currentSelectedProductId] == 1) {
+          const currentQuantity = 0;
+          const newQuantity = eval(`${currentQuantity} + ${number}`);
+          const updatedQuantities = {
+            ...prevQuantities,
+            [currentSelectedProductId]: newQuantity,
+          };
+          return updatedQuantities;
+        } else {
+          const currentQuantity = prevQuantities[currentSelectedProductId] || 0;
+          const newQuantity = `${currentQuantity}${number}`;
+          const updatedQuantities = {
+            ...prevQuantities,
+            [currentSelectedProductId]: newQuantity,
+          };
+          return updatedQuantities;
+        }
       });
     }
   };
@@ -187,7 +199,13 @@ const Cashier = () => {
               RECEIVE
             </h1>
           </div>
-          <div className="overflow-scrol w-full h-full">
+          <div
+            className={
+              keyBoardShow
+                ? "overflow-scroll w-full h-[205px]"
+                : "overflow-scrol w-full h-full"
+            }
+          >
             {selectedProducts.map((productId) => {
               const selectedProduct = data?.data?.find(
                 (product) => product.id === productId
@@ -202,22 +220,29 @@ const Cashier = () => {
               return (
                 <div
                   key={productId}
-                  className={`display cursor-pointer flex py-1 px-4 justify-between items-center transition-all border-b border-b-[#B19777] 
+                  className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 
                   ${
-                    selectedProduct.id === currentSelectedProductId && keyBoardShow
-                      ? "prodInCartActive"
+                    selectedProduct.id === currentSelectedProductId &&
+                    keyBoardShow
+                      ? " bg-base/20"
                       : ""
                   }
                   `}
                   onClick={() => handleProductInCartSelect(productId)}
                 >
-                  <div className="">
-                    <h5 className="mb-2 text-2xl tracking-tight text-[#B19777]">
+                  <div className=" ">
+                    <h5 className=" text-lg font-semibold tracking-tight text-base">
                       {selectedProduct.name}
                     </h5>
-                    <p className="mb-3 font-normal text-gray-400">{quantity}</p>
+                    <div className="flex ms-1 font-mono text-sm">
+                      <p className=" text-sm flex gap-1 text-gray-400">
+                        <div className="text-white/80"> {selectedProduct.price}</div>Kyats
+                      </p>
+                      <div className="mx-2">x</div>
+                      <p className="mb-3 text-gray-400">{quantity}</p>
+                    </div>
                   </div>
-                  <p className="mb-3 font-normal text-gray-400">{totalPrice}</p>
+                  <p className="flex gap-1 text-[#fafafa] font-semibold">{totalPrice} <div className="font-normal text-white/70">Kyats</div></p>
                 </div>
               );
             })}
@@ -227,15 +252,35 @@ const Cashier = () => {
               keyBoardShow ? "translate-x-0" : "translate-y-[260px]"
             } flex-col`}
           >
-            <div
-              onClick={() => setKeyBoadShow(false)}
-              className="flex items-center"
-            >
-              {keyBoardShow && <div className="border border-gray-400 ms-2 hover:bg-gray-400 duration-100 hover:text-black p-2 rounded px-3 flex"><FaChevronDown/></div>}
-              <p className=" text-xl flex ms-auto py-5 justify-end me-4">
-                Total:
-                <div className="ms-2 font-semibold"> {calculateTotal()}</div>
-              </p>
+            <div className="">
+              <div className="text-end py-1 pb-2">
+                <div className="flex text-xl text-white  justify-end me-4">
+                  Cash:
+                  <p className="ms-2 font-semibold text-[#fafafa]">
+                    {calculateTotal()}
+                  </p>
+                </div>
+                <div className="flex text-sm justify-end me-4">
+                  Tax: <p className="ms-1">300Kyats</p>
+                </div>
+              </div>
+              <div
+                onClick={() => setKeyBoadShow(false)}
+                className="flex border-t border-gray-400 items-center"
+              >
+                {keyBoardShow && (
+                  <div className="border border-gray-400 ms-2 hover:bg-gray-400 duration-100 hover:text-black p-2 rounded px-3 flex">
+                    <FaChevronDown />
+                  </div>
+                )}
+                <p className=" text-xl text-white flex ms-auto py-4 pt-3 justify-end me-4">
+                  Total:
+                  <div className="ms-2 text-[#fafafa] font-semibold">
+                    {" "}
+                    {calculateTotal() + 300 + " "}
+                  </div>{" "}
+                </p>
+              </div>
             </div>
             {/* keyboard layout  */}
             <div className="mb-12 w-full bg-[#323232]">
@@ -243,28 +288,32 @@ const Cashier = () => {
               <div className="buttons  text-gray-400">
                 <div className="grid grid-cols-4 h-16">
                   <button
-                    onClick={() => handleNumberClick("7")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(7)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     7
                   </button>
                   <button
-                    onClick={() => handleNumberClick("8")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(8)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     8
                   </button>
                   <button
-                    onClick={() => handleNumberClick("9")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(9)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     9
                   </button>
                   <button
-                    onClick={() => handleNumberClick("9")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick("")}
+                    className={`${
+                      keyBoardShow
+                        ? "bg-base/90 text-white col-span-1 font-semibold number-btn"
+                        : "col-span-1 font-semibold number-btn"
+                    } `}
                   >
-                    9
+                    QTY
                   </button>
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
@@ -275,28 +324,28 @@ const Cashier = () => {
                 </div>
                 <div className="grid grid-cols-4 h-16">
                   <button
-                    onClick={() => handleNumberClick("4")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(4)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     4
                   </button>
                   <button
-                    onClick={() => handleNumberClick("5")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(5)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     5
                   </button>
                   <button
-                    onClick={() => handleNumberClick("6")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(6)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     6
                   </button>
                   <button
-                    onClick={() => handleNumberClick("6")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick("")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
                   >
-                    6
+                    DIS
                   </button>
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
@@ -307,28 +356,28 @@ const Cashier = () => {
                 </div>
                 <div className="grid grid-cols-4 h-16">
                   <button
-                    onClick={() => handleNumberClick("1")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(1)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     1
                   </button>
                   <button
-                    onClick={() => handleNumberClick("2")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(2)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
                   >
                     2
                   </button>
                   <button
-                    onClick={() => handleNumberClick("3")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(3)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl  number-btn"
                   >
                     3
                   </button>
                   <button
-                    onClick={() => handleNumberClick("3")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick("")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
                   >
-                    3
+                    PRICE
                   </button>
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
@@ -337,16 +386,16 @@ const Cashier = () => {
                   Price
                 </button> */}
                 </div>
-                <div className="grid grid-cols-3 h-16">
+                <div className="grid grid-cols-4 h-16">
                   <button
                     // onClick={() => handleNumberClick("0")}
-                    className="col-span-1 number-btn"
+                    className="col-span-1 text-lg hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
                   >
                     +/-
                   </button>
                   <button
-                    onClick={() => handleNumberClick("0")}
-                    className="col-span-1 number-btn"
+                    onClick={() => handleNumberClick(0)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa]  text-xl number-btn"
                   >
                     0
                   </button>
@@ -358,7 +407,13 @@ const Cashier = () => {
                 </button> */}
                   <button
                     onClick={handleClearClick}
-                    className="flex justify-center items-center number-btn"
+                    className="flex justify-center hover:bg-base/30 hover:text-[#fafafa] text-xl font-bold items-center number-btn"
+                  >
+                    .
+                  </button>
+                  <button
+                    onClick={handleClearClick}
+                    className="flex font-semibold hover:bg-base/30 hover:text-[#fafafa] text-xl justify-center items-center number-btn"
                   >
                     <FiDelete />
                   </button>
