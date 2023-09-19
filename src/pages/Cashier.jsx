@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useGetProductQuery } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 
 const Cashier = () => {
   const navigate = useNavigate();
@@ -13,8 +13,9 @@ const Cashier = () => {
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [currentSelectedProductId, setCurrentSelectedProductId] =
     useState(null);
+  const [keyBoardShow, setKeyBoadShow] = useState(false);
 
-  console.log(selectedProducts);
+  console.log(data);
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
       if (prevSelected.includes(productId)) {
@@ -84,6 +85,7 @@ const Cashier = () => {
   };
 
   const handleProductInCartSelect = (productId) => {
+    setKeyBoadShow(true);
     setCurrentSelectedProductId(productId);
     setSelectedProducts((prevSelected) => {
       if (!prevSelected.includes(productId)) {
@@ -111,43 +113,44 @@ const Cashier = () => {
     <div className="bg-[#272727]">
       <div className="flex justify-between gap-5 ">
         <div className="w-full">
-            <div className="flex justify-between mx-5 my-5">
-              <div className=" flex items-center">
-                <p
-                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
-                  onClick={handleGoBack}
-                >
-                  <FaArrowLeft /> Back
-                </p>
-              </div>
-              <div class="relative my-3 flex items-center">
-                <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
-                  <svg
-                    className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="search"
-                  id="default-search"
-                  class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
-                  placeholder="Search ..."
-                />
-              </div>
+          <div className="flex justify-between mx-5 my-5">
+            <div className=" flex items-center">
+              <p
+                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                onClick={handleGoBack}
+              >
+                <FaArrowLeft /> Back
+              </p>
             </div>
-          <div className="w-[95%] bg-red-200 mx-auto overflow-scroll">
+            <div class="relative my-3 flex items-center">
+              <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+                <svg
+                  className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="default-search"
+                class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+                placeholder="Search ..."
+              />
+            </div>
+          </div>
+          <div className="w-[100%] mx-auto overflow-scroll">
             <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
+              {/* {test.map((product) => ( */}
               {data?.data?.map((product) => (
                 <div
                   key={product.id}
@@ -165,7 +168,7 @@ const Cashier = () => {
                   </div>
 
                   <div className="p-5 pt-3 pe-6 text-right">
-                    <h5 className=" text-2xl font-semibold tracking-tight text-[#B19777]">
+                    <h5 className=" text-xl font-semibold tracking-tight text-[#B19777]">
                       {product.name}
                     </h5>
                     <p className=" font-normal  text-gray-400">
@@ -178,187 +181,199 @@ const Cashier = () => {
           </div>
         </div>
         {/* keyboard  */}
-        <div className="flex relative flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
-          <div className="h-1/2 overflow-hidden relative">
+        <div className="flex relative overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
+          <div className="">
             <h1 className="text-3xl py-5 px-4 text-white font-semibold border-b border-b-[#B19777]">
               RECEIVE
             </h1>
-            <div className="overflow-auto bg-red-300 w-full h-full">
-              {selectedProducts.map((productId) => {
-                const selectedProduct = data?.data?.find(
-                  (product) => product.id === productId
-                );
-
-                if (!selectedProduct) {
-                  return null;
-                }
-                const quantity = selectedQuantities[productId] || 0;
-                const totalPrice = selectedProduct.price * quantity;
-
-                return (
-                  <div
-                    key={productId}
-                    className={`display cursor-pointer flex py-1 px-4 justify-between items-center transition-all border-b border-b-[#B19777] ${
-                      selectedProduct.id === currentSelectedProductId
-                        ? "prodInCartActive"
-                        : ""
-                    }`}
-                    onClick={() => handleProductInCartSelect(productId)}
-                  >
-                    <div className="">
-                      <h5 className="mb-2 text-2xl tracking-tight text-[#B19777]">
-                        {selectedProduct.name}
-                      </h5>
-                      <p className="mb-3 font-normal text-gray-400">
-                        {quantity}
-                      </p>
-                    </div>
-                    <p className="mb-3 font-normal text-gray-400">
-                      {totalPrice}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
           </div>
-            <p className=" text-xl flex ms-auto py-2 justify-end text-end me-4">
-              Total:
-              <div className="ms-2 font-semibold"> {calculateTotal()}</div>
-            </p>
-          <div className="mt-auto w-full bg-[#323232]">
-          {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
-            <div className="buttons text-gray-400">
-              <div className="grid grid-cols-4 h-16">
-                <button
-                  onClick={() => handleNumberClick("7")}
-                  className="col-span-1 number-btn"
+          <div className="overflow-scrol w-full h-full">
+            {selectedProducts.map((productId) => {
+              const selectedProduct = data?.data?.find(
+                (product) => product.id === productId
+              );
+
+              if (!selectedProduct) {
+                return null;
+              }
+              const quantity = selectedQuantities[productId] || 0;
+              const totalPrice = selectedProduct.price * quantity;
+
+              return (
+                <div
+                  key={productId}
+                  className={`display cursor-pointer flex py-1 px-4 justify-between items-center transition-all border-b border-b-[#B19777] 
+                  ${
+                    selectedProduct.id === currentSelectedProductId && keyBoardShow
+                      ? "prodInCartActive"
+                      : ""
+                  }
+                  `}
+                  onClick={() => handleProductInCartSelect(productId)}
                 >
-                  7
-                </button>
-                <button
-                  onClick={() => handleNumberClick("8")}
-                  className="col-span-1 number-btn"
-                >
-                  8
-                </button>
-                <button
-                  onClick={() => handleNumberClick("9")}
-                  className="col-span-1 number-btn"
-                >
-                  9
-                </button>
-                <button
-                  onClick={() => handleNumberClick("9")}
-                  className="col-span-1 number-btn"
-                >
-                  9
-                </button>
-                {/* <button
+                  <div className="">
+                    <h5 className="mb-2 text-2xl tracking-tight text-[#B19777]">
+                      {selectedProduct.name}
+                    </h5>
+                    <p className="mb-3 font-normal text-gray-400">{quantity}</p>
+                  </div>
+                  <p className="mb-3 font-normal text-gray-400">{totalPrice}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div
+            className={`flex mt-auto absolute bg-secondary w-full bottom-0 duration-200 ${
+              keyBoardShow ? "translate-x-0" : "translate-y-[260px]"
+            } flex-col`}
+          >
+            <div
+              onClick={() => setKeyBoadShow(false)}
+              className="flex items-center"
+            >
+              {keyBoardShow && <div className="border border-gray-400 ms-2 hover:bg-gray-400 duration-100 hover:text-black p-2 rounded px-3 flex"><FaChevronDown/></div>}
+              <p className=" text-xl flex ms-auto py-5 justify-end me-4">
+                Total:
+                <div className="ms-2 font-semibold"> {calculateTotal()}</div>
+              </p>
+            </div>
+            {/* keyboard layout  */}
+            <div className="mb-12 w-full bg-[#323232]">
+              {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
+              <div className="buttons  text-gray-400">
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick("7")}
+                    className="col-span-1 number-btn"
+                  >
+                    7
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("8")}
+                    className="col-span-1 number-btn"
+                  >
+                    8
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("9")}
+                    className="col-span-1 number-btn"
+                  >
+                    9
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("9")}
+                    className="col-span-1 number-btn"
+                  >
+                    9
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   Qty
                 </button> */}
-              </div>
-              <div className="grid grid-cols-4 h-16">
-                <button
-                  onClick={() => handleNumberClick("4")}
-                  className="col-span-1 number-btn"
-                >
-                  4
-                </button>
-                <button
-                  onClick={() => handleNumberClick("5")}
-                  className="col-span-1 number-btn"
-                >
-                  5
-                </button>
-                <button
-                  onClick={() => handleNumberClick("6")}
-                  className="col-span-1 number-btn"
-                >
-                  6
-                </button>
-                <button
-                  onClick={() => handleNumberClick("6")}
-                  className="col-span-1 number-btn"
-                >
-                  6
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick("4")}
+                    className="col-span-1 number-btn"
+                  >
+                    4
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("5")}
+                    className="col-span-1 number-btn"
+                  >
+                    5
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("6")}
+                    className="col-span-1 number-btn"
+                  >
+                    6
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("6")}
+                    className="col-span-1 number-btn"
+                  >
+                    6
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   %Disc
                 </button> */}
-              </div>
-              <div className="grid grid-cols-4 h-16">
-                <button
-                  onClick={() => handleNumberClick("1")}
-                  className="col-span-1 number-btn"
-                >
-                  1
-                </button>
-                <button
-                  onClick={() => handleNumberClick("2")}
-                  className="col-span-1 number-btn"
-                >
-                  2
-                </button>
-                <button
-                  onClick={() => handleNumberClick("3")}
-                  className="col-span-1 number-btn"
-                >
-                  3
-                </button>
-                <button
-                  onClick={() => handleNumberClick("3")}
-                  className="col-span-1 number-btn"
-                >
-                  3
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick("1")}
+                    className="col-span-1 number-btn"
+                  >
+                    1
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("2")}
+                    className="col-span-1 number-btn"
+                  >
+                    2
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("3")}
+                    className="col-span-1 number-btn"
+                  >
+                    3
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("3")}
+                    className="col-span-1 number-btn"
+                  >
+                    3
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   Price
                 </button> */}
-              </div>
-              <div className="grid grid-cols-3 h-16">
-                <button
-                  // onClick={() => handleNumberClick("0")}
-                  className="col-span-1 number-btn"
-                >
-                  +/-
-                </button>
-                <button
-                  onClick={() => handleNumberClick("0")}
-                  className="col-span-1 number-btn"
-                >
-                  0
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-3 h-16">
+                  <button
+                    // onClick={() => handleNumberClick("0")}
+                    className="col-span-1 number-btn"
+                  >
+                    +/-
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("0")}
+                    className="col-span-1 number-btn"
+                  >
+                    0
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick(".")}
                   className="col-span-1 number-btn"
                 >
                   .
                 </button> */}
-                <button
-                  onClick={handleClearClick}
-                  className="flex justify-center items-center number-btn"
-                >
-                  <FiDelete />
-                </button>
+                  <button
+                    onClick={handleClearClick}
+                    className="flex justify-center items-center number-btn"
+                  >
+                    <FiDelete />
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 bg-[#B19777]  text-white">
-              <button
-                onClick={handlePaymentClick}
-                className=" number-btn h-[49px]"
-              >
-                Payment
-              </button>
-            </div>
+          </div>
+
+          <div className="grid absolute w-full bottom-0 grid-cols-1 bg-[#B19777]  text-white">
+            <button
+              onClick={handlePaymentClick}
+              className=" number-btn h-[49px]"
+            >
+              Payment
+            </button>
           </div>
         </div>
       </div>
