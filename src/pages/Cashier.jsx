@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useGetProductQuery } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const { data } = useGetProductQuery({ token });
   const [selectedProducts, setSelectedProducts] = useState([]);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [currentSelectedProductId, setCurrentSelectedProductId] =
     useState(null);
 
+  console.log(selectedProducts);
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
       if (prevSelected.includes(productId)) {
@@ -106,74 +109,81 @@ const Cashier = () => {
   };
   return (
     <div className="bg-[#272727]">
-      <div className="flex gap-5 ">
-        <div className="w-3/4  min-h-screen">
-          <div className="flex justify-between mx-5 my-5">
-            <div className="">
-              <p className="cursor-pointer " onClick={handleGoBack}>
-                {"<"} Back
-              </p>
-              <h1 className="text-2xl text-[#B19777]">Sale</h1>
-              <p className="text-white">Sale / Cashier</p>
-            </div>
-            <div class="relative my-3">
-              <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-[#B19777] dark:text-[#B19777]"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
+      <div className="flex justify-between gap-5 ">
+        <div className="w-full">
+            <div className="flex justify-between mx-5 my-5">
+              <div className=" flex items-center">
+                <p
+                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                  onClick={handleGoBack}
                 >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+                  <FaArrowLeft /> Back
+                </p>
               </div>
-              <input
-                type="search"
-                id="default-search"
-                class="block py-2 pl-10 pr-3 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
-                placeholder="Search ..."
-              />
-            </div>
-          </div>
-          <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
-            {data?.data?.map((product) => (
-              <div
-                key={product.id}
-                className={`product cursor-pointer h-[280px] w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
-                  selectedProducts.includes(product.id) ? "active" : ""
-                }`}
-                onClick={() => handleProductClick(product.id)}
-              >
-                <img
-                  src={product.photo}
-                  className=" rounded-t-lg w-full h-2/3"
-                  alt=""
-                />
-                <div className="p-5 text-right">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#B19777]">
-                    {product.name}
-                  </h5>
-                  <p className="mb-3 font-normal  text-gray-400">
-                    {product.price} ကျပ်
-                  </p>
+              <div class="relative my-3 flex items-center">
+                <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+                  <svg
+                    className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
                 </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+                  placeholder="Search ..."
+                />
               </div>
-            ))}
+            </div>
+          <div className="w-[95%] bg-red-200 mx-auto overflow-scroll">
+            <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
+              {data?.data?.map((product) => (
+                <div
+                  key={product.id}
+                  className={`product flex hover:bg-base/20 flex-col justify-between cursor-pointer  w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
+                    selectedProducts.includes(product.id) ? "active" : ""
+                  }`}
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <div className="w-full object-fill">
+                    <img
+                      src={product.photo}
+                      className="object-cover object-center h-[190px] rounded-t-lg fit w-full"
+                      alt=""
+                    />
+                  </div>
+
+                  <div className="p-5 pt-3 pe-6 text-right">
+                    <h5 className=" text-2xl font-semibold tracking-tight text-[#B19777]">
+                      {product.name}
+                    </h5>
+                    <p className=" font-normal  text-gray-400">
+                      {product.price} ကျပ်
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/4 border-l border-l-[#B19777] max-h-screen">
+        {/* keyboard  */}
+        <div className="flex relative flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
           <div className="h-1/2 overflow-hidden relative">
-            <h1 className="text-3xl py-5 px-4 text-[#B19777] font-semibold border-b border-b-[#B19777]">
-              Cart
+            <h1 className="text-3xl py-5 px-4 text-white font-semibold border-b border-b-[#B19777]">
+              RECEIVE
             </h1>
-            <div className="overflow-auto w-full h-2/3">
+            <div className="overflow-auto bg-red-300 w-full h-full">
               {selectedProducts.map((productId) => {
                 const selectedProduct = data?.data?.find(
                   (product) => product.id === productId
@@ -210,11 +220,15 @@ const Cashier = () => {
                 );
               })}
             </div>
-            <p className=" text-2xl ml-52">Total : {calculateTotal()}</p>
           </div>
-          <div className="h-1/2 bg-[#323232]">
+            <p className=" text-xl flex ms-auto py-2 justify-end text-end me-4">
+              Total:
+              <div className="ms-2 font-semibold"> {calculateTotal()}</div>
+            </p>
+          <div className="mt-auto w-full bg-[#323232]">
+          {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
             <div className="buttons text-gray-400">
-              <div className="grid grid-cols-3 h-20">
+              <div className="grid grid-cols-4 h-16">
                 <button
                   onClick={() => handleNumberClick("7")}
                   className="col-span-1 number-btn"
@@ -233,6 +247,12 @@ const Cashier = () => {
                 >
                   9
                 </button>
+                <button
+                  onClick={() => handleNumberClick("9")}
+                  className="col-span-1 number-btn"
+                >
+                  9
+                </button>
                 {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -240,7 +260,7 @@ const Cashier = () => {
                   Qty
                 </button> */}
               </div>
-              <div className="grid grid-cols-3 h-20">
+              <div className="grid grid-cols-4 h-16">
                 <button
                   onClick={() => handleNumberClick("4")}
                   className="col-span-1 number-btn"
@@ -259,6 +279,12 @@ const Cashier = () => {
                 >
                   6
                 </button>
+                <button
+                  onClick={() => handleNumberClick("6")}
+                  className="col-span-1 number-btn"
+                >
+                  6
+                </button>
                 {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -266,7 +292,7 @@ const Cashier = () => {
                   %Disc
                 </button> */}
               </div>
-              <div className="grid grid-cols-3 h-20">
+              <div className="grid grid-cols-4 h-16">
                 <button
                   onClick={() => handleNumberClick("1")}
                   className="col-span-1 number-btn"
@@ -285,6 +311,12 @@ const Cashier = () => {
                 >
                   3
                 </button>
+                <button
+                  onClick={() => handleNumberClick("3")}
+                  className="col-span-1 number-btn"
+                >
+                  3
+                </button>
                 {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -292,7 +324,7 @@ const Cashier = () => {
                   Price
                 </button> */}
               </div>
-              <div className="grid grid-cols-3 h-20">
+              <div className="grid grid-cols-3 h-16">
                 <button
                   // onClick={() => handleNumberClick("0")}
                   className="col-span-1 number-btn"
