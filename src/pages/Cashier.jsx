@@ -21,7 +21,7 @@ const Cashier = () => {
       if (prevSelected.includes(productId)) 
       {
         const updatedQuantities = { ...selectedQuantities };
-        updatedQuantities[productId] = (updatedQuantities[productId] || 0) + 1;
+        updatedQuantities[productId] = parseInt(updatedQuantities[productId] || 0) + 1;
         setSelectedQuantities(updatedQuantities);
         return prevSelected;
       } else

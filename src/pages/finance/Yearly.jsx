@@ -200,124 +200,126 @@ const Yearly = () => {
           </div>
         </div>
         {/* last  */}
-        <div className="">
-          <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
-            <div className="flex flex-row items-center border rounded">
-              <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
-                  {yearlySaleData.total_months}
-                </p>
+        {yearlySaleData && (
+          <div className="">
+            <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
+              <div className="flex flex-row items-center border rounded">
+                <div className="flex flex-col items-end border-r py-2 px-6  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {yearlySaleData.total_months}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {yearlySaleData.total_vouchers}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {yearlySaleData.total_cash}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {yearlySaleData.total_tax}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                  <p className="text-sm text-base">Total Vouchers</p>
+                  <p className="text-xl font-bold text-white">
+                    {yearlySaleData.total}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
-                  {yearlySaleData.total_vouchers}
-                </p>
-              </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
-                  {yearlySaleData.total_cash}
-                </p>
-              </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
-                  {yearlySaleData.total_tax}
-                </p>
-              </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-sm text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
-                  {yearlySaleData.total}
-                </p>
-              </div>
-            </div>
-            {/* <Pagination
+              {/* <Pagination
               value={activePage}
               onChange={setPage}
               total={5}
               siblings={1}
             /> */}
-            <nav aria-label="Page navigation example">
-              <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
-                  >
-                    <span class="sr-only">Previous</span>
-                    <svg
-                      class="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
+              <nav aria-label="Page navigation example">
+                <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
                     >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 1 1 5l4 4"
-                      />
-                    </svg>
-                  </a>
-                </li>
+                      <span class="sr-only">Previous</span>
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 6 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 1 1 5l4 4"
+                        />
+                      </svg>
+                    </a>
+                  </li>
 
-                <li>
-                  <a
-                    href="#"
-                    aria-current="page"
-                    class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
-                  >
-                    1
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
-                  >
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
-                  >
-                    3
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
-                  >
-                    <span class="sr-only">Next</span>
-                    <svg
-                      class="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
+                  <li>
+                    <a
+                      href="#"
+                      aria-current="page"
+                      class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
                     >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="m1 9 4-4-4-4"
-                      />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                      1
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
+                    >
+                      2
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
+                    >
+                      3
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
+                    >
+                      <span class="sr-only">Next</span>
+                      <svg
+                        class="w-2.5 h-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 6 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m1 9 4-4-4-4"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Rootlayout>
   );
