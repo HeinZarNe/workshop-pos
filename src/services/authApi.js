@@ -103,7 +103,7 @@ export const authApi = createApi({
     }),
     getBrandReport: build.query({
       query: (token) => ({
-        url: "/report/brand-report",
+        url: "report/brand-report",
         header: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],

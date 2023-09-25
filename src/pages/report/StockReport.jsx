@@ -16,19 +16,23 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import {
   useGetStockBestSellerQuery,
   useGetStockQuery,
+  useGetBrandReportQuery,
 } from "../../services/authApi";
 
 const StockReport = () => {
   const token = localStorage.getItem("token");
   const { data: stockLevel } = useGetStockBestSellerQuery(token);
   const { data: stockData } = useGetStockQuery(token);
+  const stockBrand = useGetBrandReportQuery(token);
+  // const { data: stockBrand } = useGetBrandReportQuery(token);
+  console.log(stockBrand);
   // const outOfStock = `w-[52.17%] h-full bg-blue-300`;
   // const inStock = `w-[47.83%] h-full bg-[#884A39]`;
   const inStock = `w-[${stockLevel?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
   const outOfStock = `w-[${stockLevel?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
   // const lowStock = `w-[0%] h-full bg-yellow-300`;
   const lowStock = `w-[${stockLevel?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
-  console.log(inStock);
+  // console.log(stockData);
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -89,14 +93,14 @@ const StockReport = () => {
             </div>
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
-                {stockLevel?(
+                {stockLevel ? (
                   <div className=" flex w-[75%] overflow-hidden h-3 rounded-full ">
-                  <div className={inStock}></div>
-                  <div className={outOfStock}></div>
-                  <div className={lowStock}></div>
-                </div>
-                ):null}
-       
+                    <div className={inStock}></div>
+                    <div className={outOfStock}></div>
+                    <div className={lowStock}></div>
+                  </div>
+                ) : null}
+
                 <div className="w-[100px]">
                   <p className="text-3xl text-white font-semibold">89,798</p>
                   <p className="text-lg">Products</p>
