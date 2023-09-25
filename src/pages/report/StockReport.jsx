@@ -1,64 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
 import { Link, NavLink } from "react-router-dom";
-import { BsCart3, BsClipboard2Pulse, BsCoin, BsPencil, BsPlus } from "react-icons/bs";
+import {
+  BsCart3,
+  BsClipboard2Pulse,
+  BsCoin,
+  BsDash,
+  BsPencil,
+  BsPlus,
+} from "react-icons/bs";
 import { HiArrowSmallUp } from "react-icons/hi2";
 import DonutChart from "./DonutChart";
 import DonutChart1 from "./DonutChart1";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import {
+  useGetStockBestSellerQuery,
+  useGetStockQuery,
+  useGetBrandReportQuery,
+} from "../../services/authApi";
 
 const StockReport = () => {
-  const tableData = [
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-    },
-    {
-      id: 1,
-      no: "2",
-      vouncher: "09573",
-      time: "11:11AM",
-      qty: "20",
-      cash: "200,300",
-      tax: "200",
-      total: "200,500",
-    },
-  ];
+  const token = localStorage.getItem("token");
+  const { data: stockLevel } = useGetStockBestSellerQuery(token);
+  const { data: stockData } = useGetStockQuery(token);
+  const stockBrand = useGetBrandReportQuery(token);
+  // const { data: stockBrand } = useGetBrandReportQuery(token);
+  console.log(stockBrand);
+  // const outOfStock = `w-[52.17%] h-full bg-blue-300`;
+  // const inStock = `w-[47.83%] h-full bg-[#884A39]`;
+  const inStock = `w-[${stockLevel?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
+  const outOfStock = `w-[${stockLevel?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
+  // const lowStock = `w-[0%] h-full bg-yellow-300`;
+  const lowStock = `w-[${stockLevel?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
+  // console.log(stockData);
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
         <div className=" flex  justify-between">
           <div className="">
             <h1 className="text-2xl font-semibold mt-0 pt-0 text-white">
-              Daily
+              Stock
             </h1>
-            <p className=" text-gray-400">Finance/ Daily</p>
+            <p className=" text-gray-400">Report/ Stock</p>
           </div>
           <div className=" flex gap-3">
             <Link to={"/sale/cashier"}>
@@ -87,7 +70,9 @@ const StockReport = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="text-3xl font-semibold text-white">28,500k</p>
+                <p className="text-3xl font-semibold text-white">
+                  {stockLevel?.total_product}
+                </p>
                 <p className="text-lg">Total Products</p>
               </div>
             </div>
@@ -100,23 +85,22 @@ const StockReport = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="text-3xl font-semibold text-white">938,500k</p>
+                <p className="text-3xl font-semibold text-white">
+                  {stockLevel?.total_brand}
+                </p>
                 <p className="text-lg">Total Brands</p>
               </div>
             </div>
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
-                <div className="flex w-[75%] h-3 rounded-full overflow-hidden justify-between">
-                  <div className="w-[60%] ">
-                    <div className="bg-red-300  h-full "></div>
+                {stockLevel ? (
+                  <div className=" flex w-[75%] overflow-hidden h-3 rounded-full ">
+                    <div className={inStock}></div>
+                    <div className={outOfStock}></div>
+                    <div className={lowStock}></div>
                   </div>
-                  <div className="w-[25%]">
-                    <div className="bg-yellow-300 h-full "></div>
-                  </div>
-                  <div className="w-[15%]">
-                    <div className="bg-blue-300 h-full "></div>
-                  </div>
-                </div>
+                ) : null}
+
                 <div className="w-[100px]">
                   <p className="text-3xl text-white font-semibold">89,798</p>
                   <p className="text-lg">Products</p>
@@ -125,37 +109,46 @@ const StockReport = () => {
               <div className="mt-4">
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-red-300 rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#884A39] rounded-full"></div>{" "}
                     <p className="text-lg">Instock</p>
                   </div>
                   <div className="flex gap-7">
-                    <p className="text-lg">100</p>
-                    <div className="text-lg flex items-center">
-                      65% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                    <p className="text-lg">
+                      {stockLevel?.stock_lvl_bar?.in_stock[0]}
+                    </p>
+                    <div className="text-lg flex w-20 justify-end items-center">
+                      {stockLevel?.stock_lvl_bar?.in_stock[1]}
+                      <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                     </div>
                   </div>
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-yellow-300 rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#C38154] rounded-full"></div>{" "}
                     <p className="text-lg">Low stock</p>
                   </div>
                   <div className="flex gap-7">
-                    <p className="text-lg">100</p>
-                    <div className="text-lg flex items-center">
-                      25% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                    <p className="text-lg">
+                      {stockLevel?.stock_lvl_bar?.low_stock[0]}
+                    </p>
+                    <div className="text-lg w-20 justify-end flex items-center">
+                      {stockLevel?.stock_lvl_bar?.low_stock[1]}
+                      <BsDash className="ms-2 text-yellow-500" />{" "}
                     </div>
                   </div>
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-blue-300 rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#FFC26F] rounded-full"></div>{" "}
                     <p className="text-lg">Out of stock</p>
                   </div>
                   <div className="flex gap-7">
-                    <p className="text-lg">100</p>
-                    <div className="text-lg flex items-center">
-                      15% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                    <p className="text-lg">
+                      {stockLevel?.stock_lvl_bar?.out_of_stock[0]}
+                    </p>
+                    <div className="text-lg w-20 justify-end flex items-center">
+                      {stockLevel?.stock_lvl_bar?.out_of_stock[1]}
+                      <HiArrowSmallUp className="ms-2 rotate-180 text-red-500" />{" "}
                     </div>
                   </div>
                 </div>
@@ -163,7 +156,7 @@ const StockReport = () => {
             </div>
           </div>
           <div className="p-4 border border-base rounded-md">
-            <div className="text-3xl font-semibold text-white">
+            <div className="text-3xl font-semibold flex text-white">
               Best Seller Brands
             </div>
             <div className="flex mt-1 items-center justify-between">
@@ -185,7 +178,7 @@ const StockReport = () => {
                       <p className="text-lg">Instock</p>
                     </div>
                     <div className="flex gap-7">
-                      <p className="text-lg">100</p>
+                      <p className="text-lg">{}</p>
                       <div className="text-lg flex items-center">
                         65% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                       </div>
@@ -334,54 +327,64 @@ const StockReport = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  {tableData?.map((data) => {
-                    return (
-                      <tr key={data.id} class=" border-b hover:bg-white/10 ">
-                        <th
-                          scope="row"
-                          class="px-6 py-4 font-medium text-white whitespace-nowra"
-                        >
-                          {data.no}
-                        </th>
-                        <td class="px-6 py-4">{data.vouncher}</td>
-                        <td class="px-6 py-4">{data.time}</td>
-                        <td class="px-6 py-4  text-end">{data.qty}</td>
-                        <td class="px-6 py-4  text-end">{data.cash}</td>
-                        <td class="px-6 py-4  text-end">{data.tax}</td>
-                        <td class="px-6 py-4  text-center">
-                          <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">{data.total}</div>
-                        </td>
-                        <td class="px-6 py-4 text-right flex gap-2 justify-center">
-                          <NavLink
-                            to={"/profile"}
-                            class="font-medium flex justify-center text-blue-600  hover:underline"
+                {stockData && (
+                  <tbody>
+                    {stockData?.data.map((e) => {
+                      return (
+                        <tr key={e.id} class=" border-b hover:bg-white/10 ">
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-white whitespace-nowra"
                           >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <BsPlus />
-                            </button>
-                          </NavLink>
-                          <NavLink
-                            to={"/profile"}
-                            class="font-medium flex justify-center text-blue-600  hover:underline"
-                          >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <BsPencil />
-                            </button>
-                          </NavLink>
-                          <NavLink
-                            to={"/profile"}
-                            class="font-medium  flex justify-center text-blue-600  hover:underline"
-                          >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <AiOutlineArrowRight />
-                            </button>
-                          </NavLink>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
+                            {e.id}
+                          </th>
+                          <td class="px-6 py-4">{e.name}</td>
+                          <td class="px-6 py-4">{e.brand_name}</td>
+                          <td class="px-6 py-4  text-end">{e.unit}</td>
+                          <td class="px-6 py-4  text-end">{e.sale_price}</td>
+                          <td class="px-6 py-4  text-end">{e.total_stock}</td>
+                          <td class="px-6 py-4  text-center">
+                            {e.stock_levle == "In Stock" ? (
+                              <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
+                                {e.stock_levle}
+                              </div>
+                            ) : (
+                              <div className="bg-red-500 border-2 bg-opacity-30 border-red-400 p-3 px-2 rounded-full">
+                                {e.stock_levle}
+                              </div>
+                            )}
+                          </td>
+                          <td class="px-6 py-4 text-right flex gap-2 justify-center">
+                            <NavLink
+                              to={"/profile"}
+                              class="font-medium flex justify-center text-blue-600  hover:underline"
+                            >
+                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
+                                <BsPlus />
+                              </button>
+                            </NavLink>
+                            <NavLink
+                              to={"/profile"}
+                              class="font-medium flex justify-center text-blue-600  hover:underline"
+                            >
+                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
+                                <BsPencil />
+                              </button>
+                            </NavLink>
+                            <NavLink
+                              to={"/profile"}
+                              class="font-medium  flex justify-center text-blue-600  hover:underline"
+                            >
+                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
+                                <AiOutlineArrowRight />
+                              </button>
+                            </NavLink>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>
