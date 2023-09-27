@@ -241,84 +241,6 @@ const Yearly = () => {
               total={5}
               siblings={1}
             /> */}
-<<<<<<< HEAD
-            <nav aria-label="Page navigation example">
-              <ul className="flex items-center bg-transparent -space-x-px h-8 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
-                  >
-                    <span className="sr-only">Previous</span>
-                    <svg
-                      className="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 1 1 5l4 4"
-                      />
-                    </svg>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    aria-current="page"
-                    className="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
-                  >
-                    1
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
-                  >
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
-                  >
-                    3
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
-                  >
-                    <span className="sr-only">Next</span>
-                    <svg
-                      className="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 9 4-4-4-4"
-                      />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-=======
               <nav aria-label="Page navigation example">
                 <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
                   <li>
@@ -396,7 +318,6 @@ const Yearly = () => {
                 </ul>
               </nav>
             </div>
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
           </div>
         )}
       </div>

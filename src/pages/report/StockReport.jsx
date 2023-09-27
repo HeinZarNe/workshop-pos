@@ -5,10 +5,7 @@ import {
   BsCart3,
   BsClipboard2Pulse,
   BsCoin,
-<<<<<<< HEAD
-=======
   BsDash,
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
   BsPencil,
   BsPlus,
 } from "react-icons/bs";
@@ -330,61 +327,6 @@ const StockReport = () => {
                     </th>
                   </tr>
                 </thead>
-<<<<<<< HEAD
-                <tbody>
-                  {tableData?.map((data) => {
-                    return (
-                      <tr
-                        key={data.id}
-                        className=" border-b hover:bg-white/10 "
-                      >
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-white whitespace-nowra"
-                        >
-                          {data.no}
-                        </th>
-                        <td className="px-6 py-4">{data.vouncher}</td>
-                        <td className="px-6 py-4">{data.time}</td>
-                        <td className="px-6 py-4  text-end">{data.qty}</td>
-                        <td className="px-6 py-4  text-end">{data.cash}</td>
-                        <td className="px-6 py-4  text-end">{data.tax}</td>
-                        <td className="px-6 py-4  text-center">
-                          <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
-                            {data.total}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-right flex gap-2 justify-center">
-                          <NavLink
-                            to={"/profile"}
-                            className="font-medium flex justify-center text-blue-600  hover:underline"
-                          >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <BsPlus />
-                            </button>
-                          </NavLink>
-                          <NavLink
-                            to={"/profile"}
-                            className="font-medium flex justify-center text-blue-600  hover:underline"
-                          >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <BsPencil />
-                            </button>
-                          </NavLink>
-                          <NavLink
-                            to={"/profile"}
-                            className="font-medium  flex justify-center text-blue-600  hover:underline"
-                          >
-                            <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
-                              <AiOutlineArrowRight />
-                            </button>
-                          </NavLink>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-=======
                 {stockData && (
                   <tbody>
                     {stockData?.data.map((e) => {
@@ -443,7 +385,6 @@ const StockReport = () => {
                     })}
                   </tbody>
                 )}
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
               </table>
             </div>
           </div>

@@ -9,11 +9,13 @@ import {
 } from "../services/authApi";
 import { Loader } from "@mantine/core";
 import Swal from "sweetalert2";
+import ModalPhoto from "../components/ModalPhoto";
 
 const EditProfile = () => {
   const [section, setSection] = useState("personal");
   const [selectedGenders, setSelectedGenders] = useState([]);
-  const [changePassword, setChangePassword] = useState(false);
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const handleCheckboxChange = (value) => {
     setSelectedGenders(value);
   };
@@ -89,7 +91,11 @@ const EditProfile = () => {
           : date_of_birth,
       email: newData.email?.length > 0 ? newData.email : email,
       gender: newData.gender?.length > 0 ? newData.gender : gender,
-      photo: newData.photo?.length > 0 ? newData.photo : photo,
+      photo: selectedPhoto
+        ? selectedPhoto.path
+        : newData.photo?.length > 0
+        ? newData.photo
+        : photo,
       position: newData.position?.length > 0 ? newData.position : position,
     };
     updateUser({ token, updateData: dataToUpdate });
@@ -105,14 +111,22 @@ const EditProfile = () => {
 
       {profile && (
         <div className=" mx-10 my-5">
+          {showPhotoModal && (
+            <ModalPhoto
+              selectedPhoto={selectedPhoto}
+              setSelectedPhoto={setSelectedPhoto}
+              showPhotoModal={showPhotoModal}
+              setShowPhotoModal={setShowPhotoModal}
+            />
+          )}
           {/* header */}
           <h1 className=" text-[20px] font-[500] text-white">Edit Profile</h1>
           <div className=" flex items-end gap-10 mt-10 mx-5">
             {/* image */}
-            <div className="">
+            <div className="" onClick={(_) => setShowPhotoModal(true)}>
               <img
                 className=" w-[150px] h-[150px] object-cover rounded-full"
-                src={photo}
+                src={selectedPhoto ? selectedPhoto.url : photo}
                 alt=""
               />
             </div>

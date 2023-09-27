@@ -18,14 +18,13 @@ const Cashier = () => {
   // console.log(data);
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
-      if (prevSelected.includes(productId)) 
-      {
+      if (prevSelected.includes(productId)) {
         const updatedQuantities = { ...selectedQuantities };
-        updatedQuantities[productId] = parseInt(updatedQuantities[productId] || 0) + 1;
+        updatedQuantities[productId] =
+          parseInt(updatedQuantities[productId] || 0) + 1;
         setSelectedQuantities(updatedQuantities);
         return prevSelected;
-      } else
-       {
+      } else {
         const updatedSelected = [...prevSelected, productId];
         const updatedQuantities = { ...selectedQuantities };
         updatedQuantities[productId] = 1;
@@ -134,13 +133,8 @@ const Cashier = () => {
                 <FaArrowLeft /> Back
               </p>
             </div>
-<<<<<<< HEAD
-            <div className="relative my-3">
-              <div className="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
-=======
             <div class="relative my-3 flex items-center">
               <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                 <svg
                   className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
                   aria-hidden="true"
@@ -160,11 +154,7 @@ const Cashier = () => {
               <input
                 type="search"
                 id="default-search"
-<<<<<<< HEAD
-                className="block py-2 pl-10 pr-3 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
-=======
                 class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                 placeholder="Search ..."
               />
             </div>
@@ -245,13 +235,20 @@ const Cashier = () => {
                     </h5>
                     <div className="flex ms-1 font-mono text-sm">
                       <p className=" text-sm flex gap-1 text-gray-400">
-                        <div className="text-white/80"> {selectedProduct.price}</div>Kyats
+                        <div className="text-white/80">
+                          {" "}
+                          {selectedProduct.price}
+                        </div>
+                        Kyats
                       </p>
                       <div className="mx-2">x</div>
                       <p className="mb-3 text-gray-400">{quantity}</p>
                     </div>
                   </div>
-                  <p className="flex gap-1 text-[#fafafa] font-semibold">{totalPrice} <div className="font-normal text-white/70">Kyats</div></p>
+                  <p className="flex gap-1 text-[#fafafa] font-semibold">
+                    {totalPrice}{" "}
+                    <div className="font-normal text-white/70">Kyats</div>
+                  </p>
                 </div>
               );
             })}

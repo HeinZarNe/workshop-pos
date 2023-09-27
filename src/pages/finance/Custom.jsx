@@ -10,17 +10,16 @@ import { Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 const Daily = () => {
-
   const [activePage, setPage] = useState(1);
-const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-const {
-  data: dailySalesData,
-  isLoading,
-  isSuccess,
-  isError,
-  refetch,
-} = useGetDailySalesQuery(token);
+  const {
+    data: dailySalesData,
+    isLoading,
+    isSuccess,
+    isError,
+    refetch,
+  } = useGetDailySalesQuery(token);
 
   //   {
   //     id: 1,
@@ -232,15 +231,6 @@ const {
                       >
                         {data.id}
                       </th>
-<<<<<<< HEAD
-                      <td className="px-6 py-4">{data.month}</td>
-                      <td className="px-6 py-4  text-end">{data.year}</td>
-                      <td className="px-6 py-4">{data.vouchers}</td>
-                      <td className="px-6 py-4  text-end">{data.cash}</td>
-                      <td className="px-6 py-4  text-end">{data.tax}</td>
-                      <td className="px-6 py-4  text-end">{data.total}</td>
-                      <td className="px-6 py-4 text-center">
-=======
                       <td class="px-6 py-4">{data.voucher_number}</td>
                       <td class="px-6 py-4">{data.time}</td>
                       <td class="px-6 py-4  text-end">{data.item_count}</td>
@@ -248,7 +238,6 @@ const {
                       <td class="px-6 py-4  text-end">{data.tax}</td>
                       <td class="px-6 py-4  text-end">{data.total}</td>
                       <td class="px-6 py-4 text-right">
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                         <NavLink
                           to={"/profile"}
                           className="font-medium flex justify-center text-blue-600  hover:underline"
@@ -299,13 +288,8 @@ const {
               total={5}
               siblings={1}
             /> */}
-<<<<<<< HEAD
-            <nav aria-label="Page navigation example">
-              <ul className="flex items-center bg-transparent -space-x-px h-8 text-sm">
-=======
               {/* <nav aria-label="Page navigation example">
               <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                 <li>
                   <a
                     href="#"
