@@ -157,7 +157,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
         setSection("photo");
     }
   };
-  console.log(brand_name);
   return detailLoading ? (
     <div className="w-full flex items-center justify-center h-[300px]">
       <Loader />

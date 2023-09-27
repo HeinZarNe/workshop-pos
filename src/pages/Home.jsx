@@ -12,12 +12,21 @@ import { BaseColor } from "../constant";
 import { DataLineChart } from "../components/overview/DataLineChart";
 import SaleReport from "../components/overview/SaleReport";
 import TodaySaleOverview from "../components/overview/TodaySaleOverview";
-import { useGetStockQuery } from "../services/authApi";
+import {
+  useGetMonthlyOverviewQuery,
+  useGetOverviewDataQuery,
+  useGetWeeklyOverviewQuery,
+  useGetYearlyOverviewQuery,
+} from "../services/authApi";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const ContentBoxClass = " p-4 border-[#535353] rounded-md border-[1px]";
   const token = localStorage.getItem("token");
-  const stocks = useGetStockQuery(token);
+  const { data } = useGetOverviewDataQuery({ token });
+  const { data: monthlyOverview } = useGetMonthlyOverviewQuery({ token });
+  const { data: weeklyOverview } = useGetWeeklyOverviewQuery({ token });
+  const { data: yearlylyOverview } = useGetYearlyOverviewQuery({ token });
   return (
     <Rootlayout>
       <div className="p-5 flex flex-col gap-5 overview">
@@ -45,7 +54,9 @@ const Home = () => {
               </div>
             </div>
             <div className="flex flex-col items-end min-w-[100px]">
-              <p className="text-2xl font-semibold text-white ">2,500 k</p>
+              <p className="text-2xl font-semibold text-white ">
+                {data?.total_stock}
+              </p>
               <p>Total stocks</p>
             </div>
           </div>
@@ -62,8 +73,10 @@ const Home = () => {
               </div>
             </div>
             <div className="flex flex-col items-end min-w-[100px]">
-              <p className="text-2xl font-semibold text-white  ">645</p>
-              <p>Total Stuff</p>
+              <p className="text-2xl font-semibold text-white  ">
+                {data?.total_staff}
+              </p>
+              <p>Total Staff</p>
             </div>
           </div>
           {/* Quick Actions */}
@@ -76,17 +89,20 @@ const Home = () => {
                   " flex flex-row gap-5 items-center justify-between"
                 }
               >
-                <div
-                  className={
-                    "border-[#535353] rounded-md border-[1px] flex flex-row items-center justify-between px-2 py-2"
-                  }
-                >
-                  <BsPlus
-                    size={35}
-                    color={BaseColor}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
+                <Link to={"/products/create"}>
+                  <div
+                    className={
+                      "border-[#535353] rounded-md border-[1px] flex flex-row items-center justify-between px-2 py-2"
+                    }
+                  >
+                    <BsPlus
+                      size={35}
+                      color={BaseColor}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                </Link>
+
                 <div>
                   <p className="text-lg text-white">Add Product</p>
                   <p className="text-sm">stock update</p>
@@ -105,18 +121,21 @@ const Home = () => {
                   >
                     <AiOutlineShop size={30} color={BaseColor} />
                   </div>
+
                   <div>
                     <p className="text-lg text-white">Go to Shop</p>
                     <p className="text-sm">complete the sale</p>
                   </div>
                 </div>
-                <div className=" rounded-full p-2 bg-base bg-opacity-5">
-                  <AiOutlineArrowRight
-                    size={20}
-                    color={BaseColor}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
+                <Link to={"/products"}>
+                  <div className=" rounded-full p-2 bg-base bg-opacity-5">
+                    <AiOutlineArrowRight
+                      size={20}
+                      color={BaseColor}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -124,11 +143,7 @@ const Home = () => {
         {/* Second Section */}
         <SaleReport />
         {/* Third Section */}
-        <TodaySaleOverview />
-        <div></div>
-        {/* Fourth Section */}
-
-        <div></div>
+        {data?.today_sales?.length > 0 && <TodaySaleOverview />}
       </div>
     </Rootlayout>
   );

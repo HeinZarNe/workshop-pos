@@ -6,11 +6,16 @@ import ProductTables from "../components/products/ProductTables";
 import ProductCard from "../components/products/ProductCard";
 import { Link } from "react-router-dom";
 import AddStock from "../components/stock/AddStock";
+import { Pagination } from "@mantine/core";
 
 const Inventory = () => {
   const [view, setView] = useState("list");
   const [showSidebar, setShowSidebar] = useState(false);
   const [stockData, setStockData] = useState({});
+  const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState("");
+  const [totalPage, setTotalPage] = useState(0);
+
   const [addStock, setAddStock] = useState(false);
   return (
     <Rootlayout>
@@ -52,10 +57,10 @@ const Inventory = () => {
           </h1>
           {/* search */}
           <div className="flex justify-between">
-            <div class="relative my-3">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <div className="relative my-3">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -63,17 +68,22 @@ const Inventory = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
               </div>
               <input
                 type="search"
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                  setPage(0);
+                }}
+                value={keyword}
                 id="default-search"
-                class="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Search ..."
                 required
               />
@@ -107,11 +117,33 @@ const Inventory = () => {
             <ProductTables
               setShowSidebar={setShowSidebar}
               addStock={addStock}
+              keyword={keyword}
               setStockData={setStockData}
+              page={page}
+              setTotalPage={setTotalPage}
             />
           ) : (
-            <ProductCard />
+            <ProductCard keyword={keyword} page={page} />
           )}
+          <div className="pagination absolute bottom-[30px] right-[40px] ">
+            <Pagination
+              total={totalPage || 1}
+              onChange={(e) => {
+                setPage(e);
+                refetch();
+              }}
+              // onPreviousPage={(e) => {
+              //   setPage((prev) => prev > 0 && prev - 1);
+              //   refetch();
+              // }}
+              // onNextPage={(e) => {
+
+              //   refetch();
+              // }}
+              boundaries={1}
+              defaultValue={1}
+            />
+          </div>
         </div>
       </div>
     </Rootlayout>

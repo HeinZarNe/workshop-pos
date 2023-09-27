@@ -1,16 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Rootlayout from "../layout/Rootlayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { RiEdit2Fill } from "react-icons/ri";
-import { useCreateUserMutation, useGetPhotoQuery } from "../services/authApi";
+import {
+  useCreateUserMutation,
+  useGetPhotoQuery,
+  useGetUserDetailQuery,
+  useUpdateUserMutation,
+} from "../services/authApi";
 import ModalPhoto from "../components/ModalPhoto";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { BaseUrl } from "../utils/constant";
 import InfoTab from "../components/InfoTab";
 import Swal from "sweetalert2";
+import "./EditUser.css";
 
-const CreateUser = () => {
+const EditUser = ({ id, setEditState }) => {
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(false);
   const [section, setSection] = useState("personal");
@@ -18,46 +24,51 @@ const CreateUser = () => {
   const [name, setName] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [date_of_birth, setDateOfBirth] = useState("");
-  const [position, setPosition] = useState("staff");
   const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password_confirmation, setPassword_confirmation] = useState("");
-  const [createUser, { isSuccess, isLoading }] = useCreateUserMutation();
   const token = localStorage.getItem("token");
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
+  const { data: userDetail } = useGetUserDetailQuery({ token, id: id });
+
+  useEffect(() => {
+    if (!userDetail?.data) return;
+    const { name, phone_number, date_of_birth, gender, address, photo } =
+      userDetail.data;
+    setSelectedPhoto(photo);
+    setName(name);
+    setSelectedGenders(gender);
+    setPhone_number(phone_number);
+    setDateOfBirth(date_of_birth);
+    setAddress(address);
+
+    return () => {};
+  }, [userDetail]);
 
   const handleCheckboxChange = (value) => {
     setSelectedGenders(value);
   };
-  const redirectRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isLoading) {
       const userData = {
+        id,
         name,
         phone_number,
         date_of_birth,
         gender: selectedGenders,
-        position,
         address,
-        email,
-        password,
-        password_confirmation,
         photo: selectedPhoto.path,
       };
-
-      const data = await createUser({ userData, token });
-
+      const res = updateUser({ updateData: userData, token });
       await Swal.fire({
         position: "center",
         icon: "success",
-        title: "A new user has been registered!",
+        title: "User has been updated!",
         showConfirmButton: true,
 
         confirmButtonText: "Go to User",
         preConfirm: () => {
-          redirectRef?.current.click();
+          setEditState();
         },
         allowOutsideClick: false,
       });
@@ -65,20 +76,20 @@ const CreateUser = () => {
   };
 
   return (
-    <Rootlayout>
+    <div className="edit-user">
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
           <h1 className="text-2xl text-[#B19777]">Users</h1>
           <p className="text-white">Users / Create</p>
         </div>
-        <Link to={"/users"} ref={redirectRef}>
+        <Link to={"/users"}>
           <button className=" py-2 px-4 rounded-lg button">Users</button>
         </Link>
       </div>
       <div className="mt-5 flex gap-16 items-center">
         {section === "personal" && (
           <form
-            onSubmit={() => setSection("login")}
+            onSubmit={() => setSection("photo")}
             action=""
             className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col"
           >
@@ -174,89 +185,6 @@ const CreateUser = () => {
           </form>
         )}
 
-        {section === "login" && (
-          <div className="flex flex-col">
-            <form
-              onSubmit={() => setSection("photo")}
-              action=""
-              className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col"
-            >
-              <div className=" text-white flex flex-col gap-8 p-5">
-                <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Position
-                  </span>
-                  <select
-                    onChange={(e) => setPosition(e.target.value)}
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-[#B19777] text-[17px] placeholder:text-[17px]"
-                    name="position"
-                    id=""
-                  >
-                    <option value="admin" selected={position === "admin"}>
-                      Admin
-                    </option>
-                    <option value="staff" selected={position === "staff"}>
-                      Staff
-                    </option>
-                  </select>
-                </div>
-                <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Email
-                  </span>
-                  <input
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    type="text"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                  />
-                </div>
-                <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Password
-                  </span>
-                  <input
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder=""
-                    type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                  />
-                </div>
-                <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Comfirm Password
-                  </span>
-                  <input
-                    required
-                    value={password_confirmation}
-                    onChange={(e) => setPassword_confirmation(e.target.value)}
-                    placeholder=""
-                    type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                  />
-                </div>
-              </div>
-              {password !== password_confirmation && (
-                <span className="text-warning text-sm  ms-5 mb-3">
-                  Password doesn't match
-                </span>
-              )}
-
-              {password.length > 3 && password === password_confirmation && (
-                <button
-                  type="submit"
-                  className=" self-end py-2 px-4 rounded-lg button w-24 m-5"
-                >
-                  Next
-                </button>
-              )}
-            </form>
-          </div>
-        )}
         {section === "photo" && (
           <div className="w-[550px] bg-[#323232] rounded-lg ml-5 ">
             {showPhotoModal ? (
@@ -279,7 +207,7 @@ const CreateUser = () => {
                   <img
                     src={
                       !selectedPhoto.url
-                        ? BaseUrl + selectedPhoto
+                        ? selectedPhoto
                         : selectedPhoto.url || ""
                     }
                     alt="Selected"
@@ -311,52 +239,13 @@ const CreateUser = () => {
           </div>
         )}
         {section === "preview" && (
-          // <form className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col">
-          //   <div className="p-5">
-          //     <div className="flex gap-5 items-center pb-5 border-b">
-          //       {selectedPhoto && (
-          //         <img
-          //           className="w-[150px] h-[150px] rounded-full"
-          //           src={
-          //             !selectedPhoto.url
-          //               ? selectedPhoto
-          //               : selectedPhoto.url || ""
-          //           }
-          //           alt=""
-          //         />
-          //       )}
-          //       <div className="">
-          //         <h1 className="text-3xl mb-3 text-white">{name}</h1>
-          //         <p className=" text-white">Sale Price : {sale_price} ကျပ်</p>
-          //         <p className=" text-white">
-          //           Actual Price : {actual_price} ကျပ်
-          //         </p>
-          //       </div>
-          //     </div>
-          //     <div className="flex mt-5 gap-20">
-          //       <div className="space-y-4 text-white">
-          //         <p>Phone</p>
-          //         <p>Mail</p>
-          //         <p>Address</p>
-          //         <p>Gender</p>
-          //         <p>Date of birth</p>
-          //       </div>
-          //       <div className="space-y-4 text-white">
-          //         <p>: {phone_number}</p>
-          //         <p>: {email}</p>
-          //         <p>: {address || "-"}</p>
-          //         <p>: {number || "-"}</p>
-          //       </div>
-          //     </div>
-          //   </div>
-          //   <button
-          //     type="submit"
-          //     className="self-end py-2 px-4 rounded-lg button m-5"
-          //   >
-          //     Edit Product
-          //   </button>
-          // </form>
-          <div className="w-[550px] bg-[#323232] rounded-lg ml-5 p-5">
+          <div className="w-[550px] bg-[#323232] rounded-lg ml-5 p-5 relative">
+            <div
+              className=" right-5 cursor-pointer top-5 button w-8 h-8 rounded-full absolute flex justify-center items-center  "
+              onClick={(_) => setSection("personal")}
+            >
+              <RiEdit2Fill />
+            </div>
             <div className="flex items-center gap-5 px-5 py-3">
               <img
                 src={selectedPhoto.url || selectedPhoto}
@@ -365,18 +254,15 @@ const CreateUser = () => {
               />
               <div className=" text-[#B19777]">
                 <h2 className="text-3xl mb-2">{name}</h2>
-                <p className=" text-gray-300 text-sm">{position}</p>
               </div>
             </div>
             <InfoTab
-              password={password}
+              edit={true}
               detail={{
                 phone_number,
                 date_of_birth,
                 gender: selectedGenders,
                 address,
-                position,
-                email,
               }}
             />
           </div>
@@ -416,9 +302,10 @@ const CreateUser = () => {
                 section === "login" ? "text-[#B19777]" : "text-white"
               }`}
             >
-              Login Info
+              Photo
             </p>
           </div>
+
           <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
 
           <div className="flex items-center gap-5">
@@ -436,26 +323,6 @@ const CreateUser = () => {
                 section === "photo" ? "text-[#B19777]" : "text-white"
               }`}
             >
-              Photo
-            </p>
-          </div>
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
-
-          <div className="flex items-center gap-5">
-            <div
-              className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
-                section === "photo"
-                  ? "border-[#B19777] text-[#B19777]"
-                  : "border-white text-white"
-              }`}
-            >
-              4
-            </div>
-            <p
-              className={` ${
-                section === "photo" ? "text-[#B19777]" : "text-white"
-              }`}
-            >
               Preview
             </p>
           </div>
@@ -465,12 +332,12 @@ const CreateUser = () => {
             onClick={handleSubmit}
             className=" py-2 px-4 rounded-lg button mt-5"
           >
-            Create User
+            Update User
           </button>
         )}
       </div>
-    </Rootlayout>
+    </div>
   );
 };
 
-export default CreateUser;
+export default EditUser;

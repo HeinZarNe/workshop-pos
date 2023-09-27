@@ -26,6 +26,7 @@ const ModalPhoto = ({
   const storePhoto = () => {
     imageUploadRef.current.click();
   };
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -39,7 +40,6 @@ const ModalPhoto = ({
     };
     reader.readAsDataURL(file);
     // const data = await storePhotoMutation({ photos: file, token });
-    console.log(data);
   };
   return (
     <AnimatePresence>

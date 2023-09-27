@@ -116,8 +116,8 @@ const Cashier = () => {
               <h1 className="text-2xl text-[#B19777]">Sale</h1>
               <p className="text-white">Sale / Cashier</p>
             </div>
-            <div class="relative my-3">
-              <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+            <div className="relative my-3">
+              <div className="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
                 <svg
                   className="w-4 h-4 text-[#B19777] dark:text-[#B19777]"
                   aria-hidden="true"
@@ -127,9 +127,9 @@ const Cashier = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
@@ -137,7 +137,7 @@ const Cashier = () => {
               <input
                 type="search"
                 id="default-search"
-                class="block py-2 pl-10 pr-3 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+                className="block py-2 pl-10 pr-3 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
                 placeholder="Search ..."
               />
             </div>

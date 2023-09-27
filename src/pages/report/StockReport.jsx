@@ -1,7 +1,13 @@
 import React from "react";
 import Rootlayout from "../../layout/Rootlayout";
 import { Link, NavLink } from "react-router-dom";
-import { BsCart3, BsClipboard2Pulse, BsCoin, BsPencil, BsPlus } from "react-icons/bs";
+import {
+  BsCart3,
+  BsClipboard2Pulse,
+  BsCoin,
+  BsPencil,
+  BsPlus,
+} from "react-icons/bs";
 import { HiArrowSmallUp } from "react-icons/hi2";
 import DonutChart from "./DonutChart";
 import DonutChart1 from "./DonutChart1";
@@ -240,10 +246,10 @@ const StockReport = () => {
             Stock Overview
           </div>
           <div className="flex justify-between">
-            <div class="relative my-3">
-              <div class="absolute inset-y-0 left-0 flex items-center focus:border-base pl-3 pointer-events-none">
+            <div className="relative my-3">
+              <div className="absolute inset-y-0 left-0 flex items-center focus:border-base pl-3 pointer-events-none">
                 <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -251,9 +257,9 @@ const StockReport = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
@@ -261,7 +267,7 @@ const StockReport = () => {
               <input
                 type="search"
                 id="default-search"
-                class="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Search ..."
                 required
               />
@@ -271,7 +277,7 @@ const StockReport = () => {
                 <div className="">Sort:</div>
                 <select
                   id="countries"
-                  class=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
                 >
                   <option className="text-base" selected>
                     In stock
@@ -288,7 +294,7 @@ const StockReport = () => {
                 <div className="">Filter:</div>
                 <select
                   id="countries"
-                  class=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
                 >
                   <option className="text-base" selected>
                     All file
@@ -304,58 +310,63 @@ const StockReport = () => {
             </div>
           </div>
           <div className=" border-2 rounded-t-xl border-base mt-2">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table class="w-full text-sm text-left text-[#fafafa] ">
-                <thead class="text-xs text-gray-900 uppercase bg-base">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left text-[#fafafa] ">
+                <thead className="text-xs text-gray-900 uppercase bg-base">
                   <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       NO
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       NAME
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       BRAND
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       UNIT
                     </th>
-                    <th scope="col" class="px-6 text-end py-3">
+                    <th scope="col" className="px-6 text-end py-3">
                       SALE PRICE
                     </th>
-                    <th scope="col" class="px-6  text-end py-3">
+                    <th scope="col" className="px-6  text-end py-3">
                       TOTAL STOCK
                     </th>
-                    <th scope="col" class="px-6  text-center py-3">
+                    <th scope="col" className="px-6  text-center py-3">
                       STOCK LEVEL
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      <span class="sr-only">Edit</span>
+                    <th scope="col" className="px-6 py-3">
+                      <span className="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {tableData?.map((data) => {
                     return (
-                      <tr key={data.id} class=" border-b hover:bg-white/10 ">
+                      <tr
+                        key={data.id}
+                        className=" border-b hover:bg-white/10 "
+                      >
                         <th
                           scope="row"
-                          class="px-6 py-4 font-medium text-white whitespace-nowra"
+                          className="px-6 py-4 font-medium text-white whitespace-nowra"
                         >
                           {data.no}
                         </th>
-                        <td class="px-6 py-4">{data.vouncher}</td>
-                        <td class="px-6 py-4">{data.time}</td>
-                        <td class="px-6 py-4  text-end">{data.qty}</td>
-                        <td class="px-6 py-4  text-end">{data.cash}</td>
-                        <td class="px-6 py-4  text-end">{data.tax}</td>
-                        <td class="px-6 py-4  text-center">
-                          <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">{data.total}</div>
+                        <td className="px-6 py-4">{data.vouncher}</td>
+                        <td className="px-6 py-4">{data.time}</td>
+                        <td className="px-6 py-4  text-end">{data.qty}</td>
+                        <td className="px-6 py-4  text-end">{data.cash}</td>
+                        <td className="px-6 py-4  text-end">{data.tax}</td>
+                        <td className="px-6 py-4  text-center">
+                          <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
+                            {data.total}
+                          </div>
                         </td>
-                        <td class="px-6 py-4 text-right flex gap-2 justify-center">
+                        <td className="px-6 py-4 text-right flex gap-2 justify-center">
                           <NavLink
                             to={"/profile"}
-                            class="font-medium flex justify-center text-blue-600  hover:underline"
+                            className="font-medium flex justify-center text-blue-600  hover:underline"
                           >
                             <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
                               <BsPlus />
@@ -363,7 +374,7 @@ const StockReport = () => {
                           </NavLink>
                           <NavLink
                             to={"/profile"}
-                            class="font-medium flex justify-center text-blue-600  hover:underline"
+                            className="font-medium flex justify-center text-blue-600  hover:underline"
                           >
                             <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
                               <BsPencil />
@@ -371,7 +382,7 @@ const StockReport = () => {
                           </NavLink>
                           <NavLink
                             to={"/profile"}
-                            class="font-medium  flex justify-center text-blue-600  hover:underline"
+                            className="font-medium  flex justify-center text-blue-600  hover:underline"
                           >
                             <button className="flex items-center hover:bg-base/70 justify-center w-7 h-7 rounded-full bg-base text-black">
                               <AiOutlineArrowRight />

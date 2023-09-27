@@ -54,10 +54,10 @@ const UserOverview = () => {
       <div className=" p-5 text-white flex flex-col gap-3">
         <h1 className="text-[21px] font-[500] text-white">Staff Overview</h1>
         <div className="flex flex-row items-center gap-3">
-          <div class="relative my-3">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <div className="relative my-3">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
-                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -65,9 +65,9 @@ const UserOverview = () => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
               </svg>
@@ -77,16 +77,11 @@ const UserOverview = () => {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               id="default-search"
-              class="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Search ..."
               required
             />
           </div>
-          {keyword.length > 0 && (
-            <div onClick={(_) => setKeyword("")}>
-              <MdCancel size={25} className="text-gray-500 cursor-pointer" />
-            </div>
-          )}
         </div>
         {isLoading ? (
           <div className="w-full flex h-[300px] justify-center ">
@@ -95,33 +90,34 @@ const UserOverview = () => {
           </div>
         ) : (
           <UserTable
+            refetch={refetch}
             users={users?.data}
             setOpenModal={setOpenModal}
             banUser={handleBanUser}
           />
         )}
-        {users?.meta?.last_page > 1 && (
-          <div className="pagination absolute bottom-[30px] right-[40px] ">
-            <Pagination
-              total={users?.meta?.last_page}
-              onChange={(e) => {
-                setPage(e);
-                refetch();
-              }}
-              onPreviousPage={(e) => {
-                setPage(page - 1);
-                refetch();
-              }}
-              onNextPage={(e) => {
-                setPage(page + 1);
-                refetch();
-              }}
-              boundaries={1}
-              defaultValue={1}
-              on
-            />
-          </div>
-        )}
+
+        <div className="pagination absolute bottom-[30px] right-[40px] ">
+          <Pagination
+            total={users?.meta?.last_page || 1}
+            onChange={(e) => {
+              setPage(e);
+              refetch();
+            }}
+            onPreviousPage={(e) => {
+              setPage(page - 1);
+              refetch();
+            }}
+            onNextPage={(e) => {
+              setPage(page + 1);
+              refetch();
+            }}
+            boundaries={1}
+            defaultValue={1}
+            on
+          />
+        </div>
+
         <Modal show={openModal.state} onClose={toggleModal}>
           {detailLoading ? (
             <div className="w-full flex items-center justify-center h-[300px]">

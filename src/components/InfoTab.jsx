@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./InfoTab.css";
+import { LiaEyeSlashSolid, LiaEyeSolid } from "react-icons/lia";
+import { TbPassword } from "react-icons/tb";
 
-const InfoTab = ({ onTabClick, detail }) => {
+const InfoTab = ({ onTabClick, detail, password, edit = false }) => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const [showPassword, setShowPassword] = useState(true);
   const { phone_number, date_of_birth, gender, address, position, email } =
     detail;
   const handleTabClick = (tab) => {
@@ -40,10 +43,33 @@ const InfoTab = ({ onTabClick, detail }) => {
               <div className="space-y-4 text-white">
                 <p>Position</p>
                 <p>Email</p>
+                {password && <p>Password</p>}
               </div>
               <div className="space-y-4 text-white">
                 <p>: {position}</p>
                 <p>: {email}</p>
+                {password && (
+                  <div className="flex flex-row items-center gap-2">
+                    <p className="flex flex-row items-center gap-1 ">
+                      : {showPassword ? password : <TbPassword size={25} />}
+                    </p>
+                    {showPassword ? (
+                      <button
+                        className="mt-1"
+                        onClick={(_) => setShowPassword(false)}
+                      >
+                        <LiaEyeSolid />
+                      </button>
+                    ) : (
+                      <button
+                        className="mt-1"
+                        onClick={(_) => setShowPassword(true)}
+                      >
+                        <LiaEyeSlashSolid />
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -69,19 +95,21 @@ const InfoTab = ({ onTabClick, detail }) => {
             Personal Information
           </p>
         </li>
-        <li
-          className={`tab-item mb-2 text-white ${
-            activeTab === "tab2" ? "active-tab" : ""
-          }`}
-          onClick={handleParaClick}
-        >
-          <p
-            className="cursor-pointer hover:text-[#B19777]"
-            onClick={() => handleTabClick("tab2")}
+        {!edit && (
+          <li
+            className={`tab-item mb-2 text-white ${
+              activeTab === "tab2" ? "active-tab" : ""
+            }`}
+            onClick={handleParaClick}
           >
-            Login Information
-          </p>
-        </li>
+            <p
+              className="cursor-pointer hover:text-[#B19777]"
+              onClick={() => handleTabClick("tab2")}
+            >
+              Login Information
+            </p>
+          </li>
+        )}
       </ul>
       <div className="tab-content mt-3 mx-5">{renderActiveTab()}</div>
     </div>

@@ -28,6 +28,8 @@ import Yearly from "./pages/finance/Yearly";
 import Custom from "./pages/finance/Custom";
 import StockReport from "./pages/report/StockReport";
 import SaleReport from "./pages/report/SaleReport";
+import BannedUser from "./pages/BannedUser";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -36,7 +38,6 @@ const App = () => {
   const { photo } = useSelector((state) => state.media);
 
   useEffect(() => {
-    console.log(photo, data?.data);
     data?.data?.forEach((item) => {
       // Check if the item is already in the photo array
       if (!photo.some((image) => image.id === item.id)) {
@@ -52,8 +53,7 @@ const App = () => {
         path="/"
         element={
           <Guard>
-            {" "}
-            <Home />{" "}
+            <Home />
           </Guard>
         }
       />
@@ -61,8 +61,7 @@ const App = () => {
         path="/media"
         element={
           <Guard>
-            {" "}
-            <Media />{" "}
+            <Media />
           </Guard>
         }
       />
@@ -70,8 +69,7 @@ const App = () => {
         path="/profile"
         element={
           <Guard>
-            {" "}
-            <Profile />{" "}
+            <Profile />
           </Guard>
         }
       />
@@ -79,8 +77,7 @@ const App = () => {
         path="/profile/edit"
         element={
           <Guard>
-            {" "}
-            <EditProfile />{" "}
+            <EditProfile />
           </Guard>
         }
       />
@@ -88,8 +85,7 @@ const App = () => {
         path="/users"
         element={
           <Guard>
-            {" "}
-            <User />{" "}
+            <User />
           </Guard>
         }
       />
@@ -97,8 +93,16 @@ const App = () => {
         path="/users/create"
         element={
           <Guard>
-            {" "}
-            <CreateUser />{" "}
+            <CreateUser />
+          </Guard>
+        }
+      />
+
+      <Route
+        path="/users/banned"
+        element={
+          <Guard>
+            <BannedUser />
           </Guard>
         }
       />
@@ -106,8 +110,7 @@ const App = () => {
         path="/products"
         element={
           <Guard>
-            {" "}
-            <Inventory />{" "}
+            <Inventory />
           </Guard>
         }
       />
@@ -115,8 +118,7 @@ const App = () => {
         path="/products/create"
         element={
           <Guard>
-            {" "}
-            <AddProduct />{" "}
+            <AddProduct />
           </Guard>
         }
       />
@@ -124,8 +126,7 @@ const App = () => {
         path="/products/details"
         element={
           <Guard>
-            {" "}
-            <ProductDetails />{" "}
+            <ProductDetails />
           </Guard>
         }
       />
@@ -133,8 +134,7 @@ const App = () => {
         path="/stock"
         element={
           <Guard>
-            {" "}
-            <Stock />{" "}
+            <Stock />
           </Guard>
         }
       />
@@ -142,8 +142,7 @@ const App = () => {
         path="/sale/cashier"
         element={
           <Guard>
-            {" "}
-            <Cashier />{" "}
+            <Cashier />
           </Guard>
         }
       />
@@ -151,8 +150,7 @@ const App = () => {
         path="/sale/recent"
         element={
           <Guard>
-            {" "}
-            <Recent />{" "}
+            <Recent />
           </Guard>
         }
       />
@@ -160,8 +158,7 @@ const App = () => {
         path="/checkout"
         element={
           <Guard>
-            {" "}
-            <Checkout />{" "}
+            <Checkout />
           </Guard>
         }
       />
@@ -169,8 +166,7 @@ const App = () => {
         path="/brand"
         element={
           <Guard>
-            {" "}
-            <ManageBrand />{" "}
+            <ManageBrand />
           </Guard>
         }
       />
@@ -178,8 +174,7 @@ const App = () => {
         path="/daily"
         element={
           <Guard>
-            {" "}
-            <Daily />{" "}
+            <Daily />
           </Guard>
         }
       />
@@ -187,8 +182,7 @@ const App = () => {
         path="/monthly"
         element={
           <Guard>
-            {" "}
-            <Monthly />{" "}
+            <Monthly />
           </Guard>
         }
       />
@@ -196,8 +190,7 @@ const App = () => {
         path="/yearly"
         element={
           <Guard>
-            {" "}
-            <Yearly />{" "}
+            <Yearly />
           </Guard>
         }
       />
@@ -205,8 +198,7 @@ const App = () => {
         path="/stock-report"
         element={
           <Guard>
-            {" "}
-            <StockReport />{" "}
+            <StockReport />
           </Guard>
         }
       />
@@ -222,8 +214,7 @@ const App = () => {
         path="/custom"
         element={
           <Guard>
-            {" "}
-            <Custom />{" "}
+            <Custom />
           </Guard>
         }
       />

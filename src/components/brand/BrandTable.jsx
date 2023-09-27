@@ -9,19 +9,22 @@ import {
 } from "../../services/authApi";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Loader, Pagination } from "@mantine/core";
 
 const BrandTable = ({
   tableData,
-  setTableData,
-  setEditBrand,
-  editBrand,
   page,
   setPage,
+  setTableData,
+  setEditBrand,
+  keyword,
 }) => {
   const token = localStorage.getItem("token");
-  const { data, refetch, isLoading } = useGetBrandQuery({ token, page });
+  const { data, refetch, isLoading } = useGetBrandQuery({
+    token,
+    page,
+    keyword,
+  });
   const [deleteBrand] = useDeleteBrandMutation();
   useEffect(() => {
     data?.data && setTableData([...data.data]);
@@ -51,7 +54,7 @@ const BrandTable = ({
                   <th>BRAND NAME</th>
                   <th>COMPANY NAME</th>
                   <th>AGENT</th>
-                  <th>PHONT</th>
+                  <th>PHONE</th>
                   <th>DESCRIPTION</th>
                 </tr>
               </thead>
@@ -62,9 +65,9 @@ const BrandTable = ({
                     <th>{brand.id}</th>
                     <td>{brand.brand_name}</td>
                     <td>{brand.company}</td>
-                    <td className=" text-center">{brand.agent}</td>
-                    <td className=" text-center">{brand.phone_number}</td>
-                    <td className=" text-center">{"good"}</td>
+                    <td>{brand.agent}</td>
+                    <td>{brand.phone_number}</td>
+                    <td>{"good"}</td>
                     <td>
                       <div className=" text-white flex text-[20px] gap-3">
                         <button
@@ -93,17 +96,9 @@ const BrandTable = ({
 
             <div className="pagination absolute bottom-[30px] right-[40px] ">
               <Pagination
-                total={data?.meta?.last_page}
+                total={data?.meta?.last_page || 1}
                 onChange={(e) => {
                   setPage(e);
-                  refetch();
-                }}
-                onPreviousPage={(e) => {
-                  setPage(page - 1);
-                  refetch();
-                }}
-                onNextPage={(e) => {
-                  setPage(page + 1);
                   refetch();
                 }}
                 boundaries={1}

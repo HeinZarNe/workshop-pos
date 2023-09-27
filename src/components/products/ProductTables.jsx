@@ -7,16 +7,26 @@ import { Link } from "react-router-dom";
 import AddProduct from "../../pages/AddProduct";
 import { Pagination } from "@mantine/core";
 
-const ProductTables = ({ setShowSidebar, addStock, setStockData }) => {
+const ProductTables = ({
+  setShowSidebar,
+  addStock,
+  setStockData,
+  keyword,
+  page,
+  setTotalPage,
+}) => {
   const token = localStorage.getItem("token");
-  const [page, setPage] = useState(0);
-  const { data, refetch } = useGetProductQuery({ token, page });
+
+  const { data, refetch } = useGetProductQuery({ token, page, keyword });
   const [editstate, setEditState] = useState(false);
   useEffect(() => {
     refetch();
     return () => {};
   }, [addStock]);
-
+  useEffect(() => {
+    setTotalPage(data?.meta?.last_page);
+    return () => {};
+  }, [data]);
   return (
     <div>
       {editstate ? (
@@ -75,26 +85,6 @@ const ProductTables = ({ setShowSidebar, addStock, setStockData }) => {
                 ))}
             </tbody>
           </table>
-          <div className="pagination absolute bottom-[30px] right-[40px] ">
-            <Pagination
-              total={data?.meta?.last_page}
-              onChange={(e) => {
-                setPage(e);
-                refetch();
-              }}
-              onPreviousPage={(e) => {
-                setPage(page - 1);
-                refetch();
-              }}
-              onNextPage={(e) => {
-                setPage(page + 1);
-                refetch();
-              }}
-              boundaries={1}
-              defaultValue={1}
-              on
-            />
-          </div>
         </div>
       )}
     </div>

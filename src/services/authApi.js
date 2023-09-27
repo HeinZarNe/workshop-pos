@@ -46,44 +46,57 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["authapi"],
     }),
+
     banUser: build.mutation({
       query: ({ id, token }) => ({
-        url: "user/ban",
-        method: "POST",
-        body: { id },
+        url: "user/ban/" + id,
+        method: "PUT",
         headers: { authorization: `Bearer ${token}` },
       }),
       invalidatesTags: ["authapi"],
     }),
     unbanUser: build.mutation({
       query: ({ id, token }) => ({
-        url: "user/unban",
-        method: "POST",
-        body: { id },
+        url: "user/unban/" + id,
+        method: "PUT",
+
         headers: { authorization: `Bearer ${token}` },
       }),
       invalidatesTags: ["authapi"],
     }),
     getUser: build.query({
       query: ({ token, page, keyword }) => ({
-        url: `user${page ? "?page=" + page : keyword && "?keyword=" + keyword}`,
+        url: `user${
+          page ? "?page=" + page : keyword ? "?keyword=" + keyword : ""
+        }`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getBannedUser: build.query({
+      query: ({ token, page, keyword }) => ({
+        url: `user/banned-users${
+          page ? "?page=" + page : keyword ? "?keyword=" + keyword : ""
+        }`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
     }),
     getUserDetail: build.query({
-      query: ({ token, id }) => ({
-        url: `user/details/` + id,
+      query: ({ token, id, self }) => ({
+        url: `user/details${self ? "" : "/" + id}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
     }),
     getProduct: build.query({
-      query: ({ detailId, token, page }) => ({
+      query: ({ detailId, token, page, keyword }) => ({
         url: detailId
           ? "product/" + detailId
           : page
           ? `product?page=${page}`
+          : keyword
+          ? "product?keyword=" + keyword
           : "product",
 
         headers: { authorization: `Bearer ${token}` },
@@ -91,8 +104,10 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getStock: build.query({
-      query: (token) => ({
-        url: "stock",
+      query: ({ token, page, keyword }) => ({
+        url: `stock${
+          page ? "?page=" + page : keyword ? "?keyword=" + keyword : ""
+        }`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -149,13 +164,56 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    updateUser: build.mutation({
+      query: ({ updateData, token }) => ({
+        url: "profile/" + updateData.id,
+        method: "PUT",
+        body: updateData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getBrand: build.query({
-      query: ({ token, page, detail, id }) => ({
+      query: ({ token, page, detail, id, keyword }) => ({
         url: detail
           ? "brand/" + id
-          : page === 0
-          ? "brand"
-          : `brand?page=${page}`,
+          : page > 0
+          ? `brand?page=${page}`
+          : keyword
+          ? "brand?keyword=" + keyword
+          : "brand",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getOverviewData: build.query({
+      query: ({ token }) => ({
+        url: "overview-page",
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getMonthlyOverview: build.query({
+      query: ({ token }) => ({
+        url: "monthly-overview",
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getWeeklyOverview: build.query({
+      query: ({ token }) => ({
+        url: "weekly-overview",
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getYearlyOverview: build.query({
+      query: ({ token }) => ({
+        url: "yearly-overview",
+
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -214,10 +272,16 @@ export const {
   useStoreProductMutation,
   useUpdateProductMutation,
   useGetUserQuery,
+  useGetWeeklyOverviewQuery,
+  useGetMonthlyOverviewQuery,
+  useGetYearlyOverviewQuery,
+  useGetBannedUserQuery,
   useGetUserDetailQuery,
   useGetBrandQuery,
+  useGetOverviewDataQuery,
   useStoreBrandMutation,
   useDeleteBrandMutation,
+  useUpdateUserMutation,
   useUpdateBrandMutation,
   useUpdateStockMutation,
 } = authApi;

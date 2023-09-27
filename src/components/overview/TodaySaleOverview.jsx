@@ -4,9 +4,16 @@ import { PiExportBold } from "react-icons/pi";
 import { BiChevronDown } from "react-icons/bi";
 import { BaseColor } from "../../constant";
 import { Pagination } from "@mantine/core";
+import { useGetOverviewDataQuery } from "../../services/authApi";
 
 const TodaySaleOverview = () => {
   const [activePage, setPage] = useState(1);
+  const token = localStorage.getItem("token");
+
+  const { data } = useGetOverviewDataQuery({ token });
+  if (data?.today_sales?.length === 0) {
+    return <h1>There is currently no sales today.</h1>;
+  }
   return (
     <div className={"flex flex-col gap-6 sale"}>
       <div className="flex flex-row items-center justify-between">
