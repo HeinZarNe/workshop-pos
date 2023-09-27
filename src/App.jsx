@@ -38,6 +38,7 @@ const App = () => {
   const { photo } = useSelector((state) => state.media);
 
   useEffect(() => {
+    // console.log(photo, data?.data);
     data?.data?.forEach((item) => {
       // Check if the item is already in the photo array
       if (!photo.some((image) => image.id === item.id)) {

@@ -1,25 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import { useGetProductQuery } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const { data } = useGetProductQuery({ token });
   const [selectedProducts, setSelectedProducts] = useState([]);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [currentSelectedProductId, setCurrentSelectedProductId] =
     useState(null);
+  const [keyBoardShow, setKeyBoadShow] = useState(false);
 
+  // console.log(data);
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
-      if (prevSelected.includes(productId)) {
+      if (prevSelected.includes(productId)) 
+      {
         const updatedQuantities = { ...selectedQuantities };
-        updatedQuantities[productId] = (updatedQuantities[productId] || 0) + 1;
+        updatedQuantities[productId] = parseInt(updatedQuantities[productId] || 0) + 1;
         setSelectedQuantities(updatedQuantities);
         return prevSelected;
-      } else {
+      } else
+       {
         const updatedSelected = [...prevSelected, productId];
         const updatedQuantities = { ...selectedQuantities };
         updatedQuantities[productId] = 1;
@@ -32,13 +38,23 @@ const Cashier = () => {
   const handleNumberClick = (number) => {
     if (currentSelectedProductId !== null) {
       setSelectedQuantities((prevQuantities) => {
-        const currentQuantity = prevQuantities[currentSelectedProductId] || 0;
-        const newQuantity = parseInt(`${currentQuantity}${number}`);
-        const updatedQuantities = {
-          ...prevQuantities,
-          [currentSelectedProductId]: newQuantity,
-        };
-        return updatedQuantities;
+        if (prevQuantities[currentSelectedProductId] == 1) {
+          const currentQuantity = 0;
+          const newQuantity = eval(`${currentQuantity} + ${number}`);
+          const updatedQuantities = {
+            ...prevQuantities,
+            [currentSelectedProductId]: newQuantity,
+          };
+          return updatedQuantities;
+        } else {
+          const currentQuantity = prevQuantities[currentSelectedProductId] || 0;
+          const newQuantity = `${currentQuantity}${number}`;
+          const updatedQuantities = {
+            ...prevQuantities,
+            [currentSelectedProductId]: newQuantity,
+          };
+          return updatedQuantities;
+        }
       });
     }
   };
@@ -81,6 +97,7 @@ const Cashier = () => {
   };
 
   const handleProductInCartSelect = (productId) => {
+    setKeyBoadShow(true);
     setCurrentSelectedProductId(productId);
     setSelectedProducts((prevSelected) => {
       if (!prevSelected.includes(productId)) {
@@ -106,20 +123,26 @@ const Cashier = () => {
   };
   return (
     <div className="bg-[#272727]">
-      <div className="flex gap-5 ">
-        <div className="w-3/4  min-h-screen">
+      <div className="flex justify-between gap-5 ">
+        <div className="w-full">
           <div className="flex justify-between mx-5 my-5">
-            <div className="">
-              <p className="cursor-pointer " onClick={handleGoBack}>
-                {"<"} Back
+            <div className=" flex items-center">
+              <p
+                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                onClick={handleGoBack}
+              >
+                <FaArrowLeft /> Back
               </p>
-              <h1 className="text-2xl text-[#B19777]">Sale</h1>
-              <p className="text-white">Sale / Cashier</p>
             </div>
+<<<<<<< HEAD
             <div className="relative my-3">
               <div className="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+=======
+            <div class="relative my-3 flex items-center">
+              <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+>>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                 <svg
-                  className="w-4 h-4 text-[#B19777] dark:text-[#B19777]"
+                  className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -137,196 +160,284 @@ const Cashier = () => {
               <input
                 type="search"
                 id="default-search"
+<<<<<<< HEAD
                 className="block py-2 pl-10 pr-3 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+=======
+                class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+>>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
                 placeholder="Search ..."
               />
             </div>
           </div>
-          <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
-            {data?.data?.map((product) => (
-              <div
-                key={product.id}
-                className={`product cursor-pointer h-[280px] w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
-                  selectedProducts.includes(product.id) ? "active" : ""
-                }`}
-                onClick={() => handleProductClick(product.id)}
-              >
-                <img
-                  src={product.photo}
-                  className=" rounded-t-lg w-full h-2/3"
-                  alt=""
-                />
-                <div className="p-5 text-right">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#B19777]">
-                    {product.name}
-                  </h5>
-                  <p className="mb-3 font-normal  text-gray-400">
-                    {product.price} ကျပ်
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col w-1/4 border-l border-l-[#B19777] max-h-screen">
-          <div className="h-1/2 overflow-hidden relative">
-            <h1 className="text-3xl py-5 px-4 text-[#B19777] font-semibold border-b border-b-[#B19777]">
-              Cart
-            </h1>
-            <div className="overflow-auto w-full h-2/3">
-              {selectedProducts.map((productId) => {
-                const selectedProduct = data?.data?.find(
-                  (product) => product.id === productId
-                );
+          <div className="w-[100%] mx-auto overflow-scroll">
+            <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
+              {/* {test.map((product) => ( */}
+              {data?.data?.map((product) => (
+                <div
+                  key={product.id}
+                  className={`product flex hover:bg-base/20 flex-col justify-between cursor-pointer  w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
+                    selectedProducts.includes(product.id) ? "active" : ""
+                  }`}
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <div className="w-full object-fill">
+                    <img
+                      src={product.photo}
+                      className="object-cover object-center h-[190px] rounded-t-lg fit w-full"
+                      alt=""
+                    />
+                  </div>
 
-                if (!selectedProduct) {
-                  return null;
-                }
-                const quantity = selectedQuantities[productId] || 0;
-                const totalPrice = selectedProduct.price * quantity;
-
-                return (
-                  <div
-                    key={productId}
-                    className={`display cursor-pointer flex py-1 px-4 justify-between items-center transition-all border-b border-b-[#B19777] ${
-                      selectedProduct.id === currentSelectedProductId
-                        ? "prodInCartActive"
-                        : ""
-                    }`}
-                    onClick={() => handleProductInCartSelect(productId)}
-                  >
-                    <div className="">
-                      <h5 className="mb-2 text-2xl tracking-tight text-[#B19777]">
-                        {selectedProduct.name}
-                      </h5>
-                      <p className="mb-3 font-normal text-gray-400">
-                        {quantity}
-                      </p>
-                    </div>
-                    <p className="mb-3 font-normal text-gray-400">
-                      {totalPrice}
+                  <div className="p-5 pt-3 pe-6 text-right">
+                    <h5 className=" text-xl font-semibold tracking-tight text-[#B19777]">
+                      {product.name}
+                    </h5>
+                    <p className=" font-normal  text-gray-400">
+                      {product.price} ကျပ်
                     </p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
-            <p className=" text-2xl ml-52">Total : {calculateTotal()}</p>
           </div>
-          <div className="h-1/2 bg-[#323232]">
-            <div className="buttons text-gray-400">
-              <div className="grid grid-cols-3 h-20">
-                <button
-                  onClick={() => handleNumberClick("7")}
-                  className="col-span-1 number-btn"
+        </div>
+        {/* keyboard  */}
+        <div className="flex relative overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
+          <div className="">
+            <h1 className="text-3xl py-5 px-4 text-white font-semibold border-b border-b-[#B19777]">
+              RECEIVE
+            </h1>
+          </div>
+          <div
+            className={
+              keyBoardShow
+                ? "overflow-scroll w-full h-[205px]"
+                : "overflow-scrol w-full h-full"
+            }
+          >
+            {selectedProducts.map((productId) => {
+              const selectedProduct = data?.data?.find(
+                (product) => product.id === productId
+              );
+
+              if (!selectedProduct) {
+                return null;
+              }
+              const quantity = selectedQuantities[productId] || 0;
+              const totalPrice = selectedProduct.price * quantity;
+
+              return (
+                <div
+                  key={productId}
+                  className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 
+                  ${
+                    selectedProduct.id === currentSelectedProductId &&
+                    keyBoardShow
+                      ? " bg-base/20"
+                      : ""
+                  }
+                  `}
+                  onClick={() => handleProductInCartSelect(productId)}
                 >
-                  7
-                </button>
-                <button
-                  onClick={() => handleNumberClick("8")}
-                  className="col-span-1 number-btn"
-                >
-                  8
-                </button>
-                <button
-                  onClick={() => handleNumberClick("9")}
-                  className="col-span-1 number-btn"
-                >
-                  9
-                </button>
-                {/* <button
+                  <div className=" ">
+                    <h5 className=" text-lg font-semibold tracking-tight text-base">
+                      {selectedProduct.name}
+                    </h5>
+                    <div className="flex ms-1 font-mono text-sm">
+                      <p className=" text-sm flex gap-1 text-gray-400">
+                        <div className="text-white/80"> {selectedProduct.price}</div>Kyats
+                      </p>
+                      <div className="mx-2">x</div>
+                      <p className="mb-3 text-gray-400">{quantity}</p>
+                    </div>
+                  </div>
+                  <p className="flex gap-1 text-[#fafafa] font-semibold">{totalPrice} <div className="font-normal text-white/70">Kyats</div></p>
+                </div>
+              );
+            })}
+          </div>
+          <div
+            className={`flex mt-auto absolute bg-secondary w-full bottom-0 duration-200 ${
+              keyBoardShow ? "translate-x-0" : "translate-y-[260px]"
+            } flex-col`}
+          >
+            <div className="">
+              <div className="text-end py-1 pb-2">
+                <div className="flex text-xl text-white  justify-end me-4">
+                  Cash:
+                  <p className="ms-2 font-semibold text-[#fafafa]">
+                    {calculateTotal()}
+                  </p>
+                </div>
+                <div className="flex text-sm justify-end me-4">
+                  Tax: <p className="ms-1">300Kyats</p>
+                </div>
+              </div>
+              <div
+                onClick={() => setKeyBoadShow(false)}
+                className="flex border-t border-gray-400 items-center"
+              >
+                {keyBoardShow && (
+                  <div className="border border-gray-400 ms-2 hover:bg-gray-400 duration-100 hover:text-black p-2 rounded px-3 flex">
+                    <FaChevronDown />
+                  </div>
+                )}
+                <p className=" text-xl text-white flex ms-auto py-4 pt-3 justify-end me-4">
+                  Total:
+                  <div className="ms-2 text-[#fafafa] font-semibold">
+                    {" "}
+                    {calculateTotal() + 300 + " "}
+                  </div>{" "}
+                </p>
+              </div>
+            </div>
+            {/* keyboard layout  */}
+            <div className="mb-12 w-full bg-[#323232]">
+              {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
+              <div className="buttons  text-gray-400">
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick(7)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    7
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(8)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    8
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(9)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    9
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("")}
+                    className={`${
+                      keyBoardShow
+                        ? "bg-base/90 text-white col-span-1 font-semibold number-btn"
+                        : "col-span-1 font-semibold number-btn"
+                    } `}
+                  >
+                    QTY
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   Qty
                 </button> */}
-              </div>
-              <div className="grid grid-cols-3 h-20">
-                <button
-                  onClick={() => handleNumberClick("4")}
-                  className="col-span-1 number-btn"
-                >
-                  4
-                </button>
-                <button
-                  onClick={() => handleNumberClick("5")}
-                  className="col-span-1 number-btn"
-                >
-                  5
-                </button>
-                <button
-                  onClick={() => handleNumberClick("6")}
-                  className="col-span-1 number-btn"
-                >
-                  6
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick(4)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    4
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(5)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    5
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(6)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    6
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
+                  >
+                    DIS
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   %Disc
                 </button> */}
-              </div>
-              <div className="grid grid-cols-3 h-20">
-                <button
-                  onClick={() => handleNumberClick("1")}
-                  className="col-span-1 number-btn"
-                >
-                  1
-                </button>
-                <button
-                  onClick={() => handleNumberClick("2")}
-                  className="col-span-1 number-btn"
-                >
-                  2
-                </button>
-                <button
-                  onClick={() => handleNumberClick("3")}
-                  className="col-span-1 number-btn"
-                >
-                  3
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    onClick={() => handleNumberClick(1)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    1
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(2)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                  >
+                    2
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(3)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl  number-btn"
+                  >
+                    3
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
+                  >
+                    PRICE
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
                 >
                   Price
                 </button> */}
-              </div>
-              <div className="grid grid-cols-3 h-20">
-                <button
-                  // onClick={() => handleNumberClick("0")}
-                  className="col-span-1 number-btn"
-                >
-                  +/-
-                </button>
-                <button
-                  onClick={() => handleNumberClick("0")}
-                  className="col-span-1 number-btn"
-                >
-                  0
-                </button>
-                {/* <button
+                </div>
+                <div className="grid grid-cols-4 h-16">
+                  <button
+                    // onClick={() => handleNumberClick("0")}
+                    className="col-span-1 text-lg hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
+                  >
+                    +/-
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick(0)}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa]  text-xl number-btn"
+                  >
+                    0
+                  </button>
+                  {/* <button
                   // onClick={() => handleNumberClick(".")}
                   className="col-span-1 number-btn"
                 >
                   .
                 </button> */}
-                <button
-                  onClick={handleClearClick}
-                  className="flex justify-center items-center number-btn"
-                >
-                  <FiDelete />
-                </button>
+                  <button
+                    onClick={handleClearClick}
+                    className="flex justify-center hover:bg-base/30 hover:text-[#fafafa] text-xl font-bold items-center number-btn"
+                  >
+                    .
+                  </button>
+                  <button
+                    onClick={handleClearClick}
+                    className="flex font-semibold hover:bg-base/30 hover:text-[#fafafa] text-xl justify-center items-center number-btn"
+                  >
+                    <FiDelete />
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 bg-[#B19777]  text-white">
-              <button
-                onClick={handlePaymentClick}
-                className=" number-btn h-[49px]"
-              >
-                Payment
-              </button>
-            </div>
+          </div>
+
+          <div className="grid absolute w-full bottom-0 grid-cols-1 bg-[#B19777]  text-white">
+            <button
+              onClick={handlePaymentClick}
+              className=" number-btn h-[49px]"
+            >
+              Payment
+            </button>
           </div>
         </div>
       </div>

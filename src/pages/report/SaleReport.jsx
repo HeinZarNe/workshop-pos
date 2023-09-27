@@ -8,8 +8,11 @@ import { HiArrowSmallUp } from "react-icons/hi2";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import DonutChart from "./DonutChart";
 import BarChart from "./BarChart";
+import { useGetBrandReportQuery } from "../../services/authApi";
 
 const SaleReport = () => {
+  const item = useGetBrandReportQuery(localStorage.getItem("token"));
+  console.log(item);
   const tableData = [
     {
       id: 1,
@@ -282,7 +285,7 @@ const SaleReport = () => {
           </div>
           <div className="col-span-1">
             <div className="text-3xl text-white font-semibold mb-4 ms-2 mt-10">
-              Product Sales
+              Brand Sales
             </div>
             <div className="border-2 border-base p-4 rounded-md">
               <DonutChart />
