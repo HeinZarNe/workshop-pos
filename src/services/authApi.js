@@ -104,176 +104,174 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getStock: build.query({
-<<<<<<< HEAD
       query: ({ token, page, keyword }) => ({
         url: `stock${
           page ? "?page=" + page : keyword ? "?keyword=" + keyword : ""
         }`,
-=======
-      query: (token) => ({
-        url: "report/stock-level-table",
-        headers: { authorization: `Bearer ${token}` },
+        query: (token) => ({
+          url: "report/stock-level-table",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        // query: (token,page) => ({
+        //   url: page? `product?page=${page} `: "product",
+        //   headers: { authorization: `Bearer ${token}` },
+        // }),
+        providesTags: ["authapi"],
       }),
-      // query: (token,page) => ({
-      //   url: page? `product?page=${page} `: "product",
-      //   headers: { authorization: `Bearer ${token}` },
-      // }),
-      providesTags: ["authapi"],
-    }),
-    getBrandReport: build.query({
-      query: (token) => ({
-        url: "report/brand-report",
-        header: { authorization: `Bearer ${token}` },
+      getBrandReport: build.query({
+        query: (token) => ({
+          url: "report/brand-report",
+          header: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getStockBestSeller: build.query({
-      query: (token) => ({
-        url: "report/stock-level-bar",
->>>>>>> 2f2f480c2d15aac0dd23648be233b7f953c10cf4
-        headers: { authorization: `Bearer ${token}` },
+      getStockBestSeller: build.query({
+        query: (token) => ({
+          url: "report/stock-level-bar",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    updateStock: build.mutation({
-      query: ({ data, token }) => ({
-        url: "stock/" + data?.id,
-        method: "PATCH",
-        body: {
-          product_id: data?.id,
-          quantity: data?.quantity,
-          more: data?.message,
-        },
-        headers: { authorization: `Bearer ${token}` },
+      updateStock: build.mutation({
+        query: ({ data, token }) => ({
+          url: "stock/" + data?.id,
+          method: "PATCH",
+          body: {
+            product_id: data?.id,
+            quantity: data?.quantity,
+            more: data?.message,
+          },
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getMonthlySales: build.query({
-      query: (token) => ({
-        url: "finance/monthly-sales",
-        headers: { authorization: `Bearer ${token}` },
+      getMonthlySales: build.query({
+        query: (token) => ({
+          url: "finance/monthly-sales",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getYearlySales: build.query({
-      query: (token) => ({
-        url: "finance/yearly-sales",
-        headers: { authorization: `Bearer ${token}` },
+      getYearlySales: build.query({
+        query: (token) => ({
+          url: "finance/yearly-sales",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getDailySales: build.query({
-      query: (token) => ({
-        url: "finance/daily-sales",
-        headers: { authorization: `Bearer ${token}` },
+      getDailySales: build.query({
+        query: (token) => ({
+          url: "finance/daily-sales",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    storeProduct: build.mutation({
-      query: ({ productData, token }) => ({
-        url: "product",
-        method: "POST",
-        body: productData,
-        headers: { authorization: `Bearer ${token}` },
+      storeProduct: build.mutation({
+        query: ({ productData, token }) => ({
+          url: "product",
+          method: "POST",
+          body: productData,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    updateProduct: build.mutation({
-      query: ({ productData, token }) => ({
-        url: "product/" + productData.id,
-        method: "PATCH",
-        body: productData,
-        headers: { authorization: `Bearer ${token}` },
+      updateProduct: build.mutation({
+        query: ({ productData, token }) => ({
+          url: "product/" + productData.id,
+          method: "PATCH",
+          body: productData,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    updateUser: build.mutation({
-      query: ({ updateData, token }) => ({
-        url: "profile/" + updateData.id,
-        method: "PUT",
-        body: updateData,
-        headers: { authorization: `Bearer ${token}` },
+      updateUser: build.mutation({
+        query: ({ updateData, token }) => ({
+          url: "profile/" + updateData.id,
+          method: "PUT",
+          body: updateData,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getBrand: build.query({
-      query: ({ token, page, detail, id, keyword }) => ({
-        url: detail
-          ? "brand/" + id
-          : page > 0
-          ? `brand?page=${page}`
-          : keyword
-          ? "brand?keyword=" + keyword
-          : "brand",
-        headers: { authorization: `Bearer ${token}` },
+      getBrand: build.query({
+        query: ({ token, page, detail, id, keyword }) => ({
+          url: detail
+            ? "brand/" + id
+            : page > 0
+            ? `brand?page=${page}`
+            : keyword
+            ? "brand?keyword=" + keyword
+            : "brand",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getOverviewData: build.query({
-      query: ({ token }) => ({
-        url: "overview-page",
+      getOverviewData: build.query({
+        query: ({ token }) => ({
+          url: "overview-page",
 
-        headers: { authorization: `Bearer ${token}` },
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getMonthlyOverview: build.query({
-      query: ({ token }) => ({
-        url: "monthly-overview",
+      getMonthlyOverview: build.query({
+        query: ({ token }) => ({
+          url: "monthly-overview",
 
-        headers: { authorization: `Bearer ${token}` },
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getWeeklyOverview: build.query({
-      query: ({ token }) => ({
-        url: "weekly-overview",
+      getWeeklyOverview: build.query({
+        query: ({ token }) => ({
+          url: "weekly-overview",
 
-        headers: { authorization: `Bearer ${token}` },
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    getYearlyOverview: build.query({
-      query: ({ token }) => ({
-        url: "yearly-overview",
+      getYearlyOverview: build.query({
+        query: ({ token }) => ({
+          url: "yearly-overview",
 
-        headers: { authorization: `Bearer ${token}` },
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    storeBrand: build.mutation({
-      query: ({ brandData, token }) => ({
-        url: "brand",
-        method: "POST",
-        body: brandData,
-        headers: { authorization: `Bearer ${token}` },
+      storeBrand: build.mutation({
+        query: ({ brandData, token }) => ({
+          url: "brand",
+          method: "POST",
+          body: brandData,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    deleteBrand: build.mutation({
-      query: ({ id, token }) => ({
-        url: "brand/" + id,
-        method: "DELETE",
-        headers: { authorization: `Bearer ${token}` },
+      deleteBrand: build.mutation({
+        query: ({ id, token }) => ({
+          url: "brand/" + id,
+          method: "DELETE",
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    //need to fix
-    updateBrand: build.mutation({
-      query: ({ brandInfo, token }) => ({
-        url: "brand/" + brandInfo.id,
-        method: "PATCH",
-        body: brandInfo,
-        headers: { authorization: `Bearer ${token}` },
+      //need to fix
+      updateBrand: build.mutation({
+        query: ({ brandInfo, token }) => ({
+          url: "brand/" + brandInfo.id,
+          method: "PATCH",
+          body: brandInfo,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
-    }),
-    customFetch: build.query({
-      query: (url, token) => ({
-        url,
-        headers: { authorization: `Bearer ${token}` },
+      customFetch: build.query({
+        query: (url, token) => ({
+          url,
+          headers: { authorization: `Bearer ${token}` },
+        }),
+        providesTags: ["authapi"],
       }),
-      providesTags: ["authapi"],
     }),
   }),
 });
