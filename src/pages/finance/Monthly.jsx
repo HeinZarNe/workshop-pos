@@ -69,12 +69,12 @@ const Monthly = () => {
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
-                class=" border border-secondary focus:border-base gap-2 text-gray-400 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center "
+                className=" border border-secondary focus:border-base gap-2 text-gray-400 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center "
                 type="button"
               >
                 <PiExportBold className="text-lg text-base" /> Export
                 <svg
-                  class="w-2.5 h-2.5 ml-2.5"
+                  className="w-2.5 h-2.5 ml-2.5"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -82,9 +82,9 @@ const Monthly = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 4 4 4-4"
                   />
                 </svg>
@@ -92,13 +92,13 @@ const Monthly = () => {
               {/* <!-- Dropdown menu --> */}
               <div
                 id="dropdown"
-                class="z-10 hidden bg-[#fafafa] text-base  divide-y divide-gray-100  shadow w-36 "
+                className="z-10 hidden bg-[#fafafa] text-base  divide-y divide-gray-100  shadow w-36 "
               >
-                <ul class="" aria-labelledby="dropdownDefaultButton">
+                <ul className="" aria-labelledby="dropdownDefaultButton">
                   <li>
                     <a
                       href="#"
-                      class=" flex px-4 border border-base py-2 items-center gap-2"
+                      className=" flex px-4 border border-base py-2 items-center gap-2"
                     >
                       <PiFilePdf className="text-xl text-base" /> PDF
                     </a>
@@ -106,7 +106,7 @@ const Monthly = () => {
                   <li>
                     <a
                       href="#"
-                      class=" flex px-4 border border-base py-2 items-center gap-2"
+                      className=" flex px-4 border border-base py-2 items-center gap-2"
                     >
                       <BiPrinter className="text-xl text-base" /> Print
                     </a>
@@ -114,7 +114,7 @@ const Monthly = () => {
                   <li>
                     <a
                       href="#"
-                      class=" flex px-4 border border-base py-2 items-center gap-2"
+                      className=" flex px-4 border border-base py-2 items-center gap-2"
                     >
                       <FiCopy className="text-xl text-base" /> Copy
                     </a>
@@ -126,7 +126,7 @@ const Monthly = () => {
               {/* second menu  */}
               <select
                 id="countries"
-                class=" border w-28 border-white/20 text-white/50 bg-transparent text-sm rounded- focus:ring-base focus:border-base block  p-2.5  dark:placeholder-gray-400"
+                className=" border w-28 border-white/20 text-white/50 bg-transparent text-sm rounded- focus:ring-base focus:border-base block  p-2.5  dark:placeholder-gray-400"
               >
                 <option className="text-base" selected>
                   January
@@ -168,7 +168,7 @@ const Monthly = () => {
               {/* first menu  */}{" "}
               <select
                 id="countries"
-                class=" border w-20 border-white/20 text-white/50 bg-transparent text-sm rounded-sm focus:ring-base focus:border-base block  p-2.5  dark:placeholder-gray-400 "
+                className=" border w-20 border-white/20 text-white/50 bg-transparent text-sm rounded-sm focus:ring-base focus:border-base block  p-2.5  dark:placeholder-gray-400 "
               >
                 <option className="text-base" selected>
                   2023
@@ -194,52 +194,52 @@ const Monthly = () => {
         </div>
         {/* table  */}
         <div className=" border-2 rounded-t-xl border-base mt-10">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-[#fafafa] ">
-              <thead class="text-xs text-gray-900 uppercase bg-base">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left text-[#fafafa] ">
+              <thead className="text-xs text-gray-900 uppercase bg-base">
                 <tr>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     NO
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     DATE
                   </th>
-                  <th scope="col" class="px-6 py-3">
+                  <th scope="col" className="px-6 py-3">
                     VOUCHERS
                   </th>
-                  <th scope="col" class="px-6  text-end py-3">
+                  <th scope="col" className="px-6  text-end py-3">
                     CASH
                   </th>
-                  <th scope="col" class="px-6  text-end py-3">
+                  <th scope="col" className="px-6  text-end py-3">
                     TAX
                   </th>
-                  <th scope="col" class="px-6  text-end py-3">
+                  <th scope="col" className="px-6  text-end py-3">
                     TOTAL
                   </th>
-                  <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Edit</span>
+                  <th scope="col" className="px-6 py-3">
+                    <span className="sr-only">Edit</span>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {monthlySaleData?.this_month_sales?.map((data) => {
                   return (
-                    <tr key={data.id} class=" border-b hover:bg-white/10 ">
+                    <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-white whitespace-nowra"
+                        className="px-6 py-4 font-medium text-white whitespace-nowra"
                       >
                         {data.id}
                       </th>
-                      <td class="px-6 py-4">{data.date}</td>
-                      <td class="px-6 py-4">{data.vouchers}</td>
-                      <td class="px-6 py-4  text-end">{data.cash}</td>
-                      <td class="px-6 py-4  text-end">{data.tax}</td>
-                      <td class="px-6 py-4  text-end">{data.total}</td>
-                      <td class="px-6 py-4 text-center">
+                      <td className="px-6 py-4">{data.date}</td>
+                      <td className="px-6 py-4">{data.vouchers}</td>
+                      <td className="px-6 py-4  text-end">{data.cash}</td>
+                      <td className="px-6 py-4  text-end">{data.tax}</td>
+                      <td className="px-6 py-4  text-end">{data.total}</td>
+                      <td className="px-6 py-4 text-center">
                         <NavLink
                           to={"/profile"}
-                          class="font-medium flex justify-center text-blue-600  hover:underline"
+                          className="font-medium flex justify-center text-blue-600  hover:underline"
                         >
                           <button className="flex items-center mx-auto justify-center w-7 h-7 rounded-full bg-base text-black">
                             <AiOutlineArrowRight />
@@ -296,15 +296,15 @@ const Monthly = () => {
               siblings={1}
             /> */}
               <nav aria-label="Page navigation example">
-                <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
+                <ul className="flex items-center bg-transparent -space-x-px h-8 text-sm">
                   <li>
                     <a
                       href="#"
-                      class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
+                      className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
                     >
-                      <span class="sr-only">Previous</span>
+                      <span className="sr-only">Previous</span>
                       <svg
-                        class="w-2.5 h-2.5"
+                        className="w-2.5 h-2.5"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -312,9 +312,9 @@ const Monthly = () => {
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M5 1 1 5l4 4"
                         />
                       </svg>
@@ -325,7 +325,7 @@ const Monthly = () => {
                     <a
                       href="#"
                       aria-current="page"
-                      class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
+                      className="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
                     >
                       1
                     </a>
@@ -333,7 +333,7 @@ const Monthly = () => {
                   <li>
                     <a
                       href="#"
-                      class="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
+                      className="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
                     >
                       2
                     </a>
@@ -341,7 +341,7 @@ const Monthly = () => {
                   <li>
                     <a
                       href="#"
-                      class="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
+                      className="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
                     >
                       3
                     </a>
@@ -349,11 +349,11 @@ const Monthly = () => {
                   <li>
                     <a
                       href="#"
-                      class="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
+                      className="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
                     >
-                      <span class="sr-only">Next</span>
+                      <span className="sr-only">Next</span>
                       <svg
-                        class="w-2.5 h-2.5"
+                        className="w-2.5 h-2.5"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -361,9 +361,9 @@ const Monthly = () => {
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="m1 9 4-4-4-4"
                         />
                       </svg>

@@ -14,24 +14,25 @@ import DonutChart from "./DonutChart";
 import DonutChart1 from "./DonutChart1";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import {
-  useGetStockBestSellerQuery,
   useGetStockQuery,
   useGetBrandReportQuery,
+  useGetStockLevelBarQuery,
+  useGetStockLevelTableQuery,
 } from "../../services/authApi";
 
 const StockReport = () => {
   const token = localStorage.getItem("token");
-  const { data: stockLevel } = useGetStockBestSellerQuery(token);
-  const { data: stockData } = useGetStockQuery(token);
-  const stockBrand = useGetBrandReportQuery(token);
+  const { data: stockData } = useGetStockQuery({ token });
+  const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
+  const { data: stockLeveltable } = useGetStockLevelTableQuery({ token });
+
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  console.log(stockBrand);
   // const outOfStock = `w-[52.17%] h-full bg-blue-300`;
   // const inStock = `w-[47.83%] h-full bg-[#884A39]`;
-  const inStock = `w-[${stockLevel?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
-  const outOfStock = `w-[${stockLevel?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
+  const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
+  const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
   // const lowStock = `w-[0%] h-full bg-yellow-300`;
-  const lowStock = `w-[${stockLevel?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
+  const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
   // console.log(stockData);
   return (
     <Rootlayout>
@@ -71,7 +72,7 @@ const StockReport = () => {
               </div>
               <div className="flex flex-col items-center justify-center">
                 <p className="text-3xl font-semibold text-white">
-                  {stockLevel?.total_product}
+                  {stockLevelBar?.total_product}
                 </p>
                 <p className="text-lg">Total Products</p>
               </div>
@@ -86,14 +87,14 @@ const StockReport = () => {
               </div>
               <div className="flex flex-col items-center justify-center">
                 <p className="text-3xl font-semibold text-white">
-                  {stockLevel?.total_brand}
+                  {stockLevelBar?.total_brand}
                 </p>
                 <p className="text-lg">Total Brands</p>
               </div>
             </div>
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
-                {stockLevel ? (
+                {stockLevelBar ? (
                   <div className=" flex w-[75%] overflow-hidden h-3 rounded-full ">
                     <div className={inStock}></div>
                     <div className={outOfStock}></div>
@@ -114,10 +115,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.in_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.in_stock[0]}
                     </p>
                     <div className="text-lg flex w-20 justify-end items-center">
-                      {stockLevel?.stock_lvl_bar?.in_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.in_stock[1]}
                       <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                     </div>
                   </div>
@@ -129,10 +130,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.low_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.low_stock[0]}
                     </p>
                     <div className="text-lg w-20 justify-end flex items-center">
-                      {stockLevel?.stock_lvl_bar?.low_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.low_stock[1]}
                       <BsDash className="ms-2 text-yellow-500" />{" "}
                     </div>
                   </div>
@@ -144,10 +145,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.out_of_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.out_of_stock[0]}
                     </p>
                     <div className="text-lg w-20 justify-end flex items-center">
-                      {stockLevel?.stock_lvl_bar?.out_of_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}
                       <HiArrowSmallUp className="ms-2 rotate-180 text-red-500" />{" "}
                     </div>
                   </div>
@@ -233,10 +234,10 @@ const StockReport = () => {
             Stock Overview
           </div>
           <div className="flex justify-between">
-            <div class="relative my-3">
-              <div class="absolute inset-y-0 left-0 flex items-center focus:border-base pl-3 pointer-events-none">
+            <div className="relative my-3">
+              <div className="absolute inset-y-0 left-0 flex items-center focus:border-base pl-3 pointer-events-none">
                 <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -244,9 +245,9 @@ const StockReport = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
@@ -254,7 +255,7 @@ const StockReport = () => {
               <input
                 type="search"
                 id="default-search"
-                class="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Search ..."
                 required
               />
@@ -264,7 +265,7 @@ const StockReport = () => {
                 <div className="">Sort:</div>
                 <select
                   id="countries"
-                  class=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
                 >
                   <option className="text-base" selected>
                     In stock
@@ -281,7 +282,7 @@ const StockReport = () => {
                 <div className="">Filter:</div>
                 <select
                   id="countries"
-                  class=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
                 >
                   <option className="text-base" selected>
                     All file
@@ -297,33 +298,33 @@ const StockReport = () => {
             </div>
           </div>
           <div className=" border-2 rounded-t-xl border-base mt-2">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table class="w-full text-sm text-left text-[#fafafa] ">
-                <thead class="text-xs text-gray-900 uppercase bg-base">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left text-[#fafafa] ">
+                <thead className="text-xs text-gray-900 uppercase bg-base">
                   <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       NO
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       NAME
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       BRAND
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       UNIT
                     </th>
-                    <th scope="col" class="px-6 text-end py-3">
+                    <th scope="col" className="px-6 text-end py-3">
                       SALE PRICE
                     </th>
-                    <th scope="col" class="px-6  text-end py-3">
+                    <th scope="col" className="px-6  text-end py-3">
                       TOTAL STOCK
                     </th>
-                    <th scope="col" class="px-6  text-center py-3">
+                    <th scope="col" className="px-6  text-center py-3">
                       STOCK LEVEL
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      <span class="sr-only">Edit</span>
+                    <th scope="col" className="px-6 py-3">
+                      <span className="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>

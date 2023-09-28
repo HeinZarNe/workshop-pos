@@ -8,6 +8,7 @@ import "./Media.css";
 import { useDeletePhotoMutation } from "../services/mediaApi";
 import { addphoto, deletePhoto } from "../services/mediaSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Pagination } from "@mantine/core";
 
 const Media = () => {
   const token = localStorage.getItem("token");
@@ -42,17 +43,29 @@ const Media = () => {
     }
   };
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-    refetch({ page: newPage }); // Fetch data for the new page
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
   };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log(Array.from(e.dataTransfer.files));
+  };
+
   return (
     <Rootlayout>
       <div className=" mx-10 my-5">
         <h1 className=" text-[20px] font-[500] text-white ">Media</h1>
         <p>Media / Uploader</p>
         {/* upload */}
-        <div className=" bg-zinc-700 my-6 h-[200px]  flex justify-center">
+        <div
+          className=" bg-zinc-700 my-6 h-[200px]  flex justify-center"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
           <div className=" flex flex-col items-center justify-center gap-5">
             <button
               onClick={handleUpload}
@@ -65,6 +78,7 @@ const Media = () => {
               type="file"
               ref={fileRef}
               style={{ display: "none" }}
+              multiple
               onChange={handleFileChange}
             />
           </div>
@@ -90,9 +104,9 @@ const Media = () => {
                         >
                           <AiOutlineDelete size={27} />
                         </button>
-                        <button className="bg-secondary hover:border hover:border-white w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-white">
+                        {/* <button className="bg-secondary hover:border hover:border-white w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-white">
                           <GoCopy />
-                        </button>
+                        </button> */}
                       </div>
                       <img
                         className=" h-[200px] w-[200px]"
@@ -103,6 +117,18 @@ const Media = () => {
                   ))
               : ""}
           </div>
+          {/* <div className="pagination absolute bottom-[30px] right-[40px] ">
+            <Pagination
+              total={data?.meta?.last_page}
+              onChange={(e) => {
+                setPage(e);
+                refetch();
+              }}
+              boundaries={1}
+              defaultValue={1}
+              on
+            />
+          </div> */}
         </div>
       </div>
     </Rootlayout>

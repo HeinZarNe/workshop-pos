@@ -40,8 +40,15 @@ const AddStock = ({
               required
               value={stockData.quantity || ""}
               onChange={(e) => {
-                if (e.target.value.length === 0 || e.target.value > 0) {
-                  setStockData({ ...stockData, quantity: e.target.value });
+                if (
+                  !isNaN(Number(e.target.value)) ||
+                  e.target.value.length === 0 ||
+                  e.target.value > 0
+                ) {
+                  setStockData({
+                    ...stockData,
+                    quantity: Number(e.target.value),
+                  });
                 }
               }}
               type="number"

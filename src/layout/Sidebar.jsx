@@ -1,6 +1,11 @@
 import React from "react";
 import { BiHomeCircle } from "react-icons/bi";
-import { BsChevronDown, BsShopWindow, BsClipboard, BsCashCoin } from "react-icons/bs";
+import {
+  BsChevronDown,
+  BsShopWindow,
+  BsClipboard,
+  BsCashCoin,
+} from "react-icons/bs";
 import { BiUserPlus, BiLogOut } from "react-icons/bi";
 import { TfiGallery } from "react-icons/tfi";
 import { FaChartPie, FaRegUserCircle } from "react-icons/fa";
@@ -170,6 +175,9 @@ const Sidebar = () => {
               </NavLink>
               <Link to={"/users/create"}>
                 <li className=" text-white ml-10 mb-3">Create User</li>
+              </Link>
+              <Link to={"/users/banned"}>
+                <li className=" text-white ml-10 mb-3">Banned User</li>
               </Link>
             </ul>
           </div>

@@ -16,9 +16,7 @@ const AddBrand = ({
   setEditBrand,
   setSelectedPhoto,
   setShowSideBar,
-  setTableData,
-  showSideBar,
-  showPhotoModal,
+
   setShowPhotoModal,
   editBrand,
 }) => {
