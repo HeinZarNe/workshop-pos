@@ -150,6 +150,16 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    updatePassword: build.mutation({
+      query: ({ data, token }) => ({
+        url: "profile/change-password",
+        method: "POST",
+        body: data,
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getMonthlySales: build.query({
       query: (token) => ({
         url: "finance/monthly-sales",
@@ -299,6 +309,7 @@ export const {
   useCreateUserMutation,
   useStoreProductMutation,
   useUpdateProductMutation,
+  useUpdatePasswordMutation,
   useGetUserQuery,
   useGetWeeklyOverviewQuery,
   useGetMonthlyOverviewQuery,

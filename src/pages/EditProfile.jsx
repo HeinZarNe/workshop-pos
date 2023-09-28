@@ -5,6 +5,7 @@ import { BsTelephoneForward } from "react-icons/bs";
 import { TbEdit } from "react-icons/tb";
 import {
   useGetUserDetailQuery,
+  useUpdatePasswordMutation,
   useUpdateUserMutation,
 } from "../services/authApi";
 import { Loader } from "@mantine/core";
@@ -16,6 +17,7 @@ const EditProfile = () => {
   const [selectedGenders, setSelectedGenders] = useState([]);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [canUpdatePassword, setCanUpdatePassword] = useState(false);
   const handleCheckboxChange = (value) => {
     setSelectedGenders(value);
   };
@@ -43,6 +45,9 @@ const EditProfile = () => {
   } = profile?.data || {};
   const [updateUser, { isSuccess, isLoading: updating }] =
     useUpdateUserMutation();
+
+  const [updatePassword] = useUpdatePasswordMutation();
+
   useEffect(() => {
     profile?.data && setSelectedGenders(profile.data.gender);
   }, [profile]);
@@ -58,6 +63,7 @@ const EditProfile = () => {
       });
     isSuccess && refetch();
   }, [isSuccess]);
+
   useEffect(() => {
     updating &&
       Swal.fire({
@@ -67,13 +73,32 @@ const EditProfile = () => {
         allowOutsideClick: false,
       });
   }, [updating]);
+
+  useEffect(() => {
+    const { new_password, confirm_password, current_password } = newData;
+
+    if (
+      [new_password, confirm_password, current_password].every(
+        (item) => item?.length > 7
+      ) &&
+      new_password === confirm_password
+    ) {
+      setCanUpdatePassword(true);
+    } else {
+      setCanUpdatePassword(false);
+    }
+  }, [
+    newData.new_password,
+    newData.confirm_password,
+    newData.current_password,
+  ]);
+
   const handleFileChange = (key, value) => {
     setNewData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleReset = (e) => {
     e.preventDefault();
-
     setNewData({});
   };
 
@@ -99,6 +124,20 @@ const EditProfile = () => {
       position: newData.position?.length > 0 ? newData.position : position,
     };
     updateUser({ token, updateData: dataToUpdate });
+  };
+
+  const handlePasswordUpdate = (e) => {
+    e.preventDefault();
+    if (!canUpdatePassword) return;
+    const { confirm_password, new_password, current_password } = newData || {};
+    const data = updatePassword({
+      token,
+      data: {
+        new_password_confirmation: confirm_password,
+        new_password,
+        current_password,
+      },
+    });
   };
 
   return (
@@ -310,17 +349,12 @@ const EditProfile = () => {
                   >
                     Reset
                   </button>
-                  <button
-                    className=" text-white border button border-stone-400 tracking-wider px-5 w-fit py-2 rounded-lg"
-                    onClick={(e) => setSection("password")}
-                  >
-                    Change Password
-                  </button>
+
                   <button
                     className=" px-6 py-2 rounded-lg button"
                     type="submit"
                   >
-                    Update
+                    Update Information
                   </button>
                 </div>
               </div>
@@ -335,8 +369,17 @@ const EditProfile = () => {
                   </span>
                   <input
                     required
-                    //   value={}
-                    //   onChange={}
+                    value={
+                      "current_password" in newData
+                        ? newData.current_password
+                        : ""
+                    }
+                    onChange={(e) =>
+                      setNewData((prev) => ({
+                        ...prev,
+                        current_password: e.target.value,
+                      }))
+                    }
                     placeholder=".........."
                     type="text"
                     className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
@@ -350,8 +393,15 @@ const EditProfile = () => {
                     </span>
                     <input
                       required
-                      //   value={}
-                      //   onChange={}
+                      value={
+                        "new_password" in newData ? newData.new_password : ""
+                      }
+                      onChange={(e) =>
+                        setNewData((prev) => ({
+                          ...prev,
+                          new_password: e.target.value,
+                        }))
+                      }
                       placeholder="........"
                       type="text"
                       className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
@@ -363,8 +413,17 @@ const EditProfile = () => {
                     </span>
                     <input
                       required
-                      //   value={}
-                      //   onChange={}
+                      value={
+                        "confirm_password" in newData
+                          ? newData.confirm_password
+                          : ""
+                      }
+                      onChange={(e) =>
+                        setNewData((prev) => ({
+                          ...prev,
+                          confirm_password: e.target.value,
+                        }))
+                      }
                       placeholder="........"
                       type="text"
                       className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
@@ -373,11 +432,12 @@ const EditProfile = () => {
                 </>
 
                 <div className=" flex gap-6 w-1/2 justify-end">
-                  <button className=" text-white border border-stone-400 tracking-wider px-5 py-2 rounded-lg">
-                    CANCEL
-                  </button>
-                  <button className=" px-6 py-2 rounded-lg button">
-                    Update
+                  <button
+                    disabled={!canUpdatePassword}
+                    className=" px-6 py-2 rounded-lg button"
+                    onClick={handlePasswordUpdate}
+                  >
+                    Update Password
                   </button>
                 </div>
               </div>
