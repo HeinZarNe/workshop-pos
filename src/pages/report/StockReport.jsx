@@ -14,24 +14,25 @@ import DonutChart from "./DonutChart";
 import DonutChart1 from "./DonutChart1";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import {
-  useGetStockBestSellerQuery,
   useGetStockQuery,
   useGetBrandReportQuery,
+  useGetStockLevelBarQuery,
+  useGetStockLevelTableQuery,
 } from "../../services/authApi";
 
 const StockReport = () => {
   const token = localStorage.getItem("token");
-  const { data: stockLevel } = useGetStockBestSellerQuery(token);
-  const { data: stockData } = useGetStockQuery(token);
-  const stockBrand = useGetBrandReportQuery(token);
+  const { data: stockData } = useGetStockQuery({ token });
+  const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
+  const { data: stockLeveltable } = useGetStockLevelTableQuery({ token });
+
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  console.log(stockBrand);
   // const outOfStock = `w-[52.17%] h-full bg-blue-300`;
   // const inStock = `w-[47.83%] h-full bg-[#884A39]`;
-  const inStock = `w-[${stockLevel?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
-  const outOfStock = `w-[${stockLevel?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
+  const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
+  const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
   // const lowStock = `w-[0%] h-full bg-yellow-300`;
-  const lowStock = `w-[${stockLevel?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
+  const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
   // console.log(stockData);
   return (
     <Rootlayout>
@@ -71,7 +72,7 @@ const StockReport = () => {
               </div>
               <div className="flex flex-col items-center justify-center">
                 <p className="text-3xl font-semibold text-white">
-                  {stockLevel?.total_product}
+                  {stockLevelBar?.total_product}
                 </p>
                 <p className="text-lg">Total Products</p>
               </div>
@@ -86,14 +87,14 @@ const StockReport = () => {
               </div>
               <div className="flex flex-col items-center justify-center">
                 <p className="text-3xl font-semibold text-white">
-                  {stockLevel?.total_brand}
+                  {stockLevelBar?.total_brand}
                 </p>
                 <p className="text-lg">Total Brands</p>
               </div>
             </div>
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
-                {stockLevel ? (
+                {stockLevelBar ? (
                   <div className=" flex w-[75%] overflow-hidden h-3 rounded-full ">
                     <div className={inStock}></div>
                     <div className={outOfStock}></div>
@@ -114,10 +115,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.in_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.in_stock[0]}
                     </p>
                     <div className="text-lg flex w-20 justify-end items-center">
-                      {stockLevel?.stock_lvl_bar?.in_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.in_stock[1]}
                       <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                     </div>
                   </div>
@@ -129,10 +130,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.low_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.low_stock[0]}
                     </p>
                     <div className="text-lg w-20 justify-end flex items-center">
-                      {stockLevel?.stock_lvl_bar?.low_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.low_stock[1]}
                       <BsDash className="ms-2 text-yellow-500" />{" "}
                     </div>
                   </div>
@@ -144,10 +145,10 @@ const StockReport = () => {
                   </div>
                   <div className="flex gap-7">
                     <p className="text-lg">
-                      {stockLevel?.stock_lvl_bar?.out_of_stock[0]}
+                      {stockLevelBar?.stock_lvl_bar?.out_of_stock[0]}
                     </p>
                     <div className="text-lg w-20 justify-end flex items-center">
-                      {stockLevel?.stock_lvl_bar?.out_of_stock[1]}
+                      {stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}
                       <HiArrowSmallUp className="ms-2 rotate-180 text-red-500" />{" "}
                     </div>
                   </div>

@@ -108,10 +108,7 @@ export const authApi = createApi({
         url: `stock${
           page ? "?page=" + page : keyword ? "?keyword=" + keyword : ""
         }`,
-        query: (token) => ({
-          url: "report/stock-level-table",
-          headers: { authorization: `Bearer ${token}` },
-        }),
+        headers: { authorization: `Bearer ${token}` },
         // query: (token,page) => ({
         //   url: page? `product?page=${page} `: "product",
         //   headers: { authorization: `Bearer ${token}` },
@@ -122,11 +119,18 @@ export const authApi = createApi({
     getBrandReport: build.query({
       query: (token) => ({
         url: "report/brand-report",
-        header: { authorization: `Bearer ${token}` },
+        headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
     }),
-    getStockBestSeller: build.query({
+    getStockLevelTable: build.query({
+      query: ({ token, option }) => ({
+        url: `report/stock-level-table${option ? "?" + option : ""}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getStockLevelBar: build.query({
       query: (token) => ({
         url: "report/stock-level-bar",
         headers: { authorization: `Bearer ${token}` },
@@ -281,7 +285,8 @@ export const {
   useLogoutMutation,
   useGetStockQuery,
   useGetBrandReportQuery,
-  useGetStockBestSellerQuery,
+  useGetStockLevelBarQuery,
+  useGetStockLevelTableQuery,
   useCustomFetchQuery,
   useGetPhotoQuery,
   useStorePhotoMutation,
