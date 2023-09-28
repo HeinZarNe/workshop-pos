@@ -123,6 +123,13 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    // getStockLevelTable: build.query({
+    //   query: (token) => ({
+    //     url: `report/stock-level-table`,
+    //     headers: { authorization: `Bearer ${token}` },
+    //   }),
+    //   providesTags: ["authapi"],
+    // }),
     getStockLevelTable: build.query({
       query: ({ token, option }) => ({
         url: `report/stock-level-table${option ? "?" + option : ""}`,
@@ -153,6 +160,13 @@ export const authApi = createApi({
     getMonthlySales: build.query({
       query: (token) => ({
         url: "finance/monthly-sales",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getBestSellerBrands: build.query({
+      query: (token) => ({
+        url: "report/best-seller-brands",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -285,6 +299,7 @@ export const {
   useLogoutMutation,
   useGetStockQuery,
   useGetBrandReportQuery,
+  useGetBestSellerBrandsQuery,
   useGetStockLevelBarQuery,
   useGetStockLevelTableQuery,
   useCustomFetchQuery,
