@@ -35,7 +35,7 @@ const Cashier = () => {
   };
 
   const handleNumberClick = (number) => {
-    if (currentSelectedProductId !== null) {
+    if (currentSelectedProductId !== null && number != 1) {
       setSelectedQuantities((prevQuantities) => {
         if (prevQuantities[currentSelectedProductId] == 1) {
           const currentQuantity = 0;
@@ -55,6 +55,9 @@ const Cashier = () => {
           return updatedQuantities;
         }
       });
+    }
+    if (number == 1) {
+       
     }
   };
 
@@ -183,7 +186,7 @@ const Cashier = () => {
                       {product.name}
                     </h5>
                     <p className=" font-normal  text-gray-400">
-                      {product.price} ကျပ်
+                      {product.price} Kyats
                     </p>
                   </div>
                 </div>
@@ -217,6 +220,39 @@ const Cashier = () => {
               const totalPrice = selectedProduct.price * quantity;
 
               return (
+                // <div
+                //   key={productId}
+                //   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 
+                //   ${
+                //     selectedProduct.id === currentSelectedProductId &&
+                //     keyBoardShow
+                //       ? " bg-base/20"
+                //       : ""
+                //   }
+                //   `}
+                //   onClick={() => handleProductInCartSelect(productId)}
+                // >
+                //   <div className=" ">
+                //     <h5 className=" text-lg font-semibold tracking-tight text-base">
+                //       {selectedProduct.name}
+                //     </h5>
+                //     <div className="flex ms-1 font-mono text-sm">
+                //       <p className=" text-sm flex gap-1 text-gray-400">
+                //         <div className="text-white/80">
+                //           {" "}
+                //           {selectedProduct.price}
+                //         </div>
+                //         Kyats
+                //       </p>
+                //       <div className="mx-2">x</div>
+                //       <p className="mb-3 text-gray-400">{quantity}</p>
+                //     </div>
+                //   </div>
+                //   <p className="flex gap-1 text-[#fafafa] font-semibold">
+                //     {totalPrice}{" "}
+                //     <div className="font-normal text-white/70">Kyats</div>
+                //   </p>
+                // </div>
                 <div
                   key={productId}
                   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 

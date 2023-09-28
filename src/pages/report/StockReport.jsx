@@ -18,22 +18,21 @@ import {
   useGetBrandReportQuery,
   useGetStockLevelBarQuery,
   useGetStockLevelTableQuery,
+  useGetBestSellerBrandsQuery
 } from "../../services/authApi";
 
 const StockReport = () => {
   const token = localStorage.getItem("token");
-  const { data: stockData } = useGetStockQuery({ token });
+  // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
-  const { data: stockLeveltable } = useGetStockLevelTableQuery({ token });
-
+  const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
+  const { data: stockLeveltable } = useGetStockLevelTableQuery( {token} );
+  // console.log(stockLevelBar.stock_lvl_bar);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  // const outOfStock = `w-[52.17%] h-full bg-blue-300`;
-  // const inStock = `w-[47.83%] h-full bg-[#884A39]`;
   const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
   const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
-  // const lowStock = `w-[0%] h-full bg-yellow-300`;
   const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
-  // console.log(stockData);
+  console.log(bestSeller?.weekly_best_seller_brands);
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -169,42 +168,53 @@ const StockReport = () => {
               </div>
               <div className="w-[55%]">
                 <div className="text-3xl text-white font-semibold ms-auto text-end">
-                  62,000k
+                  {bestSeller?.weekly_total_cost}
                 </div>
                 <div className="text-end text-lg mt-[-8px] mb-2">kyats</div>
                 <div className="">
                   <div className="flex border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[#884A39] rounded-full"></div>{" "}
-                      <p className="text-lg">Instock</p>
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[0].brand_name}
+                      </p>
                     </div>
                     <div className="flex gap-7">
-                      <p className="text-lg">{}</p>
-                      <div className="text-lg flex items-center">
-                        65% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[0].quantity}
+                      </p>
+                      <div className="text-lg w-16 flex items-center">
+                        35% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                       </div>
                     </div>
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[#C38154] rounded-full"></div>{" "}
-                      <p className="text-lg">Instock</p>
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[1].brand_name}
+                      </p>
                     </div>
                     <div className="flex gap-7">
-                      <p className="text-lg">100</p>
-                      <div className="text-lg flex items-center">
-                        65% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[1].quantity}
+                      </p>
+                      <div className="text-lg w-16 flex items-center">
+                        5% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                       </div>
                     </div>
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[#FFC26F] rounded-full"></div>{" "}
-                      <p className="text-lg">Low stock</p>
+                      {bestSeller?.weekly_best_seller_brands[2].brand_name}
+                      <p className="text-lg"></p>
                     </div>
                     <div className="flex gap-7">
-                      <p className="text-lg">100</p>
-                      <div className="text-lg flex items-center">
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[2].quantity}
+                      </p>
+                      <div className="text-lg w-16 flex items-center">
                         25% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                       </div>
                     </div>
@@ -212,11 +222,15 @@ const StockReport = () => {
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[#F9E0BB] rounded-full"></div>{" "}
-                      <p className="text-lg">Out of stock</p>
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[3].brand_name}
+                      </p>
                     </div>
                     <div className="flex gap-7">
-                      <p className="text-lg">100</p>
-                      <div className="text-lg flex items-center">
+                      <p className="text-lg">
+                        {bestSeller?.weekly_best_seller_brands[3].quantity}
+                      </p>
+                      <div className="text-lg w-16 flex items-center">
                         15% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                       </div>
                     </div>
@@ -328,9 +342,9 @@ const StockReport = () => {
                     </th>
                   </tr>
                 </thead>
-                {stockData && (
+                {stockLeveltable && (
                   <tbody>
-                    {stockData?.data.map((e) => {
+                    {stockLeveltable?.data.map((e) => {
                       return (
                         <tr key={e.id} class=" border-b hover:bg-white/10 ">
                           <th
