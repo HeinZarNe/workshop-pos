@@ -23,6 +23,7 @@ import {
   useGetWeeklyOverviewQuery,
   useGetYearlyOverviewQuery,
 } from "../../services/authApi";
+import { Pagination } from "@mantine/core";
 
 const StockReport = () => {
   // const [view, setView] = useState("list");
