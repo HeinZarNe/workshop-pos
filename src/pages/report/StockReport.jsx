@@ -18,21 +18,46 @@ import {
   useGetBrandReportQuery,
   useGetStockLevelBarQuery,
   useGetStockLevelTableQuery,
-  useGetBestSellerBrandsQuery
+  useGetBestSellerBrandsQuery,
 } from "../../services/authApi";
+import { Pagination } from "@mantine/core";
 
 const StockReport = () => {
+  // const [view, setView] = useState("list");
+  // const [showSidebar, setShowSidebar] = useState(false);
+  // const [stockData, setStockData] = useState({});
+  // const [keyword, setKeyword] = useState("");
+  // const [addStock, setAddStock] = useState(false);
+
+  // Pagination
+  const [page, setPage] = useState("");
+  const [totalPage, setTotalPage] = useState(0);
   const token = localStorage.getItem("token");
+  const { data: stockLeveltable, refetch } = useGetStockLevelTableQuery({
+    token,
+    page,
+  });
+  useEffect(() => {
+    refetch();
+    return () => {};
+  }, [stockLeveltable]);
+
+  useEffect(() => {
+    setTotalPage(stockLeveltable?.meta?.last_page);
+    return () => {};
+  }, [stockLeveltable]);
+  // Pagination
+
+  // OTHER
   // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
-  const { data: stockLeveltable } = useGetStockLevelTableQuery( {token} );
-  console.log(stockLevelBar);
+  console.log(stockLeveltable);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
   const inStock = `w-[65%] h-full bg-[#884A39]`;
   const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
   const lowStock = `w-[35%] h-full bg-[#C38154] `;
-  console.log(typeof(parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1])));
+  console.log(typeof parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1]));
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -408,6 +433,26 @@ const StockReport = () => {
                 )}
               </table>
             </div>
+          </div>
+          <div className="flex justify-end mt-5 me-3">
+            <Pagination
+              total={totalPage || 1}
+              onChange={(e) => {
+                console.log(e);
+                setPage(e);
+                refetch();
+              }}
+              // onPreviousPage={(e) => {
+              //   setPage((prev) => prev > 0 && prev - 1);
+              //   refetch();
+              // }}
+              // onNextPage={(e) => {
+
+              //   refetch();
+              // }}
+              boundaries={1}
+              defaultValue={1}
+            />
           </div>
         </div>
       </div>

@@ -25,6 +25,7 @@ const BrandTable = ({
     page,
     keyword,
   });
+  console.log(data);
   const [deleteBrand] = useDeleteBrandMutation();
   useEffect(() => {
     data?.data && setTableData([...data.data]);
