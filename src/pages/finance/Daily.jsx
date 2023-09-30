@@ -10,7 +10,7 @@ import { Loader, Pagination } from "@mantine/core";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useGetDailySalesQuery } from "../../services/authApi";
 const Daily = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState("");
   const token = localStorage.getItem("token");
 
   const {
@@ -20,69 +20,7 @@ const Daily = () => {
     isError,
     refetch,
   } = useGetDailySalesQuery(token);
-
-  // const tableData = [
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  // ];
+console.log(dailySalesData);
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -382,6 +320,25 @@ const Daily = () => {
               defaultValue={1}
               on
             /> */}
+
+              {/* other  */}
+              {/* <Pagination
+                total={totalPage || 1}
+                onChange={(e) => {
+                  setPage(e);
+                  refetch();
+                }}
+                // onPreviousPage={(e) => {
+                //   setPage((prev) => prev > 0 && prev - 1);
+                //   refetch();
+                // }}
+                // onNextPage={(e) => {
+
+                //   refetch();
+                // }}
+                boundaries={1}
+                defaultValue={1}
+              /> */}
             </div>
           )}
         </div>
