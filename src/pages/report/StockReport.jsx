@@ -94,6 +94,7 @@ const StockReport = () => {
   const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
   const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
   const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
+  console.log(inStock, outOfStock, lowStock);
   const { data: monthlyOverview } = useGetMonthlyOverviewQuery({ token });
   const { data: weeklyOverview } = useGetWeeklyOverviewQuery({ token });
   // const { data: yearlylyOverview } = useGetYearlyOverviewQuery({ token });
@@ -158,7 +159,7 @@ const StockReport = () => {
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
-                  <div className=" flex w-[75%] overflow-hidden h-3 rounded-full ">
+                  <div className=" flex w-[75%] bg-red-300 overflow-hidden h-3 rounded-full ">
                     <div className={inStock}></div>
                     <div className={outOfStock}></div>
                     <div className={lowStock}></div>
@@ -410,19 +411,23 @@ const StockReport = () => {
                   <tbody>
                     {stockLeveltable?.data.map((e) => {
                       return (
-                        <tr key={e.id} class=" border-b hover:bg-white/10 ">
+                        <tr key={e.id} className=" border-b hover:bg-white/10 ">
                           <th
                             scope="row"
-                            class="px-6 py-4 font-medium text-white whitespace-nowra"
+                            className="px-6 py-4 font-medium text-white whitespace-nowra"
                           >
                             {e.id}
                           </th>
-                          <td class="px-6 py-4">{e.name}</td>
-                          <td class="px-6 py-4">{e.brand_name}</td>
-                          <td class="px-6 py-4  text-end">{e.unit}</td>
-                          <td class="px-6 py-4  text-end">{e.sale_price}</td>
-                          <td class="px-6 py-4  text-end">{e.total_stock}</td>
-                          <td class="px-6 py-4  text-center">
+                          <td className="px-6 py-4">{e.name}</td>
+                          <td className="px-6 py-4">{e.brand_name}</td>
+                          <td className="px-6 py-4  text-end">{e.unit}</td>
+                          <td className="px-6 py-4  text-end">
+                            {e.sale_price}
+                          </td>
+                          <td className="px-6 py-4  text-end">
+                            {e.total_stock}
+                          </td>
+                          <td className="px-6 py-4  text-center">
                             {e.stock_levle == "In Stock" ? (
                               <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
                                 {e.stock_levle}

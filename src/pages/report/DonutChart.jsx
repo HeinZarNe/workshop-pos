@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
-
+import { useGetBrandReportQuery } from "../../services/authApi";
 const DonutChart = () => {
+
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-
+  
+  const {data:ch} = useGetBrandReportQuery(localStorage.getItem("token"));
+  // console.log(ch?.brandsInfo[0].count);
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
     const data = {
       //   labels: ["emlo", "City", "Pro","Dutch"],
       datasets: [
         {
-          data: [300, 50, 100, 70],
-          backgroundColor: ["#884A39", "#C38154", "#FFC26F", "#F9E0BB"],
+          data: [
+            ch?.brandsInfo[0].count,
+            ch?.brandsInfo[1].count,
+            ch?.brandsInfo[2].count,
+            ch?.brandsInfo[3].count,
+          ],
+
+          backgroundColor: [
+            "#884A39",
+            "#C38154",
+            "#FFC26F",
+            "#F9E0BB",
+          ],
         },
       ],
     };
