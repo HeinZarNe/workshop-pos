@@ -116,13 +116,6 @@ export const authApi = createApi({
         providesTags: ["authapi"],
       }),
     }),
-    getBrandReport: build.query({
-      query: (token) => ({
-        url: "report/brand-report",
-        headers: { authorization: `Bearer ${token}` },
-      }),
-      providesTags: ["authapi"],
-    }),
     // getStockLevelTable: build.query({
     //   query: (token) => ({
     //     url: `report/stock-level-table`,
@@ -301,11 +294,34 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    todaySale: build.query({
+      query: (token) => ({
+        url: "report/today-report",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    weeklySale: build.query({
+      query: ({ token, urlLink }) => ({
+        url: `report/${urlLink}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+    getBrandReport: build.query({
+      query: (token) => ({
+        url: "report/brand-report",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
   }),
 });
 
 export const {
   useLoginMutation,
+  useTodaySaleQuery,
+  useWeeklySaleQuery,
   useLogoutMutation,
   useGetStockQuery,
   useGetBrandReportQuery,
