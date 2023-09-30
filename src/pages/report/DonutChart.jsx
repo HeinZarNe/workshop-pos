@@ -36,7 +36,7 @@ const DonutChart = () => {
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [ch]);
 
   return (
     <div className="card flex  justify-content-center">
