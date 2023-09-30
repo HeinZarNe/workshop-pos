@@ -5,7 +5,6 @@ import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const StockTable = ({ stocksData }) => {
-  console.log(stocksData);
   return (
     <div>
       <div className="overflow-x-auto">

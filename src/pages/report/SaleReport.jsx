@@ -12,7 +12,6 @@ import { useGetBrandReportQuery } from "../../services/authApi";
 
 const SaleReport = () => {
   const item = useGetBrandReportQuery(localStorage.getItem("token"));
-  console.log(item);
   const tableData = [
     {
       id: 1,

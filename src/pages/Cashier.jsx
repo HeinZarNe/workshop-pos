@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
-import { useGetProductQuery } from "../services/authApi";
+import { useCheckOutMutation, useGetProductQuery } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const { data } = useGetProductQuery({ token });
+  const [keyword, setKeyword] = useState(null);
+
+  const { data } = useGetProductQuery({ token, keyword });
   const [selectedProducts, setSelectedProducts] = useState([]);
   // const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const [currentSelectedProductId, setCurrentSelectedProductId] =
     useState(null);
-  const [keyBoardShow, setKeyBoadShow] = useState(false);
+  const [keyBoardShow, setKeyBoardShow] = useState(false);
+  const [checkOut] = useCheckOutMutation();
 
   // console.log(data);
   const handleProductClick = (productId) => {
@@ -35,10 +38,21 @@ const Cashier = () => {
   };
 
   const handleNumberClick = (number) => {
-    if (currentSelectedProductId !== null && number != 1) {
+    if (currentSelectedProductId !== null) {
       setSelectedQuantities((prevQuantities) => {
+        const currentQuantity = 0;
         if (prevQuantities[currentSelectedProductId] == 1) {
-          const currentQuantity = 0;
+          if (number === "minus") {
+            handleClearClick();
+            return prevQuantities;
+          } else if (number === "plus") {
+            const updatedQuantities = {
+              ...prevQuantities,
+              [currentSelectedProductId]: 2,
+            };
+            return updatedQuantities;
+          }
+
           const newQuantity = eval(`${currentQuantity} + ${number}`);
           const updatedQuantities = {
             ...prevQuantities,
@@ -47,17 +61,28 @@ const Cashier = () => {
           return updatedQuantities;
         } else {
           const currentQuantity = prevQuantities[currentSelectedProductId] || 0;
-          const newQuantity = `${currentQuantity}${number}`;
-          const updatedQuantities = {
-            ...prevQuantities,
-            [currentSelectedProductId]: newQuantity,
-          };
-          return updatedQuantities;
+          if (number === "plus") {
+            const updatedQuantities = {
+              ...prevQuantities,
+              [currentSelectedProductId]: eval(`${currentQuantity} + 1`),
+            };
+            return updatedQuantities;
+          } else if (number === "minus") {
+            const updatedQuantities = {
+              ...prevQuantities,
+              [currentSelectedProductId]: eval(`${currentQuantity} - 1`),
+            };
+            return updatedQuantities;
+          } else {
+            const newQuantity = `${currentQuantity}${number}`;
+            const updatedQuantities = {
+              ...prevQuantities,
+              [currentSelectedProductId]: newQuantity,
+            };
+            return updatedQuantities;
+          }
         }
       });
-    }
-    if (number == 1) {
-       
     }
   };
 
@@ -99,7 +124,7 @@ const Cashier = () => {
   };
 
   const handleProductInCartSelect = (productId) => {
-    setKeyBoadShow(true);
+    setKeyBoardShow(true);
     setCurrentSelectedProductId(productId);
     setSelectedProducts((prevSelected) => {
       if (!prevSelected.includes(productId)) {
@@ -110,14 +135,28 @@ const Cashier = () => {
   };
 
   const handlePaymentClick = () => {
+    if (selectedProducts?.length === 0) return;
     const total = calculateTotal();
+
     const checkoutData = {
       selectedProducts,
       selectedQuantities,
       total,
       data,
     };
-    navigate("/checkout", { state: { checkoutData } });
+
+    const dataToSend = {
+      items: selectedProducts.map((item) => ({
+        product_id: item,
+        quantity: selectedQuantities[item],
+      })),
+    };
+    checkOut({ data: dataToSend, token }).then((res) => {
+      res?.data &&
+        navigate("/checkout", {
+          state: { checkoutData, dataToSend, res: res.data },
+        });
+    });
   };
 
   const handleGoBack = () => {
@@ -156,13 +195,15 @@ const Cashier = () => {
               </div>
               <input
                 type="search"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
                 id="default-search"
                 class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
                 placeholder="Search ..."
               />
             </div>
           </div>
-          <div className="w-[100%] mx-auto overflow-scroll">
+          <div className="w-[100%] mx-auto ">
             <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
               {/* {test.map((product) => ( */}
               {data?.data?.map((product) => (
@@ -204,8 +245,8 @@ const Cashier = () => {
           <div
             className={
               keyBoardShow
-                ? "overflow-scroll w-full h-[205px]"
-                : "overflow-scrol w-full h-full"
+                ? "overflow-auto w-full h-[205px]"
+                : "overflow-auto w-full h-full"
             }
           >
             {selectedProducts.map((productId) => {
@@ -222,7 +263,7 @@ const Cashier = () => {
               return (
                 // <div
                 //   key={productId}
-                //   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 
+                //   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777]
                 //   ${
                 //     selectedProduct.id === currentSelectedProductId &&
                 //     keyBoardShow
@@ -307,7 +348,7 @@ const Cashier = () => {
                 </div>
               </div>
               <div
-                onClick={() => setKeyBoadShow(false)}
+                onClick={() => setKeyBoardShow(false)}
                 className="flex border-t border-gray-400 items-center"
               >
                 {keyBoardShow && (
@@ -315,7 +356,7 @@ const Cashier = () => {
                     <FaChevronDown />
                   </div>
                 )}
-                <p className=" text-xl text-white flex ms-auto py-4 pt-3 justify-end me-4">
+                <p className=" text-xl text-white flex ms-auto py-4 pt-3 justify-end me-4 h-[80px]">
                   Total:
                   <div className="ms-2 text-[#fafafa] font-semibold">
                     {" "}
@@ -328,7 +369,37 @@ const Cashier = () => {
             <div className="mb-12 w-full bg-[#323232]">
               {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
               <div className="buttons  text-gray-400">
-                <div className="grid grid-cols-4 h-16">
+                <div className="grid grid-cols-2 h-12">
+                  <button
+                    onClick={() => handleNumberClick("minus")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-2xl number-btn"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => handleNumberClick("plus")}
+                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-2xl number-btn"
+                  >
+                    +
+                  </button>
+                  {/* <button
+                    onClick={() => handleNumberClick("")}
+                    className={`${
+                      keyBoardShow
+                        ? "bg-base/90 text-white col-span-1 font-semibold number-btn"
+                        : "col-span-1 font-semibold number-btn"
+                    } `}
+                  >
+                    QTY
+                  </button> */}
+                  {/* <button
+                  // onClick={() => handleNumberClick("9")}
+                  className="col-span-1 number-btn"
+                >
+                  Qty
+                </button> */}
+                </div>{" "}
+                <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(7)}
                     className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
@@ -347,7 +418,7 @@ const Cashier = () => {
                   >
                     9
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleNumberClick("")}
                     className={`${
                       keyBoardShow
@@ -356,7 +427,7 @@ const Cashier = () => {
                     } `}
                   >
                     QTY
-                  </button>
+                  </button> */}
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -364,7 +435,7 @@ const Cashier = () => {
                   Qty
                 </button> */}
                 </div>
-                <div className="grid grid-cols-4 h-16">
+                <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(4)}
                     className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
@@ -383,12 +454,7 @@ const Cashier = () => {
                   >
                     6
                   </button>
-                  <button
-                    onClick={() => handleNumberClick("")}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
-                  >
-                    DIS
-                  </button>
+
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -396,7 +462,7 @@ const Cashier = () => {
                   %Disc
                 </button> */}
                 </div>
-                <div className="grid grid-cols-4 h-16">
+                <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(1)}
                     className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
@@ -415,12 +481,12 @@ const Cashier = () => {
                   >
                     3
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleNumberClick("")}
                     className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
                   >
                     PRICE
-                  </button>
+                  </button> */}
                   {/* <button
                   // onClick={() => handleNumberClick("9")}
                   className="col-span-1 number-btn"
@@ -428,13 +494,13 @@ const Cashier = () => {
                   Price
                 </button> */}
                 </div>
-                <div className="grid grid-cols-4 h-16">
-                  <button
+                <div className="grid grid-cols-3 h-12">
+                  {/* <button
                     // onClick={() => handleNumberClick("0")}
                     className="col-span-1 text-lg hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
                   >
                     +/-
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => handleNumberClick(0)}
                     className="col-span-1 hover:bg-base/30 hover:text-[#fafafa]  text-xl number-btn"
@@ -464,9 +530,14 @@ const Cashier = () => {
             </div>
           </div>
 
-          <div className="grid absolute w-full bottom-0 grid-cols-1 bg-[#B19777]  text-white">
+          <div
+            className={`grid absolute w-full bottom-0 grid-cols-1 ${
+              selectedProducts?.length === 0 ? "bg-[#2e2e2e]" : "bg-[#B19777]"
+            }  text-white`}
+          >
             <button
               onClick={handlePaymentClick}
+              disabled={selectedProducts?.length === 0}
               className=" number-btn h-[49px]"
             >
               Payment

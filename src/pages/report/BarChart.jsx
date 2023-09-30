@@ -22,11 +22,10 @@ const BarChart = () => {
         },
       },
     };
-    console.log(data,options);
     setChartData(data);
     setChartOptions(options);
-  }, [ ]);
-  
+  }, []);
+
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
   return (

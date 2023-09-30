@@ -63,7 +63,6 @@ const AddBrand = ({
     e.preventDefault();
 
     if (editBrand.state) {
-      console.log(valid);
       const editedData = await updateBrand({ brandInfo: brandData, token });
       const { brand } = editedData?.data;
     } else {

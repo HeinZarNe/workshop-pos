@@ -1,19 +1,17 @@
 import React from "react";
 import { Table } from "@mantine/core";
-const DataTable = () => {
-  const elements = [
-    { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-    { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-    { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-    { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-  ];
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
-      <td>{element.position}</td>
-      <td>{element.name}</td>
-      <td>{element.symbol}</td>
-      <td>{element.mass}</td>
+const DataTable = ({ data }) => {
+  const rows = data?.map((element, i) => (
+    <tr key={element.id}>
+      <td>{element.id}</td>
+      <td>{element.staff}</td>
+      <td>{element.voucher_number}</td>
+      <td>{element.tax}</td>
+      <td>{element.total} </td>
+      <td>{element.item_quantity}</td>
+      <td>{element.net_total} kyats</td>
+      <td>{element.time?.split(" ")[0]}</td>
+      <td>{element.time?.split(" ")[1]}</td>
     </tr>
   ));
   const head = {};
@@ -22,8 +20,14 @@ const DataTable = () => {
       <thead>
         <tr>
           <th>No</th>
-          <th>Sale Persons</th>
+          <th>Sale Person</th>
           <th>Voucher</th>
+          <th>Tax</th>
+          <th>Cash</th>
+          <th>Count</th>
+
+          <th>Total</th>
+          <th>Date</th>
           <th>Time</th>
         </tr>
       </thead>

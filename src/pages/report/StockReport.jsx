@@ -18,21 +18,85 @@ import {
   useGetBrandReportQuery,
   useGetStockLevelBarQuery,
   useGetStockLevelTableQuery,
-  useGetBestSellerBrandsQuery
+  useGetBestSellerBrandsQuery,
+  useGetMonthlyOverviewQuery,
+  useGetWeeklyOverviewQuery,
+  useGetYearlyOverviewQuery,
 } from "../../services/authApi";
-
+// {
+//   "monthlySaleOverview": {
+//       "monthlySales": [
+//           {
+//               "date": "01\/09\/2023",
+//               "total_sales": 13443
+//           },
+//           {
+//               "date": "02\/09\/2023",
+//               "total_sales": 23613
+//           },
+//           {
+//               "date": "03\/09\/2023",
+//               "total_sales": 8304
+//           },
+//           {
+//               "date": "04\/09\/2023",
+//               "total_sales": 14464
+//           },
+//           {
+//               "date": "05\/09\/2023",
+//               "total_sales": 24968
+//           },
+//           {
+//               "date": "06\/09\/2023",
+//               "total_sales": 15331
+//           },
+//           {
+//               "date": "07\/09\/2023",
+//               "total_sales": 21528
+//           },
+//           {
+//               "date": "08\/09\/2023",
+//               "total_sales": 21411
+//           },
+//           {
+//               "date": "09\/09\/2023",
+//               "total_sales": 21430
+//           },
+//           {
+//               "date": "10\/09\/2023",
+//               "total_sales": 18816
+//           },
+//
+//       ],
+//       "totalMonthlySalesAmount": 474215,
+//       "averageAmount": 16936.25,
+//       "highestSale": {
+//           "highestSaleAmount": 24968,
+//           "highestSellingDateOfMonth": "05\/09\/2023"
+//       },
+//       "lowestSale": {
+//           "lowestSaleAmount": 8166,
+//           "lowestSellingDateOfMonth": "12\/09\/2023"
+//       }
+//   },
+//   "totalProfit": 286179,
+//   "totalIncome": 515071,
+//   "totalExpenses": 228892
+// }
 const StockReport = () => {
   const token = localStorage.getItem("token");
   // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
-  const { data: stockLeveltable } = useGetStockLevelTableQuery( {token} );
+  const { data: stockLeveltable } = useGetStockLevelTableQuery({ token });
   // console.log(stockLevelBar.stock_lvl_bar);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
   const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
   const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
   const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
-  console.log(bestSeller?.weekly_best_seller_brands);
+  const { data: monthlyOverview } = useGetMonthlyOverviewQuery({ token });
+  const { data: weeklyOverview } = useGetWeeklyOverviewQuery({ token });
+  // const { data: yearlylyOverview } = useGetYearlyOverviewQuery({ token });
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
