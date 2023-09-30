@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
 import { Link, NavLink } from "react-router-dom";
 import { BsClipboard2Pulse, BsThreeDotsVertical } from "react-icons/bs";
 import { HiArrowSmallUp } from "react-icons/hi2";
+import { Chart } from "primereact/chart";
+
 // import Chart from "./BarChart";
 // import Text from "./Text";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import DonutChart from "./DonutChart";
 import BarChart from "./BarChart";
 import { useGetBrandReportQuery } from "../../services/authApi";
+import { useTodaySaleQuery, useWeeklySaleQuery } from "../../services/authApi";
 
 const SaleReport = () => {
-  const item = useGetBrandReportQuery(localStorage.getItem("token"));
-  console.log(item);
+  const [chartData, setChartData] = useState({});
+  const [chartOptions, setChartOptions] = useState({});
+  const [urlLink, setUrlLink] = useState("weekly-report");
+  console.log(urlLink);
+  // const [click, setClick] = useState(false);
+  const token = localStorage.getItem("token");
+  const { data: todaySale } = useTodaySaleQuery(token);
+  const { data: sale } = useWeeklySaleQuery({ token, urlLink });
+  console.log(sale);
+
+  const {data:ch} = useGetBrandReportQuery(localStorage.getItem("token"));
+  const maxPercent = (
+    (todaySale?.todayMaxSales?.total * 100) /
+    todaySale?.todayTotalSales
+  ).toFixed(2);
+  const minPercent = (
+    (todaySale?.todayMinSales?.total * 100) /
+    todaySale?.todayTotalSales
+  ).toFixed(2);
   const tableData = [
     {
       id: 1,
@@ -63,6 +83,203 @@ const SaleReport = () => {
       ),
     },
   ];
+
+  // barchart
+  useEffect(() => {
+    if (urlLink === "weekly-report" && sale?.weeklySales) {
+      // useEffect(() => {
+        const mon = sale?.weeklySales[0]?.daySales;
+        const tue = sale?.weeklySales[1]?.daySales;
+        const wed = sale?.weeklySales[2]?.daySales;
+        const thu = sale?.weeklySales[3]?.daySales;
+        const fri = sale?.weeklySales[4]?.daySales;
+        const sat = sale?.weeklySales[5]?.daySales;
+        const sun = sale?.weeklySales[6]?.daySales;
+        console.log(mon);
+
+        const data = {
+          labels: ["S", "M", "T", "W", "T", "F", "S"],
+          datasets: [
+            {
+              data: [sun, mon, tue, wed, thu, fri, sat],
+              backgroundColor: ["#B19177"],
+              label: "Sales",
+            },
+          ],
+        };
+        const options = {
+          maintainAspectRatio: true,
+          aspectRatio: 1.3,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        };
+        console.log(data, options);
+        setChartData(data);
+        setChartOptions(options);
+      // }, []);
+    } else if (urlLink === "monthly-report" && sale?.monthlySales) {
+      if (sale) {
+        // useEffect(() => {
+          const data = {
+            labels: [
+              "d1",
+              "d2",
+              "d3",
+              "d4",
+              "d5",
+              "d6",
+              "d7",
+              "d8",
+              "d9",
+              "d10",
+              "d11",
+              "d12",
+              "d13",
+              "d14",
+              "d15",
+              "d16",
+              "d17",
+              "d16",
+              "d18",
+              "d19",
+              "d20",
+              "d21",
+              "d22",
+              "d23",
+              "d24",
+              "d25",
+              "d26",
+              "d27",
+              "d28",
+              "d29",
+            ],
+
+            datasets: [
+              {
+                data: [
+                  sale?.monthlySales[1]?.total_sales,
+                  sale?.monthlySales[2]?.total_sales,
+                  sale?.monthlySales[3]?.total_sales,
+                  sale?.monthlySales[4]?.total_sales,
+                  sale?.monthlySales[5]?.total_sales,
+                  sale?.monthlySales[6]?.total_sales,
+                  sale?.monthlySales[7]?.total_sales,
+                  sale?.monthlySales[8]?.total_sales,
+                  sale?.monthlySales[9]?.total_sales,
+                  sale?.monthlySales[10]?.total_sales,
+                  sale?.monthlySales[11]?.total_sales,
+                  sale?.monthlySales[12]?.total_sales,
+                  sale?.monthlySales[13]?.total_sales,
+                  sale?.monthlySales[14]?.total_sales,
+                  sale?.monthlySales[15]?.total_sales,
+                  sale?.monthlySales[16]?.total_sales,
+                  sale?.monthlySales[17]?.total_sales,
+                  sale?.monthlySales[18]?.total_sales,
+                  sale?.monthlySales[19]?.total_sales,
+                  sale?.monthlySales[20]?.total_sales,
+                  sale?.monthlySales[21]?.total_sales,
+                  sale?.monthlySales[22]?.total_sales,
+                  sale?.monthlySales[23]?.total_sales,
+                  sale?.monthlySales[24]?.total_sales,
+                  sale?.monthlySales[25]?.total_sales,
+                  sale?.monthlySales[26]?.total_sales,
+                  sale?.monthlySales[27]?.total_sales,
+                  sale?.monthlySales[28]?.total_sales,
+                  sale?.monthlySales[29]?.total_sales,
+                ],
+                backgroundColor: ["#B19177"],
+                label: "Sales",
+              },
+            ],
+          };
+          const options = {
+            maintainAspectRatio: true,
+            aspectRatio: 1.3,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          };
+          // console.log(data, options);
+          setChartData(data);
+          setChartOptions(options);
+        // }, [urlLink, sale]);
+      }
+    } else if(urlLink === "yearly-report" && sale?.yearlySales){
+        if (sale) {
+        // useEffect(() => {
+          const data = {
+            labels: [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "June",
+              "July",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ],
+
+            datasets: [
+              {
+                data: [
+                  sale?.yearlySales[1]?.monthSales,
+                  sale?.yearlySales[2]?.monthSales,
+                  sale?.yearlySales[3]?.monthSales,
+                  sale?.yearlySales[4]?.monthSales,
+                  sale?.yearlySales[5]?.monthSales,
+                  sale?.yearlySales[6]?.monthSales,
+                  sale?.yearlySales[7]?.monthSales,
+                  sale?.yearlySales[8]?.monthSales,
+                  sale?.yearlySales[9]?.monthSales,
+                  sale?.yearlySales[10]?.monthSales,
+                  sale?.yearlySales[11]?.monthSales,
+                  sale?.yearlySales[12]?.monthSales,
+                 ],
+                backgroundColor: ["#B19177"],
+                label: "Sales",
+              },
+            ],
+          };
+          const options = {
+            maintainAspectRatio: true,
+            aspectRatio: 1.3,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          };
+          // console.log(data, options);
+          setChartData(data);
+          setChartOptions(options);
+        // }, [urlLink, sale]);
+    }}
+  }, [urlLink, sale]);
+  let hDate ;
+  if(urlLink === "weekly-report"){
+    hDate = sale?.highestSale?.highestSellingDate;
+  }else if(urlLink === "monthly-report") {
+    hDate = sale?.highestSale?.highestSellingDateOfMonth;
+  }else{
+    hDate = sale?.highestSale?.highestSellingMonth;
+  }
+  let lDate ;
+  if(urlLink === "weekly-report"){
+    lDate = sale?.lowestSale?.lowestSellingDate;
+  }else if (urlLink === "monthly-report") {
+    lDate = sale?.lowestSale?.lowestSellingDateOfMonth;
+  }else{
+    lDate = sale?.lowestSale?.lowestSellingDate;
+  }
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -76,9 +293,36 @@ const SaleReport = () => {
           </div>
           <div className=" flex gap-3">
             <div className="grid grid-cols-3 text-base border divide-base divide-x text-center border-base rounded-md">
-              <p className="p-3 px-4 text-xl font-semibold">Year</p>
-              <p className="p-3 px-4 text-xl text-white font-semibold">Month</p>
-              <p className="p-3 px-4 text-xl font-semibold">Week</p>
+              <p
+                className={
+                  urlLink == "yearly-report"
+                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    : "p-3 px-4 text-xl  font-semibold"
+                }
+                onClick={() => setUrlLink("yearly-report")}
+              >
+                Year
+              </p>
+              <p
+                className={
+                  urlLink == "monthly-report"
+                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    : "p-3 px-4 text-xl  font-semibold"
+                }
+                onClick={() => setUrlLink("monthly-report")}
+              >
+                Month
+              </p>
+              <p
+                className={
+                  urlLink == "weekly-report"
+                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    : "p-3 px-4 text-xl  font-semibold"
+                }
+                onClick={() => setUrlLink("weekly-report")}
+              >
+                Week
+              </p>
             </div>
           </div>
         </div>
@@ -89,47 +333,61 @@ const SaleReport = () => {
               <p className="text-2xl text-white">Today Sales</p>
               <BsThreeDotsVertical className="text-xl" />
             </div>
-            <h1 className="text-5xl font-semibold text-white">928,500</h1>
+            <h1 className="text-5xl font-semibold text-white">
+              {todaySale?.todayTotalSales}
+            </h1>
             <p className="text-sm ms-1 mt-1">Kyats</p>
             <div className="mt-4">
               <div className="flex border-t border-secondary py-3 items-center justify-between">
                 <div className="flex items-center gap-3">
                   <BsClipboard2Pulse className="text-base" />{" "}
-                  <p className="text-lg">09038</p>
+                  <p className="text-lg">
+                    {todaySale?.todayMaxSales?.voucherNumber.slice(0, 5)}
+                  </p>
                 </div>
                 <div className="flex gap-7">
-                  <p className="text-lg">934k</p>
+                  <p className="text-lg">{todaySale?.todayMaxSales?.total}K</p>
                   <div className="text-lg flex items-center">
-                    85% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                    {maxPercent}%{" "}
+                    <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                  </div>
+                </div>
+              </div>
+              <div className="flex border-t border-secondary py-3 items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <p className="text-lg ms-3 font-semibold">Average</p>
+                </div>
+                <div className="flex gap-1 me-6">
+                  <p className="text-lg font-semibold">
+                    {todaySale?.todayAverageSales}
+                  </p>
+                  <div className="text-lg font-semibold flex items-center">
+                    Kyats
+                    {/* <HiArrowSmallUp className="ms-2 text-green-500" />{" "} */}
                   </div>
                 </div>
               </div>
               <div className="flex border-t border-secondary py-3 items-center justify-between">
                 <div className="flex items-center gap-3">
                   <BsClipboard2Pulse className="text-base" />{" "}
-                  <p className="text-lg">09038</p>
+                  <p className="text-lg">
+                    {" "}
+                    {todaySale?.todayMinSales?.voucherNumber.slice(0, 5)}
+                  </p>
                 </div>
                 <div className="flex gap-7">
-                  <p className="text-lg">934k</p>
+                  <p className="text-lg">{todaySale?.todayMinSales?.total}k</p>
                   <div className="text-lg flex items-center">
-                    85% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
-                  </div>
-                </div>
-              </div>
-              <div className="flex border-t border-secondary py-3 items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <BsClipboard2Pulse className="text-base" />{" "}
-                  <p className="text-lg">09038</p>
-                </div>
-                <div className="flex gap-7">
-                  <p className="text-lg">934k</p>
-                  <div className="text-lg flex items-center">
-                    85% <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
+                    {(
+                      (todaySale?.todayMinSales?.total * 100) /
+                      todaySale?.todayTotalSales
+                    ).toFixed(2)}
+                    % <HiArrowSmallUp className="ms-2 text-green-500" />{" "}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end ">
               <button className="text-lg font-semibold p-2 px-3 border rounded-lg mt-3 border-[#fafafa] text-[#fafafa] hover:bg-base hover:text-black duration-100 ">
                 RECENT SALES
               </button>
@@ -138,13 +396,17 @@ const SaleReport = () => {
           <div className="col-span-8 p-4 border  border-secondary rounded-lg ">
             <div className="">
               <h1 className="text-2xl text-[#fafafa]">Weekly Sales</h1>
-              <p className="">Total 85.4k Sales</p>
+              <p className="">Total {sale?.averageAmount} kyat Sales</p>
             </div>
             <div className=" grid grid-cols-2 mt-4">
-              <div className="hidden">
+              {/* <div className="hidden">
                 <BarChart className="w-full hidden" />
+              </div> */}
+              <div className="w-full">
+                <div className="card ">
+                  <Chart type="bar" data={chartData} options={chartOptions} />
+                </div>
               </div>
-              <BarChart className="w-full" />
               {/* <Text/> */}
               <div className=" p-4">
                 <div className="flex mb-5 items-center">
@@ -157,7 +419,7 @@ const SaleReport = () => {
                         <p className="text-md text-white font-semibold">
                           Highest
                         </p>
-                        <p className="text-sm">12/8/2023</p>
+                        <p className="text-sm">{hDate}</p>
                       </div>
                       <p className="flex items-center text-green-500">
                         {" "}
@@ -165,7 +427,9 @@ const SaleReport = () => {
                       </p>
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">125k</p>
+                      <p className="text-md text-white font-semibold">
+                        {sale?.highestSale?.highestSaleAmount}
+                      </p>
                       <p className="text-sm">Kyats</p>
                     </div>
                   </div>
@@ -188,7 +452,9 @@ const SaleReport = () => {
                       </p> */}
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">100k</p>
+                      <p className="text-md text-white font-semibold">
+                        {sale?.averageAmount}
+                      </p>
                       <p className="text-sm">Kyats</p>
                     </div>
                   </div>
@@ -203,7 +469,7 @@ const SaleReport = () => {
                         <p className="text-md text-white font-semibold">
                           Lowest
                         </p>
-                        <p className="text-sm">12/8/2023</p>
+                        <p className="text-sm">{lDate}</p>
                       </div>
                       <p className="flex items-center text-red-500">
                         {" "}
@@ -211,7 +477,9 @@ const SaleReport = () => {
                       </p>
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">97k</p>
+                      <p className="text-md text-white font-semibold">
+                        {sale?.lowestSale?.lowestSaleAmount}
+                      </p>
                       <p className="text-sm ">Kyats</p>
                     </div>
                   </div>
@@ -289,22 +557,22 @@ const SaleReport = () => {
             </div>
             <div className="border-2 border-base p-4 rounded-md">
               <DonutChart />
-              <div className="flex w-[85%] mx-auto mt-3 justify-between">
+              <div className="flex w-[100%] mx-auto mt-3 justify-between">
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-[#884A39] mt-1 rounded-full"></div>
-                  melo
+                  {ch?.brandsInfo[0].name}
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-[#C38154] mt-1 rounded-full"></div>
-                  city
+                  {ch?.brandsInfo[1].name}
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-[#FFC26F] mt-1 rounded-full"></div>
-                  pro
+                  {ch?.brandsInfo[2].name}
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-[#F9E0BB] mt-1 rounded-full"></div>
-                  dutch
+                  {ch?.brandsInfo[3].name}
                 </div>
               </div>
             </div>

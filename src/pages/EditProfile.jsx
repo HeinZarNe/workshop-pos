@@ -79,7 +79,7 @@ const EditProfile = () => {
 
     if (
       [new_password, confirm_password, current_password].every(
-        (item) => item?.length > 7
+        (item) => item?.length > 5
       ) &&
       new_password === confirm_password
     ) {
