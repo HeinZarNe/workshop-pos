@@ -51,8 +51,6 @@ const Media = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    console.log(Array.from(e.dataTransfer.files));
   };
 
   return (

@@ -161,6 +161,16 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    checkOut: build.mutation({
+      query: ({ data, token }) => ({
+        url: "sale/checkout",
+        method: "POST",
+        body: data,
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getMonthlySales: build.query({
       query: (token) => ({
         url: "finance/monthly-sales",
@@ -288,6 +298,16 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+
+    saleClose: build.mutation({
+      query: (token) => ({
+        url: "sale/sale-close",
+        method: "POST",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
+
     customFetch: build.query({
       query: (url, token) => ({
         url,
@@ -333,6 +353,7 @@ export const {
   useWeeklySaleQuery,
   useGetSaleReportQuery,
   useLogoutMutation,
+  useCheckOutMutation,
   useGetStockQuery,
   useGetBrandReportQuery,
   useGetBestSellerBrandsQuery,
@@ -347,6 +368,7 @@ export const {
   useGetDailySalesQuery,
   useBanUserMutation,
   useUnbanUserMutation,
+  useSaleCloseMutation,
   useCreateUserMutation,
   useStoreProductMutation,
   useUpdateProductMutation,

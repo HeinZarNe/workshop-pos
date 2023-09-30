@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import { BaseColor } from "../../constant";
+import { Loader } from "@mantine/core";
 
 ChartJS.register(
   CategoryScale,
@@ -20,40 +21,92 @@ ChartJS.register(
 );
 export const options = {
   responsive: true,
-  plugins: {
-    title: {
-      display: true,
-      text: "Chart.js Line Chart",
-    },
-  },
 };
 
-const labels = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "November",
-  "December",
-];
+export function DataLineChart({ data: core, state }) {
+  const [chartData, setChartData] = useState();
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      data: [-131, 512, -655, 626, -917, 63, -872, -894, 849, 976, -227],
-      borderColor: BaseColor,
-      backgroundColor: "#ddbf9a",
-    },
-  ],
-};
+  useEffect(() => {
+    setChartData((prev) => ({
+      ...prev,
+      monthly: {
+        data: core?.monthly?.map((item) => item.total_sales),
+        label: core?.monthly?.map((item) => item.date),
+      },
+    }));
 
-console.log(labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })));
-export function DataLineChart() {
-  return <Line options={options} data={data} />;
+    setChartData((prev) => ({
+      ...prev,
+      yearly: {
+        data: core?.yearly?.map((item) => item.monthSales),
+        label: core?.yearly?.map((item) => item.monthName),
+      },
+    }));
+
+    setChartData((prev) => ({
+      ...prev,
+      weekly: {
+        data: core?.weekly?.map((item) => item.daySales),
+        label: core?.weekly?.map((item) => item.dayName),
+      },
+    }));
+  }, [core]);
+  if (state === 1) {
+    return (
+      <Line
+        options={options}
+        data={{
+          labels: chartData?.yearly?.label,
+          datasets: [
+            {
+              label: "Datas",
+              data: chartData?.yearly?.data,
+              borderColor: BaseColor,
+              backgroundColor: "#ddbf9a",
+            },
+          ],
+        }}
+        style={{ color: "white " }}
+      />
+    );
+  } else if (state === 2) {
+    return (
+      <Line
+        options={options}
+        data={{
+          labels: chartData?.monthly?.label,
+          datasets: [
+            {
+              label: "Datas",
+
+              data: chartData?.monthly?.data,
+              borderColor: BaseColor,
+              backgroundColor: "#ddbf9a",
+            },
+          ],
+        }}
+        style={{ color: "white " }}
+      />
+    );
+  } else if (state === 3) {
+    return (
+      <Line
+        options={options}
+        data={{
+          labels: chartData?.weekly?.label,
+          datasets: [
+            {
+              label: "Datas",
+              data: chartData?.weekly?.data,
+              borderColor: BaseColor,
+              backgroundColor: "#ddbf9a",
+            },
+          ],
+        }}
+        style={{ color: "white " }}
+      />
+    );
+  } else {
+    <div></div>;
+  }
 }

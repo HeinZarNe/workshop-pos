@@ -67,7 +67,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
   const [more_information, setMoreInformation] = useState(
     editState ? product?.data.more_information : ""
   );
-  console.log(brand_name);
   useEffect(() => {
     if (editState) {
       brands?.data.map(
@@ -557,7 +556,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(name, brand_name, total_stock, unit);
               name && brand_name && total_stock && unit && setSection("price");
             }}
             action=""
@@ -586,7 +584,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   value={brand_name}
                   onChange={(e) => {
                     setBrand_name(Number(e.target.value));
-                    console.log(e.target.value);
                   }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                 >

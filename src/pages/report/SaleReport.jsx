@@ -62,37 +62,37 @@ const SaleReport = () => {
   useEffect(() => {
     if (urlLink === "weekly-report" && sale?.weeklySales) {
       // useEffect(() => {
-      const mon = sale?.weeklySales[0]?.daySales;
-      const tue = sale?.weeklySales[1]?.daySales;
-      const wed = sale?.weeklySales[2]?.daySales;
-      const thu = sale?.weeklySales[3]?.daySales;
-      const fri = sale?.weeklySales[4]?.daySales;
-      const sat = sale?.weeklySales[5]?.daySales;
-      const sun = sale?.weeklySales[6]?.daySales;
-      // console.log(mon);
+        const mon = sale?.weeklySales[0]?.daySales;
+        const tue = sale?.weeklySales[1]?.daySales;
+        const wed = sale?.weeklySales[2]?.daySales;
+        const thu = sale?.weeklySales[3]?.daySales;
+        const fri = sale?.weeklySales[4]?.daySales;
+        const sat = sale?.weeklySales[5]?.daySales;
+        const sun = sale?.weeklySales[6]?.daySales;
+        console.log(mon);
 
-      const data = {
-        labels: ["S", "M", "T", "W", "T", "F", "S"],
-        datasets: [
-          {
-            data: [sun, mon, tue, wed, thu, fri, sat],
-            backgroundColor: ["#B19177"],
-            label: "Sales",
+        const data = {
+          labels: ["S", "M", "T", "W", "T", "F", "S"],
+          datasets: [
+            {
+              data: [sun, mon, tue, wed, thu, fri, sat],
+              backgroundColor: ["#B19177"],
+              label: "Sales",
+            },
+          ],
+        };
+        const options = {
+          maintainAspectRatio: true,
+          aspectRatio: 1.3,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
           },
-        ],
-      };
-      const options = {
-        maintainAspectRatio: true,
-        aspectRatio: 1.3,
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      };
-      // console.log(data, options);
-      setChartData(data);
-      setChartOptions(options);
+        };
+        console.log(data, options);
+        setChartData(data);
+        setChartOptions(options);
       // }, []);
     } else if (urlLink === "monthly-report" && sale?.monthlySales) {
       if (sale) {

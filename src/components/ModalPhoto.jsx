@@ -18,7 +18,6 @@ const ModalPhoto = ({
   const dispatch = useDispatch();
 
   const handleSelected = (image) => {
-    console.log(image);
     setShowPhotoModal(false);
     setSelectedPhoto(image);
   };
