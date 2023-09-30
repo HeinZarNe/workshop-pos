@@ -15,29 +15,33 @@ import { Navbar } from "flowbite-react";
 
 const Sidebar = () => {
   return (
-    <div className=" inline-block w-1/5 bg-[#323232] h-[calc(100vh-57px)] overflow-auto">
+    <div className=" inline-block w-[15%] bg-[#323232] h-[calc(100vh-57px)] overflow-auto">
       {/* <Navbar /> */}
       <div className="">
         {/* overview */}
         <div className=" px-5 py-3  border-b border-stone-500">
-          <NavLink to="/" className=" flex items-center mt-2 text-white">
+          <NavLink to="/" className="ms-1 flex items-center mt-2 text-white">
             <span className=" text-2xl mr-2">
-              <BiHomeCircle />
+              <div className="flex justify-center w-7">
+                <BiHomeCircle />
+              </div>
             </span>
-            <h1 className="text-[18px]">Overview</h1>
+            <h1 className="text-[15px] font-semibold">Overview</h1>
           </NavLink>
         </div>
         {/* sale */}
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex  w-[160px] px-2 justify-between items-center ">
               {/* <div className="  border-b border-stone-500"> */}
-              <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <BsShopWindow />
-                <h1 className=" text-[18px]">Sales</h1>
+              <span className=" text-xl text-white flex items-center gap-2">
+                <div className="flex justify-center w-7">
+                  <BsShopWindow />
+                </div>
+                <h1 className=" text-[15px] font-semibold">Sales</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white">
                 <BsChevronDown />{" "}
               </span>
 
@@ -45,7 +49,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/sale/cashier"}>
                 <li className=" text-white ml-10 mb-3">Cashier</li>
               </NavLink>
@@ -59,13 +63,15 @@ const Sidebar = () => {
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex w-[160px] justify-between items-center  px-2">
               {/* <div className="  border-b border-stone-500"> */}
-              <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <BsClipboard />
-                <h1 className=" text-[18px]">Inventory</h1>
+              <span className=" text-xl text-white flex items-center gap-2">
+                <div className="flex justify-center w-7">
+                  <BsClipboard />
+                </div>
+                <h1 className=" text-[15px] font-semibold">Inventory</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white">
                 <BsChevronDown />{" "}
               </span>
 
@@ -73,7 +79,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/products"}>
                 <li className=" text-white ml-10 mb-3">Products</li>
               </NavLink>
@@ -93,13 +99,15 @@ const Sidebar = () => {
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex w-[160px] justify-between items-center  px-2">
               {/* <div className="  border-b border-stone-500"> */}
               <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <FaChartPie />
-                <h1 className=" text-[18px]">Report</h1>
+                <div className="flex justify-center w-7">
+                  <FaChartPie />
+                </div>
+                <h1 className=" text-[15px] font-semibold">Report</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white">
                 <BsChevronDown />{" "}
               </span>
 
@@ -107,7 +115,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/stock-report"}>
                 <li className=" text-white ml-10 mb-3">Stock</li>
               </NavLink>
@@ -121,13 +129,15 @@ const Sidebar = () => {
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex w-[160px] justify-between items-center  px-2">
               {/* <div className="  border-b border-stone-500"> */}
               <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <BsCashCoin />
-                <h1 className=" text-[18px]">Finance</h1>
+                <div className="flex justify-center w-7">
+                  <BsCashCoin />
+                </div>
+                <h1 className=" text-[15px] font-semibold">Finance</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white">
                 <BsChevronDown />{" "}
               </span>
 
@@ -135,7 +145,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/daily"}>
                 <li className=" text-white ml-10 mb-3">Daily</li>
               </NavLink>
@@ -155,13 +165,15 @@ const Sidebar = () => {
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex justify-between w-[160px] items-center  px-2">
               {/* <div className="  border-b border-stone-500"> */}
               <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <BiUserPlus />
-                <h1 className=" text-[18px]">User</h1>
+                <div className="flex justify-center w-7">
+                  <BiUserPlus className="text-2xl" />
+                </div>
+                <h1 className=" text-[15px] font-semibold">User</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white">
                 <BsChevronDown />{" "}
               </span>
 
@@ -169,7 +181,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/users"}>
                 <li className=" text-white ml-10 mb-3">Overview</li>
               </NavLink>
@@ -184,24 +196,31 @@ const Sidebar = () => {
         </div>
         {/* media */}
         <div className=" px-5 py-3  border-b border-stone-500">
-          <NavLink to={"/media"} className=" flex items-center mt-2 text-white">
+          <NavLink
+            to={"/media"}
+            className=" w-[160px] px-1 flex items-center mt-2 text-white"
+          >
             <span className=" text-xl mr-2">
-              <TfiGallery />
+              <div className="flex justify-center w-7">
+                <TfiGallery />
+              </div>
             </span>
-            <h1 className="text-[18px]">Media</h1>
+            <h1 className="text-[15px] font-semibold">Media</h1>
           </NavLink>
         </div>
         {/* profile */}
         <div className="collapse border-b border-stone-500 rounded-none">
           <input type="checkbox" />
           <div className="collapse-title">
-            <div className="flex justify-between items-center  px-2">
+            <div className="flex w-[160px] justify-between items-center  px-2">
               {/* <div className="  border-b border-stone-500"> */}
               <span className=" text-xl mr-2 text-white flex items-center gap-2">
-                <FaRegUserCircle />
-                <h1 className=" text-[18px]">Profile</h1>
+                <div className="flex justify-center w-7">
+                  <FaRegUserCircle />
+                </div>
+                <h1 className=" text-[15px] font-semibold">Profile</h1>
               </span>
-              <span className=" mt-3 text-white ml-10">
+              <span className=" mt-3 text-white ">
                 <BsChevronDown />{" "}
               </span>
 
@@ -209,7 +228,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="collapse-content">
-            <ul className="text-[18px]">
+            <ul className font-semibold="text-[15px]">
               <NavLink to={"/profile"}>
                 <li className=" text-white ml-10 mb-3">My Account</li>
               </NavLink>
@@ -220,7 +239,7 @@ const Sidebar = () => {
           </div>
         </div>
         {/* logout */}
-        <div className=" px-5 py-3  border-b border-stone-500">
+        <div className=" px-5 py-3 text-[15px] font-semibold  border-b border-stone-500">
           <Logout />
         </div>
       </div>

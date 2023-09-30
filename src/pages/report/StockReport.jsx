@@ -88,16 +88,13 @@ const StockReport = () => {
   // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
-  const { data: stockLeveltable } = useGetStockLevelTableQuery({ token });
-  // console.log(stockLevelBar.stock_lvl_bar);
+  const { data: stockLeveltable } = useGetStockLevelTableQuery( {token} );
+  console.log(stockLevelBar);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  const inStock = `w-[${stockLevelBar?.stock_lvl_bar?.in_stock[1]}] h-full bg-[#884A39]`;
-  const outOfStock = `w-[${stockLevelBar?.stock_lvl_bar?.out_of_stock[1]}] h-full bg-[#FFC26F]`;
-  const lowStock = `w-[${stockLevelBar?.stock_lvl_bar?.low_stock[1]}] h-full bg-yellow-300`;
-  console.log(inStock, outOfStock, lowStock);
-  const { data: monthlyOverview } = useGetMonthlyOverviewQuery({ token });
-  const { data: weeklyOverview } = useGetWeeklyOverviewQuery({ token });
-  // const { data: yearlylyOverview } = useGetYearlyOverviewQuery({ token });
+  const inStock = `w-[65%] h-full bg-[#884A39]`;
+  const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
+  const lowStock = `w-[35%] h-full bg-[#C38154] `;
+  console.log(typeof(parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1])));
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -159,7 +156,7 @@ const StockReport = () => {
             <div className="col-span-2 border  border-base  rounded-md p-5 ">
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
-                  <div className=" flex w-[75%] bg-red-300 overflow-hidden h-3 rounded-full ">
+                  <div className=" flex w-[75%]  overflow-hidden h-3 rounded-full ">
                     <div className={inStock}></div>
                     <div className={outOfStock}></div>
                     <div className={lowStock}></div>
@@ -167,7 +164,9 @@ const StockReport = () => {
                 ) : null}
 
                 <div className="w-[100px]">
-                  <p className="text-3xl text-white font-semibold">89,798</p>
+                  <p className="text-3xl text-white text-center mx-auto flex justify-center me-6 font-semibold">
+                    {stockLevelBar?.total_product}
+                  </p>
                   <p className="text-lg">Products</p>
                 </div>
               </div>
