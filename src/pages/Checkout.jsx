@@ -2,14 +2,15 @@ import React from "react";
 import Navbar from "../layout/Navbar";
 import { BiArrowBack } from "react-icons/bi";
 import "./Checkout.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const location = useLocation();
   //   const navigate = useNavigate();
-  const { selectedProducts, selectedQuantities, total, data } =
+  const { selectedProducts, selectedQuantities, data } =
     location.state.checkoutData;
-
+  const { net_total, total, tax } = location.state.res;
+  console.log(location.state.res);
   const handlePrint = () => {
     window.print();
   };
@@ -20,7 +21,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="h-screen bg-[#272727]">
+    <div className="h-screen bg-[#272727]  box-border">
       <Navbar />
       <div className="px-5 py-3 border-b border-b-[#B19777] mb-5">
         <button className=" flex items-center" onClick={handleBackClick}>
@@ -61,22 +62,42 @@ const Checkout = () => {
                   );
                 })}
               </ul>
-              <div className="mt-3 flex justify-between">
-                <p className=" text-2xl text-gray-400">Total :</p>
+              <div className="mt-3 flex justify-between h-[30px]">
+                <p className=" text-2xl text-gray-400"></p>
                 <p className=" text-2xl text-gray-400">$ {total}</p>
+              </div>
+              <div className="pb-3 flex justify-between  border-b border-b-[#B19777]">
+                <p className=" text-2xl text-gray-400">Tax</p>
+                <p className=" text-2xl text-gray-400">
+                  $ {Number(tax).toFixed(2)}
+                </p>
+              </div>
+              <div className=" flex justify-between ">
+                <p className=" text-3xl text-gray-400">Total</p>
+                <p className=" text-2xl text-gray-400">$ {net_total}</p>
               </div>
             </div>
             <div className=" text-gray-300 text-center">
               <p>Thanks for shopping with us!</p>
               <p>Have a nice day!</p>
             </div>
-            <div className=" flex justify-center">
+            <div className=" flex justify-center gap-3">
               <button
-                className="bg-[#B19777] text-white rounded-lg w-3/4 py-2 print:hidden"
+                className="bg-[#B19777] text-white rounded-lg w-fit px-5 py-2 print:hidden"
                 onClick={handlePrint}
               >
                 Print
               </button>
+              <Link to="/sale/cashier">
+                <button className="bg-[#B19777] text-white rounded-lg w-fit px-5 py-2 print:hidden">
+                  Next
+                </button>
+              </Link>
+              <Link to="/sale/recent">
+                <button className="bg-[#B19777] text-white rounded-lg w-fit px-5 py-2 print:hidden">
+                  Recent
+                </button>
+              </Link>
             </div>
           </div>
         </div>

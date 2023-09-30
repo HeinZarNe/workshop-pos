@@ -20,7 +20,6 @@ const ProductDetails = () => {
     !state?.id && navigate("/products");
     state.id && refetch();
   }, [state]);
-  console.log(state);
   return (
     <Rootlayout>
       {isLoading && (

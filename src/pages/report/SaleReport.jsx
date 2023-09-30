@@ -24,7 +24,7 @@ const SaleReport = () => {
   const { data: sale } = useWeeklySaleQuery({ token, urlLink });
   console.log(sale);
 
-  const {data:ch} = useGetBrandReportQuery(localStorage.getItem("token"));
+  const { data: ch } = useGetBrandReportQuery(localStorage.getItem("token"));
   const maxPercent = (
     (todaySale?.todayMaxSales?.total * 100) /
     todaySale?.todayTotalSales
@@ -88,20 +88,108 @@ const SaleReport = () => {
   useEffect(() => {
     if (urlLink === "weekly-report" && sale?.weeklySales) {
       // useEffect(() => {
-        const mon = sale?.weeklySales[0]?.daySales;
-        const tue = sale?.weeklySales[1]?.daySales;
-        const wed = sale?.weeklySales[2]?.daySales;
-        const thu = sale?.weeklySales[3]?.daySales;
-        const fri = sale?.weeklySales[4]?.daySales;
-        const sat = sale?.weeklySales[5]?.daySales;
-        const sun = sale?.weeklySales[6]?.daySales;
-        console.log(mon);
+      const mon = sale?.weeklySales[0]?.daySales;
+      const tue = sale?.weeklySales[1]?.daySales;
+      const wed = sale?.weeklySales[2]?.daySales;
+      const thu = sale?.weeklySales[3]?.daySales;
+      const fri = sale?.weeklySales[4]?.daySales;
+      const sat = sale?.weeklySales[5]?.daySales;
+      const sun = sale?.weeklySales[6]?.daySales;
+      console.log(mon);
 
+      const data = {
+        labels: ["S", "M", "T", "W", "T", "F", "S"],
+        datasets: [
+          {
+            data: [sun, mon, tue, wed, thu, fri, sat],
+            backgroundColor: ["#B19177"],
+            label: "Sales",
+          },
+        ],
+      };
+      const options = {
+        maintainAspectRatio: true,
+        aspectRatio: 1.3,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      };
+      console.log(data, options);
+      setChartData(data);
+      setChartOptions(options);
+      // }, []);
+    } else if (urlLink === "monthly-report" && sale?.monthlySales) {
+      if (sale) {
+        // useEffect(() => {
         const data = {
-          labels: ["S", "M", "T", "W", "T", "F", "S"],
+          labels: [
+            "d1",
+            "d2",
+            "d3",
+            "d4",
+            "d5",
+            "d6",
+            "d7",
+            "d8",
+            "d9",
+            "d10",
+            "d11",
+            "d12",
+            "d13",
+            "d14",
+            "d15",
+            "d16",
+            "d17",
+            "d16",
+            "d18",
+            "d19",
+            "d20",
+            "d21",
+            "d22",
+            "d23",
+            "d24",
+            "d25",
+            "d26",
+            "d27",
+            "d28",
+            "d29",
+          ],
+
           datasets: [
             {
-              data: [sun, mon, tue, wed, thu, fri, sat],
+              data: [
+                sale?.monthlySales[1]?.total_sales,
+                sale?.monthlySales[2]?.total_sales,
+                sale?.monthlySales[3]?.total_sales,
+                sale?.monthlySales[4]?.total_sales,
+                sale?.monthlySales[5]?.total_sales,
+                sale?.monthlySales[6]?.total_sales,
+                sale?.monthlySales[7]?.total_sales,
+                sale?.monthlySales[8]?.total_sales,
+                sale?.monthlySales[9]?.total_sales,
+                sale?.monthlySales[10]?.total_sales,
+                sale?.monthlySales[11]?.total_sales,
+                sale?.monthlySales[12]?.total_sales,
+                sale?.monthlySales[13]?.total_sales,
+                sale?.monthlySales[14]?.total_sales,
+                sale?.monthlySales[15]?.total_sales,
+                sale?.monthlySales[16]?.total_sales,
+                sale?.monthlySales[17]?.total_sales,
+                sale?.monthlySales[18]?.total_sales,
+                sale?.monthlySales[19]?.total_sales,
+                sale?.monthlySales[20]?.total_sales,
+                sale?.monthlySales[21]?.total_sales,
+                sale?.monthlySales[22]?.total_sales,
+                sale?.monthlySales[23]?.total_sales,
+                sale?.monthlySales[24]?.total_sales,
+                sale?.monthlySales[25]?.total_sales,
+                sale?.monthlySales[26]?.total_sales,
+                sale?.monthlySales[27]?.total_sales,
+                sale?.monthlySales[28]?.total_sales,
+                sale?.monthlySales[29]?.total_sales,
+              ],
               backgroundColor: ["#B19177"],
               label: "Sales",
             },
@@ -116,168 +204,81 @@ const SaleReport = () => {
             },
           },
         };
-        console.log(data, options);
+        // console.log(data, options);
         setChartData(data);
         setChartOptions(options);
-      // }, []);
-    } else if (urlLink === "monthly-report" && sale?.monthlySales) {
-      if (sale) {
-        // useEffect(() => {
-          const data = {
-            labels: [
-              "d1",
-              "d2",
-              "d3",
-              "d4",
-              "d5",
-              "d6",
-              "d7",
-              "d8",
-              "d9",
-              "d10",
-              "d11",
-              "d12",
-              "d13",
-              "d14",
-              "d15",
-              "d16",
-              "d17",
-              "d16",
-              "d18",
-              "d19",
-              "d20",
-              "d21",
-              "d22",
-              "d23",
-              "d24",
-              "d25",
-              "d26",
-              "d27",
-              "d28",
-              "d29",
-            ],
-
-            datasets: [
-              {
-                data: [
-                  sale?.monthlySales[1]?.total_sales,
-                  sale?.monthlySales[2]?.total_sales,
-                  sale?.monthlySales[3]?.total_sales,
-                  sale?.monthlySales[4]?.total_sales,
-                  sale?.monthlySales[5]?.total_sales,
-                  sale?.monthlySales[6]?.total_sales,
-                  sale?.monthlySales[7]?.total_sales,
-                  sale?.monthlySales[8]?.total_sales,
-                  sale?.monthlySales[9]?.total_sales,
-                  sale?.monthlySales[10]?.total_sales,
-                  sale?.monthlySales[11]?.total_sales,
-                  sale?.monthlySales[12]?.total_sales,
-                  sale?.monthlySales[13]?.total_sales,
-                  sale?.monthlySales[14]?.total_sales,
-                  sale?.monthlySales[15]?.total_sales,
-                  sale?.monthlySales[16]?.total_sales,
-                  sale?.monthlySales[17]?.total_sales,
-                  sale?.monthlySales[18]?.total_sales,
-                  sale?.monthlySales[19]?.total_sales,
-                  sale?.monthlySales[20]?.total_sales,
-                  sale?.monthlySales[21]?.total_sales,
-                  sale?.monthlySales[22]?.total_sales,
-                  sale?.monthlySales[23]?.total_sales,
-                  sale?.monthlySales[24]?.total_sales,
-                  sale?.monthlySales[25]?.total_sales,
-                  sale?.monthlySales[26]?.total_sales,
-                  sale?.monthlySales[27]?.total_sales,
-                  sale?.monthlySales[28]?.total_sales,
-                  sale?.monthlySales[29]?.total_sales,
-                ],
-                backgroundColor: ["#B19177"],
-                label: "Sales",
-              },
-            ],
-          };
-          const options = {
-            maintainAspectRatio: true,
-            aspectRatio: 1.3,
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          };
-          // console.log(data, options);
-          setChartData(data);
-          setChartOptions(options);
         // }, [urlLink, sale]);
       }
-    } else if(urlLink === "yearly-report" && sale?.yearlySales){
-        if (sale) {
+    } else if (urlLink === "yearly-report" && sale?.yearlySales) {
+      if (sale) {
         // useEffect(() => {
-          const data = {
-            labels: [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "June",
-              "July",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ],
+        const data = {
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "June",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
 
-            datasets: [
-              {
-                data: [
-                  sale?.yearlySales[1]?.monthSales,
-                  sale?.yearlySales[2]?.monthSales,
-                  sale?.yearlySales[3]?.monthSales,
-                  sale?.yearlySales[4]?.monthSales,
-                  sale?.yearlySales[5]?.monthSales,
-                  sale?.yearlySales[6]?.monthSales,
-                  sale?.yearlySales[7]?.monthSales,
-                  sale?.yearlySales[8]?.monthSales,
-                  sale?.yearlySales[9]?.monthSales,
-                  sale?.yearlySales[10]?.monthSales,
-                  sale?.yearlySales[11]?.monthSales,
-                  sale?.yearlySales[12]?.monthSales,
-                 ],
-                backgroundColor: ["#B19177"],
-                label: "Sales",
-              },
-            ],
-          };
-          const options = {
-            maintainAspectRatio: true,
-            aspectRatio: 1.3,
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
+          datasets: [
+            {
+              data: [
+                sale?.yearlySales[1]?.monthSales,
+                sale?.yearlySales[2]?.monthSales,
+                sale?.yearlySales[3]?.monthSales,
+                sale?.yearlySales[4]?.monthSales,
+                sale?.yearlySales[5]?.monthSales,
+                sale?.yearlySales[6]?.monthSales,
+                sale?.yearlySales[7]?.monthSales,
+                sale?.yearlySales[8]?.monthSales,
+                sale?.yearlySales[9]?.monthSales,
+                sale?.yearlySales[10]?.monthSales,
+                sale?.yearlySales[11]?.monthSales,
+                sale?.yearlySales[12]?.monthSales,
+              ],
+              backgroundColor: ["#B19177"],
+              label: "Sales",
             },
-          };
-          // console.log(data, options);
-          setChartData(data);
-          setChartOptions(options);
+          ],
+        };
+        const options = {
+          maintainAspectRatio: true,
+          aspectRatio: 1.3,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        };
+        // console.log(data, options);
+        setChartData(data);
+        setChartOptions(options);
         // }, [urlLink, sale]);
-    }}
+      }
+    }
   }, [urlLink, sale]);
-  let hDate ;
-  if(urlLink === "weekly-report"){
+  let hDate;
+  if (urlLink === "weekly-report") {
     hDate = sale?.highestSale?.highestSellingDate;
-  }else if(urlLink === "monthly-report") {
+  } else if (urlLink === "monthly-report") {
     hDate = sale?.highestSale?.highestSellingDateOfMonth;
-  }else{
+  } else {
     hDate = sale?.highestSale?.highestSellingMonth;
   }
-  let lDate ;
-  if(urlLink === "weekly-report"){
+  let lDate;
+  if (urlLink === "weekly-report") {
     lDate = sale?.lowestSale?.lowestSellingDate;
-  }else if (urlLink === "monthly-report") {
+  } else if (urlLink === "monthly-report") {
     lDate = sale?.lowestSale?.lowestSellingDateOfMonth;
-  }else{
+  } else {
     lDate = sale?.lowestSale?.lowestSellingDate;
   }
   return (

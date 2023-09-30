@@ -5,47 +5,53 @@ import { PiCoinsBold } from "react-icons/pi";
 import { AiOutlineShop } from "react-icons/ai";
 import {
   useGetDailySalesQuery,
+  useGetMonthlyOverviewQuery,
   useGetMonthlySalesQuery,
+  useGetWeeklyOverviewQuery,
+  useGetYearlyOverviewQuery,
   useGetYearlySalesQuery,
 } from "../../services/authApi";
 import { BaseColor } from "./../../constant";
+import Yearly from "./../../pages/finance/Yearly";
+import { Loader } from "@mantine/core";
+import { Link } from "react-router-dom";
+
 function SaleReport() {
   const ContentBoxClass = " p-4 border-[#535353] rounded-md border-[1px]";
   const [chartState, setChartState] = useState(2);
-  const [chartData, setChartData] = useState(2);
   const token = localStorage.getItem("token");
-  const monthlyData = useGetMonthlySalesQuery(token);
-  const yearlyData = useGetYearlySalesQuery(token);
-  const dailyData = useGetDailySalesQuery(token);
-  useEffect(() => {
-    if (monthlyData || yearlyData || dailyData) {
-      switch (chartState) {
-        case 1:
-          setChartData(yearlyData);
-          break;
-        case 2:
-          setChartData(monthlyData);
-          break;
-        case 3:
-          setChartData(dailyData);
-          break;
-      }
-    }
 
-    return () => {};
-  }, [monthlyData, yearlyData, dailyData]);
+  const { data: monthlyData, isLoading: monthlyLoading } =
+    useGetMonthlyOverviewQuery({ token });
+  const { data: weeklyData, isLoading: weeklyLoading } =
+    useGetWeeklyOverviewQuery({ token });
+  const { data: yearlyData, isLoading: yearlyLoading } =
+    useGetYearlyOverviewQuery({ token });
 
   const handleChartState = (option) => {
     setChartState(option);
   };
+  if (monthlyLoading || weeklyLoading) {
+    return (
+      <div
+        className={
+          ContentBoxClass +
+          " flex flex-row gap-7 items-center justify-center min-h-[400px]"
+        }
+      >
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className={ContentBoxClass + " flex flex-row gap-7"}>
-      <div className="flex flex-col gap-5 flex-[2]">
+      <div className="flex flex-col gap-5 flex-[2] text-white">
         <div className="flex flex-row gap-2 items-center justify-between">
           <p className="text-2xl text-white">
             {chartState === 1 && "Yearly"}
             {chartState === 2 && "Monthly"}
-            {chartState === 3 && "Daily"} Sales
+            {chartState === 3 && "Weekly"} Sales
           </p>
           <div className="flex flex-row">
             <div
@@ -67,13 +73,20 @@ function SaleReport() {
               style={{ color: chartState == 3 && BaseColor }}
               onClick={(_) => handleChartState(3)}
             >
-              Day
+              Week
             </div>
           </div>
         </div>
-        <DataLineChart />
+        <DataLineChart
+          data={{
+            yearly: yearlyData?.yearlySaleOverview?.yearlySales,
+            monthly: monthlyData?.monthlySaleOverview?.monthlySales,
+            weekly: weeklyData?.weeklySaleOverview?.weeklySales,
+          }}
+          state={chartState}
+        />
       </div>
-      <div className="flex flex-col gap-2 flex-1">
+      <div className="flex flex-col gap-2 flex-1 justify-between">
         <div className="flex flex-col">
           <p className="text-3xl text-white">454.44k</p>
           <p className="text-xl font-thin">Kyats</p>
@@ -83,7 +96,12 @@ function SaleReport() {
             <BsGraphUpArrow color="#75ff31" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">454.443</p>
+            <p className="text-xl text-white">
+              {" "}
+              {chartState === 1 && yearlyData?.totalProfit}
+              {chartState === 2 && monthlyData?.totalProfit}
+              {chartState === 3 && weeklyData?.totalProfit}
+            </p>
             <p>Total Profit</p>
           </div>
         </div>
@@ -93,7 +111,12 @@ function SaleReport() {
             <PiCoinsBold color="#f2ff45" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">435.84</p>
+            <p className="text-xl text-white">
+              {" "}
+              {chartState === 1 && yearlyData?.totalIncome}
+              {chartState === 2 && monthlyData?.totalIncome}
+              {chartState === 3 && weeklyData?.totalIncome}
+            </p>
             <p>Total Income</p>
           </div>
         </div>
@@ -102,13 +125,20 @@ function SaleReport() {
             <AiOutlineShop color="#d1b694" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">983.43</p>
+            <p className="text-xl text-white">
+              {" "}
+              {chartState === 1 && yearlyData?.totalExpenses}
+              {chartState === 2 && monthlyData?.totalExpenses}
+              {chartState === 3 && weeklyData?.totalExpenses}
+            </p>
             <p>Total Expense</p>
           </div>
         </div>
-        <div className="bg-[#b19177] cursor-pointer text-black rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
-          SALE REPORT
-        </div>
+        <Link to="sale-report">
+          <div className="bg-[#b19177] cursor-pointer text-black rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
+            SALE REPORT
+          </div>
+        </Link>
       </div>
     </div>
   );

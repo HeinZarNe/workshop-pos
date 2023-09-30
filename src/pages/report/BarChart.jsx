@@ -1,11 +1,11 @@
 import { Chart } from "primereact/chart";
 import React, { useState, useEffect } from "react";
-import {useWeeklySaleQuery } from "../../services/authApi";
+import { useWeeklySaleQuery } from "../../services/authApi";
 const BarChart = () => {
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const [urlLink, setUrlLink] = useState("weekly-report");
   // console.log(sale?.weeklySales[0]?.daySales);
-  const { data:sale } = useWeeklySaleQuery({token,urlLink});
+  const { data: sale } = useWeeklySaleQuery({ token, urlLink });
   useEffect(() => {
     const mon = sale?.weeklySales[0]?.daySales;
     const tue = sale?.weeklySales[1]?.daySales;
