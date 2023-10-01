@@ -169,7 +169,7 @@ console.log(dailySalesData);
                       >
                         {data.id}
                       </th>
-                      <td className="px-6 py-4">{data.voucher_number}</td>
+                      <td className="px-6 py-4">{(data.voucher_number).slice(0,15)}</td>
                       <td className="px-6 py-4">{data.time}</td>
                       <td className="px-6 py-4  text-end">{data.item_count}</td>
                       <td className="px-6 py-4  text-end">{data.cash}</td>
