@@ -170,7 +170,9 @@ const Daily = () => {
                       >
                         {data.id}
                       </th>
-                      <td className="px-6 py-4">{data.voucher_number}</td>
+                      <td className="px-6 py-4">
+                        {data.voucher_number.slice(0, 15)}
+                      </td>
                       <td className="px-6 py-4">{data.time}</td>
                       <td className="px-6 py-4  text-end">{data.item_count}</td>
                       <td className="px-6 py-4  text-end">{data.cash}</td>
@@ -321,6 +323,25 @@ const Daily = () => {
               defaultValue={1}
               on
             /> */}
+
+              {/* other  */}
+              {/* <Pagination
+                total={totalPage || 1}
+                onChange={(e) => {
+                  setPage(e);
+                  refetch();
+                }}
+                // onPreviousPage={(e) => {
+                //   setPage((prev) => prev > 0 && prev - 1);
+                //   refetch();
+                // }}
+                // onNextPage={(e) => {
+
+                //   refetch();
+                // }}
+                boundaries={1}
+                defaultValue={1}
+              /> */}
             </div>
           )}
         </div>

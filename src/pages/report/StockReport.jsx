@@ -23,78 +23,44 @@ import {
   useGetWeeklyOverviewQuery,
   useGetYearlyOverviewQuery,
 } from "../../services/authApi";
-// {
-//   "monthlySaleOverview": {
-//       "monthlySales": [
-//           {
-//               "date": "01\/09\/2023",
-//               "total_sales": 13443
-//           },
-//           {
-//               "date": "02\/09\/2023",
-//               "total_sales": 23613
-//           },
-//           {
-//               "date": "03\/09\/2023",
-//               "total_sales": 8304
-//           },
-//           {
-//               "date": "04\/09\/2023",
-//               "total_sales": 14464
-//           },
-//           {
-//               "date": "05\/09\/2023",
-//               "total_sales": 24968
-//           },
-//           {
-//               "date": "06\/09\/2023",
-//               "total_sales": 15331
-//           },
-//           {
-//               "date": "07\/09\/2023",
-//               "total_sales": 21528
-//           },
-//           {
-//               "date": "08\/09\/2023",
-//               "total_sales": 21411
-//           },
-//           {
-//               "date": "09\/09\/2023",
-//               "total_sales": 21430
-//           },
-//           {
-//               "date": "10\/09\/2023",
-//               "total_sales": 18816
-//           },
-//
-//       ],
-//       "totalMonthlySalesAmount": 474215,
-//       "averageAmount": 16936.25,
-//       "highestSale": {
-//           "highestSaleAmount": 24968,
-//           "highestSellingDateOfMonth": "05\/09\/2023"
-//       },
-//       "lowestSale": {
-//           "lowestSaleAmount": 8166,
-//           "lowestSellingDateOfMonth": "12\/09\/2023"
-//       }
-//   },
-//   "totalProfit": 286179,
-//   "totalIncome": 515071,
-//   "totalExpenses": 228892
-// }
+import { Pagination } from "@mantine/core";
+
 const StockReport = () => {
+  // const [view, setView] = useState("list");
+  // const [showSidebar, setShowSidebar] = useState(false);
+  // const [stockData, setStockData] = useState({});
+  // const [keyword, setKeyword] = useState("");
+  // const [addStock, setAddStock] = useState(false);
+
+  // Pagination
+  const [page, setPage] = useState("");
+  const [totalPage, setTotalPage] = useState(0);
   const token = localStorage.getItem("token");
+  const { data: stockLeveltable, refetch } = useGetStockLevelTableQuery({
+    token,
+    page,
+  });
+  useEffect(() => {
+    refetch();
+    return () => {};
+  }, [stockLeveltable]);
+
+  useEffect(() => {
+    setTotalPage(stockLeveltable?.meta?.last_page);
+    return () => {};
+  }, [stockLeveltable]);
+  // Pagination
+
+  // OTHER
   // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
-  const { data: stockLeveltable } = useGetStockLevelTableQuery( {token} );
-  console.log(stockLevelBar);
+  console.log(stockLeveltable);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
   const inStock = `w-[65%] h-full bg-[#884A39]`;
   const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
   const lowStock = `w-[35%] h-full bg-[#C38154] `;
-  console.log(typeof(parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1])));
+  console.log(typeof parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1]));
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -470,6 +436,26 @@ const StockReport = () => {
                 )}
               </table>
             </div>
+          </div>
+          <div className="flex justify-end mt-5 me-3">
+            <Pagination
+              total={totalPage || 1}
+              onChange={(e) => {
+                console.log(e);
+                setPage(e);
+                refetch();
+              }}
+              // onPreviousPage={(e) => {
+              //   setPage((prev) => prev > 0 && prev - 1);
+              //   refetch();
+              // }}
+              // onNextPage={(e) => {
+
+              //   refetch();
+              // }}
+              boundaries={1}
+              defaultValue={1}
+            />
           </div>
         </div>
       </div>

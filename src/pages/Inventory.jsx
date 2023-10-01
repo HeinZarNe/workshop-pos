@@ -15,7 +15,6 @@ const Inventory = () => {
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState("");
   const [totalPage, setTotalPage] = useState(0);
-
   const [addStock, setAddStock] = useState(false);
   return (
     <Rootlayout>
