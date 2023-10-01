@@ -222,7 +222,7 @@ const Monthly = () => {
                 </tr>
               </thead>
               <tbody>
-                {monthlySaleData?.this_month_sales?.map((data) => {
+                {monthlySaleData?.this_month_sales?.data?.map((data) => {
                   return (
                     <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th

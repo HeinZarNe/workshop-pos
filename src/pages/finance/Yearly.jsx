@@ -11,8 +11,11 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { useGetYearlySalesQuery } from "../../services/authApi";
 const Yearly = () => {
   const token = localStorage.getItem("token");
-  const { data: yearlySaleData, refetch } = useGetYearlySalesQuery(token);
-  const [activePage, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const { data: yearlySaleData, refetch } = useGetYearlySalesQuery({
+    token,
+    page,
+  });
 
   return (
     <Rootlayout>
@@ -167,7 +170,7 @@ const Yearly = () => {
                 </tr>
               </thead>
               <tbody>
-                {yearlySaleData?.yearly_sales?.map((data) => {
+                {yearlySaleData?.yearly_sales?.data?.map((data) => {
                   return (
                     <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th
@@ -235,13 +238,13 @@ const Yearly = () => {
                   </p>
                 </div>
               </div>
-              {/* <Pagination
-              value={activePage}
-              onChange={setPage}
-              total={5}
-              siblings={1}
-            /> */}
-              <nav aria-label="Page navigation example">
+              <Pagination
+                value={page}
+                onChange={setPage}
+                total={yearlySaleData?.yearly_sales.last_page}
+                siblings={1}
+              />
+              {/* <nav aria-label="Page navigation example">
                 <ul class="flex items-center bg-transparent -space-x-px h-8 text-sm">
                   <li>
                     <a
@@ -316,7 +319,7 @@ const Yearly = () => {
                     </a>
                   </li>
                 </ul>
-              </nav>
+              </nav> */}
             </div>
           </div>
         )}
