@@ -21,8 +21,8 @@ const Daily = () => {
     isSuccess,
     isError,
     refetch,
-  } = useGetDailySalesQuery({ token, date: dateSearch ? { from, to } : false });
-
+  } = useGetDailySalesQuery({ page,token, date: dateSearch ? { from, to } : false });
+  console.log(dailySalesData);
   const handleDateSearch = () => {
     setDateSearch(true);
   };
@@ -161,7 +161,7 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {dailySalesData?.daily_sales.map((data) => {
+                {dailySalesData?.daily_sales?.data?.map((data) => {
                   return (
                     <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th
@@ -223,125 +223,16 @@ const Daily = () => {
                   </p>
                 </div>
               </div>
-              {/* <Pagination
-              value={activePage}
-              onChange={setPage}
-              total={5}
-              siblings={1}
-            /> */}
-              {/* <nav aria-label="Page navigation example">
-              <ul className="flex items-center bg-transparent -space-x-px h-8 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-white border border-base rounded-l-lg hover:text-base "
-                  >
-                    <span className="sr-only">Previous</span>
-                    <svg
-                      className="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 1 1 5l4 4"
-                      />
-                    </svg>
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    aria-current="page"
-                    className="z-10 flex items-center justify-center px-3 h-8 leading-tight text-white border border-base"
-                  >
-                    1
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white bg-base  border border-base hover:text-base "
-                  >
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white   border border-base hover:text-base "
-                  >
-                    3
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-center px-3 h-8 leading-tight text-white border border-base rounded-r-lg hover:text-base "
-                  >
-                    <span className="sr-only">Next</span>
-                    <svg
-                      className="w-2.5 h-2.5"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 6 10"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m1 9 4-4-4-4"
-                      />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </nav> */}
-              {/* <Pagination
-              total={dailySalesData?.meta?.last_page}
-              onChange={(e) => {
-                setPage(e);
-                refetch();
-              }}
-              onPreviousPage={(e) => {
-                setPage(page - 1);
-                refetch();
-              }}
-              onNextPage={(e) => {
-                setPage(page + 1);
-                refetch();
-              }}
-              boundaries={1}
-              defaultValue={1}
-              on
-            /> */}
-
-              {/* other  */}
-              {/* <Pagination
-                total={totalPage || 1}
+              <Pagination
+                total={dailySalesData?.daily_sales?.last_page}
                 onChange={(e) => {
+                  console.log(e);
                   setPage(e);
                   refetch();
                 }}
-                // onPreviousPage={(e) => {
-                //   setPage((prev) => prev > 0 && prev - 1);
-                //   refetch();
-                // }}
-                // onNextPage={(e) => {
-
-                //   refetch();
-                // }}
                 boundaries={1}
                 defaultValue={1}
-              /> */}
+              />
             </div>
           )}
         </div>

@@ -5,12 +5,13 @@ import { PiExportBold, PiFilePdf } from "react-icons/pi";
 import DatePicker from "../../components/DatePicker";
 import { FiCopy, FiSearch } from "react-icons/fi";
 import { BiPrinter } from "react-icons/bi";
-import { useGetDailySalesQuery } from "../../services/authApi";
+import { useCustomSaleQuery, useGetDailySalesQuery } from "../../services/authApi";
 import { Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 const Daily = () => {
   const token = localStorage.getItem("token");
+  const [page, setPage] = useState(1);
 
   const {
     data: dailySalesData,
@@ -18,7 +19,7 @@ const Daily = () => {
     isSuccess,
     isError,
     refetch,
-  } = useGetDailySalesQuery({ token });
+  } = useCustomSaleQuery({ token,page });
 
   //   {
   //     id: 1,
@@ -119,7 +120,7 @@ const Daily = () => {
             </button>
           </NavLink> */}
           <div className="flex gap-4">
-            <div className="">
+            {/* <div className="">
               <button
                 id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
@@ -143,7 +144,6 @@ const Daily = () => {
                   />
                 </svg>
               </button>
-              {/* <!-- Dropdown menu --> */}
               <div
                 id="dropdown"
                 className="z-10 hidden bg-[#fafafa]  divide-y divide-gray-100 text-base shadow w-36 "
@@ -178,7 +178,7 @@ const Daily = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
             <div className="flex">
               <DatePicker />
               <DatePicker />
@@ -221,7 +221,7 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {dailySalesData?.daily_sales.map((data) => {
+                {dailySalesData?.daily_sales?.data?.map((data) => {
                   return (
                     <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th
@@ -381,6 +381,16 @@ const Daily = () => {
               defaultValue={1}
               on
             /> */}
+              <Pagination
+                total={dailySalesData?.daily_sales?.last_page}
+                onChange={(e) => {
+                  console.log(e);
+                  setPage(e);
+                  refetch();
+                }}
+                boundaries={1}
+                defaultValue={1}
+              />
             </div>
           )}
         </div>

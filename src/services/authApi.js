@@ -182,8 +182,8 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getMonthlySales: build.query({
-      query: (token) => ({
-        url: "finance/monthly-sales",
+      query: ({ token, page }) => ({
+        url: `finance/monthly-sales?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -205,10 +205,10 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getDailySales: build.query({
-      query: ({ token, date }) => ({
+      query: ({ token, date, page }) => ({
         url: date
           ? `finance/daily-sales?startDate=${date.from}&&endDate=${date.to}`
-          : "finance/daily-sales",
+          : `finance/daily-sales?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -358,12 +358,21 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    customSale: build.query({
+      query: ({ token, page }) => ({
+        // url: "report/product-report",
+        url: `finance/custom-sales-list?page=${page}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
   }),
 });
 
 export const {
   useLoginMutation,
   useTodaySaleQuery,
+  useCustomSaleQuery,
   useWeeklySaleQuery,
   useGetSaleReportQuery,
   useLogoutMutation,

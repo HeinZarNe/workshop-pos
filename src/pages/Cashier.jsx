@@ -271,7 +271,7 @@ const Cashier = () => {
             </div>
           </div>
           <div className="w-[100%] mx-auto ">
-            <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
+            <div className="flex flex-row h-screen overflow-scroll flex-wrap gap-3 justify-center items-center">
               {/* {test.map((product) => ( */}
               {data?.products?.map((product) => (
                 <div
@@ -303,7 +303,7 @@ const Cashier = () => {
           </div>
         </div>
         {/* keyboard  */}
-        <div className="flex relative overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
+        <div className="flex relative  overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
           <div className="">
             <h1 className="text-3xl py-5 px-4 text-white font-semibold border-b border-b-[#B19777]">
               RECEIVE
