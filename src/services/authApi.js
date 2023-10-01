@@ -103,6 +103,16 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    getProductToSale: build.query({
+      query: ({ token, keyword }) => ({
+        url: keyword
+          ? "sale/products-list?id&&keyword=" + keyword
+          : "sale/products-list?id",
+
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getStock: build.query({
       query: ({ token, page, keyword }) => ({
         url: `stock${
@@ -192,8 +202,10 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getDailySales: build.query({
-      query: (token) => ({
-        url: "finance/daily-sales",
+      query: ({ token, date }) => ({
+        url: date
+          ? `finance/daily-sales?startDate=${date.from}&&endDate=${date.to}`
+          : "finance/daily-sales",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -353,6 +365,7 @@ export const {
   useGetPhotoQuery,
   useStorePhotoMutation,
   useGetProductQuery,
+  useGetProductToSaleQuery,
   useGetMonthlySalesQuery,
   useGetYearlySalesQuery,
   useGetDailySalesQuery,

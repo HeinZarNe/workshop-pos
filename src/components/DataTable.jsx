@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "@mantine/core";
 const DataTable = ({ data }) => {
-  const rows = data?.map((element, i) => (
+  const rows = data?.data?.map((element, i) => (
     <tr key={element.id}>
       <td>{element.id}</td>
       <td>{element.staff}</td>

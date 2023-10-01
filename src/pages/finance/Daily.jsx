@@ -7,82 +7,25 @@ import { FiCopy, FiSearch } from "react-icons/fi";
 import { BiPrinter } from "react-icons/bi";
 import { Loader, Pagination } from "@mantine/core";
 
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowRight, AiOutlineClose } from "react-icons/ai";
 import { useGetDailySalesQuery } from "../../services/authApi";
 const Daily = () => {
   const [page, setPage] = useState(1);
+  const [dateSearch, setDateSearch] = useState(false);
   const token = localStorage.getItem("token");
-
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
   const {
     data: dailySalesData,
     isLoading,
     isSuccess,
     isError,
     refetch,
-  } = useGetDailySalesQuery(token);
+  } = useGetDailySalesQuery({ token, date: dateSearch ? { from, to } : false });
 
-  // const tableData = [
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  //   {
-  //     id: 1,
-  //     no: "2",
-  //     vouncher: "09573",
-  //     time: "11:11AM",
-  //     qty: "20",
-  //     cash: "200,300",
-  //     tax: "200",
-  //     total: "200,500",
-  //     btn: (
-  //       <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
-  //         <AiOutlineArrowRight />
-  //       </button>
-  //     ),
-  //   },
-  // ];
+  const handleDateSearch = () => {
+    setDateSearch(true);
+  };
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -121,31 +64,10 @@ const Daily = () => {
             </button>
           </NavLink> */}
           <div className="flex gap-3">
-            <div className="">
-              <button
-                id="dropdownDefaultButton"
-                data-dropdown-toggle="dropdown"
-                className=" border border-secondary focus:border-base gap-2 text-gray-400 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center "
-                type="button"
-              >
-                <PiExportBold className="text-lg text-base" /> Export
-                <svg
-                  className="w-2.5 h-2.5 ml-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              {/* <!-- Dropdown menu --> */}
+            {" "}
+            {/* <!-- Dropdown menu --> */}
+            {/* <div className="">
+            
               <div
                 id="dropdown"
                 className="z-10 hidden bg-[#fafafa] text-base  divide-y divide-gray-100  shadow w-36 "
@@ -180,12 +102,29 @@ const Daily = () => {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div className="flex">
-              <DatePicker />
-              <div className="flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base">
-                <FiSearch />
-              </div>
+            </div> */}
+            <div className="flex   gap-1 flex-row items-end justify-center">
+              <DatePicker from={from} setFrom={setFrom} to={to} setTo={setTo} />
+              {from && to && (
+                <>
+                  <div
+                    className=" cursor-pointer flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base h-10"
+                    onClick={handleDateSearch}
+                  >
+                    <FiSearch />
+                  </div>
+                  <div
+                    className=" cursor-pointer flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base h-10"
+                    onClick={(_) => {
+                      setFrom(null);
+                      setTo(null);
+                      setDateSearch(false);
+                    }}
+                  >
+                    <AiOutlineClose />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

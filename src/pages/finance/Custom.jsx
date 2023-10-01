@@ -10,7 +10,6 @@ import { Pagination } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 const Daily = () => {
-  const [activePage, setPage] = useState(1);
   const token = localStorage.getItem("token");
 
   const {
@@ -19,7 +18,7 @@ const Daily = () => {
     isSuccess,
     isError,
     refetch,
-  } = useGetDailySalesQuery(token);
+  } = useGetDailySalesQuery({ token });
 
   //   {
   //     id: 1,

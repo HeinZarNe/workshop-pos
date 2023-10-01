@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
-import { useCheckOutMutation, useGetProductQuery } from "../services/authApi";
+import {
+  useCheckOutMutation,
+  useGetProductToSaleQuery,
+  useSaleCloseMutation,
+} from "../services/authApi";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [keyword, setKeyword] = useState(null);
 
-  const { data } = useGetProductQuery({ token, keyword });
+  const { data, refetch, isLoading } = useGetProductToSaleQuery({
+    token,
+    keyword,
+  });
   const [selectedProducts, setSelectedProducts] = useState([]);
   // const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedQuantities, setSelectedQuantities] = useState({});
@@ -85,7 +93,10 @@ const Cashier = () => {
       });
     }
   };
-
+  useEffect(() => {
+    refetch();
+  }, [data]);
+  const [saleClose] = useSaleCloseMutation();
   const handleClearClick = () => {
     setSelectedQuantities((prevQuantities) => {
       const productId = currentSelectedProductId;
@@ -162,6 +173,62 @@ const Cashier = () => {
   const handleGoBack = () => {
     window.history.back();
   };
+
+  const handleSaleOpen = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      confirmButtonColor: "blue",
+      timer: false,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const res = saleClose(token);
+
+        Swal.fire("Opened!", "", "success");
+        refetch();
+      } else if (result.isDenied) {
+        Swal.close();
+      }
+    });
+  };
+
+  if (data?.is_sale_close) {
+    return (
+      <div className="bg-[#272727] h-screen">
+        <div className="flex justify-between gap-5 ">
+          <div className="w-full">
+            <div className="flex justify-between mx-5 my-5">
+              <div className=" flex items-center">
+                <p
+                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                  onClick={handleGoBack}
+                >
+                  <FaArrowLeft /> Back
+                </p>
+              </div>
+            </div>
+            <div className="h-[70vh] flex flex-col items-center justify-center">
+              <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                <p className="text-2xl font-semibold">
+                  Sale is currently closed. Do you want to open it?
+                </p>
+                <button
+                  className="px-3 py-1 pb-2 font-semibold rounded-md text-xl border border-base"
+                  onClick={handleSaleOpen}
+                >
+                  Open
+                </button>
+              </div>{" "}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#272727]">
       <div className="flex justify-between gap-5 ">
@@ -206,7 +273,7 @@ const Cashier = () => {
           <div className="w-[100%] mx-auto ">
             <div className="flex flex-row flex-wrap gap-3 justify-center items-center">
               {/* {test.map((product) => ( */}
-              {data?.data?.map((product) => (
+              {data?.products?.map((product) => (
                 <div
                   key={product.id}
                   className={`product flex hover:bg-base/20 flex-col justify-between cursor-pointer  w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${

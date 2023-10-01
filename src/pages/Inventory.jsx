@@ -132,14 +132,6 @@ const Inventory = () => {
                 setPage(e);
                 refetch();
               }}
-              // onPreviousPage={(e) => {
-              //   setPage((prev) => prev > 0 && prev - 1);
-              //   refetch();
-              // }}
-              // onNextPage={(e) => {
-
-              //   refetch();
-              // }}
               boundaries={1}
               defaultValue={1}
             />

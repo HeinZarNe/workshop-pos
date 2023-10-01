@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "../DataTable";
-import { PiExportBold } from "react-icons/pi";
+import { AiFillShop } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 import { BaseColor } from "../../constant";
 import { Button, Modal, Pagination } from "@mantine/core";
@@ -12,8 +12,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { color } from "framer-motion";
 import Swal from "sweetalert2";
 const TodaySaleOverview = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  // const [saleCloseModalOpen,setSaleCloseModalOpen] = useState(false)
+  const [page, setPage] = useState(1);
   const token = localStorage.getItem("token");
   const [saleClose, { isSuccess, isLoading }] = useSaleCloseMutation();
   const { data } = useGetOverviewDataQuery({ token });
@@ -63,7 +62,7 @@ const TodaySaleOverview = () => {
           className="flex flex-row items-center justify-between gap-3 border border-base  text-white py-1 px-3 rounded-md "
           onClick={handleSaleClose}
         >
-          <PiExportBold color={BaseColor} />
+          <AiFillShop color={BaseColor} />
           Sale Close
         </button>
       </div>
@@ -90,12 +89,14 @@ const TodaySaleOverview = () => {
             <p className="text-xl font-bold text-white"> {data?.total_net}</p>
           </div>
         </div>
-        {/* <Pagination
-          value={activePage}
-          onChange={setPage}
-          total={5}
+        <Pagination
+          value={page}
+          onChange={(e) => {
+            setPage(e);
+          }}
+          total={data?.today_sales?.last_page}
           siblings={1}
-        /> */}
+        />
       </div>
     </div>
   );
