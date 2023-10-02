@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Select } from "flowbite-react";
+import { Select } from "@mantine/core";
 
 const Cashier = () => {
   const navigate = useNavigate();
@@ -244,13 +244,19 @@ const Cashier = () => {
                 <FaArrowLeft /> Back
               </p>
             </div>
-            {/* <div>
+            <div>
               <Select
-                label="Your favorite library"
+                className="cashier-select"
                 placeholder="Pick value"
-                data={brands.data.map()}
+                color="#000"
+                data={
+                  brands?.with_no_pagi.map((item, i) => ({
+                    label: item.name,
+                    value: item.id,
+                  })) || []
+                }
               />
-            </div> */}
+            </div>
             <div class="relative my-3 flex items-center">
               <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
                 <svg

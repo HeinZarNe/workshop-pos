@@ -13,6 +13,33 @@
   border: 1px solid #b19777;
 }
 
+.cashier-select.mantine-1cn2mlo {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  height: 2.25rem;
+  -webkit-tap-highlight-color: transparent;
+  line-height: calc(2.25rem - 0.125rem);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  resize: none;
+  box-sizing: border-box;
+  font-size: 0.875rem;
+  width: 100%;
+  color: #fff;
+  display: block;
+  text-align: left;
+  border: 0.0625rem solid #b19777 !important;
+  background-color: #272727 !important;
+  -webkit-transition: border-color 100ms ease;
+  transition: border-color 100ms ease;
+  min-height: 2.25rem;
+  padding-left: calc(2.25rem / 3);
+  padding-right: 2.25rem;
+  border-radius: 0.25rem;
+}
+
 .button:hover {
   background-color: #323232;
   color: #b19777;
