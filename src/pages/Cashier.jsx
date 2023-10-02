@@ -254,13 +254,15 @@ const Cashier = () => {
                 color="#000"
                 onChange={(e) => setSearchBrand(e)}
                 data={
-                  [
-                    { label: "All", value: 0 },
-                    ...brands?.with_no_pagi.map((item, i) => ({
-                      label: item.name,
-                      value: item.id,
-                    })),
-                  ] || []
+                  brands?.with_no_pagi
+                    ? [
+                        { label: "All", value: 0 },
+                        ...brands?.with_no_pagi.map((item, i) => ({
+                          label: item.name,
+                          value: item.id,
+                        })),
+                      ]
+                    : []
                 }
               />
             </div>
