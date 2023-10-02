@@ -25,7 +25,6 @@ const Daily = () => {
     token,
     date: dateSearch || false,
   });
-  console.log(dailySalesData);
   const handleDateSearch = () => {
     setPage(0);
     const inputDate = new Date(date);
@@ -64,7 +63,7 @@ const Daily = () => {
         <div className="flex mt-12 flex-row items-center  justify-between">
           <div className="flex flex-col gap-2">
             <p className="text-2xl font-semibold mt-0 pt-0 text-white">
-              Today Sales Overview
+              Daily Finance
             </p>
           </div>
           {/* <NavLink to={"/sale/cashier"}>
@@ -97,114 +96,136 @@ const Daily = () => {
             </div>
           </div>
         </div>
-        {/* table  */}
-        <div className=" border-2 rounded-t-xl border-base mt-10">
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left text-[#fafafa] ">
-              <thead className="text-xs text-gray-900 uppercase bg-base">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    NO
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    VOUNCHER
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    TIME
-                  </th>
-                  <th scope="col" className="px-6 text-end py-3">
-                    ITEM COUNT
-                  </th>
-                  <th scope="col" className="px-6  text-end py-3">
-                    CASH
-                  </th>
-                  <th scope="col" className="px-6  text-end py-3">
-                    TAX
-                  </th>
-                  <th scope="col" className="px-6  text-end py-3">
-                    TOTAL
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {dailySalesData?.daily_sales?.data?.map((data) => {
-                  return (
-                    <tr key={data.id} className=" border-b hover:bg-white/10 ">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-white whitespace-nowra"
-                      >
-                        {data.id}
-                      </th>
-                      <td className="px-6 py-4">
-                        {data.voucher_number.slice(0, 15)}
-                      </td>
-                      <td className="px-6 py-4">{data.time}</td>
-                      <td className="px-6 py-4  text-end">{data.item_count}</td>
-                      <td className="px-6 py-4  text-end">{data.cash}</td>
-                      <td className="px-6 py-4  text-end">{data.tax}</td>
-                      <td className="px-6 py-4  text-end">{data.total}</td>
-                      <td className="px-6 py-4 text-right">
-                        <NavLink
-                          to={"/profile"}
-                          className="font-medium flex justify-center text-blue-600  hover:underline"
-                        >
-                          {data.btn}
-                        </NavLink>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {/* last  */}
-        <div className="">
-          {dailySalesData && (
-            <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
-              <div className="flex flex-row items-center border rounded">
-                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                  <p className="text-sm text-base">Total Vouchers</p>
-                  <p className="text-xl font-bold text-white">
-                    {dailySalesData.total_vouchers}
-                  </p>
-                </div>
-                <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                  <p className="text-sm text-base">Total Cash</p>
-                  <p className="text-xl font-bold text-white">
-                    {dailySalesData.total_cash}
-                  </p>
-                </div>
-                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                  <p className="text-sm text-base">Total Tax</p>
-                  <p className="text-xl font-bold text-white">
-                    {dailySalesData.total_tax}
-                  </p>
-                </div>
-                <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                  <p className="text-sm text-base">Total</p>
-                  <p className="text-xl font-bold text-white">
-                    {dailySalesData.total}
-                  </p>
+        {dailySalesData?.daily_sales?.data?.length === 0 ? (
+          <div className="bg-[#272727] ">
+            <div className="flex justify-between gap-5 ">
+              <div className="w-full flex flex-col items-center justify-center h-[50vh]">
+                <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                  <p className="text-2xl font-semibold">There is no datas.</p>
                 </div>
               </div>
-              <Pagination
-                total={dailySalesData?.daily_sales?.last_page}
-                onChange={(e) => {
-                  console.log(e);
-                  setPage(e);
-                  refetch();
-                }}
-                boundaries={1}
-                defaultValue={1}
-              />
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <>
+            {/* table  */}
+            <div className=" border-2 rounded-t-xl border-base mt-10">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left text-[#fafafa] ">
+                  <thead className="text-xs text-gray-900 uppercase bg-base">
+                    <tr>
+                      <th scope="col" className="px-6 py-3">
+                        NO
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        VOUNCHER
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        TIME
+                      </th>
+                      <th scope="col" className="px-6 text-end py-3">
+                        ITEM COUNT
+                      </th>
+                      <th scope="col" className="px-6  text-end py-3">
+                        CASH
+                      </th>
+                      <th scope="col" className="px-6  text-end py-3">
+                        TAX
+                      </th>
+                      <th scope="col" className="px-6  text-end py-3">
+                        TOTAL
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        <span className="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dailySalesData?.daily_sales?.data?.map((data) => {
+                      return (
+                        <tr
+                          key={data.id}
+                          className=" border-b hover:bg-white/10 "
+                        >
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-white whitespace-nowra"
+                          >
+                            {data.id}
+                          </th>
+                          <td className="px-6 py-4">
+                            {data.voucher_number.slice(0, 15)}
+                          </td>
+                          <td className="px-6 py-4">{data.time}</td>
+                          <td className="px-6 py-4  text-end">
+                            {data.item_count}
+                          </td>
+                          <td className="px-6 py-4  text-end">{data.cash}</td>
+                          <td className="px-6 py-4  text-end">{data.tax}</td>
+                          <td className="px-6 py-4  text-end">{data.total}</td>
+                          <td className="px-6 py-4 text-right">
+                            <NavLink
+                              to={"/profile"}
+                              className="font-medium flex justify-center text-blue-600  hover:underline"
+                            >
+                              {data.btn}
+                            </NavLink>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {/* last  */}
+            <div className="">
+              {dailySalesData && (
+                <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
+                  <div className="flex flex-row items-center border rounded">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                      <p className="text-sm text-base">Total Vouchers</p>
+                      <p className="text-xl font-bold text-white">
+                        {dailySalesData.total_vouchers}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end border-r py-2 px-6  border-white">
+                      <p className="text-sm text-base">Total Cash</p>
+                      <p className="text-xl font-bold text-white">
+                        {dailySalesData.total_cash}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                      <p className="text-sm text-base">Total Tax</p>
+                      <p className="text-xl font-bold text-white">
+                        {dailySalesData.total_tax}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                      <p className="text-sm text-base">Total</p>
+                      <p className="text-xl font-bold text-white">
+                        {dailySalesData.total}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pagination  ">
+                    <Pagination
+                      total={dailySalesData?.daily_sales?.last_page}
+                      onChange={(e) => {
+                        console.log(e);
+                        setPage(e);
+                        refetch();
+                      }}
+                      value={page || 1}
+                      boundaries={1}
+                      defaultValue={1}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </Rootlayout>
   );

@@ -16,7 +16,6 @@ const AddBrand = ({
   setEditBrand,
   setSelectedPhoto,
   setShowSideBar,
-
   setShowPhotoModal,
   editBrand,
 }) => {
@@ -59,6 +58,7 @@ const AddBrand = ({
       setSelectedPhoto(null);
     };
   }, [editBrand, data]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

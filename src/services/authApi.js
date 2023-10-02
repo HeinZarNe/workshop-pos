@@ -104,13 +104,22 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getProductToSale: build.query({
-      query: ({ token, keyword }) => ({
-        url: keyword
-          ? "sale/products-list?id&&keyword=" + keyword
-          : "sale/products-list?id",
+      query: ({ token, keyword, brand }) => {
+        const url = `sale/products-list?id${
+          keyword && brand
+            ? `&keyword=${keyword}&brandID=${brand}`
+            : keyword
+            ? `&keyword=${keyword}`
+            : brand
+            ? `&brandID=${brand}`
+            : ""
+        }`;
+        return {
+          url: url,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
 
-        headers: { authorization: `Bearer ${token}` },
-      }),
       providesTags: ["authapi"],
     }),
     getStock: build.query({
@@ -181,17 +190,7 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
-    getMonthlySales: build.query({
-      query: ({ token, date, page }) => ({
-        url: page
-          ? `finance/monthly-sales?page=${page}`
-          : date
-          ? `finance/monthly-sales?date=${date}`
-          : "finance/monthly-sales",
-        headers: { authorization: `Bearer ${token}` },
-      }),
-      providesTags: ["authapi"],
-    }),
+
     getBestSellerBrands: build.query({
       query: (token) => ({
         url: "report/best-seller-brands",
@@ -200,21 +199,57 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getYearlySales: build.query({
-      query: ({ token, page, date }) => ({
-        url: page
-          ? `finance/yearly-sales?page=${page}`
-          : date
-          ? `finance/yearly-sales?date=${date}`
-          : "finance/yearly-sales",
-        headers: { authorization: `Bearer ${token}` },
-      }),
+      query: ({ token, page, date }) => {
+        const url = `finance/yearly-sales${
+          page && date
+            ? `?page=${page}&year=${date}`
+            : page
+            ? `?page=${page}`
+            : date
+            ? `?year=${date}`
+            : ""
+        }`;
+        return {
+          url: url,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
       providesTags: ["authapi"],
     }),
     getDailySales: build.query({
-      query: ({ token, date }) => ({
-        url: date ? `finance/daily-sales?date=${date}` : "finance/daily-sales",
-        headers: { authorization: `Bearer ${token}` },
-      }),
+      query: ({ token, date, page }) => {
+        const url = `finance/daily-sales${
+          page && date
+            ? `?page=${page}&date=${date}`
+            : page
+            ? `?page=${page}`
+            : date
+            ? `?date=${date}`
+            : ""
+        }`;
+        return {
+          url: url,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
+      providesTags: ["authapi"],
+    }),
+    getMonthlySales: build.query({
+      query: ({ token, page, date }) => {
+        const url = `finance/monthly-sales${
+          page && date
+            ? `?page=${page}&date=${date}`
+            : page
+            ? `?page=${page}`
+            : date
+            ? `?date=${date}`
+            : ""
+        }`;
+        return {
+          url: url,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
       providesTags: ["authapi"],
     }),
     storeProduct: build.mutation({
@@ -363,11 +398,21 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     customSale: build.query({
-      query: ({ token, page }) => ({
-        // url: "report/product-report",
-        url: `finance/custom-sales-list?page=${page}`,
-        headers: { authorization: `Bearer ${token}` },
-      }),
+      query: ({ token, page, date }) => {
+        const url = `finance/custom-sales-list${
+          page && date
+            ? `?page=${page}&year=${date}`
+            : page
+            ? `?page=${page}`
+            : date
+            ? `?date=${date}`
+            : ""
+        }`;
+        return {
+          url: url,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
       providesTags: ["authapi"],
     }),
   }),

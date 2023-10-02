@@ -11,12 +11,11 @@ import { TfiGallery } from "react-icons/tfi";
 import { FaChartPie, FaRegUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import Logout from "../components/Logout";
-import { Navbar } from "flowbite-react";
 
 const Sidebar = () => {
   return (
-    <div className=" inline-block w-[13%] bg-[#323232] h-[screen]">
-    {/* <div className=" inline-block w-[15%] bg-[#323232] h-[calc(100vh-57px)] overflow-auto"> */}
+    <div className="inline-block bg-[#323232] max-h-[calc(100vh-57px)] overflow-y-auto w-[240px]">
+      {/* <div className=" inline-block w-[15%] bg-[#323232] h-[calc(100vh-57px)] overflow-auto"> */}
       {/* <Navbar /> */}
       <div className="">
         {/* overview */}

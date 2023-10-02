@@ -24,7 +24,7 @@ const ProductTables = ({
     return () => {};
   }, [addStock]);
   useEffect(() => {
-    setTotalPage(data?.meta?.last_page);
+    setTotalPage(data?.last_page);
     return () => {};
   }, [data]);
   return (

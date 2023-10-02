@@ -225,7 +225,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                 >
-                  {brands?.data.map((item) => (
+                  {brands?.with_no_pagi?.data.map((item) => (
                     <option
                       key={item.id}
                       value={item.id}
@@ -587,7 +587,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                 >
-                  {brands?.data.map((item) => (
+                  {brands?.with_no_pagi.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.brand_name}
                     </option>

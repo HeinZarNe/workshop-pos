@@ -25,10 +25,10 @@ const BrandTable = ({
     page,
     keyword,
   });
-  console.log(data);
   const [deleteBrand] = useDeleteBrandMutation();
   useEffect(() => {
-    data?.data && setTableData([...data.data]);
+    data?.message && setTableData([]);
+    data?.brands?.data && setTableData([...data?.brands?.data]);
     return () => {};
   }, [data]);
 
@@ -41,7 +41,17 @@ const BrandTable = ({
   return (
     <div>
       <div className="">
-        {isLoading ? (
+        {tableData?.length === 0 ? (
+          <div className="bg-[#272727] ">
+            <div className="flex justify-between gap-5 ">
+              <div className="w-full flex flex-col items-center justify-center h-[50vh]">
+                <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                  <p className="text-2xl font-semibold">There is no datas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : isLoading ? (
           <div className="flex items-center justify-center w-full h-[300px]">
             <Loader />
           </div>
@@ -61,7 +71,7 @@ const BrandTable = ({
               </thead>
               <tbody>
                 {/* row 1 */}
-                {tableData.map((brand) => (
+                {tableData?.map((brand) => (
                   <tr key={brand.id}>
                     <th>{brand.id}</th>
                     <td>{brand.brand_name}</td>
@@ -97,14 +107,13 @@ const BrandTable = ({
 
             <div className="pagination absolute bottom-[30px] right-[40px] ">
               <Pagination
-                total={data?.meta?.last_page || 1}
+                total={data?.brands?.last_page || 1}
                 onChange={(e) => {
                   setPage(e);
                   refetch();
                 }}
                 boundaries={1}
-                defaultValue={1}
-                on
+                value={page || 1}
               />
             </div>
           </>

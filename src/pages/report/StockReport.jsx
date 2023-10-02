@@ -46,7 +46,7 @@ const StockReport = () => {
   }, [stockLeveltable]);
 
   useEffect(() => {
-    setTotalPage(stockLeveltable?.meta?.last_page);
+    setTotalPage(stockLeveltable?.meta.last_page);
     return () => {};
   }, [stockLeveltable]);
   // Pagination
@@ -437,7 +437,7 @@ const StockReport = () => {
               </table>
             </div>
           </div>
-          <div className="flex justify-end mt-5 me-3">
+          <div className="pagination flex justify-end mt-5 me-3">
             <Pagination
               total={totalPage || 1}
               onChange={(e) => {

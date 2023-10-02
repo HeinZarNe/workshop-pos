@@ -88,7 +88,7 @@ const Stock = () => {
           <StockTable stocksData={stocks} />
           <div className="pagination absolute bottom-[30px] right-[40px] ">
             <Pagination
-              total={stocks?.meta?.last_page || 1}
+              total={stocks?.last_page || 1}
               onChange={(e) => {
                 setPage(e);
                 refetch();

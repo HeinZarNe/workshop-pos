@@ -15,10 +15,13 @@ const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [keyword, setKeyword] = useState(null);
+  const [searchBrand, setSearchBrand] = useState(null);
+
   const { data: brands } = useGetBrandQuery({ token });
   const { data, refetch, isLoading } = useGetProductToSaleQuery({
     token,
     keyword,
+    brand: searchBrand,
   });
   const [selectedProducts, setSelectedProducts] = useState([]);
   // const [selectedProducts, setSelectedProducts] = useState([]);
@@ -235,7 +238,7 @@ const Cashier = () => {
     <div className="bg-[#272727]">
       <div className="flex justify-between gap-5 ">
         <div className="w-full">
-          <div className="flex justify-between mx-5 my-5">
+          <div className="flex justify-between mx-5 my-5 items-center">
             <div className=" flex items-center">
               <p
                 className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
@@ -249,11 +252,15 @@ const Cashier = () => {
                 className="cashier-select"
                 placeholder="Pick value"
                 color="#000"
+                onChange={(e) => setSearchBrand(e)}
                 data={
-                  brands?.with_no_pagi.map((item, i) => ({
-                    label: item.name,
-                    value: item.id,
-                  })) || []
+                  [
+                    { label: "All", value: 0 },
+                    ...brands?.with_no_pagi.map((item, i) => ({
+                      label: item.name,
+                      value: item.id,
+                    })),
+                  ] || []
                 }
               />
             </div>
@@ -286,7 +293,7 @@ const Cashier = () => {
             </div>
           </div>
           <div className="w-[100%] mx-auto ">
-            <div className="flex flex-row h-screen overflow-scroll flex-wrap gap-3 justify-center items-center">
+            <div className="flex flex-row h-screen overflow-scroll flex-wrap gap-3 justify-center items-start">
               {/* {test.map((product) => ( */}
               {data?.products?.map((product) => (
                 <div

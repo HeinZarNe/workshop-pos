@@ -99,7 +99,7 @@ const UserOverview = () => {
 
         <div className="pagination absolute bottom-[30px] right-[40px] ">
           <Pagination
-            total={users?.meta?.last_page || 1}
+            total={users?.last_page || 1}
             onChange={(e) => {
               setPage(e);
               refetch();

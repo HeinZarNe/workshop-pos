@@ -6,9 +6,9 @@ const Rootlayout = ({ children }) => {
   return (
     <div className="max-h-[100vh]">
       <Navbar />
-      <div className=" flex bg-[#272727]">
+      <div className=" flex bg-[#272727] ">
         <Sidebar />
-        <div className="w-full max-h-[calc(100vh-57px)] overflow-y-auto">
+        <div className="w-full h-[calc(100vh-57px)] overflow-y-auto">
           {children}
         </div>
       </div>
