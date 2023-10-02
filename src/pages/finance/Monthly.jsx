@@ -12,7 +12,8 @@ import { useGetMonthlySalesQuery } from "../../services/authApi";
 import { MonthPicker, MonthPickerInput } from "@mantine/dates";
 const Monthly = () => {
   const token = localStorage.getItem("token");
-  const [activePage, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+
   const [value, setValue] = useState(null);
   const [dateSearch, setDateSearch] = useState(false);
   const { data: monthlySaleData } = useGetMonthlySalesQuery({

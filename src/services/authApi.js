@@ -182,10 +182,10 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getMonthlySales: build.query({
-      query: ({ token, date }) => ({
+      query: ({ { token, date }, page }) => ({
         url: date
           ? `finance/monthly-sales?date=${date}`
-          : "finance/monthly-sales",
+          : `finance/monthly-sales?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -360,12 +360,21 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    customSale: build.query({
+      query: ({ token, page }) => ({
+        // url: "report/product-report",
+        url: `finance/custom-sales-list?page=${page}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
   }),
 });
 
 export const {
   useLoginMutation,
   useTodaySaleQuery,
+  useCustomSaleQuery,
   useWeeklySaleQuery,
   useGetSaleReportQuery,
   useLogoutMutation,
