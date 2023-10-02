@@ -202,7 +202,7 @@ const Home = () => {
         {/* Second Section */}
         <SaleReport />
         {/* Third Section */}
-        {data?.today_sales?.length > 0 && <TodaySaleOverview />}
+        {data?.today_sales?.data.length > 0 && <TodaySaleOverview />}
       </div>
     </Rootlayout>
   );

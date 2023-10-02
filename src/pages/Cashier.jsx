@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import {
   useCheckOutMutation,
+  useGetBrandQuery,
   useGetProductToSaleQuery,
   useSaleCloseMutation,
 } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Select } from "flowbite-react";
 
 const Cashier = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [keyword, setKeyword] = useState(null);
-
+  const { data: brands } = useGetBrandQuery({ token });
   const { data, refetch, isLoading } = useGetProductToSaleQuery({
     token,
     keyword,
@@ -121,7 +123,7 @@ const Cashier = () => {
     let total = 0;
 
     selectedProducts.forEach((productId) => {
-      const selectedProduct = data?.data?.find(
+      const selectedProduct = data?.products?.find(
         (product) => product.id === productId
       );
 
@@ -242,6 +244,13 @@ const Cashier = () => {
                 <FaArrowLeft /> Back
               </p>
             </div>
+            {/* <div>
+              <Select
+                label="Your favorite library"
+                placeholder="Pick value"
+                data={brands.data.map()}
+              />
+            </div> */}
             <div class="relative my-3 flex items-center">
               <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
                 <svg
@@ -317,7 +326,7 @@ const Cashier = () => {
             }
           >
             {selectedProducts.map((productId) => {
-              const selectedProduct = data?.data?.find(
+              const selectedProduct = data?.products?.find(
                 (product) => product.id === productId
               );
 
@@ -423,7 +432,11 @@ const Cashier = () => {
                     <FaChevronDown />
                   </div>
                 )}
-                <p className=" text-xl text-white flex ms-auto py-4 pt-3 justify-end me-4 h-[80px]">
+                <p
+                  className={` text-xl text-white flex ms-auto py-4 pt-3 ${
+                    keyBoardShow ? " h-[50px]" : "mb-2"
+                  } justify-end me-4  `}
+                >
                   Total:
                   <div className="ms-2 text-[#fafafa] font-semibold">
                     {" "}

@@ -6,6 +6,7 @@ import { BaseColor } from "../../constant";
 import { Button, Modal, Pagination } from "@mantine/core";
 import {
   useGetOverviewDataQuery,
+  useGetProductToSaleQuery,
   useSaleCloseMutation,
 } from "../../services/authApi";
 import { useDisclosure } from "@mantine/hooks";
@@ -16,9 +17,10 @@ const TodaySaleOverview = () => {
   const token = localStorage.getItem("token");
   const [saleClose, { isSuccess, isLoading }] = useSaleCloseMutation();
   const { data } = useGetOverviewDataQuery({ token });
-  if (data?.today_sales?.length === 0) {
-    return <h1>There is currently no sales today.</h1>;
-  }
+
+  const { data: isSaleClose, refetch } = useGetProductToSaleQuery({
+    token,
+  });
 
   const handleSaleClose = () => {
     Swal.fire({
@@ -26,14 +28,18 @@ const TodaySaleOverview = () => {
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes",
-      confirmButtonColor: "red",
+      confirmButtonColor: isSaleClose?.is_sale_close ? "green" : "red",
       timer: false,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         const res = saleClose(token);
-
-        Swal.fire("Closed!", "", "success");
+        refetch();
+        Swal.fire(
+          isSaleClose?.is_sale_close ? "Opened!" : "Closed!",
+          "",
+          "success"
+        );
       } else if (result.isDenied) {
         Swal.close();
       }
@@ -55,49 +61,72 @@ const TodaySaleOverview = () => {
           </Button>
         </div>
       </Modal> */}
-      <div className="flex flex-row items-center justify-between">
-        <p className="text-3xl text-white">Today Sales Overview</p>
-
-        <button
-          className="flex flex-row items-center justify-between gap-3 border border-base  text-white py-1 px-3 rounded-md "
-          onClick={handleSaleClose}
-        >
-          <AiFillShop color={BaseColor} />
-          Sale Close
-        </button>
-      </div>
-
-      <DataTable data={data?.today_sales} />
-      <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
-        <div className="flex flex-row items-center border rounded">
-          <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-            <p className="text-md text-base">Total Vouchers</p>
-            <p className="text-xl font-bold text-white">
-              {data?.total_voucher}
-            </p>
-          </div>
-          <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-            <p className="text-md text-base">Total Cash</p>
-            <p className="text-xl font-bold text-white">{data?.total_cash}</p>
-          </div>
-          <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-            <p className="text-md text-base">Total Tax</p>
-            <p className="text-xl font-bold text-white">{data?.total_tax}</p>
-          </div>
-          <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-            <p className="text-md text-base">Total</p>
-            <p className="text-xl font-bold text-white"> {data?.total_net}</p>
+      {data?.today_sales?.data?.length === 0 ? (
+        <div className="bg-[#272727] ">
+          <div className="flex justify-between gap-5 ">
+            <div className="w-full flex flex-col items-center justify-center h-[50vh]">
+              <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                <p className="text-2xl font-semibold">
+                  There is currently no sales.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <Pagination
-          value={page}
-          onChange={(e) => {
-            setPage(e);
-          }}
-          total={data?.today_sales?.last_page}
-          siblings={1}
-        />
-      </div>
+      ) : (
+        <>
+          {" "}
+          <div className="flex flex-row items-center justify-between">
+            <p className="text-3xl text-white">Today Sales Overview</p>
+
+            <button
+              className="flex flex-row items-center justify-between gap-3 border border-base  text-white py-1 px-3 rounded-md "
+              onClick={handleSaleClose}
+            >
+              <AiFillShop color={BaseColor} />
+              {isSaleClose?.is_sale_close ? "Sale open" : "Sale Close"}
+            </button>
+          </div>
+          <DataTable data={data?.today_sales} />
+          <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
+            <div className="flex flex-row items-center border rounded">
+              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                <p className="text-md text-base">Total Vouchers</p>
+                <p className="text-xl font-bold text-white">
+                  {data?.total_voucher}
+                </p>
+              </div>
+              <div className="flex flex-col items-end border-r py-2 px-6  border-white">
+                <p className="text-md text-base">Total Cash</p>
+                <p className="text-xl font-bold text-white">
+                  {data?.total_cash}
+                </p>
+              </div>
+              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                <p className="text-md text-base">Total Tax</p>
+                <p className="text-xl font-bold text-white">
+                  {data?.total_tax}
+                </p>
+              </div>
+              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
+                <p className="text-md text-base">Total</p>
+                <p className="text-xl font-bold text-white">
+                  {" "}
+                  {data?.total_net}
+                </p>
+              </div>
+            </div>
+            <Pagination
+              value={page}
+              onChange={(e) => {
+                setPage(e);
+              }}
+              total={data?.today_sales?.last_page}
+              siblings={1}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

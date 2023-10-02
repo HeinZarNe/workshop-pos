@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
 import { Link, NavLink } from "react-router-dom";
 import { PiExportBold, PiFilePdf } from "react-icons/pi";
@@ -13,18 +13,22 @@ const Daily = () => {
   const [page, setPage] = useState(1);
   const [dateSearch, setDateSearch] = useState(false);
   const token = localStorage.getItem("token");
-  const [from, setFrom] = useState(null);
-  const [to, setTo] = useState(null);
+  const [date, setDate] = useState(null);
   const {
     data: dailySalesData,
     isLoading,
     isSuccess,
     isError,
     refetch,
-  } = useGetDailySalesQuery({ token, date: dateSearch ? { from, to } : false });
+  } = useGetDailySalesQuery({ token, date: dateSearch || false });
 
   const handleDateSearch = () => {
-    setDateSearch(true);
+    const inputDate = new Date(date);
+    const year = inputDate.getFullYear();
+    const month = String(inputDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1
+    const day = String(inputDate.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    setDateSearch(formattedDate);
   };
   return (
     <Rootlayout>
@@ -52,7 +56,7 @@ const Daily = () => {
           </div>
         </div>
         {/* second */}
-        <div className="flex mt-12 flex-row justify-between">
+        <div className="flex mt-12 flex-row items-center  justify-between">
           <div className="flex flex-col gap-2">
             <p className="text-2xl font-semibold mt-0 pt-0 text-white">
               Today Sales Overview
@@ -64,48 +68,9 @@ const Daily = () => {
             </button>
           </NavLink> */}
           <div className="flex gap-3">
-            {" "}
-            {/* <!-- Dropdown menu --> */}
-            {/* <div className="">
-            
-              <div
-                id="dropdown"
-                className="z-10 hidden bg-[#fafafa] text-base  divide-y divide-gray-100  shadow w-36 "
-              >
-                <ul
-                  className="bg-opacity-20"
-                  aria-labelledby="dropdownDefaultButton"
-                >
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <PiFilePdf className="text-xl text-base" /> PDF
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <BiPrinter className="text-xl text-base" /> Print
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <FiCopy className="text-xl text-base" /> Copy
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div> */}
             <div className="flex   gap-1 flex-row items-end justify-center">
-              <DatePicker from={from} setFrom={setFrom} to={to} setTo={setTo} />
-              {from && to && (
+              <DatePicker date={date} setDate={setDate} />
+              {date && (
                 <>
                   <div
                     className=" cursor-pointer flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base h-10"
@@ -116,8 +81,7 @@ const Daily = () => {
                   <div
                     className=" cursor-pointer flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base h-10"
                     onClick={(_) => {
-                      setFrom(null);
-                      setTo(null);
+                      setDate(null);
                       setDateSearch(false);
                     }}
                   >
@@ -161,7 +125,7 @@ const Daily = () => {
                 </tr>
               </thead>
               <tbody>
-                {dailySalesData?.daily_sales.map((data) => {
+                {dailySalesData?.daily_sales?.data.map((data) => {
                   return (
                     <tr key={data.id} className=" border-b hover:bg-white/10 ">
                       <th

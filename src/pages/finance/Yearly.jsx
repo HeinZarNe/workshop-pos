@@ -5,17 +5,31 @@ import { PiExportBold, PiFilePdf } from "react-icons/pi";
 import DatePicker from "../../components/DatePicker";
 import { FiCopy, FiSearch } from "react-icons/fi";
 import { BiPrinter, BiSolidCalendarWeek } from "react-icons/bi";
-import { Pagination } from "@mantine/core";
+import { Pagination, Select } from "@mantine/core";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useGetYearlySalesQuery } from "../../services/authApi";
+import { YearPickerInput } from "@mantine/dates";
 const Yearly = () => {
   const token = localStorage.getItem("token");
   const [page, setPage] = useState(1);
+  const [value, setValue] = useState(null);
+  const [dateSearch, setDateSearch] = useState(false);
+
   const { data: yearlySaleData, refetch } = useGetYearlySalesQuery({
     token,
     page,
+    date: dateSearch || false,
   });
+
+  const handleDateSearch = () => {
+    const inputDate = new Date(value);
+
+    const year = inputDate.getFullYear();
+
+    setDateSearch(year);
+    setPage(0);
+  };
 
   return (
     <Rootlayout>
@@ -50,90 +64,19 @@ const Yearly = () => {
             </p>
           </div>
           {/* ... */}
-          <div className="flex gap-4">
-            <div className="">
-              <button
-                id="dropdownDefaultButton"
-                data-dropdown-toggle="dropdown"
-                className=" border border-secondary focus:border-base gap-2 text-gray-400 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center "
-                type="button"
-              >
-                <PiExportBold className="text-lg text-base" /> Export
-                <svg
-                  className="w-2.5 h-2.5 ml-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              {/* <!-- Dropdown menu --> */}
-              <div
-                id="dropdown"
-                className="z-10 hidden bg-[#fafafa] text-base  divide-y divide-gray-100  shadow w-36 "
-              >
-                <ul className="" aria-labelledby="dropdownDefaultButton">
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <PiFilePdf className="text-xl text-base" /> PDF
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <BiPrinter className="text-xl text-base" /> Print
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className=" flex px-4 border border-base py-2 items-center gap-2"
-                    >
-                      <FiCopy className="text-xl text-base" /> Copy
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex">
-              {/* first menu  */}{" "}
-              <select
-                id="countries"
-                className=" border w-20 border-white/20 text-white/50 bg-transparent text-sm rounded-sm focus:ring-base focus:border-base block  p-2.5  dark:placeholder-gray-400 "
-              >
-                <option className="text-base" selected>
-                  2023
-                </option>
-                <option className="text-base" value="22">
-                  2022
-                </option>
-                <option className="text-base" value="21">
-                  2021
-                </option>
-                <option className="text-base" value="20">
-                  2020
-                </option>
-                <option className="text-base" value="19">
-                  2019
-                </option>
-              </select>
-              {/* second menu  */}
-              <div className="flex text-black items-center justify-center font-semibold text-xl p-2 pe-3 rounded-e-sm bg-base">
-                <FiSearch />
-              </div>
+          <div className="flex gap-2 items-center">
+            {/* first menu  */}{" "}
+            <YearPickerInput
+              placeholder="Pick date"
+              value={value}
+              onChange={setValue}
+            />
+            {/* second menu  */}
+            <div
+              className="flex text-black items-center justify-center font-semibold text-xl h-fit p-2  rounded-e-sm bg-base"
+              onClick={handleDateSearch}
+            >
+              <FiSearch />
             </div>
           </div>
         </div>

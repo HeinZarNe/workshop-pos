@@ -19,6 +19,12 @@
   border: 1px solid #b19777;
 }
 
+.mantine-MonthPickerInput-input {
+  color: rgb(255, 255, 255) !important;
+}
+.mantine-YearPickerInput-input {
+  color: rgb(255, 255, 255) !important;
+}
 .modal {
   z-index: 199999;
   position: fixed;

@@ -11,7 +11,7 @@ import { theme } from "flowbite-react";
 //   )
 // }
 
-function DatePicker({ from, setFrom, to, setTo }) {
+function DatePicker({ date, setDate }) {
   //   const styles = (theme) => ({});
   return (
     <MantineProvider
@@ -43,48 +43,25 @@ function DatePicker({ from, setFrom, to, setTo }) {
         },
       }}
     >
-      <div className="flex flex-row items-center justify-center gap-1">
-        <DatePickerInput
-          icon={
-            <BiSolidCalendarWeek
-              size="1.2rem"
-              className="text-base"
-              stroke={1.5}
-            />
-          }
-          label="From date"
-          labelProps={{ style: { color: "white" } }}
-          className="bg-transparent  "
-          placeholder="From"
-          value={from}
-          onChange={(e) => {
-            setFrom(e);
-            setTo(null);
-          }}
-          mx="auto"
-          maw={400}
-        />
-        <DatePickerInput
-          icon={
-            <BiSolidCalendarWeek
-              size="1.2rem"
-              className="text-base"
-              stroke={1.5}
-            />
-          }
-          label="To date"
-          labelProps={{ style: { color: "white" } }}
-          disabled={!from}
-          //   label="Pick date"
-          className="bg-transparent "
-          placeholder="To"
-          value={to}
-          onChange={setTo}
-          mx="auto"
-          minDate={from}
-          maw={400}
-        />
-      </div>
+      <DatePickerInput
+        icon={
+          <BiSolidCalendarWeek
+            size="1.2rem"
+            className="text-base"
+            stroke={1.5}
+          />
+        }
+        label="Search date"
+        labelProps={{ style: { color: "white" } }}
+        className="bg-transparent  "
+        placeholder="Date"
+        value={date}
+        onChange={(e) => {
+          setDate(e);
+        }}
+        mx="auto"
+        maw={400}
+      />
     </MantineProvider>
   );
 }

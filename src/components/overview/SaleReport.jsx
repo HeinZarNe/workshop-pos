@@ -88,7 +88,12 @@ function SaleReport() {
       </div>
       <div className="flex flex-col gap-2 flex-1 justify-between">
         <div className="flex flex-col">
-          <p className="text-3xl text-white">454.44k</p>
+          <p className="text-3xl text-white">
+            {" "}
+            {chartState === 1 && yearlyData?.totalIncome}
+            {chartState === 2 && monthlyData?.totalIncome}
+            {chartState === 3 && weeklyData?.totalIncome}
+          </p>
           <p className="text-xl font-thin">Kyats</p>
         </div>
         <div className="flex flex-row items-center gap-3">

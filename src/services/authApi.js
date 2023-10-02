@@ -182,8 +182,10 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getMonthlySales: build.query({
-      query: (token) => ({
-        url: "finance/monthly-sales",
+      query: ({ token, date }) => ({
+        url: date
+          ? `finance/monthly-sales?date=${date}`
+          : "finance/monthly-sales",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
@@ -196,9 +198,11 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getYearlySales: build.query({
-      query: ({ token, page }) => ({
+      query: ({ token, page, date }) => ({
         url: page
           ? `finance/yearly-sales?page=${page}`
+          : date
+          ? `finance/yearly-sales?date=${date}`
           : "finance/yearly-sales",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -206,9 +210,7 @@ export const authApi = createApi({
     }),
     getDailySales: build.query({
       query: ({ token, date }) => ({
-        url: date
-          ? `finance/daily-sales?startDate=${date.from}&&endDate=${date.to}`
-          : "finance/daily-sales",
+        url: date ? `finance/daily-sales?date=${date}` : "finance/daily-sales",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],
