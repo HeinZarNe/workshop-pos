@@ -24,6 +24,7 @@ const Monthly = () => {
 
   const handleDateSearch = () => {
     const inputDate = new Date(value);
+    setPage(0);
 
     const year = inputDate.getFullYear();
     const month = String(inputDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1

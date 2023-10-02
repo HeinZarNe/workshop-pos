@@ -182,10 +182,12 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getMonthlySales: build.query({
-      query: ({ { token, date }, page }) => ({
-        url: date
+      query: ({ token, date, page }) => ({
+        url: page
+          ? `finance/monthly-sales?page=${page}`
+          : date
           ? `finance/monthly-sales?date=${date}`
-          : `finance/monthly-sales?page=${page}`,
+          : "finance/monthly-sales",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["authapi"],

@@ -23,10 +23,11 @@ const Daily = () => {
   } = useGetDailySalesQuery({
     page,
     token,
-    date: dateSearch ? { from, to } : false,
+    date: dateSearch || false,
   });
   console.log(dailySalesData);
   const handleDateSearch = () => {
+    setPage(0);
     const inputDate = new Date(date);
     const year = inputDate.getFullYear();
     const month = String(inputDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1
