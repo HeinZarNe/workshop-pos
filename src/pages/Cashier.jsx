@@ -295,7 +295,7 @@ const Cashier = () => {
             </div>
           </div>
           <div className="w-[100%] mx-auto ">
-            <div className="flex flex-row h-screen overflow-scroll flex-wrap gap-3 justify-center items-start">
+            <div className="flex flex-row h-screen overflow-y-scroll pb-[150px] flex-wrap gap-3 justify-center items-start">
               {/* {test.map((product) => ( */}
               {data?.products?.map((product) => (
                 <div
