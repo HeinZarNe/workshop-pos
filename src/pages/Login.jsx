@@ -30,7 +30,7 @@ const Login = () => {
         console.error("Login failed:", data?.error);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.error("An error occured:", error);
     }
   };
 
