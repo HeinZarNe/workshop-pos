@@ -54,7 +54,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
   ] = useUpdateProductMutation();
   const [name, setName] = useState(editState ? product?.data.name : "");
   const [brand_name, setBrand_name] = useState(
-    editState ? product?.data.brand_name : ""
+    editState ? product?.data.brand_name : "1"
   );
   const [actual_price, setActurl_price] = useState(
     editState ? product?.data.actual_price : ""
@@ -69,7 +69,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
   );
   useEffect(() => {
     if (editState) {
-      brands?.data.map(
+      brands?.with_no_pagi.map(
         (brand) =>
           brand.brand_name == product?.data.brand_name &&
           setBrand_name(brand?.id)
@@ -231,7 +231,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       value={item.id}
                       selected={item.id === brand_name && "selected"}
                     >
-                      {item.brand_name}
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -589,7 +589,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 >
                   {brands?.with_no_pagi.map((item) => (
                     <option key={item.id} value={item.id}>
-                      {item.brand_name}
+                      {item.name}
                     </option>
                   ))}
                 </select>

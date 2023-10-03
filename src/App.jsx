@@ -39,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     // console.log(photo, data?.data);
-    data?.data?.forEach((item) => {
+    data?.forEach((item) => {
       // Check if the item is already in the photo array
       if (!photo.some((image) => image.id === item.id)) {
         dispatch(addphoto(item));

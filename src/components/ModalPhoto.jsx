@@ -51,8 +51,8 @@ const ModalPhoto = ({
         <div className=" bg-[#323232] overflow-y-scroll p-10 rounded-lg w-[1000px] flex flex-col gap-10 items-center">
           <h2 className="text-white text-[22px] font-[600] ">Choose photo</h2>
           <div className="grid grid-cols-3 gap-20 flex-wrap">
-            {Array.isArray(data?.data)
-              ? data?.data?.map((image) => (
+            {Array.isArray(data)
+              ? data?.map((image) => (
                   <div
                     onClick={() => setClickedPhoto(image)}
                     key={image.id}

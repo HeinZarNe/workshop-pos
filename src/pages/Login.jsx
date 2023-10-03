@@ -9,7 +9,7 @@ import { addUser } from "../services/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("admin@gmail.com");
-  const [password, setPassword] = useState("aaaaaaaa");
+  const [password, setPassword] = useState("thepassword");
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();

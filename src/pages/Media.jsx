@@ -27,6 +27,9 @@ const Media = () => {
     for (let i = 0; i < selectedFile.length; i++) {
       photos.append("photos[]", selectedFile[i], selectedFile[i].name);
     }
+
+    console.log(photos);
+
     const data = await storePhoto({ photos, token });
   };
 
