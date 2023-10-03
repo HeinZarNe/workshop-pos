@@ -129,7 +129,7 @@ const Inventory = () => {
               total={totalPage || 1}
               onChange={(e) => {
                 setPage(e);
-                refetch();
+                // refetch();
               }}
               boundaries={1}
               defaultValue={1}

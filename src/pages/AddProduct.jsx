@@ -30,10 +30,10 @@ const AddProduct = ({ editState = false, setEditState }) => {
     isSuccess: detailSuccess,
     isLoading: detailLoading,
   } = useGetProductQuery({
-    detailId: editState.id,
-    token,
+    token, detailId: editState.id,
   });
 
+  console.log(product);
   const { data: brands } = useGetBrandQuery({ token, page: 0 });
 
   //for Photo Gallery
@@ -69,9 +69,9 @@ const AddProduct = ({ editState = false, setEditState }) => {
   );
   useEffect(() => {
     if (editState) {
-      brands?.data.map(
+      brands?.with_no_pagi.map(
         (brand) =>
-          brand.brand_name == product?.data.brand_name &&
+          brand.brand_name == product?.data.name &&
           setBrand_name(brand?.id)
       );
       setName(product?.data.name);
@@ -225,7 +225,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                 >
-                  {brands?.with_no_pagi?.data.map((item) => (
+                  {brands?.with_no_pagi?.map((item) => (
                     <option
                       key={item.id}
                       value={item.id}
