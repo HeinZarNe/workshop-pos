@@ -35,6 +35,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
   });
 
   const { data: brands } = useGetBrandQuery({ token, page: 0 });
+  console.log(brands);
 
   //for Photo Gallery
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -225,7 +226,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   }}
                   className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
                 >
-                  {brands?.with_no_pagi?.data.map((item) => (
+                  {brands?.with_no_pagi?.map((item) => (
                     <option
                       key={item.id}
                       value={item.id}
