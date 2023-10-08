@@ -36,10 +36,20 @@ const StockReport = () => {
   const [page, setPage] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const token = localStorage.getItem("token");
+  const [filter, setFilter] = useState(0);
+  const [keyword, setKeyword] = useState("");
   const { data: stockLeveltable, refetch } = useGetStockLevelTableQuery({
     token,
     page,
+    filter,
+    keyword,
   });
+
+  const handleSearch = (e) => {
+    setFilter(0);
+    setPage(0);
+    setKeyword(e.target.value);
+  };
   useEffect(() => {
     refetch();
     return () => {};
@@ -55,12 +65,10 @@ const StockReport = () => {
   // const { data: stockData } = useGetStockQuery({ token });
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
-  console.log(stockLeveltable);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
   const inStock = `w-[65%] h-full bg-[#884A39]`;
   const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
   const lowStock = `w-[35%] h-full bg-[#C38154] `;
-  console.log(typeof parseInt(stockLevelBar?.stock_lvl_bar?.in_stock[1]));
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -266,9 +274,11 @@ const StockReport = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn-outline border-base ms-auto flex mt-3 hover:bg-base hover:text-white">
-                  RECENT SALES
-                </button>
+                <Link to="/sale/recent">
+                  <button className="btn btn-outline border-base ms-auto flex mt-3 hover:bg-base hover:text-white">
+                    RECENT SALES
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -298,47 +308,49 @@ const StockReport = () => {
               </div>
               <input
                 type="search"
+                value={keyword}
+                onChange={handleSearch}
                 id="default-search"
                 className="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Search ..."
-                required
               />
             </div>
-            <div className="flex gap-5">
-              <div className="flex items-center">
-                <div className="">Sort:</div>
-                <select
-                  id="countries"
-                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+            <div className="flex items-center gap-2">
+              <div className="">Sort:</div>
+              <select
+                id="countries"
+                className=" flex   items-center justify-center border border-base  text-white bg-transparent text-sm rounded-md p-2 "
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option
+                  className="text-black py-3 px-2 "
+                  selected={filter === 0}
+                  value="0"
                 >
-                  <option className="text-base" selected>
-                    In stock
-                  </option>
-                  <option className="text-base" value="22">
-                    ...
-                  </option>
-                  <option className="text-base" value="21">
-                    ....
-                  </option>
-                </select>
-              </div>
-              <div className="flex items-center">
-                <div className="">Filter:</div>
-                <select
-                  id="countries"
-                  className=" w-20  text-white bg-transparent text-sm rounded-sm p-2.5 "
+                  All stocks
+                </option>
+                <option
+                  className="text-black py-3 px-2"
+                  selected={filter === "in_stock"}
+                  value="in_stock"
                 >
-                  <option className="text-base" selected>
-                    All file
-                  </option>
-                  <option className="text-base" value="22">
-                    ...
-                  </option>
-                  <option className="text-base" value="21">
-                    ....
-                  </option>
-                </select>
-              </div>
+                  In Stock
+                </option>
+                <option
+                  className="text-black py-3 px-2"
+                  selected={filter === "low_stock"}
+                  value="low_stock"
+                >
+                  Low stock
+                </option>
+                <option
+                  className="text-black py-3 px-2"
+                  selected={filter === "out_of_stock"}
+                  value="out_of_stock"
+                >
+                  Out of stock
+                </option>
+              </select>
             </div>
           </div>
           <div className=" border-2 rounded-t-xl border-base mt-2">
@@ -366,9 +378,6 @@ const StockReport = () => {
                     </th>
                     <th scope="col" className="px-6  text-center py-3">
                       STOCK LEVEL
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      <span className="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
@@ -402,32 +411,6 @@ const StockReport = () => {
                                 {e.stock_levle}
                               </div>
                             )}
-                          </td>
-                          <td class="px-6 py-4 text-right flex gap-2 justify-center">
-                            <NavLink
-                              to={"/profile"}
-                              class="font-medium flex justify-center text-blue-600  hover:underline"
-                            >
-                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
-                                <BsPlus />
-                              </button>
-                            </NavLink>
-                            <NavLink
-                              to={"/profile"}
-                              class="font-medium flex justify-center text-blue-600  hover:underline"
-                            >
-                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
-                                <BsPencil />
-                              </button>
-                            </NavLink>
-                            <NavLink
-                              to={"/profile"}
-                              class="font-medium  flex justify-center text-blue-600  hover:underline"
-                            >
-                              <button className="flex items-center hover:bg-base/70 justify-center w-8 h-8 rounded-full bg-base text-white">
-                                <AiOutlineArrowRight />
-                              </button>
-                            </NavLink>
                           </td>
                         </tr>
                       );

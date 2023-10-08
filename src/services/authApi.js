@@ -143,8 +143,10 @@ export const authApi = createApi({
     //   providesTags: ["authapi"],
     // }),
     getStockLevelTable: build.query({
-      query: ({ token, option, page }) => ({
-        url: `report/stock-level-table?page=${page}`,
+      query: ({ token, filter, page, keyword }) => ({
+        url: `report/stock-level-table?${keyword ? `keyword=${keyword}` : ""}${
+          page ? `${keyword ? "&" : ""}page=${page}` : ""
+        }${filter ? `?${filter}` : ""}`,
         // url: `report/stock-level-table${option ? "?" + option : ""}`,
         headers: { authorization: `Bearer ${token}` },
       }),
