@@ -146,7 +146,7 @@ export const authApi = createApi({
       query: ({ token, filter, page, keyword }) => ({
         url: `report/stock-level-table?${keyword ? `keyword=${keyword}` : ""}${
           page ? `${keyword ? "&" : ""}page=${page}` : ""
-        }${filter ? `?${filter}` : ""}`,
+        }${filter ? `${filter}` : ""}`,
         // url: `report/stock-level-table${option ? "?" + option : ""}`,
         headers: { authorization: `Bearer ${token}` },
       }),
