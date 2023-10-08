@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useUpdateStockMutation } from "../../services/authApi";
 
@@ -10,14 +10,19 @@ const AddStock = ({
   setAddStock,
 }) => {
   const token = localStorage.getItem("token");
-
   const [updateStock, { isLoading }] = useUpdateStockMutation();
+  // console.log(updateStock);
   const handleAddStock = () => {
-    if (stockData.quantity > 0 && stockData.message.length > 0) {
+    if (stockData.quantity > 0) {
       const res = updateStock({ data: stockData, token });
-      setAddStock(true);
+      setAddStock((pre) => !pre);
       setShowSideBar(false);
     }
+    // if (stockData.quantity > 0 && stockData.message.length > 0) {
+    //   const res = updateStock({ data: stockData, token });
+    //   setAddStock(true);
+    //   setShowSideBar(false);
+    // }
   };
 
   return (
@@ -54,7 +59,7 @@ const AddStock = ({
               type="number"
               className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
             />
-            <span className=" text-[15px] text-stone-300 font-bold">
+            {/* <span className=" text-[15px] text-stone-300 font-bold">
               More *
             </span>
             <textarea
@@ -68,7 +73,7 @@ const AddStock = ({
               id=""
               cols="10"
               rows="4"
-            ></textarea>
+            ></textarea> */}
           </div>
           <div className=" flex gap-4 flex-col">
             <button

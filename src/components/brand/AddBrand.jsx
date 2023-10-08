@@ -14,11 +14,14 @@ import { BaseUrl } from "../../utils/constant";
 const AddBrand = ({
   selectedPhoto,
   setEditBrand,
+  setDataFetch,
   setSelectedPhoto,
   setShowSideBar,
   setShowPhotoModal,
   editBrand,
+  // dataFetch,
 }) => {
+  
   const token = localStorage.getItem("token");
   const [storeBrand, { isLoading: uploading }] = useStoreBrandMutation();
   const [updateBrand, { isLoading: updating }] = useUpdateBrandMutation();
@@ -69,6 +72,7 @@ const AddBrand = ({
       const data = await storeBrand({ brandData, token });
     }
     setShowSideBar(false);
+    setDataFetch(pre=>!pre)
   };
   const CanUserSubmit = () => {
     const { name, company, agent, photo, phone_number, information } =
@@ -178,7 +182,7 @@ const AddBrand = ({
                   Description
                 </span>
                 <textarea
-                  required
+                  // required
                   id="information"
                   name="information"
                   onChange={handleInputChange}
@@ -215,12 +219,12 @@ const AddBrand = ({
               </div>
             </div>
             <div className=" flex gap-4 flex-col">
-              {valid && (
-                <button type="submit" className=" px-6 py-2 rounded-lg button">
-                  {" "}
-                  SAVE
-                </button>
-              )}
+              {/* {valid && ( */}
+              <button type="submit" className=" px-6 py-2 rounded-lg button">
+                {" "}
+                SAVE
+              </button>
+              {/* )} */}
               <button
                 type="reset"
                 onClick={() => setShowSideBar(false)}
