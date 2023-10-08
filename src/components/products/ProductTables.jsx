@@ -15,18 +15,23 @@ const ProductTables = ({
   page,
   setTotalPage,
 }) => {
-  const token = localStorage.getItem("token");
 
+  const token = localStorage.getItem("token");
   const { data, refetch } = useGetProductQuery({ token, page, keyword });
-  const [editstate, setEditState] = useState(false);
   useEffect(() => {
     refetch();
-    return () => {};
+    // return () => {};
   }, [addStock]);
+
+
+  // const h = useGetProductQuery({ token, page, keyword });
+  // console.log(h);
+  const [editstate, setEditState] = useState(false);
   useEffect(() => {
     setTotalPage(data?.last_page);
     return () => {};
   }, [data]);
+
   return (
     <div>
       {editstate ? (

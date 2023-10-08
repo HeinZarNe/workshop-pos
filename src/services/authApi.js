@@ -160,11 +160,11 @@ export const authApi = createApi({
     updateStock: build.mutation({
       query: ({ data, token }) => ({
         url: "stock/" + data?.id,
-        method: "PATCH",
+        method: "POST",
         body: {
           product_id: data?.id,
           quantity: data?.quantity,
-          more: data?.message,
+          // more: data?.message,
         },
         headers: { authorization: `Bearer ${token}` },
       }),

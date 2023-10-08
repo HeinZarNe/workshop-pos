@@ -32,10 +32,15 @@ const Cashier = () => {
   const [checkOut] = useCheckOutMutation();
 
   // console.log(data);
+
+  // product list click
   const handleProductClick = (productId) => {
     setSelectedProducts((prevSelected) => {
       if (prevSelected.includes(productId)) {
         const updatedQuantities = { ...selectedQuantities };
+        setKeyBoardShow(true);
+        // console.log(productId);
+        setCurrentSelectedProductId(productId);
         updatedQuantities[productId] =
           parseInt(updatedQuantities[productId] || 0) + 1;
         setSelectedQuantities(updatedQuantities);
@@ -43,12 +48,30 @@ const Cashier = () => {
       } else {
         const updatedSelected = [...prevSelected, productId];
         const updatedQuantities = { ...selectedQuantities };
+        setKeyBoardShow(true);
+        // console.log(productId);
+        setCurrentSelectedProductId(productId);
         updatedQuantities[productId] = 1;
         setSelectedQuantities(updatedQuantities);
         return updatedSelected;
       }
     });
   };
+
+  // selected item
+  const handleProductInCartSelect = (productId) => {
+    setKeyBoardShow(true);
+    // console.log(productId);
+    setCurrentSelectedProductId(productId);
+    setSelectedProducts((prevSelected) => {
+      if (!prevSelected.includes(productId)) {
+        return [...prevSelected, productId];
+      }
+      return prevSelected;
+    });
+  };
+
+  // end
 
   const handleNumberClick = (number) => {
     if (currentSelectedProductId !== null) {
@@ -137,17 +160,6 @@ const Cashier = () => {
     });
 
     return total;
-  };
-
-  const handleProductInCartSelect = (productId) => {
-    setKeyBoardShow(true);
-    setCurrentSelectedProductId(productId);
-    setSelectedProducts((prevSelected) => {
-      if (!prevSelected.includes(productId)) {
-        return [...prevSelected, productId];
-      }
-      return prevSelected;
-    });
   };
 
   const handlePaymentClick = () => {
@@ -352,39 +364,6 @@ const Cashier = () => {
               const totalPrice = selectedProduct.price * quantity;
 
               return (
-                // <div
-                //   key={productId}
-                //   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777]
-                //   ${
-                //     selectedProduct.id === currentSelectedProductId &&
-                //     keyBoardShow
-                //       ? " bg-base/20"
-                //       : ""
-                //   }
-                //   `}
-                //   onClick={() => handleProductInCartSelect(productId)}
-                // >
-                //   <div className=" ">
-                //     <h5 className=" text-lg font-semibold tracking-tight text-base">
-                //       {selectedProduct.name}
-                //     </h5>
-                //     <div className="flex ms-1 font-mono text-sm">
-                //       <p className=" text-sm flex gap-1 text-gray-400">
-                //         <div className="text-white/80">
-                //           {" "}
-                //           {selectedProduct.price}
-                //         </div>
-                //         Kyats
-                //       </p>
-                //       <div className="mx-2">x</div>
-                //       <p className="mb-3 text-gray-400">{quantity}</p>
-                //     </div>
-                //   </div>
-                //   <p className="flex gap-1 text-[#fafafa] font-semibold">
-                //     {totalPrice}{" "}
-                //     <div className="font-normal text-white/70">Kyats</div>
-                //   </p>
-                // </div>
                 <div
                   key={productId}
                   className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 

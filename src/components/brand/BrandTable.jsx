@@ -14,11 +14,13 @@ import { Loader, Pagination } from "@mantine/core";
 const BrandTable = ({
   tableData,
   page,
+  dataFetch,
   setPage,
   setTableData,
   setEditBrand,
   keyword,
 }) => {
+  console.log(dataFetch);
   const token = localStorage.getItem("token");
   const { data, refetch, isLoading } = useGetBrandQuery({
     token,
@@ -32,6 +34,9 @@ const BrandTable = ({
     return () => {};
   }, [data]);
 
+  useEffect(()=>{
+    refetch();
+  },[dataFetch])
   const handleTableRowDelete = async (id) => {
     setTableData((prev) => prev.filter((item) => item.id !== id));
     const res = await deleteBrand({ id, token });

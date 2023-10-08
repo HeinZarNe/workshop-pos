@@ -15,6 +15,7 @@ const ManageBrand = () => {
   const [tableData, setTableData] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
+  const [dataFetch, setDataFetch] = useState(false);
 
   const [editBrand, setEditBrand] = useState({
     state: false,
@@ -33,6 +34,7 @@ const ManageBrand = () => {
       {showSidebar && (
         <AddBrand
           editBrand={editBrand}
+          setDataFetch={setDataFetch}
           setEditBrand={setEditBrand}
           showPhotoModal={showPhotoModal}
           setShowPhotoModal={setShowPhotoModal}
@@ -118,6 +120,7 @@ const ManageBrand = () => {
           </div>
           <BrandTable
             keyword={keyword}
+            dataFetch={dataFetch}
             setEditBrand={setEditBrand}
             editBrand={editBrand}
             tableData={tableData}
