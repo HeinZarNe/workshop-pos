@@ -30,28 +30,28 @@ const Inventory = () => {
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
           <div className="">
-            <h1 className=" text-[20px] font-[500] text-white">Products</h1>
-            <p className=" text-gray-500">Inventory/ Products</p>
+            <h1 className=" text-[20px] font-[500] text-tcolor">Products</h1>
+            <p className=" text-tscolor">Inventory/ Products</p>
           </div>
           <div className=" flex gap-3">
             <Link to={"/sale/cashier"}>
-              <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+              <button className=" px-4 py-2 rounded-lg text-primary border border-primary hover:bg-primary hover:text-secondary">
                 {" "}
                 Go To Shop
               </button>
             </Link>
             <Link to={"/products/create"}>
-              <button className=" px-4 py-2 rounded-lg flex items-center gap-2 button">
+              <div className=" px-4 py-2 rounded-lg flex text-secondary items-center gap-2 bg-primary hover:bg-transparent hover:text-primary hover:border hover:border-primary">
                 {" "}
                 <AiOutlinePlus />
                 Add Product
-              </button>
+              </div>
             </Link>
           </div>
         </div>
         {/* product overview */}
         <div className=" my-5">
-          <h1 className="text-[21px] font-[500] text-white">
+          <h1 className="text-[21px] font-[500] text-tcolor">
             Products Overview
           </h1>
           {/* search */}
@@ -59,7 +59,7 @@ const Inventory = () => {
             <div className="relative my-3">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-primary"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -82,18 +82,18 @@ const Inventory = () => {
                 }}
                 value={keyword}
                 id="default-search"
-                className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-secondary  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
                 placeholder="Search ..."
                 required
               />
             </div>
-            <div className=" text-white text-[22px]">
+            <div className=" text-tcolor text-[22px]">
               <button
                 onClick={() => setView("list")}
                 className={`${
                   view === "list"
-                    ? "border border-[#B19777] text-[#B19777] p-2 mr-5"
-                    : "border border-white p-2 mr-5"
+                    ? "border border-primary text-primary p-2 mr-5"
+                    : "border border-tcolor p-2 mr-5"
                 }`}
               >
                 {" "}
@@ -103,8 +103,8 @@ const Inventory = () => {
                 onClick={() => setView("grid")}
                 className={`${
                   view === "grid"
-                    ? "border border-[#B19777] text-[#B19777] p-2 mr-5"
-                    : "border border-white p-2 mr-5"
+                    ? "border border-primary text-primary p-2 mr-5"
+                    : "border border-tcolor p-2 mr-5"
                 }`}
               >
                 {" "}

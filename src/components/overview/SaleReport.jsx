@@ -17,7 +17,7 @@ import { Loader } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 function SaleReport() {
-  const ContentBoxClass = " p-4 border-[#535353] rounded-md border-[1px]";
+  const ContentBoxClass = " p-4 border-[#E9E9E950] rounded-md border-[1px]";
   const [chartState, setChartState] = useState(2);
   const token = localStorage.getItem("token");
 
@@ -46,9 +46,9 @@ function SaleReport() {
 
   return (
     <div className={ContentBoxClass + " flex flex-row gap-7"}>
-      <div className="flex flex-col gap-5 flex-[2] text-white">
+      <div className="flex flex-col gap-5 flex-[2] text-tcolor">
         <div className="flex flex-row gap-2 items-center justify-between">
-          <p className="text-2xl text-white">
+          <p className="text-2xl text-tcolor">
             {chartState === 1 && "Yearly"}
             {chartState === 2 && "Monthly"}
             {chartState === 3 && "Weekly"} Sales
@@ -88,7 +88,7 @@ function SaleReport() {
       </div>
       <div className="flex flex-col gap-2 flex-1 justify-between">
         <div className="flex flex-col">
-          <p className="text-3xl text-white">
+          <p className="text-3xl text-tcolor">
             {" "}
             {chartState === 1 && yearlyData?.totalIncome}
             {chartState === 2 && monthlyData?.totalIncome}
@@ -97,11 +97,11 @@ function SaleReport() {
           <p className="text-xl font-thin">Kyats</p>
         </div>
         <div className="flex flex-row items-center gap-3">
-          <div className="bg-[#383838] rounded-[5px] p-[12px]">
+          <div className="bg-[#1e1e1e] rounded-[5px] p-[12px]">
             <BsGraphUpArrow color="#75ff31" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">
+            <p className="text-xl text-tcolor">
               {" "}
               {chartState === 1 && yearlyData?.totalProfit}
               {chartState === 2 && monthlyData?.totalProfit}
@@ -112,11 +112,11 @@ function SaleReport() {
         </div>
 
         <div className="flex flex-row items-center gap-3">
-          <div className="bg-[#383838] rounded-[5px] p-[12px]">
+          <div className="bg-[#1e1e1e] rounded-[5px] p-[12px]">
             <PiCoinsBold color="#f2ff45" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">
+            <p className="text-xl text-tcolor">
               {" "}
               {chartState === 1 && yearlyData?.totalIncome}
               {chartState === 2 && monthlyData?.totalIncome}
@@ -126,11 +126,11 @@ function SaleReport() {
           </div>
         </div>
         <div className="flex flex-row items-center gap-3">
-          <div className="bg-[#383838] rounded-[5px] p-[12px]">
+          <div className="bg-[#1e1e1e] rounded-[5px] p-[12px]">
             <AiOutlineShop color="#d1b694" />
           </div>
           <div className="flex flex-col">
-            <p className="text-xl text-white">
+            <p className="text-xl text-tcolor">
               {" "}
               {chartState === 1 && yearlyData?.totalExpenses}
               {chartState === 2 && monthlyData?.totalExpenses}
@@ -140,7 +140,7 @@ function SaleReport() {
           </div>
         </div>
         <Link to="sale-report">
-          <div className="bg-[#b19177] cursor-pointer text-black rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
+          <div className="bg-primary cursor-pointer text-secondary rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
             SALE REPORT
           </div>
         </Link>

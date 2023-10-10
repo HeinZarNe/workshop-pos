@@ -76,7 +76,7 @@ const SaleReport = () => {
         datasets: [
           {
             data: [sun, mon, tue, wed, thu, fri, sat],
-            backgroundColor: ["#B19177"],
+            backgroundColor: ["#bb86fc"],
             label: "Sales",
           },
         ],
@@ -164,7 +164,7 @@ const SaleReport = () => {
                 sale?.monthlySales[28]?.total_sales,
                 sale?.monthlySales[29]?.total_sales,
               ],
-              backgroundColor: ["#B19177"],
+              backgroundColor: ["#bb96fc"],
               label: "Sales",
             },
           ],
@@ -218,7 +218,7 @@ const SaleReport = () => {
                 sale?.yearlySales[11]?.monthSales,
                 sale?.yearlySales[12]?.monthSales,
               ],
-              backgroundColor: ["#B19177"],
+              backgroundColor: ["#bb86fc"],
               label: "Sales",
             },
           ],
@@ -261,17 +261,17 @@ const SaleReport = () => {
         {/* first  */}
         <div className=" flex  justify-between">
           <div className="">
-            <h1 className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <h1 className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               Sale
             </h1>
             <p className=" text-gray-400">Report/ Sale</p>
           </div>
           <div className=" flex gap-3">
-            <div className="grid grid-cols-3 text-base border divide-base divide-x text-center border-base rounded-md">
+            <div className="grid grid-cols-3 text-primary border divide-primary divide-x text-center border-primary rounded-md">
               <p
                 className={
                   urlLink == "yearly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
                     : "p-3 px-4 text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("yearly-report")}
@@ -281,7 +281,7 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "monthly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
                     : "p-3 px-4 text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("monthly-report")}
@@ -291,7 +291,7 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "weekly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
+                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
                     : "p-3 px-4 text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("weekly-report")}
@@ -305,17 +305,17 @@ const SaleReport = () => {
         <div className="grid grid-cols-12  mt-5 gap-4">
           <div className="col-span-4 border border-secondary rounded-lg p-4">
             <div className="flex mb-3 items-center justify-between">
-              <p className="text-2xl text-white">Today Sales</p>
+              <p className="text-2xl text-tcolor">Today Sales</p>
               <BsThreeDotsVertical className="text-xl" />
             </div>
-            <h1 className="text-5xl font-semibold text-white">
+            <h1 className="text-5xl font-semibold text-tcolor">
               {todaySale?.todayTotalSales}
             </h1>
             <p className="text-sm ms-1 mt-1">Kyats</p>
             <div className="mt-4">
               <div className="flex border-t border-secondary py-3 items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <BsClipboard2Pulse className="text-base" />{" "}
+                  <BsClipboard2Pulse className="text-primary" />{" "}
                   <p className="text-lg">
                     {todaySale?.todayMaxSales?.voucherNumber.slice(0, 5)}
                   </p>
@@ -344,7 +344,7 @@ const SaleReport = () => {
               </div>
               <div className="flex border-t border-secondary py-3 items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <BsClipboard2Pulse className="text-base" />{" "}
+                  <BsClipboard2Pulse className="text-primary" />{" "}
                   <p className="text-lg">
                     {" "}
                     {todaySale?.todayMinSales?.voucherNumber.slice(0, 5)}
@@ -363,14 +363,14 @@ const SaleReport = () => {
               </div>
             </div>
             <div className="flex justify-end ">
-              <button className="text-lg font-semibold p-2 px-3 border rounded-lg mt-3 border-[#fafafa] text-[#fafafa] hover:bg-base hover:text-black duration-100 ">
+              <button className="text-lg font-semibold p-2 px-3 border rounded-lg mt-3 border-primary text-primary hover:bg-primary hover:text-black duration-100 ">
                 RECENT SALES
               </button>
             </div>
           </div>
           <div className="col-span-8 p-4 border  border-secondary rounded-lg ">
             <div className="">
-              <h1 className="text-2xl text-[#fafafa]">Weekly Sales</h1>
+              <h1 className="text-2xl text-primary">Weekly Sales</h1>
               <p className="">Total {sale?.averageAmount} kyat Sales</p>
             </div>
             <div className=" grid grid-cols-2 mt-4">
@@ -391,7 +391,7 @@ const SaleReport = () => {
                   <div className="flex items-center w-full px-4 justify-between">
                     <div className="flex items-start">
                       <div className="flex flex-col">
-                        <p className="text-md text-white font-semibold">
+                        <p className="text-md text-tcolor font-semibold">
                           Highest
                         </p>
                         <p className="text-sm">{hDate}</p>
@@ -402,7 +402,7 @@ const SaleReport = () => {
                       </p>
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">
+                      <p className="text-md text-tcolor font-semibold">
                         {sale?.highestSale?.highestSaleAmount}
                       </p>
                       <p className="text-sm">Kyats</p>
@@ -416,7 +416,7 @@ const SaleReport = () => {
                   <div className="flex items-center w-full px-4 justify-between">
                     <div className="flex items-start">
                       <div className="flex flex-col">
-                        <p className="text-md text-white font-semibold">
+                        <p className="text-md text-tcolor font-semibold">
                           Average
                         </p>
                         <p className="text-sm">Income</p>
@@ -427,7 +427,7 @@ const SaleReport = () => {
                       </p> */}
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">
+                      <p className="text-md text-tcolor font-semibold">
                         {sale?.averageAmount}
                       </p>
                       <p className="text-sm">Kyats</p>
@@ -441,7 +441,7 @@ const SaleReport = () => {
                   <div className="flex items-center w-full px-4 justify-between">
                     <div className="flex items-start">
                       <div className="flex flex-col">
-                        <p className="text-md text-white font-semibold">
+                        <p className="text-md text-tcolor font-semibold">
                           Lowest
                         </p>
                         <p className="text-sm">{lDate}</p>
@@ -452,14 +452,14 @@ const SaleReport = () => {
                       </p>
                     </div>
                     <div className="flex items-end flex-col">
-                      <p className="text-md text-white font-semibold">
+                      <p className="text-md text-tcolor font-semibold">
                         {sale?.lowestSale?.lowestSaleAmount}
                       </p>
                       <p className="text-sm ">Kyats</p>
                     </div>
                   </div>
                 </div>
-                <button className="btn block ms-auto btn-outline hover:bg-base hover:border-0 px-5 text-base border-base">
+                <button className="btn block ms-auto btn-outline hover:bg-primary hover:border-0 px-5 text-primary border-primary">
                   SEE MORE
                 </button>
               </div>
@@ -469,25 +469,26 @@ const SaleReport = () => {
         {/* third */}
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2">
-            <div className="text-3xl text-white font-semibold mb-4 ms-2 mt-10">
+            <div className="text-3xl text-tcolor font-semibold mb-4 ms-2 mt-10">
               Product Sales
             </div>
-            <div className=" border-2 rounded-t-lg border-base">
+            <div className=" border-2 rounded-t-lg border-primary">
               <div className="relative overflow-x-auto shadow-md sm:rounded-md">
-                <table className="w-full text-sm text-left text-[#fafafa] ">
-                  <thead className="text-xs text-gray-900 uppercase bg-base">
+                <table className="w-full text-sm text-left text-primary ">
+                  <thead className="text-xs text-gray-900 uppercase bg-primary">
                     <tr>
                       <th scope="col" className="px-6 py-3">
-                        NO
+                        <div className="text-secondary">NO</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        NAME
+                        <div className="text-secondary">NAME</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        BRAND
+                        <div className="text-secondary"> BRAND NO</div>
                       </th>
                       <th scope="col" className="px-6 text-end py-3">
-                        SALE PRICE
+                        <div className="text-secondary">SALE PRICE</div>
+                        
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <span className="sr-only">Edit</span>
@@ -503,7 +504,7 @@ const SaleReport = () => {
                         >
                           <th
                             scope="row"
-                            className="px-6 py-4 font-medium text-white whitespace-nowra"
+                            className="px-6 py-4 font-medium text-tcolor whitespace-nowra"
                           >
                             {data.id}
                           </th>
@@ -517,7 +518,7 @@ const SaleReport = () => {
                               to={"/profile"}
                               className="font-medium flex ps-5 justify-center text-blue-600  hover:underline"
                             >
-                              <button className="flex items-center justify-center w-7 h-7 rounded-full bg-base text-black">
+                              <button className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-black">
                                 <AiOutlineArrowRight />
                               </button>
                             </NavLink>
@@ -531,10 +532,10 @@ const SaleReport = () => {
             </div>
           </div>
           <div className="col-span-1">
-            <div className="text-3xl text-white font-semibold mb-4 ms-2 mt-10">
+            <div className="text-3xl text-tcolor font-semibold mb-4 ms-2 mt-10">
               Brand Sales
             </div>
-            <div className="border-2 border-base p-4 rounded-md">
+            <div className="border-2 border-primary p-4 rounded-md">
               <DonutChart />
               <div className="flex w-[100%] mx-auto mt-3 justify-between">
                 <div className="flex items-center gap-1">

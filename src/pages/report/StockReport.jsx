@@ -66,22 +66,22 @@ const StockReport = () => {
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  const inStock = `w-[65%] h-full bg-[#884A39]`;
+  const inStock = `w-[65%] h-full bg-[#610C9F]`;
   const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
-  const lowStock = `w-[35%] h-full bg-[#C38154] `;
+  const lowStock = `w-[35%] h-full bg-[#DA0C81] `;
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
         <div className=" flex  justify-between">
           <div className="">
-            <h1 className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <h1 className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               Stock
             </h1>
             <p className=" text-gray-400">Report/ Stock</p>
           </div>
           <div className=" flex gap-3">
             <Link to={"/sale/cashier"}>
-              <button className=" px-4 py-2 mt-1 rounded-lg text-base border border-base hover:text-black hover:bg-base">
+              <button className=" px-4 py-2 mt-1 rounded-lg text-primary border border-primary hover:text-secondary  hover:bg-primary">
                 {" "}
                 Go To Shop
               </button>
@@ -97,37 +97,37 @@ const StockReport = () => {
         {/* second  */}
         <div className="grid grid-cols-2 mt-12 gap-3">
           <div className="grid grid-cols-2 gap-3">
-            <div className="border border-base flex itmes-center justify-around rounded-md py-4 p-3 ">
+            <div className="border border-primary flex itmes-center justify-around rounded-md py-4 p-3 ">
               <div className="flex">
                 <div className=" rounded-full bg-[#202020] p-3">
-                  <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-base">
-                    <BsCart3 size={28} className="text-base" />
+                  <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-primary">
+                    <BsCart3 size={28} className="text-primary" />
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="text-3xl font-semibold text-white">
+                <p className="text-3xl font-semibold text-tcolor">
                   {stockLevelBar?.total_product}
                 </p>
                 <p className="text-lg">Total Products</p>
               </div>
             </div>
-            <div className="border border-base flex itmes-center justify-around rounded-md py-4 p-3 ">
+            <div className="border border-primary flex itmes-center justify-around rounded-md py-4 p-3 ">
               <div className="flex">
                 <div className=" rounded-full bg-[#202020] p-3">
-                  <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-base">
-                    <BsCoin size={28} className="text-base" />
+                  <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-primary">
+                    <BsCoin size={28} className="text-primary" />
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="text-3xl font-semibold text-white">
+                <p className="text-3xl font-semibold text-tcolor">
                   {stockLevelBar?.total_brand}
                 </p>
                 <p className="text-lg">Total Brands</p>
               </div>
             </div>
-            <div className="col-span-2 border  border-base  rounded-md p-5 ">
+            <div className="col-span-2 border  border-primary  rounded-md p-5 ">
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
                   <div className=" flex w-[75%]  overflow-hidden h-3 rounded-full ">
@@ -138,7 +138,7 @@ const StockReport = () => {
                 ) : null}
 
                 <div className="w-[100px]">
-                  <p className="text-3xl text-white text-center mx-auto flex justify-center me-6 font-semibold">
+                  <p className="text-3xl text-tcolor text-center mx-auto flex justify-center me-6 font-semibold">
                     {stockLevelBar?.total_product}
                   </p>
                   <p className="text-lg">Products</p>
@@ -147,7 +147,7 @@ const StockReport = () => {
               <div className="mt-4">
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#884A39] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#610C9F] rounded-full"></div>{" "}
                     <p className="text-lg">Instock</p>
                   </div>
                   <div className="flex gap-7">
@@ -162,7 +162,7 @@ const StockReport = () => {
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#C38154] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#E95793] rounded-full"></div>{" "}
                     <p className="text-lg">Low stock</p>
                   </div>
                   <div className="flex gap-7">
@@ -177,7 +177,7 @@ const StockReport = () => {
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#FFC26F] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#940B92] rounded-full"></div>{" "}
                     <p className="text-lg">Out of stock</p>
                   </div>
                   <div className="flex gap-7">
@@ -193,8 +193,8 @@ const StockReport = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 border border-base rounded-md">
-            <div className="text-3xl font-semibold flex text-white">
+          <div className="p-4 border border-primary rounded-md">
+            <div className="text-3xl font-semibold flex text-tcolor">
               Best Seller Brands
             </div>
             <div className="flex mt-1 items-center justify-between">
@@ -205,14 +205,14 @@ const StockReport = () => {
                 <DonutChart1 className="w-full" />
               </div>
               <div className="w-[55%]">
-                <div className="text-3xl text-white font-semibold ms-auto text-end">
+                <div className="text-3xl text-tcolor font-semibold ms-auto text-end">
                   {bestSeller?.weekly_total_cost}
                 </div>
                 <div className="text-end text-lg mt-[-8px] mb-2">kyats</div>
                 <div className="">
                   <div className="flex border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#884A39] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#DA0C81] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[0].brand_name}
                       </p>
@@ -228,7 +228,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#C38154] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#E95793] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[1].brand_name}
                       </p>
@@ -244,7 +244,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#FFC26F] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#940B92] rounded-full"></div>{" "}
                       {bestSeller?.weekly_best_seller_brands[2].brand_name}
                       <p className="text-lg"></p>
                     </div>
@@ -259,7 +259,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#F9E0BB] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#DA0C81] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[3].brand_name}
                       </p>
@@ -275,7 +275,7 @@ const StockReport = () => {
                   </div>
                 </div>
                 <Link to="/sale/recent">
-                  <button className="btn btn-outline border-base ms-auto flex mt-3 hover:bg-base hover:text-white">
+                  <button className="btn btn-outline text-primary border-primary ms-auto flex mt-3 hover:bg-primary hover:text-secondary">
                     RECENT SALES
                   </button>
                 </Link>
@@ -284,12 +284,12 @@ const StockReport = () => {
           </div>
         </div>
         <div className="mt-10">
-          <div className="text-3xl mb-4  font-semibold text-white">
+          <div className="text-3xl mb-4  font-semibold text-tcolor">
             Stock Overview
           </div>
           <div className="flex justify-between">
             <div className="relative my-3">
-              <div className="absolute inset-y-0 left-0 flex items-center focus:border-base pl-3 pointer-events-none">
+              <div className="absolute inset-y-0 left-0 flex items-center focus:border-primary pl-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
@@ -311,7 +311,7 @@ const StockReport = () => {
                 value={keyword}
                 onChange={handleSearch}
                 id="default-search"
-                className="block w-[300px] p-2 pl-10 text-sm focus:border-base text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm focus:border-primary text-tcolor border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
                 placeholder="Search ..."
               />
             </div>
@@ -319,7 +319,7 @@ const StockReport = () => {
               <div className="">Sort:</div>
               <select
                 id="countries"
-                className=" flex   items-center justify-center border border-base  text-white bg-transparent text-sm rounded-md p-2 "
+                className=" flex   items-center justify-center border border-primary  text-tcolor bg-transparent text-sm rounded-md p-2 "
                 onChange={(e) => setFilter(e.target.value)}
               >
                 <option
@@ -353,31 +353,31 @@ const StockReport = () => {
               </select>
             </div>
           </div>
-          <div className=" border-2 rounded-t-xl border-base mt-2">
+          <div className=" border-2 rounded-t-xl border-primary mt-2">
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="w-full text-sm text-left text-[#fafafa] ">
-                <thead className="text-xs text-gray-900 uppercase bg-base">
+              <table className="w-full text-sm text-left">
+                <thead className="text-xs bg-primary">
                   <tr>
-                    <th scope="col" className="px-6 py-3">
-                      NO
+                    <th scope="col" className="px-6">
+                      <span className="text-secondary"> NO</span>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      NAME
+                      <span className="text-secondary"> NAME</span>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      BRAND
+                      <span className="text-secondary">BRAND </span>
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      UNIT
+                    <th scope="col" className="px-6 py-3 text-end">
+                      <span className="text-secondary">UNIT </span>
                     </th>
                     <th scope="col" className="px-6 text-end py-3">
-                      SALE PRICE
+                      <span className="text-secondary"> SALE PRICE</span>
                     </th>
                     <th scope="col" className="px-6  text-end py-3">
-                      TOTAL STOCK
+                      <span className="text-secondary">TOTAL STOCK</span>
                     </th>
                     <th scope="col" className="px-6  text-center py-3">
-                      STOCK LEVEL
+                      <span className="text-secondary"> STOCK LEVEL</span>
                     </th>
                   </tr>
                 </thead>
@@ -388,7 +388,7 @@ const StockReport = () => {
                         <tr key={e.id} className=" border-b hover:bg-white/10 ">
                           <th
                             scope="row"
-                            className="px-6 py-4 font-medium text-white whitespace-nowra"
+                            className="px-6 py-4 font-medium text-tcolor whitespace-nowra"
                           >
                             {e.id}
                           </th>

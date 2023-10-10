@@ -8,9 +8,9 @@ const StockTable = ({ stocksData }) => {
   return (
     <div>
       <div className="overflow-x-auto">
-        <table className="table text-white bg-[#272727] rounded-md">
+        <table className="table text-tcolor bg-secondary rounded-md">
           {/* head */}
-          <thead className=" text-white">
+          <thead className=" text-tcolor">
             <tr>
               <th>NO</th>
               <th>NAME</th>
@@ -29,7 +29,7 @@ const StockTable = ({ stocksData }) => {
                 <td>{item.quantity}</td>
 
                 {/* <td>
-                  <div className=" text-white flex text-[20px] gap-3">
+                  <div className=" text-tcolor flex text-[20px] gap-3">
                     <button className=" bg-[#B19777] rounded-full p-2">
                       <AiOutlinePlus />
                     </button>

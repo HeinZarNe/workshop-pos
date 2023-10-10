@@ -91,8 +91,8 @@ const Home = () => {
       <div className="p-5 flex flex-col gap-5 overview">
         {/* Header */}
         <div className="flex flex-col gap-2 ">
-          <h1 className="text-2xl text-[#B19777]">Overview</h1>
-          <p className="text-white">Overview / Products</p>
+          <h1 className="text-2xl text-primary">Overview</h1>
+          <p className="text-tcolor">Overview / Products</p>
         </div>
         {/* First Section */}
         <div
@@ -108,12 +108,12 @@ const Home = () => {
             }
           >
             <div className=" rounded-full bg-[#202020] p-3">
-              <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-base">
+              <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-primary">
                 <BsCart3 size={28} color={BaseColor} />
               </div>
             </div>
             <div className="flex flex-col items-end min-w-[100px]">
-              <p className="text-2xl font-semibold text-white ">
+              <p className="text-2xl font-semibold text-tcolor ">
                 {data?.total_stock || "--"}
               </p>
               <p>Total stocks</p>
@@ -127,12 +127,12 @@ const Home = () => {
             }
           >
             <div className=" rounded-full bg-[#202020] p-3">
-              <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-base">
+              <div className=" rounded-full bg-[#262626] p-4 border-[1px] border-primary">
                 <BsFillPersonBadgeFill size={26} color={BaseColor} />
               </div>
             </div>
             <div className="flex flex-col items-end min-w-[100px]">
-              <p className="text-2xl font-semibold text-white  ">
+              <p className="text-2xl font-semibold text-tcolor  ">
                 {data?.total_staff || "--"}
               </p>
               <p>Total Staff</p>
@@ -140,7 +140,7 @@ const Home = () => {
           </div>
           {/* Quick Actions */}
           <div className={ContentBoxClass + " flex flex-col  gap-3 flex-[4] "}>
-            <p className="text-lg   text-white">Quick Actions</p>
+            <p className="text-lg   text-tcolor">Quick Actions</p>
             <div className="flex flex-row items-stretch gap-2 ">
               <div
                 className={
@@ -163,7 +163,7 @@ const Home = () => {
                 </Link>
 
                 <div>
-                  <p className="text-lg text-white">Add Product</p>
+                  <p className="text-lg text-tcolor">Add Product</p>
                   <p className="text-sm">stock update</p>
                 </div>
               </div>
@@ -182,12 +182,12 @@ const Home = () => {
                   </div>
 
                   <div>
-                    <p className="text-lg text-white">Go to Shop</p>
+                    <p className="text-lg text-tcolor">Go to Shop</p>
                     <p className="text-sm">complete the sale</p>
                   </div>
                 </div>
                 <Link to={"/products"}>
-                  <div className=" rounded-full p-2 bg-base bg-opacity-5">
+                  <div className=" rounded-full p-2 bg-primary bg-opacity-5">
                     <AiOutlineArrowRight
                       size={20}
                       color={BaseColor}

@@ -65,7 +65,7 @@ const TodaySaleOverview = () => {
         <div className="bg-[#272727] ">
           <div className="flex justify-between gap-5 ">
             <div className="w-full flex flex-col items-center justify-center h-[50vh]">
-              <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+              <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
                 <p className="text-2xl font-semibold">
                   There is currently no sales.
                 </p>
@@ -77,40 +77,40 @@ const TodaySaleOverview = () => {
         <>
           {" "}
           <div className="flex flex-row items-center justify-between">
-            <p className="text-3xl text-white">Today Sales Overview</p>
+            <p className="text-3xl text-tcolor">Today Sales Overview</p>
 
             <button
-              className="flex flex-row items-center justify-between gap-3 border border-base  text-white py-1 px-3 rounded-md "
+              className="flex flex-row items-center justify-between gap-3 border border-primary  text-tcolor py-1 px-3 rounded-md "
               onClick={handleSaleClose}
             >
               <AiFillShop color={BaseColor} />
               {isSaleClose?.is_sale_close ? "Sale open" : "Sale Close"}
             </button>
           </div>
-          <DataTable data={data?.today_sales} />
+          <DataTable className="text-tcolor" data={data?.today_sales} />
           <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
             <div className="flex flex-row items-center border rounded">
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-md text-base">Total Vouchers</p>
-                <p className="text-xl font-bold text-white">
+              <div className="flex flex-col items-end border-r px-6 py-2  border-tscolor">
+                <p className="text-md text-primary">Total Vouchers</p>
+                <p className="text-xl font-bold text-tcolor">
                   {data?.total_voucher}
                 </p>
               </div>
-              <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                <p className="text-md text-base">Total Cash</p>
-                <p className="text-xl font-bold text-white">
+              <div className="flex flex-col items-end border-r py-2 px-6  border-tscolor">
+                <p className="text-md text-primary">Total Cash</p>
+                <p className="text-xl font-bold text-tcolor">
                   {data?.total_cash}
                 </p>
               </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-md text-base">Total Tax</p>
-                <p className="text-xl font-bold text-white">
+              <div className="flex flex-col items-end border-r px-6 py-2  border-tscolor">
+                <p className="text-md text-primary">Total Tax</p>
+                <p className="text-xl font-bold text-tcolor">
                   {data?.total_tax}
                 </p>
               </div>
-              <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                <p className="text-md text-base">Total</p>
-                <p className="text-xl font-bold text-white">
+              <div className="flex flex-col items-end border-r px-6 py-2  border-tscolor">
+                <p className="text-md text-primary">Total</p>
+                <p className="text-xl font-bold text-tcolor">
                   {" "}
                   {data?.total_net}
                 </p>

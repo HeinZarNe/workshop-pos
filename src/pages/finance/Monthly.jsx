@@ -38,14 +38,14 @@ const Monthly = () => {
         {/* top */}
         <div className=" flex  justify-between">
           <div className="">
-            <h1 className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <h1 className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               Monthly
             </h1>
             <p className=" text-gray-400">Finance/ Monthly</p>
           </div>
           <div className=" flex gap-3">
             {/* <Link to={"/sale/cashier"}>
-              <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+              <button className=" px-4 py-2 rounded-lg text-tcolor border border-[#FFFFFF] hover:bg-[#B19777]">
                 {" "}
                 Go To Shop
               </button>
@@ -60,27 +60,27 @@ const Monthly = () => {
         {/* second */}
         <div className="flex mt-12 flex-row justify-between">
           <div className="flex flex-col gap-2">
-            <p className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <p className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               This Month Sales Overview
             </p>
           </div>
           {/* ... */}
-          <div className="flex gap-2 flex-row justify-center items-center text-white ">
+          <div className="flex gap-2 flex-row justify-center items-center text-tcolor ">
             <MonthPickerInput
               placeholder="Pick month"
               value={value}
-              className="text-white"
+              className="text-tcolor"
               onChange={setValue}
             />
             <div
-              className="flex text-black items-center justify-center font-semibold text-xl  h-fit p-2 rounded-sm bg-base"
+              className="flex text-black items-center justify-center font-semibold text-xl  h-fit p-2 rounded-sm bg-primary"
               onClick={handleDateSearch}
             >
               <FiSearch />
             </div>
             {dateSearch && (
               <div
-                className="flex text-black items-center justify-center font-semibold text-xl  h-fit p-2 rounded-sm bg-base"
+                className="flex text-black items-center justify-center font-semibold text-xl  h-fit p-2 rounded-sm bg-primary"
                 onClick={(_) => {
                   setValue(null);
                   setDateSearch(false);
@@ -96,7 +96,7 @@ const Monthly = () => {
           <div className="bg-[#272727] ">
             <div className="flex justify-between gap-5 ">
               <div className="w-full flex flex-col items-center justify-center h-[50vh]">
-                <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
                   <p className="text-2xl font-semibold">There is no datas.</p>
                 </div>
               </div>
@@ -104,28 +104,28 @@ const Monthly = () => {
           </div>
         ) : (
           <>
-            <div className=" border-2 rounded-t-xl border-base mt-10">
+            <div className=" border-2 rounded-t-xl border-primary mt-10">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-[#fafafa] ">
-                  <thead className="text-xs text-gray-900 uppercase bg-base">
+                  <thead className="text-xs text-gray-900 uppercase bg-primary">
                     <tr>
                       <th scope="col" className="px-6 py-3">
-                        NO
+                        <div className="text-secondary">NO</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        DATE
+                        <div className="text-secondary">DATE</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        VOUCHERS
+                        <div className="text-secondary">VOUCHERS</div>
                       </th>
                       <th scope="col" className="px-6  text-end py-3">
-                        CASH
+                        <div className="text-secondary">CASH</div>
                       </th>
                       <th scope="col" className="px-6  text-end py-3">
-                        TAX
+                        <div className="text-secondary">TAX</div>
                       </th>
                       <th scope="col" className="px-6  text-end py-3">
-                        TOTAL
+                        <div className="text-secondary">TOTAL</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <span className="sr-only">Edit</span>
@@ -141,7 +141,7 @@ const Monthly = () => {
                         >
                           <th
                             scope="row"
-                            className="px-6 py-4 font-medium text-white whitespace-nowra"
+                            className="px-6 py-4 font-medium text-tcolor whitespace-nowra"
                           >
                             {data.id}
                           </th>
@@ -155,7 +155,7 @@ const Monthly = () => {
                               to={"/profile"}
                               className="font-medium flex justify-center text-blue-600  hover:underline"
                             >
-                              <button className="flex items-center mx-auto justify-center w-7 h-7 rounded-full bg-base text-black">
+                              <button className="flex items-center mx-auto justify-center w-7 h-7 rounded-full bg-primary text-black">
                                 <AiOutlineArrowRight />
                               </button>
                             </NavLink>
@@ -171,39 +171,39 @@ const Monthly = () => {
             {monthlySaleData && (
               <div className="">
                 <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
-                  <div className="flex flex-row items-center border rounded">
-                    <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                  <div className="flex flex-row items-center border-primary border rounded">
+                    <div className="flex flex-col items-end border-r py-2 px-6  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {monthlySaleData.total_days}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {monthlySaleData.total_vouchers}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {monthlySaleData.total_cash}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {monthlySaleData.total_tax}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {monthlySaleData.total}
                       </p>
                     </div>
                   </div>
-                  <div className="pagination absolute bottom-[30px] right-[40px] ">
+                  <div className="pagination bottom-[30px] right-[40px] ">
                     <Pagination
                       total={monthlySaleData?.this_month_sales?.last_page}
                       onChange={(e) => {

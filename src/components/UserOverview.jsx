@@ -43,16 +43,16 @@ const UserOverview = () => {
     <div>
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
-          <h1 className="text-2xl text-[#B19777]">Users</h1>
-          <p className="text-white">Users / Overview</p>
+          <h1 className="text-2xl text-primary">Users</h1>
+          <p className="text-tcolor">Users / Overview</p>
         </div>
         <Link to={"/users/create"}>
           <button className=" py-2 px-4 rounded-lg button">Create User</button>
         </Link>
       </div>
 
-      <div className=" p-5 text-white flex flex-col gap-3">
-        <h1 className="text-[21px] font-[500] text-white">Staff Overview</h1>
+      <div className=" p-5 text-tcolor flex flex-col gap-3">
+        <h1 className="text-[21px] font-[500] text-tcolor">Staff Overview</h1>
         <div className="flex flex-row items-center gap-3">
           <div className="relative my-3">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -77,7 +77,7 @@ const UserOverview = () => {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               id="default-search"
-              className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
               placeholder="Search ..."
               required
             />
@@ -133,7 +133,7 @@ const UserOverview = () => {
                       alt="admin"
                       className=" h-[150px] w-[150px] rounded-full"
                     />
-                    <div className=" text-[#B19777]">
+                    <div className=" text-primary">
                       <h2 className="text-3xl mb-2">{userDetail.data.name}</h2>
                       <p className=" text-gray-300 text-sm">
                         {userDetail.data.position}

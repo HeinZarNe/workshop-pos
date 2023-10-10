@@ -214,13 +214,13 @@ const Cashier = () => {
 
   if (data?.is_sale_close) {
     return (
-      <div className="bg-[#272727] h-screen">
+      <div className="bg-back h-screen">
         <div className="flex justify-between gap-5 ">
           <div className="w-full">
             <div className="flex justify-between mx-5 my-5">
               <div className=" flex items-center">
                 <p
-                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-primary  font-semibold"
                   onClick={handleGoBack}
                 >
                   <FaArrowLeft /> Back
@@ -228,12 +228,12 @@ const Cashier = () => {
               </div>
             </div>
             <div className="h-[70vh] flex flex-col items-center justify-center">
-              <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+              <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
                 <p className="text-2xl font-semibold">
                   Sale is currently closed. Do you want to open it?
                 </p>
                 <button
-                  className="px-3 py-1 pb-2 font-semibold rounded-md text-xl border border-base"
+                  className="px-3 py-1 pb-2 font-semibold rounded-md text-xl border border-primary"
                   onClick={handleSaleOpen}
                 >
                   Open
@@ -247,13 +247,13 @@ const Cashier = () => {
   }
 
   return (
-    <div className="bg-[#272727]">
+    <div className="bg-back">
       <div className="flex justify-between gap-5 ">
         <div className="w-full">
           <div className="flex justify-between mx-5 my-5 items-center">
             <div className=" flex items-center">
               <p
-                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-base hover:border-base text-base hover:text-white  font-semibold"
+                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-primary  font-semibold"
                 onClick={handleGoBack}
               >
                 <FaArrowLeft /> Back
@@ -279,9 +279,9 @@ const Cashier = () => {
               />
             </div>
             <div class="relative my-3 flex items-center">
-              <div class="absolute inset-y-0 left-2 flex items-center text-[#B19777] pointer-events-none">
+              <div class="absolute inset-y-0 left-2 flex items-center text-primary pointer-events-none">
                 <svg
-                  className="w-4 h-4 ms-1 text-[#B19777] dark:text-[#B19777]"
+                  className="w-4 h-4 ms-1 text-primary dark:text-primary"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -301,7 +301,7 @@ const Cashier = () => {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 id="default-search"
-                class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-[#B19777] border border-[#B19777] rounded-lg bg-[#272727]   placeholder-[#B19777]  focus:outline-none"
+                class="block py-2 pl-10 pr-3 w-[300px] me-2 text-sm text-primary border border-primary rounded-lg bg-secondary   placeholder-primary  focus:outline-none"
                 placeholder="Search ..."
               />
             </div>
@@ -312,7 +312,7 @@ const Cashier = () => {
               {data?.products?.map((product) => (
                 <div
                   key={product.id}
-                  className={`product flex hover:bg-base/20 flex-col justify-between cursor-pointer  w-[23%] bg-[#323232] border border-[#B19777] rounded-lg shadow dark:bg-[#323232] dark:border-[#B19777]" ${
+                  className={`product flex hover:bg-primary/10 flex-col justify-between cursor-pointer  w-[23%] bg-secondary border border-primary rounded-lg shadow dark:bg-secondary dark:border-primary" ${
                     selectedProducts.includes(product.id) ? "active" : ""
                   }`}
                   onClick={() => handleProductClick(product.id)}
@@ -326,10 +326,10 @@ const Cashier = () => {
                   </div>
 
                   <div className="p-5 pt-3 pe-6 text-right">
-                    <h5 className=" text-xl font-semibold tracking-tight text-[#B19777]">
+                    <h5 className=" text-xl font-semibold tracking-tight text-primary">
                       {product.name}
                     </h5>
-                    <p className=" font-normal  text-gray-400">
+                    <p className=" font-normal  text-tscolor">
                       {product.price} Kyats
                     </p>
                   </div>
@@ -339,9 +339,9 @@ const Cashier = () => {
           </div>
         </div>
         {/* keyboard  */}
-        <div className="flex relative  overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-[#B19777] max-h-screen">
+        <div className="flex relative  overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-primary max-h-screen">
           <div className="">
-            <h1 className="text-3xl py-5 px-4 text-white font-semibold border-b border-b-[#B19777]">
+            <h1 className="text-3xl py-5 px-4 text-tcolor font-semibold border-b border-b-primary">
               RECEIVE
             </h1>
           </div>
@@ -366,23 +366,23 @@ const Cashier = () => {
               return (
                 <div
                   key={productId}
-                  className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-[#B19777] 
+                  className={`display cursor-pointer flex py-1 px-4 justify-between items-   transition-all border-b border-b-primary 
                   ${
                     selectedProduct.id === currentSelectedProductId &&
                     keyBoardShow
-                      ? " bg-base/20"
+                      ? " bg-primary/10"
                       : ""
                   }
                   `}
                   onClick={() => handleProductInCartSelect(productId)}
                 >
                   <div className=" ">
-                    <h5 className=" text-lg font-semibold tracking-tight text-base">
+                    <h5 className=" text-lg font-semibold tracking-tight text-primary">
                       {selectedProduct.name}
                     </h5>
                     <div className="flex ms-1 font-mono text-sm">
                       <p className=" text-sm flex gap-1 text-gray-400">
-                        <div className="text-white/80">
+                        <div className="text-tcolor/80">
                           {" "}
                           {selectedProduct.price}
                         </div>
@@ -392,9 +392,9 @@ const Cashier = () => {
                       <p className="mb-3 text-gray-400">{quantity}</p>
                     </div>
                   </div>
-                  <p className="flex gap-1 text-[#fafafa] font-semibold">
+                  <p className="flex gap-1 text-tcolor font-semibold">
                     {totalPrice}{" "}
-                    <div className="font-normal text-white/70">Kyats</div>
+                    <div className="font-normal text-tcolor/70">Kyats</div>
                   </p>
                 </div>
               );
@@ -407,9 +407,9 @@ const Cashier = () => {
           >
             <div className="">
               <div className="text-end py-1 pb-2">
-                <div className="flex text-xl text-white  justify-end me-4">
+                <div className="flex text-xl text-tcolor  justify-end me-4">
                   Cash:
-                  <p className="ms-2 font-semibold text-[#fafafa]">
+                  <p className="ms-2 font-semibold text-tcolor">
                     {calculateTotal()}
                   </p>
                 </div>
@@ -422,17 +422,17 @@ const Cashier = () => {
                 className="flex border-t border-gray-400 items-center"
               >
                 {keyBoardShow && (
-                  <div className="border border-gray-400 ms-2 hover:bg-gray-400 duration-100 hover:text-black p-2 rounded px-3 flex">
+                  <div className="border border-primary text-primary ms-2 hover:bg-primary duration-100 hover:text-secondary p-2 rounded px-3 flex">
                     <FaChevronDown />
                   </div>
                 )}
                 <p
-                  className={` text-xl text-white flex ms-auto py-4 pt-3 ${
+                  className={` text-xl text-tcolor flex ms-auto py-4 pt-3 ${
                     keyBoardShow ? " h-[50px]" : "mb-2"
                   } justify-end me-4  `}
                 >
                   Total:
-                  <div className="ms-2 text-[#fafafa] font-semibold">
+                  <div className="ms-2 text-tcolor font-semibold">
                     {" "}
                     {calculateTotal() + 300 + " "}
                   </div>{" "}
@@ -440,19 +440,19 @@ const Cashier = () => {
               </div>
             </div>
             {/* keyboard layout  */}
-            <div className="mb-12 w-full bg-[#323232]">
-              {/* <div className="absolute bottom-0 w-full bg-[#323232]"> */}
+            <div className="mb-12 w-full bg-secondary">
+              {/* <div className="absolute bottom-0 w-full bg-secondary"> */}
               <div className="buttons  text-gray-400">
                 <div className="grid grid-cols-2 h-12">
                   <button
                     onClick={() => handleNumberClick("minus")}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-2xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-2xl number-btn"
                   >
                     -
                   </button>
                   <button
                     onClick={() => handleNumberClick("plus")}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-2xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-2xl number-btn"
                   >
                     +
                   </button>
@@ -460,7 +460,7 @@ const Cashier = () => {
                     onClick={() => handleNumberClick("")}
                     className={`${
                       keyBoardShow
-                        ? "bg-base/90 text-white col-span-1 font-semibold number-btn"
+                        ? "bg-primary/90 text-tcolor col-span-1 font-semibold number-btn"
                         : "col-span-1 font-semibold number-btn"
                     } `}
                   >
@@ -476,19 +476,19 @@ const Cashier = () => {
                 <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(7)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     7
                   </button>
                   <button
                     onClick={() => handleNumberClick(8)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     8
                   </button>
                   <button
                     onClick={() => handleNumberClick(9)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     9
                   </button>
@@ -496,7 +496,7 @@ const Cashier = () => {
                     onClick={() => handleNumberClick("")}
                     className={`${
                       keyBoardShow
-                        ? "bg-base/90 text-white col-span-1 font-semibold number-btn"
+                        ? "bg-primary/90 text-tcolor col-span-1 font-semibold number-btn"
                         : "col-span-1 font-semibold number-btn"
                     } `}
                   >
@@ -512,19 +512,19 @@ const Cashier = () => {
                 <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(4)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     4
                   </button>
                   <button
                     onClick={() => handleNumberClick(5)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     5
                   </button>
                   <button
                     onClick={() => handleNumberClick(6)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     6
                   </button>
@@ -539,25 +539,25 @@ const Cashier = () => {
                 <div className="grid grid-cols-3 h-12">
                   <button
                     onClick={() => handleNumberClick(1)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     1
                   </button>
                   <button
                     onClick={() => handleNumberClick(2)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl number-btn"
                   >
                     2
                   </button>
                   <button
                     onClick={() => handleNumberClick(3)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] text-xl  number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary text-xl  number-btn"
                   >
                     3
                   </button>
                   {/* <button
                     onClick={() => handleNumberClick("")}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary font-semibold number-btn"
                   >
                     PRICE
                   </button> */}
@@ -571,13 +571,13 @@ const Cashier = () => {
                 <div className="grid grid-cols-3 h-12">
                   {/* <button
                     // onClick={() => handleNumberClick("0")}
-                    className="col-span-1 text-lg hover:bg-base/30 hover:text-[#fafafa] font-semibold number-btn"
+                    className="col-span-1 text-lg hover:bg-primary/20 hover:text-primary font-semibold number-btn"
                   >
                     +/-
                   </button> */}
                   <button
                     onClick={() => handleNumberClick(0)}
-                    className="col-span-1 hover:bg-base/30 hover:text-[#fafafa]  text-xl number-btn"
+                    className="col-span-1 hover:bg-primary/20 hover:text-primary  text-xl number-btn"
                   >
                     0
                   </button>
@@ -589,13 +589,13 @@ const Cashier = () => {
                 </button> */}
                   <button
                     onClick={handleClearClick}
-                    className="flex justify-center hover:bg-base/30 hover:text-[#fafafa] text-xl font-bold items-center number-btn"
+                    className="flex justify-center hover:bg-primary/20 hover:text-primary text-xl font-bold items-center number-btn"
                   >
                     .
                   </button>
                   <button
                     onClick={handleClearClick}
-                    className="flex font-semibold hover:bg-base/30 hover:text-[#fafafa] text-xl justify-center items-center number-btn"
+                    className="flex font-semibold hover:bg-primary/20 hover:text-primary text-xl justify-center items-center number-btn"
                   >
                     <FiDelete />
                   </button>
@@ -606,13 +606,13 @@ const Cashier = () => {
 
           <div
             className={`grid absolute w-full bottom-0 grid-cols-1 ${
-              selectedProducts?.length === 0 ? "bg-[#2e2e2e]" : "bg-[#B19777]"
-            }  text-white`}
+              selectedProducts?.length === 0 ? "bg-[#2e2e2e]" : "bg-primary"
+            }  text-tcolor`}
           >
             <button
               onClick={handlePaymentClick}
               disabled={selectedProducts?.length === 0}
-              className=" number-btn h-[49px]"
+              className=" number-btn text-secondary h-[49px]"
             >
               Payment
             </button>
