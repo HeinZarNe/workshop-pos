@@ -8,7 +8,7 @@ const StockTable = ({ stocksData }) => {
   return (
     <div>
       <div className="overflow-x-auto">
-        <table className="table text-tcolor bg-secondary rounded-md">
+        <table className="table text-tcolor bg-transparent mt-5 rounded-md">
           {/* head */}
           <thead className=" text-tcolor">
             <tr>

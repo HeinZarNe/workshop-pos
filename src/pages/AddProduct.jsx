@@ -204,7 +204,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
           >
             <div className=" text-tcolor flex flex-col gap-8 p-5">
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Name *
                 </span>
                 <input
@@ -217,7 +217,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Brand *
                 </span>
                 <select
@@ -239,7 +239,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               </div>
 
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Unit *
                 </span>
                 <input
@@ -252,7 +252,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   More Info *
                 </span>
                 <textarea
@@ -300,7 +300,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
             >
               <div className=" text-tcolor flex flex-col gap-8 p-5">
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Actual Price *
                   </span>
                   <input
@@ -317,7 +317,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   />
                 </div>
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Sale Price *
                   </span>
                   <input
@@ -564,7 +564,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
           >
             <div className=" text-tcolor flex flex-col gap-8 p-5">
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Name *
                 </span>
                 <input
@@ -577,7 +577,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Brand *
                 </span>
                 <select
@@ -596,7 +596,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 </select>
               </div>
               {/* <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Stock *
                 </span>
                 <input
@@ -617,7 +617,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 />
               </div> */}
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Unit *
                 </span>
                 <input
@@ -630,7 +630,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   More Info *
                 </span>
                 <textarea
@@ -650,8 +650,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
               {[name, brand_name, total_stock, unit, more_information].some(
                 (item) => item == false
               ) ? (
-                <p className="text-warning flex flex-row items-center gap-1 pl-5">
-                  <AiOutlineInfoCircle color={"#fbbd23"} />
+                <p className="text-primary flex flex-row items-center gap-1 pl-5">
+                  <AiOutlineInfoCircle color={"#BB86fc"} />
                   Please fill every required information!
                 </p>
               ) : (
@@ -679,7 +679,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
             >
               <div className=" text-tcolor flex flex-col gap-8 p-5">
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Actual Price *
                   </span>
                   <input
@@ -696,7 +696,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   />
                 </div>
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Sale Price *
                   </span>
                   <input

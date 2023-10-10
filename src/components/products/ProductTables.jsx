@@ -38,7 +38,7 @@ const ProductTables = ({
         <AddProduct editState={editstate} setEditState={setEditState} />
       ) : (
         <div className="overflow-x-auto">
-          <table className="table text-tcolor bg-transparent rounded-md">
+          <table className="table text-tcolor mt-5 bg-transparent rounded-md">
             {/* head */}
             <thead className=" text-tcolor">
               <tr>

@@ -267,12 +267,12 @@ const SaleReport = () => {
             <p className=" text-gray-400">Report/ Sale</p>
           </div>
           <div className=" flex gap-3">
-            <div className="grid grid-cols-3 text-primary border divide-primary divide-x text-center border-primary rounded-md">
+            <div className="grid grid-cols-3  border divide-primary divide-x text-center border-primary rounded-md">
               <p
                 className={
                   urlLink == "yearly-report"
-                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 text-xl text-primary font-semibold cursor-pointer"
+                    : "p-3 px-4 text-xl  font-semibold cursor-pointer"
                 }
                 onClick={() => setUrlLink("yearly-report")}
               >
@@ -281,8 +281,8 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "monthly-report"
-                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 text-xl text-primary font-semibold cursor-pointer"
+                    : "p-3 px-4 text-xl  font-semibold cursor-pointer"
                 }
                 onClick={() => setUrlLink("monthly-report")}
               >
@@ -291,8 +291,8 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "weekly-report"
-                    ? "p-3 px-4 text-xl text-tcolor font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 text-xl text-primary font-semibold cursor-pointer"
+                    : "p-3 px-4 text-xl  font-semibold cursor-pointer"
                 }
                 onClick={() => setUrlLink("weekly-report")}
               >
@@ -488,7 +488,6 @@ const SaleReport = () => {
                       </th>
                       <th scope="col" className="px-6 text-end py-3">
                         <div className="text-secondary">SALE PRICE</div>
-                        
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <span className="sr-only">Edit</span>
@@ -508,9 +507,11 @@ const SaleReport = () => {
                           >
                             {data.id}
                           </th>
-                          <td className="px-6 py-4">{data.name}</td>
-                          <td className="px-6 py-4">{data.brand_name}</td>
-                          <td className="px-6 py-4  text-end">
+                          <td className="px-6 py-4 text-tcolor">{data.name}</td>
+                          <td className="px-6 py-4 text-tcolor">
+                            {data.brand_name}
+                          </td>
+                          <td className="px-6 py-4 text-tcolor text-end">
                             {data.sale_price}
                           </td>
                           <td className="px-6 py-4 text-right">
