@@ -12,7 +12,7 @@ const DonutChart1 = () => {
       datasets: [
         {
           data: [300, 50, 100, 70],
-          backgroundColor: ["#610C9F", "#E95793", "#FFC26F", "#F9E0BB"],
+          backgroundColor: ["#660066", "#BE29EC", "#EFBBFF", "#E53F71"],
         },
       ],
     };
