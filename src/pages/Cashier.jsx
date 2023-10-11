@@ -220,7 +220,7 @@ const Cashier = () => {
             <div className="flex justify-between mx-5 my-5">
               <div className=" flex items-center">
                 <p
-                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-primary  font-semibold"
+                  className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-secondary  font-semibold"
                   onClick={handleGoBack}
                 >
                   <FaArrowLeft /> Back
@@ -253,7 +253,7 @@ const Cashier = () => {
           <div className="flex justify-between mx-5 my-5 items-center">
             <div className=" flex items-center">
               <p
-                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-primary  font-semibold"
+                className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-secondary  font-semibold"
                 onClick={handleGoBack}
               >
                 <FaArrowLeft /> Back
