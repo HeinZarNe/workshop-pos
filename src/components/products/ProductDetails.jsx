@@ -24,7 +24,7 @@ const ProductDetails = () => {
     <Rootlayout>
       {isLoading && (
         <div className="flex items-center justify-center w-full h-[300px]">
-          <Loader variant="bars" />
+          <Loader variant="bars" color="#bb86fc" />
         </div>
       )}
       {data && (
@@ -36,7 +36,7 @@ const ProductDetails = () => {
             </div>
             <div className=" ">
               <Link to={"/products"}>
-                <button className=" px-4 py-2 rounded-lg flex items-center gap-2 text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+                <button className=" px-4 py-2 rounded-lg flex items-center gap-2 text-white border border-[#FFFFFF] hover:bg-[#BB86FC]">
                   Product List
                 </button>
               </Link>

@@ -14,14 +14,13 @@ const BarChart = () => {
     const fri = sale?.weeklySales[4]?.daySales;
     const sat = sale?.weeklySales[5]?.daySales;
     const sun = sale?.weeklySales[6]?.daySales;
-    console.log(mon);
 
     const data = {
       labels: ["S", "M", "T", "W", "T", "F", "S"],
       datasets: [
         {
           data: [sun, mon, tue, wed, thu, fri, sat],
-          backgroundColor: ["#B19177"],
+          backgroundColor: ["#bb86fc"],
           label: "Sales",
         },
       ],
@@ -35,7 +34,6 @@ const BarChart = () => {
         },
       },
     };
-    console.log(data, options);
     setChartData(data);
     setChartOptions(options);
   }, []);

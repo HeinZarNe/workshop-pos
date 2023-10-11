@@ -46,7 +46,7 @@ const Login = () => {
               <Label
                 htmlFor="email"
                 value="Your email"
-                className=" text-[#B19777] text-lg"
+                className=" text-[#BB86FC] text-lg"
               />
             </div>
             <TextInput
@@ -63,7 +63,7 @@ const Login = () => {
             <div className="mb-2 block">
               <Label
                 htmlFor="password"
-                className="text-[#B19777] text-lg"
+                className="text-[#BB86FC] text-lg"
                 value="Your password"
               />
             </div>
@@ -83,7 +83,7 @@ const Login = () => {
               Loading
             </Button>
           ) : (
-            <Button type="submit" className="bg-[#B19777] submit-btn mt-5">
+            <Button type="submit" className="bg-[#BB86FC] submit-btn mt-5">
               Log In
             </Button>
           )}

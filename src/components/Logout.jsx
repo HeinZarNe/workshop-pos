@@ -36,11 +36,11 @@ const Logout = () => {
       
   return (
     <div>
-       <div onClick={logoutHandler} href="#" className=" flex items-center mt-2 text-white cursor-pointer">
-            <span className=" text-2xl mr-2">
+       <div onClick={logoutHandler} href="#" className="ms-1 flex items-center text-tcolor cursor-pointer">
+            <span className=" text-[22px] mr-4">
               <BiLogOut />
             </span>
-            <h1 className="text-[18px]">Logout</h1>
+            <h1 className="text-[15px] font-semibold">Logout</h1>
           </div>
     </div>
   )

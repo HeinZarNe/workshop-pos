@@ -59,12 +59,12 @@ const ManageBrand = () => {
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
           <div className="">
-            <h1 className=" text-[20px] font-[500] text-white">Products</h1>
+            <h1 className=" text-[20px] font-[500] text-tcolor">Products</h1>
             <p className=" text-gray-500">Inventory/ Brands</p>
           </div>
           <div className=" flex gap-3">
             <Link to={"/"}>
-              <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+              <button className=" px-4 py-2 rounded-lg text-primary hover:text-secondary border border-primary hover:bg-primary">
                 {" "}
                 Go To Shop
               </button>
@@ -83,7 +83,7 @@ const ManageBrand = () => {
         </div>
         {/* product overview */}
         <div className=" my-5">
-          <h1 className="text-[21px] font-[500] text-white">Brands Overview</h1>
+          <h1 className="text-[21px] font-[500] text-tcolor">Brands Overview</h1>
           {/* search */}
           <div className="flex justify-between">
             <div className="relative my-3">
@@ -112,7 +112,7 @@ const ManageBrand = () => {
                 }}
                 type="search"
                 id="default-search"
-                className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
                 placeholder="Search ..."
                 required
               />

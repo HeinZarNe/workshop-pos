@@ -20,7 +20,6 @@ const BrandTable = ({
   setEditBrand,
   keyword,
 }) => {
-  console.log(dataFetch);
   const token = localStorage.getItem("token");
   const { data, refetch, isLoading } = useGetBrandQuery({
     token,
@@ -47,7 +46,7 @@ const BrandTable = ({
     <div>
       <div className="">
         {tableData?.length === 0 ? (
-          <div className="bg-[#272727] ">
+          <div className="bg-secondary ">
             <div className="flex justify-between gap-5 ">
               <div className="w-full flex flex-col items-center justify-center h-[50vh]">
                 <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
@@ -58,13 +57,13 @@ const BrandTable = ({
           </div>
         ) : isLoading ? (
           <div className="flex items-center justify-center w-full h-[300px]">
-            <Loader variant="bars" />
+            <Loader variant="bars" color="#bb86fc" />
           </div>
         ) : (
           <>
-            <table className="table text-white bg-[#272727] rounded-md">
+            <table className="table text-tcolor bg-transparent mt-5 rounded-md">
               {/* head */}
-              <thead className=" text-white">
+              <thead className=" text-tcolor">
                 <tr>
                   <th>NO</th>
                   <th>BRAND NAME</th>
@@ -85,15 +84,15 @@ const BrandTable = ({
                     <td>{brand.phone_number}</td>
                     <td>{"good"}</td>
                     <td>
-                      <div className=" text-white flex text-[20px] gap-3">
+                      <div className=" text-secondary flex text-[20px] gap-3">
                         <button
-                          className=" bg-[#B19777] rounded-full p-2 hover:shadow-md"
+                          className=" bg-primary rounded-full p-2 hover:shadow-md"
                           onClick={(_) => handleTableRowDelete(brand.id)}
                         >
                           <AiOutlineMinus />
                         </button>
                         <button
-                          className=" bg-[#B19777] rounded-full p-2"
+                          className=" bg-primary rounded-full p-2"
                           onClick={(_) =>
                             setEditBrand({
                               state: true,

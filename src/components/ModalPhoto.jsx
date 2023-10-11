@@ -74,7 +74,7 @@ const ModalPhoto = ({
                 Cancel
               </button>
               <button
-                className="text-white bg-[#B19777] px-4 py-2 rounded-md"
+                className="text-white bg-[#BB86FC] px-4 py-2 rounded-md"
                 onClick={storePhoto}
               >
                 <BiPlus />
@@ -82,7 +82,7 @@ const ModalPhoto = ({
             </div>{" "}
             {clickedPhoto ? (
               <button
-                className="text-white bg-[#B19777] px-4 py-2 rounded-md"
+                className="text-white bg-[#BB86FC] px-4 py-2 rounded-md"
                 onClick={(_) => handleSelected(clickedPhoto)}
               >
                 Confirm

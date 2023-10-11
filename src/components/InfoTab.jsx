@@ -89,7 +89,7 @@ const InfoTab = ({ onTabClick, detail, password, edit = false }) => {
           onClick={handleParaClick}
         >
           <p
-            className="cursor-pointer hover:text-[#B19777] "
+            className="cursor-pointer hover:text-[#BB86FC] "
             onClick={() => handleTabClick("tab1")}
           >
             Personal Information
@@ -103,7 +103,7 @@ const InfoTab = ({ onTabClick, detail, password, edit = false }) => {
             onClick={handleParaClick}
           >
             <p
-              className="cursor-pointer hover:text-[#B19777]"
+              className="cursor-pointer hover:text-[#BB86FC]"
               onClick={() => handleTabClick("tab2")}
             >
               Login Information

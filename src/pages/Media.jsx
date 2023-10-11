@@ -28,8 +28,6 @@ const Media = () => {
       photos.append("photos[]", selectedFile[i], selectedFile[i].name);
     }
 
-    console.log(photos);
-
     const data = await storePhoto({ photos, token });
   };
 

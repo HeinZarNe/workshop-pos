@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "@mantine/core";
 const DataTable = ({ data }) => {
   const rows = data?.data?.map((element, i) => (
-    <tr key={element.id}>
-      <td>{element.id}</td>
-      <td>{element.staff}</td>
+    <tr className="text-tcolor" key={element.id}>
+      <td className="text-tcolor">{element.id}</td>
+      <td className="text-tcolor">{element.staff}</td>
       <td>{element.voucher_number}</td>
       <td>{element.tax}</td>
       <td>{element.total} </td>
@@ -18,8 +18,8 @@ const DataTable = ({ data }) => {
   return (
     <Table withBorder highlightOnHover>
       <thead>
-        <tr>
-          <th>No</th>
+        <tr className="text-tcolor">
+          <th className="text-tcolor">No</th>
           <th>Sale Person</th>
           <th>Voucher</th>
           <th>Tax</th>
@@ -31,7 +31,7 @@ const DataTable = ({ data }) => {
           <th>Time</th>
         </tr>
       </thead>
-      <tbody>{rows}</tbody>
+      <tbody className="text-tcolor">{rows}</tbody>
     </Table>
   );
 };

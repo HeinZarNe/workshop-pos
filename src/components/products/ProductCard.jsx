@@ -9,19 +9,21 @@ const ProductCard = ({ keyword, page }) => {
 
   return (
     <div>
-      <div className="flex flex-row flex-wrap items-center gap-5">
+      <div className="flex flex-row flex-wrap items-center rounded-md gap-5">
         {data?.data?.map((item) => {
           return (
-            <div className=" flex-1 bg-stone-700 rounded-md">
+            <div className=" flex-1 bg-secondary overflow-hidden rounded-md ">
               <Link to={"/products/details"} state={{ id: item.id }}>
                 <img
-                  className=" w-full h-[150px] object-cover"
+                  className=" w-full h-[150px]  object-cover"
                   src={item.photo}
                   alt=""
                 />
               </Link>
-              <div className=" text-white text-right px-3 py-4">
-                <h1>{item.name}</h1>
+              <div className=" text-tcolor text-right px-3 py-4">
+                <h1 className="text-xl text-primary font-semibold">
+                  {item.name}
+                </h1>
                 <p>{item.price} kyats</p>
               </div>
             </div>

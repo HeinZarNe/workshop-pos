@@ -22,14 +22,14 @@
   background: hsl(260, 1%, 25%);
 }
 .active {
-  color: #b19777;
+  color: #bb86fc;
 }
 
 .button {
   transition: all;
-  background-color: #b19777;
-  color: white;
-  border: 1px solid #b19777;
+  background-color: #bb86fc;
+  color: #1e1e1e;
+  border: 1px solid #bb86fc;
 }
 
 .mantine-1cn2mlo {
@@ -46,11 +46,11 @@
   box-sizing: border-box;
   font-size: 0.875rem;
   width: 100%;
-  color: #b19777 !important;
+  color: #bb86fc !important;
   display: block;
   text-align: left;
-  border: 0.0625rem solid #b19777 !important;
-  background-color: #272727 !important;
+  border: 0.0625rem solid #bb86fc !important;
+  background-color: #1e1e1e !important;
   -webkit-transition: border-color 100ms ease;
   transition: border-color 100ms ease;
   min-height: 2.25rem;
@@ -60,13 +60,13 @@
 }
 
 .mantine-1cn2mlo {
-  color: #b19777 !important;
+  color: #bb86fc !important;
 }
 
 .button:hover {
-  background-color: #323232;
-  color: #b19777;
-  border: 1px solid #b19777;
+  background-color: transparent;
+  color: #bb86fc;
+  border: 1px solid #bb86fc;
 }
 
 .mantine-MonthPickerInput-input {
@@ -93,8 +93,8 @@
   order: 0.0625rem solid #a68d6f !important;
 }
 .number-btn {
-  border-top: 1px solid #b19777;
-  border-right: 1px solid #b19777;
+  border-top: 1px solid #bb86fc;
+  border-right: 1px solid #bb86fc;
 }
 
 .prodInCartActive {
@@ -134,7 +134,7 @@ div[data-saleAction="true"] {
 .mantine-1wc3ure[data-active] {
   border-color: transparent;
   color: #fff;
-  background-color: #b19777;
+  background-color: #bb86fc;
 }
 
 button:disabled {
@@ -177,7 +177,7 @@ button:disabled:hover {
   height: 100%;
   top: 0;
   right: 0;
-  background: #272727;
+  background: #1e1e1e;
   overflow-y: auto;
   width: 100%;
 }

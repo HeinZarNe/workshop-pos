@@ -41,7 +41,7 @@ const Inventory = () => {
       )}
       {isLoading ? (
         <div className=" w-full h-full flex items-center justify-center">
-          <Loader variant="bars" />
+          <Loader variant="bars" color="#bb86fc" />
         </div>
       ) : (
         <div className=" mx-10 my-5">
@@ -52,7 +52,7 @@ const Inventory = () => {
             </div>
             <div className=" flex gap-3">
               <Link to={"/sale/cashier"}>
-                <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+                <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#BB86FC]">
                   {" "}
                   Go To Shop
                 </button>
@@ -109,7 +109,7 @@ const Inventory = () => {
                   onClick={() => setView("list")}
                   className={`${
                     view === "list"
-                      ? "border border-[#B19777] text-[#B19777] p-2 mr-5"
+                      ? "border border-[#BB86FC] text-[#BB86FC] p-2 mr-5"
                       : "border border-white p-2 mr-5"
                   }`}
                 >
@@ -120,7 +120,7 @@ const Inventory = () => {
                   onClick={() => setView("grid")}
                   className={`${
                     view === "grid"
-                      ? "border border-[#B19777] text-[#B19777] p-2 mr-5"
+                      ? "border border-[#BB86FC] text-[#BB86FC] p-2 mr-5"
                       : "border border-white p-2 mr-5"
                   }`}
                 >

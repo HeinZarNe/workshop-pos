@@ -30,7 +30,7 @@ const Profile = () => {
     <Rootlayout>
       {isLoading && (
         <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader variant="bars" />
+          <Loader variant="bars" color="#bb86fc" />
         </div>
       )}
       {profile && (
@@ -63,7 +63,7 @@ const Profile = () => {
                 onClick={() => setSection("personal")}
                 className={`${
                   section === "personal"
-                    ? "text-[#B19777] select-none font-[600] text-[18px] cursor-pointer"
+                    ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >
@@ -73,7 +73,7 @@ const Profile = () => {
                 onClick={() => setSection("login")}
                 className={`${
                   section === "login"
-                    ? "text-[#B19777] select-none font-[600] text-[18px] cursor-pointer"
+                    ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >

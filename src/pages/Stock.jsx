@@ -30,7 +30,7 @@ const Stock = () => {
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
           <div className="">
-            <h1 className=" text-[20px] font-[500] text-white">
+            <h1 className=" text-[20px] font-[500] text-tcolor">
               Stock Control
             </h1>
             <p className=" text-gray-500">Inventory/Stock Control</p>
@@ -50,7 +50,7 @@ const Stock = () => {
         </div>
         {/* product overview */}
         <div className=" my-5">
-          <h1 className="text-[21px] font-[500] text-white">Stock Overview</h1>
+          <h1 className="text-[21px] font-[500] text-tcolor">Stock Overview</h1>
           {/* search */}
           <div className="flex justify-between">
             <div className="relative my-3">
@@ -79,7 +79,7 @@ const Stock = () => {
                 }}
                 type="search"
                 id="default-search"
-                className="block w-[300px] p-2 pl-10 text-sm text-white border border-gray-600 rounded-lg bg-[#272727]  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-secondary  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
                 placeholder="Search ..."
                 required
               />

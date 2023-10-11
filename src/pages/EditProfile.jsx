@@ -175,7 +175,7 @@ const EditProfile = () => {
     <Rootlayout>
       {isLoading && (
         <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader variant="bars" />
+          <Loader variant="bars" color="#bb86fc" />
         </div>
       )}
 
@@ -213,7 +213,7 @@ const EditProfile = () => {
                 onClick={() => setSection("personal")}
                 className={`${
                   section === "personal"
-                    ? "text-[#B19777] select-none font-[600] text-[18px] cursor-pointer"
+                    ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >
@@ -224,7 +224,7 @@ const EditProfile = () => {
                 onClick={() => setSection("password")}
                 className={`${
                   section === "password"
-                    ? "text-[#B19777] select-none font-[600] text-[18px] cursor-pointer"
+                    ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >
@@ -246,7 +246,7 @@ const EditProfile = () => {
                     onChange={(e) => handleFileChange("name", e.target.value)}
                     placeholder="Name"
                     type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
 
@@ -266,7 +266,7 @@ const EditProfile = () => {
                     }
                     placeholder="Date Of Birth"
                     type="date"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex gap-[120px] items-center">
@@ -306,7 +306,7 @@ const EditProfile = () => {
                     }
                     name=""
                     placeholder="Address"
-                    className="mt-1 block w-1/2 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-1/2 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                     id=""
                     cols="10"
                     rows="4"
@@ -352,7 +352,7 @@ const EditProfile = () => {
                     }
                     placeholder=".........."
                     type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                   />
                 </div>
 
@@ -374,7 +374,7 @@ const EditProfile = () => {
                       }
                       placeholder="........"
                       type="text"
-                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                     />
                   </div>
                   <div className=" flex gap-12 items-center">
@@ -396,7 +396,7 @@ const EditProfile = () => {
                       }
                       placeholder="........"
                       type="text"
-                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                     />
                   </div>{" "}
                 </>

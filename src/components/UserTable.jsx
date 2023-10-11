@@ -20,9 +20,9 @@ const UserTable = ({ users, banUser, refetch, setOpenModal }) => {
       <td>{element.position}</td>
       <td>{element.email}</td>
       <td>
-        <div className=" text-white flex text-[20px] gap-3">
+        <div className=" text-secondary flex text-[20px] gap-3">
           <button
-            className=" bg-[#B19777] rounded-full p-2"
+            className=" bg-primary rounded-full p-2"
             onClick={(_) => {
               banUser(element.id);
               refetch();
@@ -38,14 +38,14 @@ const UserTable = ({ users, banUser, refetch, setOpenModal }) => {
             <AiOutlineMinus />
           </button>
           <button
-            className=" bg-[#B19777] rounded-full p-2"
+            className=" bg-primary rounded-full p-2"
             onClick={(_) => setEditState({ state: true, id: element.id })}
           >
             <TbEdit />
           </button>
 
           <button
-            className=" bg-[#B19777] rounded-full p-2"
+            className=" bg-primary rounded-full p-2"
             onClick={(_) => setOpenModal({ state: true, id: element.id })}
           >
             <BsArrowRight />

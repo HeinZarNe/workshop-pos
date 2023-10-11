@@ -21,7 +21,6 @@ const AddBrand = ({
   editBrand,
   // dataFetch,
 }) => {
-  
   const token = localStorage.getItem("token");
   const [storeBrand, { isLoading: uploading }] = useStoreBrandMutation();
   const [updateBrand, { isLoading: updating }] = useUpdateBrandMutation();
@@ -72,7 +71,7 @@ const AddBrand = ({
       const data = await storeBrand({ brandData, token });
     }
     setShowSideBar(false);
-    setDataFetch(pre=>!pre)
+    setDataFetch((pre) => !pre);
   };
   const CanUserSubmit = () => {
     const { name, company, agent, photo, phone_number, information } =
@@ -133,7 +132,7 @@ const AddBrand = ({
                   value={brandData.name}
                   onChange={handleInputChange}
                   type="text"
-                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
+                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px]"
                 />
               </div>
               <div className="">
@@ -147,7 +146,7 @@ const AddBrand = ({
                   value={brandData.company}
                   onChange={handleInputChange}
                   type="text"
-                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
+                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px]"
                 />
               </div>
               <div className="">
@@ -161,7 +160,7 @@ const AddBrand = ({
                   value={brandData.agent}
                   onChange={handleInputChange}
                   type="text"
-                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
+                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px]"
                 />
               </div>
               <div className="">
@@ -174,7 +173,7 @@ const AddBrand = ({
                   name="phone_number"
                   value={brandData.phone_number}
                   onChange={handleInputChange}
-                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
+                  className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px]"
                 />
               </div>
               <div className="">
@@ -187,7 +186,7 @@ const AddBrand = ({
                   name="information"
                   onChange={handleInputChange}
                   value={brandData.information}
-                  className="mt-1 block w-full p-2 py-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-full p-2 py-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                   cols="10"
                   rows="4"
                 ></textarea>
@@ -195,7 +194,7 @@ const AddBrand = ({
               <div className="bg-[#323232] rounded-lg ml-5 ">
                 <div className="flex flex-col items-center p-5">
                   <h4 className="text-lg text-white mb-6">Upload Photo</h4>
-                  <div className="mb-6 relative w-[180px] h-[150px] rounded-lg border-2 border-dashed border-[#B19777] bg-[#272727] flex justify-center items-center">
+                  <div className="mb-6 relative w-[180px] h-[150px] rounded-lg border-2 border-dashed border-[#BB86FC] bg-[#272727] flex justify-center items-center">
                     {selectedPhoto ? (
                       <img
                         src={selectedPhoto.url || selectedPhoto}

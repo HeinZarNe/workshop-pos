@@ -79,7 +79,7 @@ const EditUser = ({ id, setEditState }) => {
     <div className="edit-user">
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
-          <h1 className="text-2xl text-[#B19777]">Users</h1>
+          <h1 className="text-2xl text-[#BB86FC]">Users</h1>
           <p className="text-white">Users / Create</p>
         </div>
         <div onClick={setEditState}>
@@ -104,7 +104,7 @@ const EditUser = ({ id, setEditState }) => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -117,7 +117,7 @@ const EditUser = ({ id, setEditState }) => {
                   onChange={(e) => setPhone_number(e.target.value)}
                   placeholder="Phone"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -130,7 +130,7 @@ const EditUser = ({ id, setEditState }) => {
                   onChange={(e) => setDateOfBirth(e.target.value)}
                   placeholder="date of birth"
                   type="date"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-[#BB86FC] text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -169,7 +169,7 @@ const EditUser = ({ id, setEditState }) => {
                   onChange={(e) => setAddress(e.target.value)}
                   name=""
                   placeholder="Address"
-                  className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
                   id=""
                   cols="10"
                   rows="4"
@@ -202,7 +202,7 @@ const EditUser = ({ id, setEditState }) => {
               className="flex flex-col items-center p-5"
             >
               <h4 className="text-lg text-white mb-6">Upload Photo</h4>
-              <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-[#B19777] bg-[#272727] flex justify-center items-center">
+              <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-[#BB86FC] bg-[#272727] flex justify-center items-center">
                 {selectedPhoto ? (
                   <img
                     src={
@@ -252,7 +252,7 @@ const EditUser = ({ id, setEditState }) => {
                 alt="admin"
                 className=" h-[150px] w-[150px] rounded-full"
               />
-              <div className=" text-[#B19777]">
+              <div className=" text-[#BB86FC]">
                 <h2 className="text-3xl mb-2">{name}</h2>
               </div>
             </div>
@@ -272,7 +272,7 @@ const EditUser = ({ id, setEditState }) => {
             <div
               className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
                 section === "personal"
-                  ? "border-[#B19777] text-[#B19777]"
+                  ? "border-[#BB86FC] text-[#BB86FC]"
                   : "border-white text-white"
               }`}
             >
@@ -280,18 +280,18 @@ const EditUser = ({ id, setEditState }) => {
             </div>
             <p
               className={` ${
-                section === "personal" ? "text-[#B19777]" : "text-white"
+                section === "personal" ? "text-[#BB86FC]" : "text-white"
               }`}
             >
               Personal
             </p>
           </div>
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
+          <div className="bg-[#BB86FC] w-[1px] h-[80px] ml-[28px] my-2"></div>
           <div className="flex items-center gap-5">
             <div
               className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
                 section === "login"
-                  ? "border-[#B19777] text-[#B19777]"
+                  ? "border-[#BB86FC] text-[#BB86FC]"
                   : "border-white text-white"
               }`}
             >
@@ -299,20 +299,20 @@ const EditUser = ({ id, setEditState }) => {
             </div>
             <p
               className={` ${
-                section === "login" ? "text-[#B19777]" : "text-white"
+                section === "login" ? "text-[#BB86FC]" : "text-white"
               }`}
             >
               Photo
             </p>
           </div>
 
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
+          <div className="bg-[#BB86FC] w-[1px] h-[80px] ml-[28px] my-2"></div>
 
           <div className="flex items-center gap-5">
             <div
               className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
                 section === "photo"
-                  ? "border-[#B19777] text-[#B19777]"
+                  ? "border-[#BB86FC] text-[#BB86FC]"
                   : "border-white text-white"
               }`}
             >
@@ -320,7 +320,7 @@ const EditUser = ({ id, setEditState }) => {
             </div>
             <p
               className={` ${
-                section === "photo" ? "text-[#B19777]" : "text-white"
+                section === "photo" ? "text-[#BB86FC]" : "text-white"
               }`}
             >
               Preview

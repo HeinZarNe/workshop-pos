@@ -57,7 +57,7 @@ const AddStock = ({
                 }
               }}
               type="number"
-              className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px]"
+              className=" mb-5 mt-1 block w-full p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px]"
             />
             {/* <span className=" text-[15px] text-stone-300 font-bold">
               More *
@@ -69,7 +69,7 @@ const AddStock = ({
                 setStockData({ ...stockData, message: e.target.value })
               }
               name=""
-              className="mt-1 block w-full p-2 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+              className="mt-1 block w-full p-2 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
               id=""
               cols="10"
               rows="4"

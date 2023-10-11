@@ -10,7 +10,7 @@
 //   theme: {
 //     extend: {
 //       colors: {
-//         base: "#B19777",
+//         base: "#BB86FC",
 //         secondary: "#535353",
 //         transparent: "transparent",
 //         current: "currentColor",
@@ -22,7 +22,7 @@
 //   },
 //   plugins: [require( "flowbite/plugin","daisyui")],
 //   colors: {
-//     primary: "#B19777",
+//     primary: "#BB86FC",
 //   },
 // };
 /**   @type {import('tailwindcss').Config} */
@@ -36,8 +36,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        base: "#B19777",
-        secondary: "#535353",
+        primary: "#BB86FC",
+        secondary: "#1E1E1E",
+        back: "#121212",
+        tcolor: "#E9E9E9",
+        tscolor: "#A7A7A7",
         transparent: "transparent",
         current: "currentColor",
       },
@@ -46,10 +49,8 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("daisyui", "flowbite/plugin")
-  ],
+  plugins: [require("daisyui", "flowbite/plugin")],
   colors: {
-    primary: "#B19777",
+    primary: "#BB86FC",
   },
 };

@@ -44,7 +44,7 @@ const BannedTables = ({ keyword }) => {
 
                     <td>
                       <button
-                        className=" bg-[#B19777] rounded-md p-2"
+                        className=" bg-[#BB86FC] rounded-md p-2"
                         onClick={(_) => {
                           unbanUser({ token, id: item.id });
                           Swal.fire({

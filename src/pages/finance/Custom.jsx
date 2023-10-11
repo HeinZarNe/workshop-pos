@@ -27,7 +27,6 @@ const Daily = () => {
   } = useCustomSaleQuery({ token, page, date: dateSearch || false });
 
   const handleDateSearch = () => {
-    console.log(fromTo);
     setPage(0);
     const fromInputDate = new Date(fromTo.from);
     const fromYear = fromInputDate.getFullYear();
@@ -47,14 +46,14 @@ const Daily = () => {
         {/* top */}
         <div className=" flex  justify-between">
           <div className="">
-            <h1 className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <h1 className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               Custom
             </h1>
             <p className=" text-gray-400">Finance/ Custom</p>
           </div>
           <div className=" flex gap-3">
             {/* <Link to={"/sale/cashier"}>
-              <button className=" px-4 py-2 rounded-lg text-white border border-[#FFFFFF] hover:bg-[#B19777]">
+              <button className=" px-4 py-2 rounded-lg text-tcolor border border-[#FFFFFF] hover:bg-[#BB86FC]">
                 {" "}
                 Go To Shop
               </button>
@@ -69,7 +68,7 @@ const Daily = () => {
         {/* second */}
         <div className="flex mt-12 flex-row justify-between">
           <div className="flex flex-col gap-2">
-            <p className="text-2xl font-semibold mt-0 pt-0 text-white">
+            <p className="text-2xl font-semibold mt-0 pt-0 text-tcolor">
               Custom Finance
             </p>
           </div>
@@ -78,7 +77,7 @@ const Daily = () => {
             <DatePicker fromTo={fromTo} setFromTo={setFromTo} />
 
             <div
-              className="flex text-black items-center justify-center font-semibold mb-1 text-xl p-2 h-fit rounded-sm bg-base"
+              className="flex text-black items-center justify-center font-semibold mb-1 text-xl p-2 h-fit rounded-sm bg-primary"
               onClick={handleDateSearch}
             >
               <FiSearch />
@@ -88,10 +87,10 @@ const Daily = () => {
         {dateSearch ? (
           <>
             {/* table  */}
-            <div className=" border-2 rounded-t-xl border-base mt-10">
+            <div className=" border-2 rounded-t-xl border-primary mt-10">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-[#fafafa] ">
-                  <thead className="text-xs text-gray-900 uppercase bg-base">
+                  <thead className="text-xs text-gray-900 uppercase bg-primary">
                     <tr>
                       <th scope="col" className="px-6 py-3">
                         NO
@@ -128,7 +127,7 @@ const Daily = () => {
                         >
                           <th
                             scope="row"
-                            className="px-6 py-4 font-medium text-white whitespace-nowra"
+                            className="px-6 py-4 font-medium text-tcolor whitespace-nowra"
                           >
                             {data.id}
                           </th>
@@ -158,27 +157,27 @@ const Daily = () => {
               {dailySalesData && (
                 <div className="flex flex-row items-center justify-between bottom-section mt-10 ">
                   <div className="flex flex-row items-center border rounded">
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Vouchers</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Vouchers</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {dailySalesData.total_vouchers}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r py-2 px-6  border-white">
-                      <p className="text-sm text-base">Total Cash</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r py-2 px-6  border-primary">
+                      <p className="text-sm text-primary">Total Cash</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {dailySalesData.total_cash}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total Tax</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total Tax</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {dailySalesData.total_tax}
                       </p>
                     </div>
-                    <div className="flex flex-col items-end border-r px-6 py-2  border-white">
-                      <p className="text-sm text-base">Total</p>
-                      <p className="text-xl font-bold text-white">
+                    <div className="flex flex-col items-end border-r px-6 py-2  border-primary">
+                      <p className="text-sm text-primary">Total</p>
+                      <p className="text-xl font-bold text-tcolor">
                         {dailySalesData.total}
                       </p>
                     </div>
@@ -201,7 +200,7 @@ const Daily = () => {
           <div className="bg-[#272727] ">
             <div className="flex justify-between gap-5 ">
               <div className="w-full flex flex-col items-center justify-center h-[50vh]">
-                <div className="border border-base px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
                   <p className="text-2xl font-semibold">
                     There is no datas. Please enter dates to get custom finance
                     data!

@@ -62,7 +62,7 @@ export function DataLineChart({ data: core, state }) {
               label: "Datas",
               data: chartData?.yearly?.data,
               borderColor: BaseColor,
-              backgroundColor: "#ddbf9a",
+              backgroundColor: "#BB86FC",
             },
           ],
         }}
@@ -81,7 +81,7 @@ export function DataLineChart({ data: core, state }) {
 
               data: chartData?.monthly?.data,
               borderColor: BaseColor,
-              backgroundColor: "#ddbf9a",
+              backgroundColor: "#BB86FC",
             },
           ],
         }}
@@ -99,7 +99,7 @@ export function DataLineChart({ data: core, state }) {
               label: "Datas",
               data: chartData?.weekly?.data,
               borderColor: BaseColor,
-              backgroundColor: "#ddbf9a",
+              backgroundColor: "#BB86FC",
             },
           ],
         }}

@@ -68,8 +68,8 @@ const CreateUser = () => {
     <Rootlayout>
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
-          <h1 className="text-2xl text-[#B19777]">Users</h1>
-          <p className="text-white">Users / Create</p>
+          <h1 className="text-2xl text-primary">Users</h1>
+          <p className="text-tcolor">Users / Create</p>
         </div>
         <Link to={"/users"} ref={redirectRef}>
           <button className=" py-2 px-4 rounded-lg button">Users</button>
@@ -80,11 +80,11 @@ const CreateUser = () => {
           <form
             onSubmit={() => setSection("login")}
             action=""
-            className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col"
+            className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
           >
-            <div className=" text-white flex flex-col gap-8 p-5">
+            <div className=" text-tcolor flex flex-col gap-8 p-5">
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Name
                 </span>
                 <input
@@ -93,11 +93,11 @@ const CreateUser = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Phone
                 </span>
                 <input
@@ -106,11 +106,11 @@ const CreateUser = () => {
                   onChange={(e) => setPhone_number(e.target.value)}
                   placeholder="Phone"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Date Of Birth
                 </span>
                 <input
@@ -119,11 +119,11 @@ const CreateUser = () => {
                   onChange={(e) => setDateOfBirth(e.target.value)}
                   placeholder="date of birth"
                   type="date"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Gender
                 </span>
                 <label className="inline-flex items-center">
@@ -149,7 +149,7 @@ const CreateUser = () => {
                 </label>
               </div>
               <div className=" flex justify-between">
-                <span className=" text-[17px] text-stone-300 font-bold">
+                <span className=" text-[17px] text-tscolor font-bold">
                   Address
                 </span>
                 <textarea
@@ -158,7 +158,7 @@ const CreateUser = () => {
                   onChange={(e) => setAddress(e.target.value)}
                   name=""
                   placeholder="Address"
-                  className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   id=""
                   cols="10"
                   rows="4"
@@ -179,16 +179,16 @@ const CreateUser = () => {
             <form
               onSubmit={() => setSection("photo")}
               action=""
-              className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col"
+              className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
             >
-              <div className=" text-white flex flex-col gap-8 p-5">
+              <div className=" text-tcolor flex flex-col gap-8 p-5">
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Position
                   </span>
                   <select
                     onChange={(e) => setPosition(e.target.value)}
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
                     name="position"
                     id=""
                   >
@@ -201,7 +201,7 @@ const CreateUser = () => {
                   </select>
                 </div>
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Email
                   </span>
                   <input
@@ -210,11 +210,11 @@ const CreateUser = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     type="text"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Password
                   </span>
                   <input
@@ -223,11 +223,11 @@ const CreateUser = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder=""
                     type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex justify-between">
-                  <span className=" text-[17px] text-stone-300 font-bold">
+                  <span className=" text-[17px] text-tscolor font-bold">
                     Comfirm Password
                   </span>
                   <input
@@ -236,7 +236,7 @@ const CreateUser = () => {
                     onChange={(e) => setPassword_confirmation(e.target.value)}
                     placeholder=""
                     type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
               </div>
@@ -258,7 +258,7 @@ const CreateUser = () => {
           </div>
         )}
         {section === "photo" && (
-          <div className="w-[550px] bg-[#323232] rounded-lg ml-5 ">
+          <div className="w-[550px] bg-secondary rounded-lg ml-5 ">
             {showPhotoModal ? (
               <ModalPhoto
                 selectedPhoto={selectedPhoto}
@@ -273,8 +273,8 @@ const CreateUser = () => {
               onClick={() => setShowPhotoModal(!showPhotoModal)}
               className="flex flex-col items-center p-5"
             >
-              <h4 className="text-lg text-white mb-6">Upload Photo</h4>
-              <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-[#B19777] bg-[#272727] flex justify-center items-center">
+              <h4 className="text-lg text-tcolor mb-6">Upload Photo</h4>
+              <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-primary bg-[#272727] flex justify-center items-center">
                 {selectedPhoto ? (
                   <img
                     src={
@@ -311,7 +311,7 @@ const CreateUser = () => {
           </div>
         )}
         {section === "preview" && (
-          // <form className="w-[550px] bg-[#323232] rounded-lg ml-5 flex flex-col">
+          // <form className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col">
           //   <div className="p-5">
           //     <div className="flex gap-5 items-center pb-5 border-b">
           //       {selectedPhoto && (
@@ -326,22 +326,22 @@ const CreateUser = () => {
           //         />
           //       )}
           //       <div className="">
-          //         <h1 className="text-3xl mb-3 text-white">{name}</h1>
-          //         <p className=" text-white">Sale Price : {sale_price} ကျပ်</p>
-          //         <p className=" text-white">
+          //         <h1 className="text-3xl mb-3 text-tcolor">{name}</h1>
+          //         <p className=" text-tcolor">Sale Price : {sale_price} ကျပ်</p>
+          //         <p className=" text-tcolor">
           //           Actual Price : {actual_price} ကျပ်
           //         </p>
           //       </div>
           //     </div>
           //     <div className="flex mt-5 gap-20">
-          //       <div className="space-y-4 text-white">
+          //       <div className="space-y-4 text-tcolor">
           //         <p>Phone</p>
           //         <p>Mail</p>
           //         <p>Address</p>
           //         <p>Gender</p>
           //         <p>Date of birth</p>
           //       </div>
-          //       <div className="space-y-4 text-white">
+          //       <div className="space-y-4 text-tcolor">
           //         <p>: {phone_number}</p>
           //         <p>: {email}</p>
           //         <p>: {address || "-"}</p>
@@ -356,14 +356,14 @@ const CreateUser = () => {
           //     Edit Product
           //   </button>
           // </form>
-          <div className="w-[550px] bg-[#323232] rounded-lg ml-5 p-5">
+          <div className="w-[550px] bg-secondary rounded-lg ml-5 p-5">
             <div className="flex items-center gap-5 px-5 py-3">
               <img
                 src={selectedPhoto.url || selectedPhoto}
                 alt="admin"
                 className=" h-[150px] w-[150px] rounded-full"
               />
-              <div className=" text-[#B19777]">
+              <div className=" text-primary">
                 <h2 className="text-3xl mb-2">{name}</h2>
                 <p className=" text-gray-300 text-sm">{position}</p>
               </div>
@@ -384,76 +384,76 @@ const CreateUser = () => {
         <div className="">
           <div className="flex items-center gap-5">
             <div
-              className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
+              className={`w-14 h-14 bg-secondary flex justify-center items-center rounded-full border ${
                 section === "personal"
-                  ? "border-[#B19777] text-[#B19777]"
-                  : "border-white text-white"
+                  ? "border-primary text-primary"
+                  : "border-white text-tcolor"
               }`}
             >
               1
             </div>
             <p
               className={` ${
-                section === "personal" ? "text-[#B19777]" : "text-white"
+                section === "personal" ? "text-primary" : "text-tcolor"
               }`}
             >
               Personal
             </p>
           </div>
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
+          <div className="bg-primary w-[1px] h-[80px] ml-[28px] my-2"></div>
           <div className="flex items-center gap-5">
             <div
-              className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
+              className={`w-14 h-14 bg-secondary flex justify-center items-center rounded-full border ${
                 section === "login"
-                  ? "border-[#B19777] text-[#B19777]"
-                  : "border-white text-white"
+                  ? "border-primary text-primary"
+                  : "border-white text-tcolor"
               }`}
             >
               2
             </div>
             <p
               className={` ${
-                section === "login" ? "text-[#B19777]" : "text-white"
+                section === "login" ? "text-primary" : "text-tcolor"
               }`}
             >
               Login Info
             </p>
           </div>
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
+          <div className="bg-primary w-[1px] h-[80px] ml-[28px] my-2"></div>
 
           <div className="flex items-center gap-5">
             <div
-              className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
+              className={`w-14 h-14 bg-secondary flex justify-center items-center rounded-full border ${
                 section === "photo"
-                  ? "border-[#B19777] text-[#B19777]"
-                  : "border-white text-white"
+                  ? "border-primary text-primary"
+                  : "border-white text-tcolor"
               }`}
             >
               3
             </div>
             <p
               className={` ${
-                section === "photo" ? "text-[#B19777]" : "text-white"
+                section === "photo" ? "text-primary" : "text-tcolor"
               }`}
             >
               Photo
             </p>
           </div>
-          <div className="bg-[#B19777] w-[1px] h-[80px] ml-[28px] my-2"></div>
+          <div className="bg-primary w-[1px] h-[80px] ml-[28px] my-2"></div>
 
           <div className="flex items-center gap-5">
             <div
-              className={`w-14 h-14 bg-[#323232] flex justify-center items-center rounded-full border ${
+              className={`w-14 h-14 bg-secondary flex justify-center items-center rounded-full border ${
                 section === "photo"
-                  ? "border-[#B19777] text-[#B19777]"
-                  : "border-white text-white"
+                  ? "border-primary text-primary"
+                  : "border-white text-tcolor"
               }`}
             >
               4
             </div>
             <p
               className={` ${
-                section === "photo" ? "text-[#B19777]" : "text-white"
+                section === "photo" ? "text-primary" : "text-tcolor"
               }`}
             >
               Preview
