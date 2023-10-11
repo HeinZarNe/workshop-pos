@@ -86,7 +86,7 @@ const Stock = () => {
             </div>
           </div>
           <StockTable stocksData={stocks} />
-          <div className="pagination absolute bottom-[30px] right-[40px] ">
+          <div className="pagination ">
             <Pagination
               total={stocks?.last_page || 1}
               onChange={(e) => {

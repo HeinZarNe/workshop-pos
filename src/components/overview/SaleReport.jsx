@@ -39,7 +39,7 @@ function SaleReport() {
           " flex flex-row gap-7 items-center justify-center min-h-[400px]"
         }
       >
-        <Loader />
+        <Loader variant="bars" />
       </div>
     );
   }

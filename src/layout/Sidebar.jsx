@@ -19,7 +19,7 @@ const Sidebar = () => {
       {/* <Navbar /> */}
       <div className="">
         {/* overview */}
-        <div className=" px-5 py-3  border-b border-stone-500">
+        <div className=" px-5 py-3  border-b border-stone-500 ">
           <NavLink to="/" className="ms-1 flex items-center mt-2 text-white">
             <span className=" text-2xl mr-2">
               <div className="flex justify-center w-7">
@@ -30,9 +30,9 @@ const Sidebar = () => {
           </NavLink>
         </div>
         {/* sale */}
-        <div className="collapse border-b border-stone-500 rounded-none">
+        <div className="collapse collapse-open border-b border-stone-500 rounded-none">
           <input type="checkbox" />
-          <div className="collapse-title">
+          <div className="collapse-title ">
             <div className="flex  w-[160px] px-2 justify-between items-center ">
               {/* <div className="  border-b border-stone-500"> */}
               <span className=" text-xl text-white flex items-center gap-2">
@@ -48,7 +48,7 @@ const Sidebar = () => {
               {/* </div> */}
             </div>
           </div>
-          <div className="collapse-content">
+          <div className="collapse-content ">
             <ul className font-semibold="text-[15px]">
               <NavLink to={"/sale/cashier"}>
                 <li className=" text-white ml-10 mb-3">Cashier</li>

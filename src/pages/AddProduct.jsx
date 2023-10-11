@@ -30,7 +30,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
     isSuccess: detailSuccess,
     isLoading: detailLoading,
   } = useGetProductQuery({
-    token, detailId: editState.id,
+    token,
+    detailId: editState.id,
   });
 
   console.log(product);
@@ -72,8 +73,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
     if (editState) {
       brands?.with_no_pagi.map(
         (brand) =>
-          brand.brand_name == product?.data.name &&
-          setBrand_name(brand?.id)
+          brand.brand_name == product?.data.name && setBrand_name(brand?.id)
       );
       setName(product?.data.name);
 
@@ -159,7 +159,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
   };
   return detailLoading ? (
     <div className="w-full flex items-center justify-center h-[300px]">
-      <Loader />
+      <Loader variant="bars" />
     </div>
   ) : editState && detailSuccess ? (
     <div className="edit-product">

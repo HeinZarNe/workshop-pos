@@ -4,6 +4,7 @@ import { BiMessageAltMinus } from "react-icons/bi";
 import { BsTelephoneForward } from "react-icons/bs";
 import { TbEdit } from "react-icons/tb";
 import {
+  useGetProfileQuery,
   useGetUserDetailQuery,
   useUpdatePasswordMutation,
   useUpdateUserMutation,
@@ -11,6 +12,7 @@ import {
 import { Loader } from "@mantine/core";
 import Swal from "sweetalert2";
 import ModalPhoto from "../components/ModalPhoto";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const [section, setSection] = useState("personal");
@@ -27,9 +29,8 @@ const EditProfile = () => {
     data: profile,
     isLoading,
     refetch,
-  } = useGetUserDetailQuery({
+  } = useGetProfileQuery({
     token,
-    self: true,
   });
 
   const {
@@ -50,7 +51,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     profile?.data && setSelectedGenders(profile.data.gender);
-  }, [profile]);
+  }, [profile, newData]);
 
   useEffect(() => {
     isSuccess &&
@@ -92,7 +93,7 @@ const EditProfile = () => {
     newData.confirm_password,
     newData.current_password,
   ]);
-
+  const navigate = useNavigate();
   const handleFileChange = (key, value) => {
     setNewData((prev) => ({ ...prev, [key]: value }));
   };
@@ -115,7 +116,7 @@ const EditProfile = () => {
           ? newData.date_of_birth
           : date_of_birth,
       email: newData.email?.length > 0 ? newData.email : email,
-      gender: newData.gender?.length > 0 ? newData.gender : gender,
+      gender: selectedGenders?.length > 0 ? selectedGenders : gender,
       photo: selectedPhoto
         ? selectedPhoto.path
         : newData.photo?.length > 0
@@ -125,9 +126,39 @@ const EditProfile = () => {
     };
     updateUser({ token, updateData: dataToUpdate });
   };
-
-  const handlePasswordUpdate = (e) => {
+  const handleUpdateConfirm = async (e) => {
     e.preventDefault();
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "You will need to login again after you had changed password.",
+
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handlePasswordUpdate();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "You need to login again to continue.",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          confirmButtonText: "Go to Login Page.",
+        }).then((result) => {
+          localStorage.clear();
+          navigate("/login");
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire("Cancelled", "", "error");
+        Swal.close();
+      }
+    });
+  };
+
+  const handlePasswordUpdate = () => {
     if (!canUpdatePassword) return;
     const { confirm_password, new_password, current_password } = newData || {};
     const data = updatePassword({
@@ -144,7 +175,7 @@ const EditProfile = () => {
     <Rootlayout>
       {isLoading && (
         <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader />
+          <Loader variant="bars" />
         </div>
       )}
 
@@ -186,18 +217,9 @@ const EditProfile = () => {
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >
-                Personal
+                Update Personal Information
               </h1>
-              <h1
-                onClick={() => setSection("login")}
-                className={`${
-                  section === "login"
-                    ? "text-[#B19777] select-none font-[600] text-[18px] cursor-pointer"
-                    : "text-white font-[600] text-[18px] cursor-pointer"
-                }`}
-              >
-                Login Information
-              </h1>
+
               <h1
                 onClick={() => setSection("password")}
                 className={`${
@@ -206,7 +228,7 @@ const EditProfile = () => {
                     : "text-white font-[600] text-[18px] cursor-pointer"
                 }`}
               >
-                Password
+                Change Password
               </h1>
             </div>
           </div>
@@ -299,67 +321,15 @@ const EditProfile = () => {
                   </button>
                   <button
                     className=" px-6 py-2 rounded-lg button"
-                    onClick={(_) => setSection("login")}
+                    onClick={handleUpdate}
                   >
-                    Next
+                    Update
                   </button>
                 </div>
               </div>
             </form>
           )}
-          {section === "login" && (
-            <form action="" onSubmit={handleUpdate}>
-              <div className=" text-white flex flex-col gap-10 p-5">
-                <div className=" flex gap-14 items-center">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Phone Number
-                  </span>
-                  <input
-                    required
-                    value={
-                      "phone_number" in newData
-                        ? newData.phone_number
-                        : phone_number
-                    }
-                    onChange={(e) =>
-                      handleFileChange("phone_number", e.target.value)
-                    }
-                    placeholder="Phone"
-                    type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                  />
-                </div>
-                <div className=" flex gap-[133px] items-center">
-                  <span className=" text-[17px] text-stone-300 font-bold">
-                    Email
-                  </span>
-                  <input
-                    required
-                    value={"email" in newData ? newData.email : email}
-                    onChange={(e) => handleFileChange("email", e.target.value)}
-                    placeholder="Email"
-                    type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#B19777] text-[#B19777] text-[17px] placeholder:text-[17px]"
-                  />
-                </div>
-                <div className=" flex gap-6 w-1/2 justify-end">
-                  <button
-                    className=" text-white border border-stone-400 tracking-wider px-5 py-2 rounded-lg"
-                    onClick={handleReset}
-                  >
-                    Reset
-                  </button>
 
-                  <button
-                    className=" px-6 py-2 rounded-lg button"
-                    type="submit"
-                  >
-                    Update Information
-                  </button>
-                </div>
-              </div>
-            </form>
-          )}
           {section === "password" && (
             <form action="">
               <div className=" text-white flex flex-col gap-10 p-5">
@@ -435,7 +405,7 @@ const EditProfile = () => {
                   <button
                     disabled={!canUpdatePassword}
                     className=" px-6 py-2 rounded-lg button"
-                    onClick={handlePasswordUpdate}
+                    onClick={handleUpdateConfirm}
                   >
                     Update Password
                   </button>

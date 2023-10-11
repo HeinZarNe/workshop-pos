@@ -188,7 +188,7 @@ const Cashier = () => {
   };
 
   const handleGoBack = () => {
-    window.history.back();
+    navigate("/sale/recent");
   };
 
   const handleSaleOpen = () => {

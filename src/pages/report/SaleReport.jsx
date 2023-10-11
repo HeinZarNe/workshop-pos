@@ -271,8 +271,8 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "yearly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 cursor-pointer text-xl text-white font-semibold"
+                    : "p-3 px-4 cursor-pointer text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("yearly-report")}
               >
@@ -281,8 +281,8 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "monthly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 cursor-pointer text-xl text-white font-semibold"
+                    : "p-3 px-4 cursor-pointer text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("monthly-report")}
               >
@@ -291,8 +291,8 @@ const SaleReport = () => {
               <p
                 className={
                   urlLink == "weekly-report"
-                    ? "p-3 px-4 text-xl text-white font-semibold"
-                    : "p-3 px-4 text-xl  font-semibold"
+                    ? "p-3 px-4 cursor-pointer text-xl text-white font-semibold"
+                    : "p-3 px-4 cursor-pointer text-xl  font-semibold"
                 }
                 onClick={() => setUrlLink("weekly-report")}
               >
@@ -472,8 +472,8 @@ const SaleReport = () => {
             <div className="text-3xl text-white font-semibold mb-4 ms-2 mt-10">
               Product Sales
             </div>
-            <div className=" border-2 rounded-t-lg border-base">
-              <div className="relative overflow-x-auto shadow-md sm:rounded-md">
+            <div className=" ">
+              <div className="relative overflow-x-auto shadow-md sm:rounded-md border-2 rounded-t-lg border-base">
                 <table className="w-full text-sm text-left text-[#fafafa] ">
                   <thead className="text-xs text-gray-900 uppercase bg-base">
                     <tr>
@@ -528,6 +528,25 @@ const SaleReport = () => {
                   </tbody>
                 </table>
               </div>
+              <div className="pagination">
+                <Pagination
+                  total={totalPage || 1}
+                  onChange={(e) => {
+                    setPage(e);
+                    refetch();
+                  }}
+                  // onPreviousPage={(e) => {
+                  //   setPage((prev) => prev > 0 && prev - 1);
+                  //   refetch();
+                  // }}
+                  // onNextPage={(e) => {
+
+                  //   refetch();
+                  // }}
+                  boundaries={1}
+                  defaultValue={1}
+                />
+              </div>
             </div>
           </div>
           <div className="col-span-1">
@@ -556,26 +575,7 @@ const SaleReport = () => {
               </div>
             </div>
           </div>
-          <div className="pagination">
-            <Pagination
-              total={totalPage || 1}
-              onChange={(e) => {
-                setPage(e);
-                refetch();
-              }}
-              // onPreviousPage={(e) => {
-              //   setPage((prev) => prev > 0 && prev - 1);
-              //   refetch();
-              // }}
-              // onNextPage={(e) => {
-
-              //   refetch();
-              // }}
-              boundaries={1}
-              defaultValue={1}
-            />
-          </div>
-        </div>
+        </div>{" "}
       </div>
     </Rootlayout>
   );

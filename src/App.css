@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #252525;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(260, 1%, 22%);
+  border-radius: 24px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(260, 1%, 25%);
+}
 .active {
   color: #b19777;
 }
@@ -131,6 +150,9 @@ button:disabled:hover {
 }
 
 .pagination {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 .pagination button {
   color: white;
@@ -150,12 +172,12 @@ button:disabled:hover {
 }
 
 .edit-product {
-  position: fixed;
+  position: absolute;
   z-index: 99;
-  height: calc(100vh - 57px);
-  top: 57px;
+  height: 100%;
+  top: 0;
   right: 0;
   background: #272727;
   overflow-y: auto;
-  width: calc(100vw - 271.19px);
+  width: 100%;
 }

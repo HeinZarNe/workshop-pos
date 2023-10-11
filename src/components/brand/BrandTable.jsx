@@ -34,9 +34,9 @@ const BrandTable = ({
     return () => {};
   }, [data]);
 
-  useEffect(()=>{
+  useEffect(() => {
     refetch();
-  },[dataFetch])
+  }, [dataFetch]);
   const handleTableRowDelete = async (id) => {
     setTableData((prev) => prev.filter((item) => item.id !== id));
     const res = await deleteBrand({ id, token });
@@ -58,7 +58,7 @@ const BrandTable = ({
           </div>
         ) : isLoading ? (
           <div className="flex items-center justify-center w-full h-[300px]">
-            <Loader />
+            <Loader variant="bars" />
           </div>
         ) : (
           <>
@@ -110,7 +110,7 @@ const BrandTable = ({
               </tbody>
             </table>
 
-            <div className="pagination absolute bottom-[30px] right-[40px] ">
+            <div className="pagination ">
               <Pagination
                 total={data?.brands?.last_page || 1}
                 onChange={(e) => {

@@ -203,7 +203,7 @@ const Monthly = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="pagination absolute bottom-[30px] right-[40px] ">
+                  <div className="pagination ">
                     <Pagination
                       total={monthlySaleData?.this_month_sales?.last_page}
                       onChange={(e) => {

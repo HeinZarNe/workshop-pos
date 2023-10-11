@@ -4,16 +4,14 @@ import { BiMessageAltMinus } from "react-icons/bi";
 import { BsTelephoneForward } from "react-icons/bs";
 import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useGetUserDetailQuery } from "../services/authApi";
+import { useGetProfileQuery } from "../services/authApi";
 import { Loader } from "@mantine/core";
 
 const Profile = () => {
   const [section, setSection] = useState("personal");
   const token = localStorage.getItem("token");
-  const { data: profile, isLoading } = useGetUserDetailQuery({
+  const { data: profile, isLoading } = useGetProfileQuery({
     token,
-    self: true,
   });
 
   const {
@@ -32,7 +30,7 @@ const Profile = () => {
     <Rootlayout>
       {isLoading && (
         <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader />
+          <Loader variant="bars" />
         </div>
       )}
       {profile && (

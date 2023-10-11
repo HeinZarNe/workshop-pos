@@ -11,26 +11,17 @@ const ProductTables = ({
   setShowSidebar,
   addStock,
   setStockData,
-  keyword,
-  page,
-  setTotalPage,
+  data,
+  refetch,
 }) => {
-
-  const token = localStorage.getItem("token");
-  const { data, refetch } = useGetProductQuery({ token, page, keyword });
-  useEffect(() => {
-    refetch();
-    // return () => {};
-  }, [addStock]);
-
+  // useEffect(() => {
+  //   refetch();
+  //   // return () => {};
+  // }, [addStock]);
 
   // const h = useGetProductQuery({ token, page, keyword });
   // console.log(h);
   const [editstate, setEditState] = useState(false);
-  useEffect(() => {
-    setTotalPage(data?.last_page);
-    return () => {};
-  }, [data]);
 
   return (
     <div>

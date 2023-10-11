@@ -24,7 +24,7 @@ const ProductDetails = () => {
     <Rootlayout>
       {isLoading && (
         <div className="flex items-center justify-center w-full h-[300px]">
-          <Loader />
+          <Loader variant="bars" />
         </div>
       )}
       {data && (

@@ -78,6 +78,7 @@ const Media = () => {
             <input
               type="file"
               ref={fileRef}
+              accept="image/png, image/jpg"
               style={{ display: "none" }}
               multiple
               onChange={handleFileChange}
@@ -118,7 +119,7 @@ const Media = () => {
                   ))
               : ""}
           </div>
-          {/* <div className="pagination absolute bottom-[30px] right-[40px] ">
+          {/* <div className="pagination ">
             <Pagination
               total={data?.meta?.last_page}
               onChange={(e) => {

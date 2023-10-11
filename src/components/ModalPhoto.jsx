@@ -93,6 +93,7 @@ const ModalPhoto = ({
           </div>
           <input
             type="file"
+            accept="image/png, image/jpg"
             onChange={handleImageChange}
             className="hidden"
             ref={imageUploadRef}

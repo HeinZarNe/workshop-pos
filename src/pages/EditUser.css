@@ -1,8 +1,9 @@
 .edit-user {
-  width: calc(100vw - 273.19px);
+  width: 100%;
   min-height: 100vh;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   background: #272727;
+  z-index: 99;
 }

@@ -89,6 +89,13 @@ export const authApi = createApi({
       }),
       providesTags: ["authapi"],
     }),
+    getProfile: build.query({
+      query: ({ token }) => ({
+        url: `profile/details`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["authapi"],
+    }),
     getProduct: build.query({
       query: ({ detailId, token, page, keyword }) => ({
         url: detailId
@@ -454,6 +461,7 @@ export const {
   useGetYearlyOverviewQuery,
   useGetBannedUserQuery,
   useGetUserDetailQuery,
+  useGetProfileQuery,
   useGetBrandQuery,
   useGetOverviewDataQuery,
   useStoreBrandMutation,

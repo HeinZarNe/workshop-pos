@@ -82,9 +82,9 @@ const EditUser = ({ id, setEditState }) => {
           <h1 className="text-2xl text-[#B19777]">Users</h1>
           <p className="text-white">Users / Create</p>
         </div>
-        <Link to={"/users"}>
+        <div onClick={setEditState}>
           <button className=" py-2 px-4 rounded-lg button">Users</button>
-        </Link>
+        </div>
       </div>
       <div className="mt-5 flex gap-16 items-center">
         {section === "personal" && (

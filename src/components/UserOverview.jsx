@@ -86,7 +86,7 @@ const UserOverview = () => {
         {isLoading ? (
           <div className="w-full flex h-[300px] justify-center ">
             {" "}
-            <Loader />{" "}
+            <Loader variant="bars" />{" "}
           </div>
         ) : (
           <UserTable
@@ -97,7 +97,7 @@ const UserOverview = () => {
           />
         )}
 
-        <div className="pagination absolute bottom-[30px] right-[40px] ">
+        <div className="pagination ">
           <Pagination
             total={users?.last_page || 1}
             onChange={(e) => {
@@ -119,37 +119,41 @@ const UserOverview = () => {
         </div>
 
         <Modal show={openModal.state} onClose={toggleModal}>
-          {detailLoading ? (
-            <div className="w-full flex items-center justify-center h-[300px]">
-              <Loader />
-            </div>
-          ) : (
-            userDetail && (
-              <>
-                <Modal.Header style={{ backgroundColor: "#323232" }}>
-                  <div className="flex items-center gap-5">
-                    <img
-                      src={userDetail.data.photo}
-                      alt="admin"
-                      className=" h-[150px] w-[150px] rounded-full"
-                    />
-                    <div className=" text-[#B19777]">
-                      <h2 className="text-3xl mb-2">{userDetail.data.name}</h2>
-                      <p className=" text-gray-300 text-sm">
-                        {userDetail.data.position}
-                      </p>
+          <div className="bg-red">
+            {detailLoading ? (
+              <div className="w-full flex items-center justify-center h-[300px]">
+                <Loader variant="bars" />
+              </div>
+            ) : (
+              userDetail && (
+                <>
+                  <Modal.Header style={{ backgroundColor: "#323232" }}>
+                    <div className="flex items-center gap-5">
+                      <img
+                        src={userDetail.data.photo}
+                        alt="admin"
+                        className=" h-[150px] w-[150px] rounded-full"
+                      />
+                      <div className=" text-[#B19777]">
+                        <h2 className="text-3xl mb-2">
+                          {userDetail.data.name}
+                        </h2>
+                        <p className=" text-gray-300 text-sm">
+                          {userDetail.data.position}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Modal.Header>
-                <Modal.Body style={{ backgroundColor: "#323232" }}>
-                  <InfoTab
-                    onTabClick={handleTabClick}
-                    detail={userDetail.data}
-                  />
-                </Modal.Body>
-              </>
-            )
-          )}
+                  </Modal.Header>
+                  <Modal.Body style={{ backgroundColor: "#323232" }}>
+                    <InfoTab
+                      onTabClick={handleTabClick}
+                      detail={userDetail.data}
+                    />
+                  </Modal.Body>
+                </>
+              )
+            )}
+          </div>
         </Modal>
       </div>
     </div>
