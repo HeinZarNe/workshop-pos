@@ -140,7 +140,7 @@ function SaleReport() {
           </div>
         </div>
         <Link to="sale-report">
-          <div className="bg-primary cursor-pointer text-white rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
+          <div className="bg-primary cursor-pointer text-secondary rounded-lg text-center py-2 px-4 font-semibold tracking-wider">
             SALE REPORT
           </div>
         </Link>
