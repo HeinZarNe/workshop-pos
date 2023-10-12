@@ -527,25 +527,25 @@ const SaleReport = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="pagination">
-                <Pagination
-                  total={totalPage || 1}
-                  onChange={(e) => {
-                    setPage(e);
-                    refetch();
-                  }}
-                  // onPreviousPage={(e) => {
-                  //   setPage((prev) => prev > 0 && prev - 1);
-                  //   refetch();
-                  // }}
-                  // onNextPage={(e) => {
+            </div>
+            <div className="pagination me-4">
+              <Pagination
+                total={totalPage || 1}
+                onChange={(e) => {
+                  setPage(e);
+                  refetch();
+                }}
+                // onPreviousPage={(e) => {
+                //   setPage((prev) => prev > 0 && prev - 1);
+                //   refetch();
+                // }}
+                // onNextPage={(e) => {
 
-                  //   refetch();
-                  // }}
-                  boundaries={1}
-                  defaultValue={1}
-                />
-              </div>
+                //   refetch();
+                // }}
+                boundaries={1}
+                defaultValue={1}
+              />
             </div>
           </div>
           <div className="col-span-1">
@@ -556,19 +556,19 @@ const SaleReport = () => {
               <DonutChart />
               <div className="flex w-[100%] mx-auto mt-3 justify-between">
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 bg-[#884A39] mt-1 rounded-full"></div>
+                  <div className="w-3 h-3 bg-[#660066] mt-1 rounded-full"></div>
                   {ch?.brandsInfo[0].name}
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 bg-[#C38154] mt-1 rounded-full"></div>
+                  <div className="w-3 h-3 bg-[#BE29EC] mt-1 rounded-full"></div>
                   {ch?.brandsInfo[1].name}
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 bg-[#FFC26F] mt-1 rounded-full"></div>
+                  <div className="w-3 h-3 bg-[#EFBBFF] mt-1 rounded-full"></div>
                   {ch?.brandsInfo[2].name}
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 bg-[#F9E0BB] mt-1 rounded-full"></div>
+                  <div className="w-3 h-3 bg-[#E53F71] mt-1 rounded-full"></div>
                   {ch?.brandsInfo[3].name}
                 </div>
               </div>
