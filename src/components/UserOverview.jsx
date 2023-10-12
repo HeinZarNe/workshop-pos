@@ -29,6 +29,7 @@ const UserOverview = () => {
     token,
     id: openModal.id,
   });
+  console.log(userDetail);
   const [banUser, { isSuccess, isError }] = useBanUserMutation();
   const toggleModal = () => {
     setOpenModal(!openModal.state);

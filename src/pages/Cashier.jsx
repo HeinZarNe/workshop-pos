@@ -229,7 +229,7 @@ const Cashier = () => {
           justifyContent: "center",
         }}
       >
-        <Loader variant="bars" color={BaseColor} />
+        <Loader variant="bars" size='xl' color={BaseColor} />
       </div>
     );
   }

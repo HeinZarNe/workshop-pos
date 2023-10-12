@@ -25,8 +25,18 @@ const Inventory = () => {
   });
   useEffect(() => {
     setTotalPage(data?.last_page);
+    refetch();
+    console.log("d");
     return () => {};
   }, [data]);
+  useEffect(() => {
+    refetch();
+    // console.log("f");
+    // return () => {};
+  }, [addStock]);
+  // console.log(stockData);
+  // console.log(addStock);
+  // console.log(data.data.map(e=>console.log(e.stock)));
   return (
     <Rootlayout>
       {" "}
@@ -41,7 +51,8 @@ const Inventory = () => {
       )}
       {isLoading ? (
         <div className=" w-full h-full flex items-center justify-center">
-          <Loader variant="bars" color="#bb86fc" />
+          {/* table loder product */}
+          <Loader variant="bars" size="xl" color="#bb86fc" />
         </div>
       ) : (
         <div className=" mx-10 my-5">
@@ -130,31 +141,54 @@ const Inventory = () => {
               </div>
             </div>
             {view === "list" ? (
-              <ProductTables
-                setShowSidebar={setShowSidebar}
-                addStock={addStock}
-                keyword={keyword}
-                setStockData={setStockData}
-                page={page}
-                data={data}
-                refetch={refetch}
-              />
-            ) : (
-              <ProductCard keyword={keyword} page={page} />
-            )}
-            {data && (
-              <div className="pagination">
-                <Pagination
-                  total={totalPage || 1}
-                  onChange={(e) => {
-                    setPage(e);
-                    // refetch();
-                  }}
-                  boundaries={1}
-                  defaultValue={1}
+              <div className="">
+                <ProductTables
+                setPage={setPage}
+                  totalPage={totalPage}
+                  setShowSidebar={setShowSidebar}
+                  addStock={addStock}
+                  keyword={keyword}
+                  setStockData={setStockData}
+                  stockData={stockData}
+                  page={page}
+                  data={data}
+                  refetch={refetch}
                 />
+                {/* {data && (
+                  <div className="pagination">
+                    <Pagination
+                      total={totalPage || 1}
+                      onChange={(e) => {
+                        setPage(e);
+                        // refetch();
+                      }}
+                      boundaries={1}
+                      defaultValue={1}
+                    />
+                  </div>
+                )} */}
+              </div>
+            ) : (
+              <div className="">
+                <ProductCard keyword={keyword} page={page} />
+                {data && (
+                  <div className="pagination">
+                    <Pagination
+                      total={totalPage || 1}
+                      onChange={(e) => {
+                        setPage(e);
+                        // refetch();
+                      }}
+                      boundaries={1}
+                      defaultValue={1}
+                    />
+                  </div>
+                )}
+                
               </div>
             )}
+
+            {/* fix that */}
           </div>
         </div>
       )}

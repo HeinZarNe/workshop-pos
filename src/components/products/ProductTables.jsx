@@ -8,16 +8,19 @@ import AddProduct from "../../pages/AddProduct";
 import { Pagination } from "@mantine/core";
 
 const ProductTables = ({
+  totalPage,
+  setPage,
   setShowSidebar,
   addStock,
   setStockData,
+  stockData,
   data,
   refetch,
 }) => {
   // useEffect(() => {
   //   refetch();
-  //   // return () => {};
-  // }, [addStock]);
+  //   return () => {};
+  // }, [stockData]);
 
   // const h = useGetProductQuery({ token, page, keyword });
   // console.log(h);
@@ -27,6 +30,7 @@ const ProductTables = ({
     <div>
       {editstate ? (
         <AddProduct editState={editstate} setEditState={setEditState} />
+        // console.log("h")
       ) : (
         <div className="overflow-x-auto">
           <table className="table text-tcolor mt-5 bg-transparent rounded-md">
@@ -83,6 +87,19 @@ const ProductTables = ({
           </table>
         </div>
       )}
+      <div className="pagination">
+        {!editstate && (
+          <Pagination
+            total={totalPage || 1}
+            onChange={(e) => {
+              setPage(e);
+              // refetch();
+            }}
+            boundaries={1}
+            defaultValue={1}
+          />
+        )}
+      </div>
     </div>
   );
 };
