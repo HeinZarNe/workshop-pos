@@ -21,7 +21,7 @@ const DonutChart = () => {
             ch?.brandsInfo[3].count,
           ],
 
-          backgroundColor: ["#610C9F", "#E95793", "#FFC26F", "#F9E0BB"],
+          backgroundColor: ["#660066", "#BE29EC", "#EFBBFF", "#E53F71"],
         },
       ],
     };

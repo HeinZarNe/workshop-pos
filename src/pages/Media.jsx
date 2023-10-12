@@ -9,6 +9,7 @@ import { useDeletePhotoMutation } from "../services/mediaApi";
 import { addphoto, deletePhoto } from "../services/mediaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "@mantine/core";
+import { BaseUrl } from "../utils/constant";
 
 const Media = () => {
   const token = localStorage.getItem("token");
@@ -19,7 +20,10 @@ const Media = () => {
   const dispatch = useDispatch();
   const { photo } = useSelector((state) => state.media);
   const photoList = [...photo];
-
+  
+  // console.log(photoList)
+  photoList.map(e=>console.log(BaseUrl + (e.location)))
+  photoList.map(e=>console.log(e.location))
   const handleFileChange = async (e) => {
     const selectedFile = await e.target.files;
     let photos = new FormData();
@@ -110,7 +114,7 @@ const Media = () => {
                       </div>
                       <img
                         className=" h-[200px] w-[200px]"
-                        src={photo.url}
+                        src={BaseUrl + photo.location}
                         alt=""
                       />
                     </div>

@@ -1,1 +1,1 @@
-export const BaseUrl = "https://f.mmsdev.site";
+export const BaseUrl = "https://f.mmsdev.site/";

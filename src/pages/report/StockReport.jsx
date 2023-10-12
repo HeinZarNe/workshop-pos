@@ -410,15 +410,15 @@ const StockReport = () => {
                           </td>
                           <td className="px-6 py-4  text-center">
                             {e.stock_levle == "In Stock" ? (
-                              <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
+                              <div className="bg-[#610C9F] border-2 bg-opacity-30 border-[#610C9F] p-3 px-2 rounded-full">
                                 {e.stock_levle}
                               </div>
                             ) : e.stock_levle == "Low Stock" ? (
-                              <div className="bg-red-500 border-2 bg-opacity-30 border-red-400 p-3 px-2 rounded-full">
+                              <div className="bg-[#E95793] border-2 bg-opacity-30 border-[#E95793] p-3 px-2 rounded-full">
                                 {e.stock_levle}
                               </div>
                             ) : (
-                              <div className="bg-blue-500 border-2 bg-opacity-30 border-blue-400 p-3 px-2 rounded-full">
+                              <div className="bg-[#FFC26F] border-2 bg-opacity-30 border-[#FFC26F] p-3 px-2 rounded-full">
                                 {e.stock_levle}
                               </div>
                             )}
