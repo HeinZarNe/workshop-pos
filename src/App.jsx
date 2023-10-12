@@ -34,18 +34,19 @@ import EditUser from "./pages/EditUser";
 const App = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
+  // const  data  = useGetPhotoQuery(token);
   const { data } = useGetPhotoQuery(token);
   const { photo } = useSelector((state) => state.media);
 
   useEffect(() => {
-    // console.log(photo, data?.data);
     data?.forEach((item) => {
       // Check if the item is already in the photo array
       if (!photo.some((image) => image.id === item.id)) {
         dispatch(addphoto(item));
-      }
+      }  
     });
   }, [data]);
+  console.log(data);
 
   return (
     <Routes>

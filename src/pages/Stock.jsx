@@ -7,7 +7,7 @@ import StockTable from "../components/stock/StockTable";
 import StockCard from "../components/stock/StockCard";
 import AddStock from "../components/stock/AddStock";
 import { useGetStockQuery } from "../services/authApi";
-import { Pagination } from "@mantine/core";
+import { Loader, Pagination } from "@mantine/core";
 
 const Stock = () => {
   const [showSidebar, setShowSideBar] = useState(false);
@@ -15,18 +15,18 @@ const Stock = () => {
   const [keyword, setKeyword] = useState("");
   const [stockData, setStockData] = useState({});
   const token = localStorage.getItem("token");
-  const { data: stocks } = useGetStockQuery({ token, page, keyword });
+  const { data: stocks, isLoading } = useGetStockQuery({
+    token,
+    page,
+    keyword,
+  });
 
-  return (
+  return isLoading ? (
+    <div className="w-full flex h-[100vh] items-center justify-center ">
+      <Loader size="xl" variant="bars" color="#bb86fc" />
+    </div>
+  ) : (
     <Rootlayout>
-      {/* {showSidebar && (
-        <AddStock
-          stockData={stockData}
-          setStockData={setStockData}
-          showSidebar={showSidebar}
-          setShowSideBar={setShowSideBar}
-        />
-      )} */}
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
           <div className="">

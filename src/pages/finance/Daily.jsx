@@ -34,6 +34,13 @@ const Daily = () => {
     const formattedDate = `${year}-${month}-${day}`;
     setDateSearch(formattedDate);
   };
+      //  {
+      //    isLoading && (
+      //      <div className="flex items-center justify-center w-full h-[300px]">
+      //        <Loader variant="bars" size="xl" color="#bb86fc" />
+      //      </div>
+      //    );
+      //  }
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
