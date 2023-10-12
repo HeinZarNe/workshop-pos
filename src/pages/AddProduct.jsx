@@ -84,6 +84,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
   }, [editState, product, brands]);
 
   const navigate = useNavigate();
+  console.log(selectedPhoto);
   const submitHandler = async (e) => {
     e.preventDefault();
     if (isLoading) return;
@@ -103,12 +104,30 @@ const AddProduct = ({ editState = false, setEditState }) => {
       });
 
       await Swal.fire({
-        position: "center",
+        title: "Product has been updated !",
+        buttonsStyling: false,
         icon: "success",
-        title: "Product has been updated!",
         showConfirmButton: true,
-
+        color: "#bb86fc",
+        width: "30em",
         confirmButtonText: "Go to Products",
+        background: "#1e1e1e",
+        customClass: {
+          title: "text-primary",
+          // htmlContainer: 'bg-secondary',
+          // action: '!mt-2',
+          confirmButton:
+            "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+        },
+
+        // position: "center",
+        // icon: "success",
+        // title: "Product has been updated!",
+        // color: "#bb86fc",
+        // showConfirmButton: true,
+        // background: "#1e1e1e",
+        // confirmButtonText: "Go to Products",
+        // confirmButtonColor: "#bb86fc",
         preConfirm: () => {
           setEditState(false);
         },
@@ -156,11 +175,11 @@ const AddProduct = ({ editState = false, setEditState }) => {
     }
   };
   return detailLoading ? (
-    <div className="w-full flex items-center justify-center h-[300px]">
-      <Loader variant="bars" color="#bb86fc" />
+    <div className="w-full flex items-center justify-center ">
+      <Loader size="xl" variant="bars" color="#bb86fc" />
     </div>
   ) : editState && detailSuccess ? (
-    <div className="edit-product">
+    <div className="edit-product !bg-back">
       {showPhotoModal && (
         <ModalPhoto
           setShowPhotoModal={setShowPhotoModal}
@@ -198,12 +217,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 setSection("price");
             }}
             action=""
-            className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+            className="w-[500px] rounded-lg ml-5 flex flex-col"
           >
             <div className=" text-tcolor flex flex-col gap-8 p-5">
-              <div className=" flex justify-between">
+              <div className=" flex items-center justify-between">
                 <span className=" text-[17px] text-tscolor font-bold">
-                  Name *
+                  Name
                 </span>
                 <input
                   required
@@ -211,18 +230,19 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Product Name"
                   type="text"
-                  className="mt-1 rounded-sm block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
-              <div className=" flex justify-between">
+              <div className=" flex items-center justify-between">
                 <span className=" text-[17px] text-tscolor font-bold">
-                  Brand *
+                  Brand
                 </span>
                 <select
                   onChange={(e) => {
                     setBrand_name(Number(e.target.value));
                   }}
-                  className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 >
                   {brands?.with_no_pagi?.map((item) => (
                     <option
@@ -236,9 +256,9 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 </select>
               </div>
 
-              <div className=" flex justify-between">
+              <div className=" flex items-center justify-between">
                 <span className=" text-[17px] text-tscolor font-bold">
-                  Unit *
+                  Unit
                 </span>
                 <input
                   required
@@ -246,12 +266,13 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   onChange={(e) => setUnit(e.target.value)}
                   placeholder=""
                   type="text"
-                  className="mt-1 rounded-sm block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm text-primary focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 rounded-sm block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm text-primary focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
-              <div className=" flex justify-between">
+              <div className=" flex items-center justify-between">
                 <span className=" text-[17px] text-tscolor font-bold">
-                  More Info *
+                  More Info
                 </span>
                 <textarea
                   required
@@ -259,7 +280,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   value={more_information}
                   name=""
                   placeholder="More ..."
-                  className="mt-1 block w-2/3 p-2 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-2 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   id=""
                   cols="10"
                   rows="4"
@@ -294,12 +316,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
             <form
               onSubmit={() => setSection("photo")}
               action=""
-              className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+              className="w-[500px] bg-secondary rounded-lg ml-5 flex flex-col"
             >
               <div className=" text-tcolor flex flex-col gap-8 p-5">
-                <div className=" flex justify-between">
+                <div className=" flex items-center justify-between">
                   <span className=" text-[17px] text-tscolor font-bold">
-                    Actual Price *
+                    Actual Price
                   </span>
                   <input
                     type="number"
@@ -311,12 +333,13 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
-                <div className=" flex justify-between">
+                <div className=" flex items-center justify-between">
                   <span className=" text-[17px] text-tscolor font-bold">
-                    Sale Price *
+                    Sale Price
                   </span>
                   <input
                     type="number"
@@ -328,7 +351,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                       }
                     }}
                     placeholder=""
-                    className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
               </div>
@@ -346,17 +370,18 @@ const AddProduct = ({ editState = false, setEditState }) => {
           </div>
         )}
         {section === "photo" && (
-          <div className="w-[550px] bg-secondary rounded-lg ml-5 ">
+          <div className="w-[500px] bg-secondary rounded-lg ml-5 ">
             <div className="flex flex-col items-center p-5">
               <h4 className="text-lg text-tcolor mb-6">Upload Photo</h4>
               <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-primary bg-[#272727] flex justify-center items-center">
                 {selectedPhoto ? (
                   <img
-                    src={
-                      !selectedPhoto.url
-                        ? BaseUrl + selectedPhoto
-                        : selectedPhoto.url || ""
-                    }
+                    src={selectedPhoto}
+                    // src={
+                    //   !selectedPhoto.url
+                    //     ? BaseUrl + selectedPhoto
+                    //     : selectedPhoto.url || ""
+                    // }
                     alt="Selected"
                     style={{ maxWidth: "100%", maxHeight: "200px" }}
                     className="rounded-full h-[177px] aspect-square "
@@ -402,7 +427,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
         {section === "productPreview" && (
           <form
             onSubmit={submitHandler}
-            className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+            className="w-[500px] bg-secondary rounded-lg ml-5 flex flex-col"
           >
             <div className="p-5">
               <div className="flex gap-5 items-center pb-5 border-b">
@@ -427,10 +452,10 @@ const AddProduct = ({ editState = false, setEditState }) => {
               </div>
               <div className="flex mt-5 gap-20">
                 <div className="space-y-4 text-tcolor">
-                  <p>Name</p>
-                  <p>Brand</p>
-                  <p>Unit</p>
-                  <p>More Information</p>
+                  <p className=" font-semibold">Name</p>
+                  <p className=" font-semibold">Brand</p>
+                  <p className=" font-semibold">Unit</p>
+                  <p className=" font-semibold">More Information</p>
                 </div>
                 <div className="space-y-4 text-tcolor">
                   <p>: {name}</p>
@@ -444,7 +469,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               type="submit"
               className="self-end py-2 px-4 rounded-lg button m-5"
             >
-              Edit Product
+              Save
             </button>
           </form>
         )}
@@ -454,8 +479,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
               onClick={(_) => GoToThisStep(1)}
               className={`w-14 h-14 ${
                 section === "info"
-                  ? "bg-secondary border-primary text-primary"
-                  : "bg-primary "
+                  ? "bg-secondary text-lg border-primary text-primary"
+                  : "bg-primary text-secondary border-0 text-lg"
               } flex justify-center items-center rounded-full border  "`}
             >
               1
@@ -476,10 +501,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
               onClick={(_) => GoToThisStep(2)}
               className={`w-14 h-14 ${
                 section === "info"
-                  ? "bg-secondary border-[#fff] text-primary"
-                  : section === "price"
+                  ? "bg-secondary text-lg border-primary text-primary"
+                  : // ? "bg-secondary border-[#fff] text-primary"
+                  section === "price"
                   ? "bg-secondary border-primary text-primary"
-                  : "bg-primary"
+                  : "bg-primary text-secondary border-0 text-lg"
+                // : "bg-primary"
               } flex justify-center items-center rounded-full border text-[#ffffff] "`}
             >
               2
@@ -499,8 +526,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
               onClick={(_) => GoToThisStep(3)}
               className={`w-14 h-14 ${
                 section === "info" || section === "price" || section === "photo"
-                  ? "bg-secondary"
-                  : "bg-primary"
+                  ? "bg-secondary text-lg border-primary text-primary"
+                  : "bg-primary text-secondary border-0 text-lg"
               } flex justify-center items-center rounded-full border ${
                 section === "photo"
                   ? "border-primary text-primary  "
@@ -571,7 +598,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Product Name"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -584,7 +612,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   onChange={(e) => {
                     setBrand_name(Number(e.target.value));
                   }}
-                  className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 >
                   {brands?.with_no_pagi.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -637,7 +666,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                   value={more_information}
                   name=""
                   placeholder="More ..."
-                  className="mt-1 block w-2/3 p-2 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-2 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   id=""
                   cols="10"
                   rows="4"
@@ -673,12 +703,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
             <form
               onSubmit={() => setSection("photo")}
               action=""
-              className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+              className="w-[500px] bg-secondary rounded-lg ml-5 flex flex-col"
             >
               <div className=" text-tcolor flex flex-col gap-8 p-5">
                 <div className=" flex justify-between">
                   <span className=" text-[17px] text-tscolor font-bold">
-                    Actual Price *
+                    Actual Price
                   </span>
                   <input
                     required
@@ -690,12 +720,13 @@ const AddProduct = ({ editState = false, setEditState }) => {
                     }}
                     placeholder=""
                     type="number"
-                    className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex justify-between">
                   <span className=" text-[17px] text-tscolor font-bold">
-                    Sale Price *
+                    Sale Price
                   </span>
                   <input
                     required
@@ -707,7 +738,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
                     }}
                     placeholder=""
                     type="number"
-                    className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-gray/50 border border-white/50 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
               </div>

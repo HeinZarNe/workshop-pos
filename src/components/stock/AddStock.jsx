@@ -84,7 +84,7 @@ const AddStock = ({
             </button>
             <button
               onClick={() => setShowSideBar(false)}
-              className=" text-white border border-stone-400 tracking-wider px-5 py-2 rounded-lg"
+              className=" text-primary border border-primary tracking-wider px-5 py-2 rounded-lg"
             >
               {" "}
               CANCEL

@@ -70,7 +70,7 @@ const StockReport = () => {
   const lW = stockLevelBar?.stock_lvl_bar?.low_stock[1];
   const oW = stockLevelBar?.stock_lvl_bar?.out_of_stock[1];
   console.log(stockLevelBar?.stock_lvl_bar);
-  const inStock = `w-[${inW}]`;
+  const inStock = inW ? ` w-[${parseFloat(inW)}%]` : "w-0";
   const outOfStock = `w-[${oW}]`;
   const lowStock = `w-[${lW}] `;
   console.log(inStock);
@@ -135,16 +135,12 @@ const StockReport = () => {
             <div className="col-span-2 border  border-primary  rounded-md p-5 ">
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
-                  <div className=" flex w-[75%]  overflow-hidden h-3 rounded-full ">
-                    <div className={`bg-[#660066] h-full ${inStock}`}>
-                      {/* <div className="bg-red-300 h-full w-full"></div> */}
+                  <div className=" flex w-3/4  overflow-hidden h-3 rounded-full ">
+                    <div className={inStock}>
+                      {/* <div className={`bg-[#660066]  h-full ${inStock}`}> */}
                     </div>
-                    <div
-                      className={`bg-[#BE29EC] h-full  ${lowStock}`}
-                    ></div>
-                    <div
-                      className={`bg-[#EFBBFF] h-full  ${outOfStock}`}
-                    ></div>
+                    <div className={`bg-[#BE29EC] h-full  ${lowStock}`}></div>
+                    <div className={`bg-[#EFBBFF] h-full  ${outOfStock}`}></div>
                   </div>
                 ) : null}
 
