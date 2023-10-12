@@ -197,7 +197,7 @@ const Daily = () => {
             </div>
           </>
         ) : (
-          <div className="bg-[#272727] ">
+          <div className=" ">
             <div className="flex justify-between gap-5 ">
               <div className="w-full flex flex-col items-center justify-center h-[50vh]">
                 <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
