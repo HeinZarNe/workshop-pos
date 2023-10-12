@@ -66,9 +66,14 @@ const StockReport = () => {
   const { data: stockLevelBar } = useGetStockLevelBarQuery(token);
   const { data: bestSeller } = useGetBestSellerBrandsQuery(token);
   // const { data: stockBrand } = useGetBrandReportQuery(token);
-  const inStock = `w-[65%] h-full bg-[#610C9F]`;
-  const outOfStock = `w-[0%] h-full bg-[#FFC26F]`;
-  const lowStock = `w-[35%] h-full bg-[#DA0C81] `;
+  const inW = stockLevelBar?.stock_lvl_bar?.in_stock[1];
+  const lW = stockLevelBar?.stock_lvl_bar?.low_stock[1];
+  const oW = stockLevelBar?.stock_lvl_bar?.out_of_stock[1];
+  console.log(stockLevelBar?.stock_lvl_bar);
+  const inStock = `w-[${inW}]`;
+  const outOfStock = `w-[${oW}]`;
+  const lowStock = `w-[${lW}] `;
+  console.log(inStock);
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -131,9 +136,15 @@ const StockReport = () => {
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
                   <div className=" flex w-[75%]  overflow-hidden h-3 rounded-full ">
-                    <div className={inStock}></div>
-                    <div className={outOfStock}></div>
-                    <div className={lowStock}></div>
+                    <div className={`bg-[#660066] h-full ${inStock}`}>
+                      {/* <div className="bg-red-300 h-full w-full"></div> */}
+                    </div>
+                    <div
+                      className={`bg-[#BE29EC] h-full  ${lowStock}`}
+                    ></div>
+                    <div
+                      className={`bg-[#EFBBFF] h-full  ${outOfStock}`}
+                    ></div>
                   </div>
                 ) : null}
 
@@ -147,7 +158,7 @@ const StockReport = () => {
               <div className="mt-4">
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#610C9F] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#660066] rounded-full"></div>{" "}
                     <p className="text-lg">Instock</p>
                   </div>
                   <div className="flex gap-7">
@@ -162,7 +173,7 @@ const StockReport = () => {
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#E95793] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#BE29EC] rounded-full"></div>{" "}
                     <p className="text-lg">Low stock</p>
                   </div>
                   <div className="flex gap-7">
@@ -177,7 +188,7 @@ const StockReport = () => {
                 </div>
                 <div className="flex border-t border-secondary py-3 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-[#940B92] rounded-full"></div>{" "}
+                    <div className="w-3 h-3 bg-[#EFBBFF] rounded-full"></div>{" "}
                     <p className="text-lg">Out of stock</p>
                   </div>
                   <div className="flex gap-7">
@@ -212,7 +223,7 @@ const StockReport = () => {
                 <div className="">
                   <div className="flex border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#DA0C81] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#660066] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[0].brand_name}
                       </p>
@@ -228,7 +239,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#E95793] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#BE29EC] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[1].brand_name}
                       </p>
@@ -244,7 +255,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#940B92] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#EFBBFF] rounded-full"></div>{" "}
                       {bestSeller?.weekly_best_seller_brands[2].brand_name}
                       <p className="text-lg"></p>
                     </div>
@@ -259,7 +270,7 @@ const StockReport = () => {
                   </div>
                   <div className="flex border-t border-secondary py-3 items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-[#DA0C81] rounded-full"></div>{" "}
+                      <div className="w-3 h-3 bg-[#E53F71] rounded-full"></div>{" "}
                       <p className="text-lg">
                         {bestSeller?.weekly_best_seller_brands[3].brand_name}
                       </p>
@@ -406,8 +417,12 @@ const StockReport = () => {
                               <div className="bg-green-500 border-2 bg-opacity-30 border-green-400 p-3 px-2 rounded-full">
                                 {e.stock_levle}
                               </div>
-                            ) : (
+                            ) : e.stock_levle == "Low Stock" ? (
                               <div className="bg-red-500 border-2 bg-opacity-30 border-red-400 p-3 px-2 rounded-full">
+                                {e.stock_levle}
+                              </div>
+                            ) : (
+                              <div className="bg-blue-500 border-2 bg-opacity-30 border-blue-400 p-3 px-2 rounded-full">
                                 {e.stock_levle}
                               </div>
                             )}

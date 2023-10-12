@@ -270,9 +270,9 @@ const Cashier = () => {
 
   return (
     <div className="bg-black">
-      <div className="flex justify-between gap-5 ">
+      <div className="flex justify-between  gap-5 ">
         <div className="w-full">
-          <div className="flex justify-between mx-5 my-5 items-center">
+          <div className="flex justify-between  mx-5 my-5 items-center">
             <div className=" flex items-center">
               <p
                 className="ms-2 cursor-pointer flex gap-2 btn btn-outline items-center text-lg py-2 hover:bg-primary hover:border-primary text-primary hover:text-secondary  font-semibold"
@@ -329,12 +329,12 @@ const Cashier = () => {
             </div>
           </div>
           <div className="w-[100%] mx-auto ">
-            <div className="flex flex-row h-screen overflow-y-scroll pb-[150px] flex-wrap gap-3 justify-center items-start">
+            <div className="flex p-2 flex-row h-[85vh] overflow-y-scroll pb-[150px] flex-wrap gap-5 justify-center items-start">
               {/* {test.map((product) => ( */}
               {data?.products?.map((product) => (
                 <div
                   key={product.id}
-                  className={`product flex hover:bg-primary/10 flex-col justify-between cursor-pointer  w-[23%] bg-secondary border border-primary rounded-lg shadow dark:bg-secondary dark:border-primary" ${
+                  className={`product flex hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 flex-col justify-between cursor-pointer overflow-hidden  w-[23%] bg-secondary borde rounded-lg shadow " ${
                     selectedProducts.includes(product.id) ? "active" : ""
                   }`}
                   onClick={() => handleProductClick(product.id)}
@@ -342,7 +342,7 @@ const Cashier = () => {
                   <div className="w-full object-fill">
                     <img
                       src={product.photo}
-                      className="object-cover object-center h-[190px] rounded-t-lg fit w-full"
+                      className="object-cover object-center h-[190px] fit w-full"
                       alt=""
                     />
                   </div>
