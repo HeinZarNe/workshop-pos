@@ -11,6 +11,7 @@ import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Loader, Select } from "@mantine/core";
 import { BaseColor } from "./../constant";
+import closedIcon from "./closed.png";
 
 const Cashier = () => {
   const navigate = useNavigate();
@@ -199,17 +200,44 @@ const Cashier = () => {
   const handleSaleOpen = () => {
     Swal.fire({
       title: "Are you sure?",
-      icon: "question",
+      icon: "warning",
+      iconColor: "#bb86fc",
+      buttonsStyling: false,
+      width: "20em",
+      color: "#fafafa",
+      heightAuto: false,
+      background: "#1E1E1E",
+      focusConfirm: true,
       showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      customClass: {
+        cancelButton:
+          "bg-primary text-secondary rounded-lg border-2 border-primary px-4 font-mono py-2",
+        confirmButton:
+          "bg-transparent text-primary rounded-lg border-2 border-primary px-7 font-mono py-2",
+        actions: " !mt-5 !w-[100%] flex justify-center gap-9",
+        icon: "!p-0",
+        title: "!mt-0 !pt-0",
+      },
       confirmButtonText: "Yes",
-      confirmButtonColor: "blue",
-      timer: false,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         const res = saleClose(token);
 
-        Swal.fire("Opened!", "", "success");
+        Swal.fire({
+          title: "Sale Opened !",
+          icon: "success",
+          buttonsStyling: false,
+          color: "#bb86fc",
+          width: "25em",
+          background: "#1e1e1e",
+          customClass: {
+            title: "text-primary",
+            confirmButton:
+              "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+          },
+        });
         refetch();
       } else if (result.isDenied) {
         Swal.close();
@@ -229,7 +257,7 @@ const Cashier = () => {
           justifyContent: "center",
         }}
       >
-        <Loader variant="bars" size='xl' color={BaseColor} />
+        <Loader variant="bars" size="xl" color={BaseColor} />
       </div>
     );
   }
@@ -250,15 +278,17 @@ const Cashier = () => {
               </div>
             </div>
             <div className="h-[70vh] flex flex-col items-center justify-center">
-              <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
-                <p className="text-2xl font-semibold">
-                  Sale is currently closed. Do you want to open it?
+              <div className="border border-primary bg-secondary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                <img src={closedIcon} className="h-40" alt="" />
+                <p className="text-2xl text-tcolor font-mono">
+                  Sale is currently closed.
                 </p>
                 <button
-                  className="px-3 py-1 pb-2 font-semibold rounded-md text-xl border border-primary"
+                  className="px-5 mt-2 py-2 font-mono rounded-lg text-primary hover:bg-primary hover:text-secondary duration-150
+                   text-xl border border-primary"
                   onClick={handleSaleOpen}
                 >
-                  Open
+                  OPEN
                 </button>
               </div>{" "}
             </div>
