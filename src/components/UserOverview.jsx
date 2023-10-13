@@ -190,7 +190,7 @@ const UserOverview = () => {
         </div>
       </div>
       {/* section */}
-      <div className=" w-[1000px] my-5 justify-between items-center relative">
+      <div className=" w-[400px] my-5 justify-between items-center relative">
         <div className=" px-5 py-3  border-b border-stone-500 text-white flex gap-20">
           <h1
             onClick={() => setSection("personal")}
