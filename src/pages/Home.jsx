@@ -186,7 +186,7 @@ const Home = () => {
                     <p className="text-sm">complete the sale</p>
                   </div>
                 </div>
-                <Link to={"/products"}>
+                <Link to={"/sale/cashier"}>
                   <div className=" rounded-full p-2 bg-primary bg-opacity-5">
                     <AiOutlineArrowRight
                       size={20}

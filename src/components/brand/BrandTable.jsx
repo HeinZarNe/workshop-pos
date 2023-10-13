@@ -1,6 +1,7 @@
 import React from "react";
 import { TbEdit } from "react-icons/tb";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import {  AiOutlinePlus } from "react-icons/ai";
+import { BiTrash } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import {
@@ -89,7 +90,7 @@ const BrandTable = ({
                           className=" bg-primary rounded-full p-2 hover:shadow-md"
                           onClick={(_) => handleTableRowDelete(brand.id)}
                         >
-                          <AiOutlineMinus />
+                          <BiTrash />
                         </button>
                         <button
                           className=" bg-primary rounded-full p-2"
