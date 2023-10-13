@@ -48,11 +48,24 @@ const BannedTables = ({ keyword }) => {
                         onClick={(_) => {
                           unbanUser({ token, id: item.id });
                           Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "User has been unbanned!",
+                            // position: "center",
+                            // icon: "success",
+                            // title: "User has been unbanned!",
 
-                            allowOutsideClick: true,
+                            // allowOutsideClick: true,
+                            title: "Successfully restored !",
+                            icon: "success",
+                            buttonsStyling: false,
+                            color: "#bb86fc",
+                            width: "25em",
+                            background: "#1e1e1e",
+                            customClass: {
+                              title: "text-primary",
+                              // htmlContainer: 'bg-secondary',
+                              // action: '!mt-2',
+                              confirmButton:
+                                "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+                            },
                           });
                         }}
                       >

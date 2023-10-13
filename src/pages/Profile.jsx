@@ -29,8 +29,8 @@ const Profile = () => {
   return (
     <Rootlayout>
       {isLoading && (
-        <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader variant="bars" color="#bb86fc" />
+        <div className="w-full h-[100vh] flex items-center justify-center">
+          <Loader variant="bars" size='xl' color="#bb86fc" />
         </div>
       )}
       {profile && (
