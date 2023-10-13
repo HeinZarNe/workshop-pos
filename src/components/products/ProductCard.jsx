@@ -12,7 +12,7 @@ const ProductCard = ({ keyword, page }) => {
       <div className="flex flex-row flex-wrap items-center rounded-md gap-5">
         {data?.data?.map((item) => {
           return (
-            <div className=" flex-1 hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 bg-secondary overflow-hidden rounded-lg  ">
+            <div className="w-[30%] hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 bg-secondary overflow-hidden rounded-lg  ">
               <Link to={"/products/details"} state={{ id: item.id }}>
                 <img
                   className=" w-full h-[230px]  object-cover"

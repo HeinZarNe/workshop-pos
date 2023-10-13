@@ -118,7 +118,7 @@ const EditProfile = () => {
       email: newData.email?.length > 0 ? newData.email : email,
       gender: selectedGenders?.length > 0 ? selectedGenders : gender,
       photo: selectedPhoto
-        ? selectedPhoto.path
+        ? selectedPhoto.url
         : newData.photo?.length > 0
         ? newData.photo
         : photo,

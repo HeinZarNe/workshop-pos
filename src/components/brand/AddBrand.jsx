@@ -40,7 +40,7 @@ const AddBrand = ({
   }, []);
 
   const handleImageChange = () => {
-    setBrandData((prevData) => ({ ...prevData, photo: selectedPhoto.path }));
+    setBrandData((prevData) => ({ ...prevData, photo: selectedPhoto.url }));
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;

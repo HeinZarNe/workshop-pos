@@ -64,7 +64,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
   const [sale_price, setSale_price] = useState(
     editState ? product?.data.sale_price : ""
   );
-  const [total_stock, setTotalStock] = useState("");
   const [unit, setUnit] = useState(editState ? product?.data.unit : "");
   const [more_information, setMoreInformation] = useState(
     editState ? product?.data.more_information : ""
@@ -99,7 +98,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
           actual_price,
           sale_price,
           more_information,
-          photo: selectedPhoto.path || selectedPhoto,
+          photo: selectedPhoto.url || selectedPhoto,
           unit,
         },
         token,
@@ -141,11 +140,10 @@ const AddProduct = ({ editState = false, setEditState }) => {
       productData: {
         name,
         brand_id: brand_name,
-        total_stock,
         actual_price,
         sale_price,
         more_information,
-        photo: selectedPhoto.path || selectedPhoto,
+        photo: selectedPhoto.url || selectedPhoto,
         unit,
       },
       token,
@@ -384,7 +382,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-primary bg-[#272727] flex justify-center items-center">
                 {selectedPhoto ? (
                   <img
-                    src={selectedPhoto}
+                    src={selectedPhoto?.url || selectedPhoto}
                     // src={
                     //   !selectedPhoto.url
                     //     ? BaseUrl + selectedPhoto
@@ -593,7 +591,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              // name && brand_name && total_stock && unit && setSection("price");
               name &&
                 brand_name &&
                 unit &&
@@ -692,7 +689,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               </div>
             </div>
             <div className="flex flex-row items-center justify-between">
-              {[name, brand_name, total_stock, unit, more_information].some(
+              {[name, brand_name, unit, more_information].some(
                 (item) => item == false
               ) ? (
                 <p className="text-primary flex flex-row items-center gap-1 pl-5">
@@ -703,7 +700,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 <div></div>
               )}
               <button
-                disabled={[name, brand_name, total_stock, unit].some(
+                disabled={[name, brand_name, unit].some(
                   (item) => item === false
                 )}
                 type="submit"
@@ -849,14 +846,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 <div className="space-y-4 text-tcolor">
                   <p>Name</p>
                   <p>Brand</p>
-                  <p>Stock</p>
                   <p>Unit</p>
                   <p>More Information</p>
                 </div>
                 <div className="space-y-4 text-tcolor">
                   <p>: {name}</p>
                   <p>: {brand_name}</p>
-                  <p>: {total_stock}</p>
                   <p>: {unit || "-"}</p>
                   <p>: {more_information || "-"}</p>
                 </div>
@@ -882,12 +877,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
             >
               1
             </div>
-            <p
-              className={
-                section === "info" &&
-                ` text-primary `
-              }
-            >
+            <p className={section === "info" && ` text-primary `}>
               Information
             </p>
           </div>
