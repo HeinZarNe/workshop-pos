@@ -146,9 +146,9 @@ const Monthly = () => {
                         <th scope="col" className="px-6  text-end py-3">
                           <div className="text-secondary">TOTAL</div>
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        {/* <th scope="col" className="px-6 py-3">
                           <span className="sr-only">Edit</span>
-                        </th>
+                        </th> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@ const Monthly = () => {
                             <td className="px-6 py-4  text-end">
                               {data.total}
                             </td>
-                            <td className="px-6 py-4 text-center">
+                            {/* <td className="px-6 py-4 text-center">
                               <NavLink
                                 to={"/profile"}
                                 className="font-medium flex justify-center text-blue-600  hover:underline"
@@ -180,7 +180,7 @@ const Monthly = () => {
                                   <AiOutlineArrowRight />
                                 </button>
                               </NavLink>
-                            </td>
+                            </td> */}
                           </tr>
                         );
                       })}

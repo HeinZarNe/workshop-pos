@@ -218,8 +218,8 @@ const Daily = () => {
               <div className="flex justify-between gap-5 ">
                 <div className="w-full flex flex-col items-center justify-center h-[60vh]">
                   <div className="border border-primary px-9 py-6 pt-7 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
-                    <img src={icon} alt="" className="h-28 text-primary" />
-                    <p className="text-2xl text-tscolor font-mono">
+                    <img src={icon} alt="" className="h-28 mt-3 text-primary" />
+                    <p className="text-2xl mt-3 mb-2 text-tscolor font-mono">
                       Please enter date to get data!
                     </p>
                   </div>
