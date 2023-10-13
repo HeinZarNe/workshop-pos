@@ -50,12 +50,26 @@ const CreateUser = () => {
       const data = await createUser({ userData, token });
 
       await Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "A new user has been registered!",
-        showConfirmButton: true,
+        // position: "center",
+        // icon: "success",
+        // title: "A new user has been registered!",
+        // showConfirmButton: true,
 
+        // confirmButtonText: "Go to User",
+        title: "Successfully registered !",
+        icon: "success",
+        buttonsStyling: false,
+        color: "#bb86fc",
+        width: "25em",
+        background: "#1e1e1e",
         confirmButtonText: "Go to User",
+        customClass: {
+          title: "text-primary",
+          // htmlContainer: 'bg-secondary',
+          // action: '!mt-2',
+          confirmButton:
+            "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+        },
         preConfirm: () => {
           redirectRef?.current.click();
         },
@@ -93,7 +107,8 @@ const CreateUser = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -106,7 +121,8 @@ const CreateUser = () => {
                   onChange={(e) => setPhone_number(e.target.value)}
                   placeholder="Phone"
                   type="text"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -119,7 +135,8 @@ const CreateUser = () => {
                   onChange={(e) => setDateOfBirth(e.target.value)}
                   placeholder="date of birth"
                   type="date"
-                  className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                 />
               </div>
               <div className=" flex justify-between">
@@ -158,7 +175,8 @@ const CreateUser = () => {
                   onChange={(e) => setAddress(e.target.value)}
                   name=""
                   placeholder="Address"
-                  className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  // className="mt-1 block w-2/3 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                  className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   id=""
                   cols="10"
                   rows="4"
@@ -188,7 +206,8 @@ const CreateUser = () => {
                   </span>
                   <select
                     onChange={(e) => setPosition(e.target.value)}
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm text-slate-400 focus:outline-none focus:border-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                     name="position"
                     id=""
                   >
@@ -210,7 +229,8 @@ const CreateUser = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     type="text"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex justify-between">
@@ -223,7 +243,8 @@ const CreateUser = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder=""
                     type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex justify-between">
@@ -236,7 +257,8 @@ const CreateUser = () => {
                     onChange={(e) => setPassword_confirmation(e.target.value)}
                     placeholder=""
                     type="password"
-                    className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-2/3 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-2/3 p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"x
                   />
                 </div>
               </div>
@@ -444,7 +466,7 @@ const CreateUser = () => {
           <div className="flex items-center gap-5">
             <div
               className={`w-14 h-14 bg-secondary flex justify-center items-center rounded-full border ${
-                section === "photo"
+                section === "preview"
                   ? "border-primary text-primary"
                   : "border-white text-tcolor"
               }`}
@@ -453,7 +475,7 @@ const CreateUser = () => {
             </div>
             <p
               className={` ${
-                section === "photo" ? "text-primary" : "text-tcolor"
+                section === "preview" ? "text-primary" : "text-tcolor"
               }`}
             >
               Preview
