@@ -38,15 +38,15 @@ const App = () => {
   const { data } = useGetPhotoQuery(token);
   const { photo } = useSelector((state) => state.media);
 
-  useEffect(() => {
-    data?.forEach((item) => {
-      // Check if the item is already in the photo array
-      if (!photo.some((image) => image.id === item.id)) {
-        dispatch(addphoto(item));
-      }  
-    });
-  }, [data]);
-  console.log(data);
+  // useEffect(() => {
+  //   data?.forEach((item) => {
+  //     // Check if the item is already in the photo array
+  //     if (!photo.some((image) => image.id === item.id)) {
+  //       dispatch(addphoto(item));
+  //     }  
+  //   });
+  // }, [data]);
+  // console.log(data);
 
   return (
     <Routes>

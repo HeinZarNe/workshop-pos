@@ -40,7 +40,11 @@ const UserOverview = () => {
   const handleTabClick = (event) => {
     event.stopPropagation();
   };
-  return (
+  return isLoading ? (
+    <div className="w-full flex h-[100vh] justify-center ">
+      <Loader variant="bars" size="xl" color="#bb86fc" />{" "}
+    </div>
+  ) : (
     <div>
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
@@ -84,18 +88,12 @@ const UserOverview = () => {
             />
           </div>
         </div>
-        {isLoading ? (
-          <div className="w-full flex h-[300px] justify-center ">
-            <Loader variant="bars" color="#bb86fc" />{" "}
-          </div>
-        ) : (
-          <UserTable
-            refetch={refetch}
-            users={users?.data}
-            setOpenModal={setOpenModal}
-            banUser={handleBanUser}
-          />
-        )}
+        <UserTable
+          refetch={refetch}
+          users={users?.data}
+          setOpenModal={setOpenModal}
+          banUser={handleBanUser}
+        />
 
         <div className="pagination ">
           <Pagination
