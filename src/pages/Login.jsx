@@ -9,8 +9,8 @@ import { addUser } from "../services/authSlice";
 import illu from "../assets/images/illu.png";
 
 const Login = () => {
-  const [email, setEmail] = useState("admin@gmail.com");
-  const [password, setPassword] = useState("thepassword");
+  const [email, setEmail] = useState("admin2@gmail.com");
+  const [password, setPassword] = useState("aaaaaaaa");
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
