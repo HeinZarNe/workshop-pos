@@ -150,10 +150,25 @@ const AddProduct = ({ editState = false, setEditState }) => {
     });
 
     await Swal.fire({
-      position: "center",
+      // position: "center",
+      // icon: "success",
+      // title: "A new product has been added!",
+      // showConfirmButton: true,
+      title: "New product has been added!",
+      buttonsStyling: false,
       icon: "success",
-      title: "A new product has been added!",
       showConfirmButton: true,
+      color: "#bb86fc",
+      width: "35em",
+      confirmButtonText: "Go to Products",
+      background: "#1e1e1e",
+      customClass: {
+        title: "text-primary",
+        // htmlContainer: 'bg-secondary',
+        // action: '!mt-2',
+        confirmButton:
+          "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+      },
 
       confirmButtonText: "Go to Products",
       preConfirm: () => {

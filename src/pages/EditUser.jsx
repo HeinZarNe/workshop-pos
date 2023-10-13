@@ -61,10 +61,26 @@ const EditUser = ({ id, setEditState }) => {
       };
       const res = updateUser({ updateData: userData, token });
       await Swal.fire({
-        position: "center",
-        icon: "success",
+        // position: "center",
+        // icon: "success",
+        // title: "User has been updated!",
+        // showConfirmButton: true,
+
         title: "User has been updated!",
+        buttonsStyling: false,
+        icon: "success",
         showConfirmButton: true,
+        color: "#bb86fc",
+        width: "30em",
+        confirmButtonText: "Go to Products",
+        background: "#1e1e1e",
+        customClass: {
+          title: "text-primary",
+          // htmlContainer: 'bg-secondary',
+          // action: '!mt-2',
+          confirmButton:
+            "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+        },
 
         confirmButtonText: "Go to User",
         preConfirm: () => {
