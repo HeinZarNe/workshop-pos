@@ -481,7 +481,7 @@ const SaleReport = () => {
                         <div className="text-secondary">NAME</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        <div className="text-secondary"> BRAND NO</div>
+                        <div className="text-secondary"> BRAND NAME</div>
                       </th>
                       <th scope="col" className="px-6 text-end py-3">
                         <div className="text-secondary">SALE PRICE</div>
