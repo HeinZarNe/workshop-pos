@@ -70,10 +70,9 @@ const StockReport = () => {
   const lW = stockLevelBar?.stock_lvl_bar?.low_stock[1];
   const oW = stockLevelBar?.stock_lvl_bar?.out_of_stock[1];
   console.log(stockLevelBar?.stock_lvl_bar);
-  const inStock = inW ? ` w-[${parseFloat(inW)}%]` : "w-0";
-  const outOfStock = `w-[${oW}]`;
-  const lowStock = `w-[${lW}] `;
-  console.log(inStock);
+  const inStock = inW ? { width: `${inW}` } : "";
+  const outOfStock = oW ? { width: `${oW}` } : "";
+  const lowStock = lW ? { width: `${lW}` } : "";
   return (
     <Rootlayout>
       <div className="mx-10 my-5">
@@ -136,11 +135,18 @@ const StockReport = () => {
               <div className="flex justify-between items-center">
                 {stockLevelBar ? (
                   <div className=" flex w-3/4  overflow-hidden h-3 rounded-full ">
-                    <div className={inStock}>
-                      {/* <div className={`bg-[#660066]  h-full ${inStock}`}> */}
-                    </div>
-                    <div className={`bg-[#BE29EC] h-full  ${lowStock}`}></div>
-                    <div className={`bg-[#EFBBFF] h-full  ${outOfStock}`}></div>
+                    <div
+                      className={`bg-[#660066]  h-full `}
+                      style={inStock}
+                    ></div>
+                    <div
+                      className={`bg-[#BE29EC] h-full  `}
+                      style={lowStock}
+                    ></div>
+                    <div
+                      className={`bg-[#EFBBFF] h-full  `}
+                      style={outOfStock}
+                    ></div>
                   </div>
                 ) : null}
 

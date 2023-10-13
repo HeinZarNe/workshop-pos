@@ -410,11 +410,11 @@ export const authApi = createApi({
       query: ({ token, page, date }) => {
         const url = `finance/custom-sales-list${
           page && date
-            ? `?page=${page}&year=${date}`
+            ? `?page=${page}&startDate=${date.from}&endDate=${date.to}`
             : page
             ? `?page=${page}`
             : date
-            ? `?date=${date}`
+            ? `?startDate=${date.from}&endDate=${date.to}`
             : ""
         }`;
         return {

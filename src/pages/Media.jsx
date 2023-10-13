@@ -20,10 +20,10 @@ const Media = () => {
   const dispatch = useDispatch();
   const { photo } = useSelector((state) => state.media);
   const photoList = [...photo];
-  
+
   // console.log(photoList)
-  photoList.map(e=>console.log(BaseUrl + (e.location)))
-  photoList.map(e=>console.log(e.location))
+  photoList.map((e) => console.log(BaseUrl + e.location));
+  photoList.map((e) => console.log(e.location));
   const handleFileChange = async (e) => {
     const selectedFile = await e.target.files;
     let photos = new FormData();
@@ -33,6 +33,7 @@ const Media = () => {
     }
 
     const data = await storePhoto({ photos, token });
+    console.log(selectedFile);
   };
 
   const handleUpload = async () => {

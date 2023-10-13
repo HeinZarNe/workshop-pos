@@ -59,7 +59,7 @@ function DatePicker({ date, setDate, fromTo = false, setFromTo }) {
             placeholder="Date"
             value={fromTo.from}
             onChange={(e) => {
-              setFromTo((prev) => ({ ...prev, from: e }));
+              setFromTo((prev) => ({ to: null, from: e }));
             }}
             mx="auto"
             maw={400}
@@ -72,6 +72,7 @@ function DatePicker({ date, setDate, fromTo = false, setFromTo }) {
                 stroke={1.5}
               />
             }
+            minDate={fromTo.from}
             label="To date"
             labelProps={{ style: { color: "white" } }}
             className="bg-transparent  "
