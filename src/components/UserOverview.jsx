@@ -16,10 +16,11 @@ import { Loader, Pagination } from "@mantine/core";
 
 const UserOverview = () => {
   const token = localStorage.getItem("token");
+  const [section, setSection] = useState("personal");
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState("");
   const [openModal, setOpenModal] = useState({ state: false, id: 0 });
-
+  const [another, setAnother] = useState(true);
   console.log(openModal.id);
   const {
     data: users,
@@ -49,7 +50,7 @@ const UserOverview = () => {
     <div className="w-full flex h-[100vh] justify-center ">
       <Loader variant="bars" size="xl" color="#bb86fc" />{" "}
     </div>
-  ) : (
+  ) : another ? (
     <div>
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
@@ -96,6 +97,7 @@ const UserOverview = () => {
         <UserTable
           refetch={refetch}
           users={users?.data}
+          setAnother={setAnother}
           setOpenModal={(e) => {
             setOpenModal(e);
             refetchDetail();
@@ -116,7 +118,7 @@ const UserOverview = () => {
           />
         </div>
 
-        <Modal show={openModal.state} onClose={toggleModal}>
+        {/* <Modal show={openModal.state} onClose={toggleModal}>
           <div>
             {detailLoading ? (
               <div className="w-full flex items-center justify-center h-[300px]">
@@ -128,16 +130,16 @@ const UserOverview = () => {
                   <Modal.Header style={{ backgroundColor: "#323232" }}>
                     <div className="flex items-center gap-5">
                       <img
-                        src={userDetail.data.photo}
+                        src={userDetail?.data?.photo}
                         alt="admin"
                         className=" h-[150px] w-[150px] rounded-full"
                       />
                       <div className=" text-[#BB86FC]">
                         <h2 className="text-3xl mb-2">
-                          {userDetail.data.name}
+                          {userDetail?.data?.name}
                         </h2>
                         <p className=" text-gray-300 text-sm">
-                          {userDetail.data.position}
+                          {userDetail?.data?.position}
                         </p>
                       </div>
                     </div>
@@ -145,15 +147,121 @@ const UserOverview = () => {
                   <Modal.Body style={{ backgroundColor: "#323232" }}>
                     <InfoTab
                       onTabClick={handleTabClick}
-                      detail={userDetail.data}
+                      detail={userDetail?.data}
                     />
                   </Modal.Body>
                 </>
               )
             )}
           </div>
-        </Modal>
+        </Modal> */}
+        {/* {another && ( */}
+        {/* )} */}
       </div>
+    </div>
+  ) : (
+    <div className=" mx-10 my-5">
+      {/* header */}
+      <div className="flex justify-between">
+        <h1 className=" text-2xl ms-3 mt-2 font-semibold text-white">Profile details</h1>
+        <div className="px-5 py-2 rounded-md font-semibold bg-primary text-secondary" onClick={()=>setAnother(true)}>BACK</div>
+      </div>
+      <div className=" flex items-end gap-10 mt-10 mx-5">
+        {/* image */}
+        <div className="">
+          <img
+            className=" w-[150px] h-[150px] object-cover rounded-full"
+            src={userDetail?.data?.photo}
+            alt=""
+          />
+        </div>
+        {/* name */}
+        <div className=" text-white mb-5">
+          <h1 className=" text-[22px] font-[700] tracking-wider">
+            {userDetail?.data?.name}
+          </h1>
+          <span className=" text-[15px] text-stone-400">
+            {userDetail?.data?.position}
+          </span>
+          <div className=" text-white text-xl flex gap-4 mt-5">
+            {/* <BsTelephoneForward /> */}
+            {/* <BiMessageAltMinus className=" text-2xl" /> */}
+          </div>
+        </div>
+      </div>
+      {/* section */}
+      <div className=" w-[1000px] my-5 justify-between items-center relative">
+        <div className=" px-5 py-3  border-b border-stone-500 text-white flex gap-20">
+          <h1
+            onClick={() => setSection("personal")}
+            className={`${
+              section === "personal"
+                ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
+                : "text-white font-[600] text-[18px] cursor-pointer"
+            }`}
+          >
+            Personal
+          </h1>
+          <h1
+            onClick={() => setSection("login")}
+            className={`${
+              section === "login"
+                ? "text-[#BB86FC] select-none font-[600] text-[18px] cursor-pointer"
+                : "text-white font-[600] text-[18px] cursor-pointer"
+            }`}
+          >
+            Login Information
+          </h1>
+        </div>
+        {/* <div className="absolute right-[100px] top-[-5px]">
+                <Link to={"/profile/edit"}>
+                  <button className=" px-4 py-2 rounded-lg flex items-center gap-2 button">
+                    {" "}
+                    <TbEdit /> Edit Profile
+                  </button>
+                </Link>
+              </div> */}
+      </div>
+      {/* personal */}
+      {section === "personal" ? (
+        <div className=" text-white flex flex-col gap-6 p-5">
+          <div className=" flex gap-20">
+            <span className=" text-[17px] text-stone-300 font-bold">
+              Date Of birth
+            </span>
+            <span> {userDetail?.data?.date_of_birth}</span>
+          </div>
+          <div className=" flex gap-32">
+            <span className=" text-[17px] text-stone-300 font-bold">
+              Gender
+            </span>
+            <span> {userDetail?.data?.gender}</span>
+          </div>
+          <div className=" flex gap-[122px]">
+            <span className=" text-[17px] text-stone-300 font-bold">
+              Address
+            </span>
+            <span> {userDetail?.data?.address}</span>
+          </div>
+        </div>
+      ) : (
+        <div className=" text-white flex flex-col gap-6 p-5">
+          <div className=" flex gap-32">
+            <span className=" text-[17px] text-stone-300 font-bold">Phone</span>
+            <span> {userDetail?.data?.phone_number}</span>
+          </div>
+          <div className=" flex gap-28">
+            <span className=" text-[17px] text-stone-300 font-bold">
+              Position
+            </span>
+            <span> {userDetail?.data?.position}</span>
+          </div>
+          <div className=" flex gap-36">
+            <span className=" text-[17px] text-stone-300 font-bold">Mail</span>
+            <span> {userDetail?.data?.email}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
