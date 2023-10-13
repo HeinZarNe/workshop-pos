@@ -20,7 +20,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="h-screen bg-[#272727]  box-border">
+    <div className="h-screen bg-back  box-border">
       <Navbar />
       <div className="px-5 py-3 border-b border-b-[#BB86FC] mb-5">
         <button className=" flex items-center" onClick={handleBackClick}>

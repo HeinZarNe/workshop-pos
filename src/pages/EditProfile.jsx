@@ -174,8 +174,8 @@ const EditProfile = () => {
   return (
     <Rootlayout>
       {isLoading && (
-        <div className="w-full h-[300px] flex items-center justify-center">
-          <Loader variant="bars" color="#bb86fc" />
+        <div className="w-full h-[100vh] flex items-center justify-center">
+          <Loader size="xl" variant="bars" color="#bb86fc" />
         </div>
       )}
 
@@ -246,7 +246,8 @@ const EditProfile = () => {
                     onChange={(e) => handleFileChange("name", e.target.value)}
                     placeholder="Name"
                     type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 w-[500px] block p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
 
@@ -266,7 +267,8 @@ const EditProfile = () => {
                     }
                     placeholder="Date Of Birth"
                     type="date"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 w-[500px] block p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
                 <div className=" flex gap-[120px] items-center">
@@ -306,13 +308,14 @@ const EditProfile = () => {
                     }
                     name=""
                     placeholder="Address"
-                    className="mt-1 block w-1/2 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-1/2 p-4 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-[500px] p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                     id=""
                     cols="10"
                     rows="4"
                   ></textarea>
                 </div>
-                <div className=" flex w-1/2 gap-6 mt-5 items-end justify-end">
+                <div className=" flex w-[670px] gap-6 mt-5 items-end justify-end">
                   <button
                     className=" text-white border border-stone-400 tracking-wider px-5 py-2 rounded-lg"
                     onClick={(e) => handleReset(e)}
@@ -352,7 +355,8 @@ const EditProfile = () => {
                     }
                     placeholder=".........."
                     type="text"
-                    className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    // className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                    className="mt-1 block w-[500px] p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                   />
                 </div>
 
@@ -374,7 +378,8 @@ const EditProfile = () => {
                       }
                       placeholder="........"
                       type="text"
-                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                      // className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                      className="mt-1 block w-[500px] p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                     />
                   </div>
                   <div className=" flex gap-12 items-center">
@@ -396,12 +401,13 @@ const EditProfile = () => {
                       }
                       placeholder="........"
                       type="text"
-                      className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                      // className="mt-1 block w-1/2 p-1 bg-[#34353A] border border-slate-500 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-[#BB86FC] text-[#BB86FC] text-[17px] placeholder:text-[17px]"
+                      className="mt-1 block w-[500px] p-3 rounded-md bg-gray/50 border-secondary border text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary text-primary text-[17px] placeholder:text-[17px]"
                     />
                   </div>{" "}
                 </>
 
-                <div className=" flex gap-6 w-1/2 justify-end">
+                <div className=" flex gap-6 w-[690px] justify-end">
                   <button
                     disabled={!canUpdatePassword}
                     className=" px-6 py-2 rounded-lg button"

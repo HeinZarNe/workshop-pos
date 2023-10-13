@@ -15,15 +15,14 @@ const Media = () => {
   const token = localStorage.getItem("token");
   const fileRef = useRef(null);
   const [storePhoto] = useStorePhotoMutation();
-  const [page, setPage] = useState(1); // Current page
   const [deletePhotoMutation] = useDeletePhotoMutation();
   const dispatch = useDispatch();
-  const { photo } = useSelector((state) => state.media);
-  const photoList = [...photo];
+  const { data: photo, refetch } = useGetPhotoQuery(token);
 
+  // const { photo } = useSelector((state) => state.media);
+  const photoList = photo && [...photo];
   // console.log(photoList)
-  photoList.map((e) => console.log(BaseUrl + e.location));
-  photoList.map((e) => console.log(e.location));
+
   const handleFileChange = async (e) => {
     const selectedFile = await e.target.files;
     let photos = new FormData();
@@ -33,7 +32,7 @@ const Media = () => {
     }
 
     const data = await storePhoto({ photos, token });
-    console.log(selectedFile);
+    refetch();
   };
 
   const handleUpload = async () => {
@@ -47,6 +46,7 @@ const Media = () => {
     if (res.data.message == "A photo has been deleted") {
       dispatch(deletePhoto(id));
     }
+    refetch();
   };
 
   const handleDragOver = (e) => {
@@ -96,8 +96,8 @@ const Media = () => {
           <div className="flex flex-row gap-3 flex-wrap">
             {photoList?.length > 0
               ? photoList
-                  .sort((a, b) => b.id - a.id)
-                  .map((photo, i) => (
+                  ?.sort((a, b) => b.id - a.id)
+                  ?.map((photo, i) => (
                     <div
                       key={i}
                       className="img-container p-2 border border-secondary hover:border-white relative"
@@ -115,7 +115,7 @@ const Media = () => {
                       </div>
                       <img
                         className=" h-[200px] w-[200px]"
-                        src={BaseUrl + photo.location}
+                        src={photo.url}
                         alt=""
                       />
                     </div>

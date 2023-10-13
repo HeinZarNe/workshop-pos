@@ -21,11 +21,7 @@ const Stock = () => {
     keyword,
   });
 
-  return isLoading ? (
-    <div className="w-full flex h-[100vh] items-center justify-center ">
-      <Loader size="xl" variant="bars" color="#bb86fc" />
-    </div>
-  ) : (
+  return (
     <Rootlayout>
       <div className=" mx-10 my-5">
         <div className=" flex justify-between">
@@ -49,55 +45,62 @@ const Stock = () => {
           </div> */}
         </div>
         {/* product overview */}
-        <div className=" my-5">
-          <h1 className="text-[21px] font-[500] text-tcolor">Stock Overview</h1>
-          {/* search */}
-          <div className="flex justify-between">
-            <div className="relative my-3">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+        {isLoading ? (
+          <div className="flex items-center justify-center w-full h-[80vh]">
+            <Loader variant="bars" size="xl" color="#bb86fc" />
+          </div>
+        ) : (
+          <div className=" my-5">
+            <h1 className="text-[21px] font-[500] text-tcolor">
+              Stock Overview
+            </h1>
+            <div className="flex justify-between">
+              <div className="relative my-3">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg
+                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  value={keyword}
+                  onChange={(e) => {
+                    setKeyword(e.target.value);
+                    setPage(0);
+                  }}
+                  type="search"
+                  id="default-search"
+                  className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-secondary  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
+                  placeholder="Search ..."
+                  required
+                />
               </div>
-              <input
-                value={keyword}
+            </div>
+            <StockTable stocksData={stocks} />
+            <div className="pagination ">
+              <Pagination
+                total={stocks?.last_page || 1}
                 onChange={(e) => {
-                  setKeyword(e.target.value);
-                  setPage(0);
+                  setPage(e);
+                  refetch();
                 }}
-                type="search"
-                id="default-search"
-                className="block w-[300px] p-2 pl-10 text-sm text-tcolor border border-gray-600 rounded-lg bg-secondary  dark:border-gray-600 dark:placeholder-gray-400 dark:text-tcolor"
-                placeholder="Search ..."
-                required
+                boundaries={1}
+                defaultValue={1}
               />
             </div>
           </div>
-          <StockTable stocksData={stocks} />
-          <div className="pagination ">
-            <Pagination
-              total={stocks?.last_page || 1}
-              onChange={(e) => {
-                setPage(e);
-                refetch();
-              }}
-              boundaries={1}
-              defaultValue={1}
-            />
-          </div>
-        </div>
+        )}
       </div>
     </Rootlayout>
   );

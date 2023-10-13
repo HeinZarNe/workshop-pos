@@ -20,16 +20,20 @@ const UserOverview = () => {
   const [page, setPage] = useState("");
   const [openModal, setOpenModal] = useState({ state: false, id: 0 });
 
+  console.log(openModal.id);
   const {
     data: users,
     refetch,
     isLoading,
   } = useGetUserQuery({ token, keyword, page });
-  const { data: userDetail, isLoading: detailLoading } = useGetUserDetailQuery({
+  const {
+    data: userDetail,
+    isLoading: detailLoading,
+    refetch: refetchDetail,
+  } = useGetUserDetailQuery({
     token,
-    id: openModal.id,
+    id: openModal?.id,
   });
-  console.log(userDetail);
   const [banUser, { isSuccess, isError }] = useBanUserMutation();
   const toggleModal = () => {
     setOpenModal(!openModal.state);
@@ -40,7 +44,12 @@ const UserOverview = () => {
   const handleTabClick = (event) => {
     event.stopPropagation();
   };
-  return (
+
+  return isLoading ? (
+    <div className="w-full flex h-[100vh] justify-center ">
+      <Loader variant="bars" size="xl" color="#bb86fc" />{" "}
+    </div>
+  ) : (
     <div>
       <div className="flex justify-between mx-5 mt-5">
         <div className="">
@@ -84,32 +93,21 @@ const UserOverview = () => {
             />
           </div>
         </div>
-        {isLoading ? (
-          <div className="w-full flex h-[300px] justify-center ">
-            <Loader variant="bars" color="#bb86fc" />{" "}
-          </div>
-        ) : (
-          <UserTable
-            refetch={refetch}
-            users={users?.data}
-            setOpenModal={setOpenModal}
-            banUser={handleBanUser}
-          />
-        )}
+        <UserTable
+          refetch={refetch}
+          users={users?.data}
+          setOpenModal={(e) => {
+            setOpenModal(e);
+            refetchDetail();
+          }}
+          banUser={handleBanUser}
+        />
 
         <div className="pagination ">
           <Pagination
             total={users?.last_page || 1}
             onChange={(e) => {
               setPage(e);
-              refetch();
-            }}
-            onPreviousPage={(e) => {
-              setPage(page - 1);
-              refetch();
-            }}
-            onNextPage={(e) => {
-              setPage(page + 1);
               refetch();
             }}
             boundaries={1}

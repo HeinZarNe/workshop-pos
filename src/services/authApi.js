@@ -83,10 +83,13 @@ export const authApi = createApi({
       providesTags: ["authapi"],
     }),
     getUserDetail: build.query({
-      query: ({ token, id, self }) => ({
-        url: `user/details${self ? "" : "/" + id}`,
-        headers: { authorization: `Bearer ${token}` },
-      }),
+      query: ({ token, id, self }) => {
+        if (!id) return;
+        return {
+          url: `user/details/${id}`,
+          headers: { authorization: `Bearer ${token}` },
+        };
+      },
       providesTags: ["authapi"],
     }),
     getProfile: build.query({

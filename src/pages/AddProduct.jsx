@@ -601,7 +601,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 setSection("price");
             }}
             action=""
-            className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+            className="w-[500px] bg-secondary rounded-lg ml-5 flex flex-col"
           >
             <div className=" text-tcolor flex flex-col gap-8 p-5">
               <div className="items-center flex justify-between">
@@ -774,7 +774,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
           </div>
         )}
         {section === "photo" && (
-          <div className="w-[550px] bg-secondary rounded-lg ml-5 ">
+          <div className="w-[500px] bg-secondary rounded-lg ml-5 ">
             <div className="flex flex-col items-center p-5">
               <h4 className="text-lg text-tcolor mb-6">Upload Photo</h4>
               <div className="mb-6 relative w-[180px] h-[180px] rounded-full border-2 border-dashed border-primary bg-[#272727] flex justify-center items-center">
@@ -826,7 +826,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
         {section === "productPreview" && (
           <form
             onSubmit={submitHandler}
-            className="w-[550px] bg-secondary rounded-lg ml-5 flex flex-col"
+            className="w-[500px] bg-secondary rounded-lg ml-5 flex flex-col"
           >
             <div className="p-5">
               <div className="flex gap-5 items-center pb-5 border-b">
@@ -877,7 +877,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
               className={`w-14 h-14 ${
                 section === "info"
                   ? "bg-secondary border-primary text-primary"
-                  : "bg-primary "
+                  : "bg-primary text-secondary border-secondary font-semibold text-lg"
               } flex justify-center items-center rounded-full border  "`}
             >
               1
@@ -885,8 +885,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
             <p
               className={
                 section === "info" &&
-                ` text-primary
-              `
+                ` text-primary `
               }
             >
               Information
@@ -898,10 +897,10 @@ const AddProduct = ({ editState = false, setEditState }) => {
               onClick={(_) => GoToThisStep(2)}
               className={`w-14 h-14 ${
                 section === "info"
-                  ? "bg-secondary border-[#fff] text-primary"
+                  ? "bg-secondary border-[#fff] text-[#fff]"
                   : section === "price"
                   ? "bg-secondary border-primary text-primary"
-                  : "bg-primary"
+                  : "bg-primary text-secondary border-secondary font-semibold text-lg"
               } flex justify-center items-center rounded-full border text-[#ffffff] "`}
             >
               2
@@ -921,8 +920,8 @@ const AddProduct = ({ editState = false, setEditState }) => {
               onClick={(_) => GoToThisStep(3)}
               className={`w-14 h-14 ${
                 section === "info" || section === "price" || section === "photo"
-                  ? "bg-secondary"
-                  : "bg-primary"
+                  ? "bg-secondary border-primary text-primary"
+                  : "bg-primary text-secondary border-secondary font-semibold text-lg"
               } flex justify-center items-center rounded-full border ${
                 section === "photo"
                   ? "border-primary text-primary  "

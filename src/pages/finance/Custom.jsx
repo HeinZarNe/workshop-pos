@@ -5,6 +5,7 @@ import { PiExportBold, PiFilePdf } from "react-icons/pi";
 import DatePicker from "../../components/DatePicker";
 import { FiCopy, FiSearch } from "react-icons/fi";
 import { BiPrinter } from "react-icons/bi";
+import icon from "./no-results(3).png";
 import {
   useCustomSaleQuery,
   useGetDailySalesQuery,
@@ -198,17 +199,16 @@ const Daily = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="pagination">
-                      <Pagination
-                        total={dailySalesData?.daily_sales?.last_page}
-                        onChange={(e) => {
-                          setPage(e);
-                          refetch();
-                        }}
-                        value={page || 1}
-                        boundaries={1}
-                      />
-                    </div>
+
+                    <Pagination
+                      total={dailySalesData?.daily_sales?.last_page}
+                      onChange={(e) => {
+                        setPage(e);
+                        refetch();
+                      }}
+                      value={page || 1}
+                      boundaries={1}
+                    />
                   </div>
                 )}
               </div>
@@ -216,11 +216,11 @@ const Daily = () => {
           ) : (
             <div className=" ">
               <div className="flex justify-between gap-5 ">
-                <div className="w-full flex flex-col items-center justify-center h-[50vh]">
-                  <div className="border border-primary px-10 py-5 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
-                    <p className="text-2xl font-semibold">
-                      There is no datas. Please enter dates to get custom
-                      finance data!
+                <div className="w-full flex flex-col items-center justify-center h-[60vh]">
+                  <div className="border border-primary px-9 py-6 pt-7 w-fit gap-3   rounded-lg flex flex-col justify-center items-center">
+                    <img src={icon} alt="" className="h-28 text-primary" />
+                    <p className="text-2xl text-tscolor font-mono">
+                      Please enter date to get data!
                     </p>
                   </div>
                 </div>

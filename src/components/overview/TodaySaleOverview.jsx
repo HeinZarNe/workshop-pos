@@ -21,27 +21,93 @@ const TodaySaleOverview = () => {
   const { data: isSaleClose, refetch } = useGetProductToSaleQuery({
     token,
   });
-
+  console.log(isSaleClose?.is_sale_close);
   const handleSaleClose = () => {
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   icon: "question",
+    //   showCancelButton: true,
+    //   confirmButtonText: "Yes",
+    //   confirmButtonColor: isSaleClose?.is_sale_close ? "green" : "red",
+    //   timer: false,
+    // }).then((result) => {
+    //   /* Read more about isConfirmed, isDenied below */
+    //   if (result.isConfirmed) {
+    //     const res = saleClose(token);
+    //     refetch();
+    //     Swal.fire(
+    //       isSaleClose?.is_sale_close ? "Opened!" : "Closed!",
+    //       "",
+    //       "success"
+    //     );
+    //   } else if (result.isDenied) {
+    //     Swal.close();
+    //   }
+    // });
+
     Swal.fire({
       title: "Are you sure?",
-      icon: "question",
+      icon: "warning",
+      iconColor: "#bb86fc",
+      buttonsStyling: false,
+      width: "20em",
+      color: "#fafafa",
+      heightAuto: false,
+      background: "#1E1E1E",
+      focusConfirm: true,
       showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      customClass: {
+        cancelButton:
+          "bg-primary text-secondary rounded-lg border-2 border-primary px-4 font-mono py-2",
+        confirmButton:
+          "bg-transparent text-primary rounded-lg border-2 border-primary px-7 font-mono py-2",
+        actions: " !mt-5 !w-[100%] flex justify-center gap-9",
+        icon: "!p-0",
+        title: "!mt-0 !pt-0",
+      },
       confirmButtonText: "Yes",
-      confirmButtonColor: isSaleClose?.is_sale_close ? "green" : "red",
-      timer: false,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        const res = saleClose(token);
-        refetch();
-        Swal.fire(
-          isSaleClose?.is_sale_close ? "Opened!" : "Closed!",
-          "",
-          "success"
-        );
-      } else if (result.isDenied) {
-        Swal.close();
+    }).then(async (result) => {
+      if (isSaleClose?.is_sale_close == 1) {
+        if (result.isConfirmed) {
+          const res = saleClose(token);
+          refetch();
+          Swal.fire({
+            title: "Sale Opened !",
+            icon: "success",
+            buttonsStyling: false,
+            color: "#bb86fc",
+            width: "25em",
+            background: "#1e1e1e",
+            customClass: {
+              title: "text-primary",
+              confirmButton:
+                "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+            },
+          });
+        } else if (result.isDenied) {
+          Swal.close();
+        }
+      } else {
+        if (result.isConfirmed) {
+          const res = saleClose(token);
+          refetch();
+          Swal.fire({
+            title: "Sale Closed !",
+            icon: "success",
+            buttonsStyling: false,
+            color: "#bb86fc",
+            width: "25em",
+            background: "#1e1e1e",
+            customClass: {
+              title: "text-primary",
+              confirmButton:
+                "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+            },
+          });
+        } else if (result.isDenied) {
+          Swal.close();
+        }
       }
     });
   };
@@ -56,7 +122,7 @@ const TodaySaleOverview = () => {
           justifyContent: "center",
         }}
       >
-        <Loader variant="bars" size='xl' color={BaseColor} />
+        <Loader variant="bars" size="xl" color={BaseColor} />
       </div>
     );
   }

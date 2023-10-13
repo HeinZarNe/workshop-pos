@@ -57,7 +57,7 @@ const EditUser = ({ id, setEditState }) => {
         date_of_birth,
         gender: selectedGenders,
         address,
-        photo: selectedPhoto.path,
+        photo: selectedPhoto.url,
       };
       const res = updateUser({ updateData: userData, token });
       await Swal.fire({
