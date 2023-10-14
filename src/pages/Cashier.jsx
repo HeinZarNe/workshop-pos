@@ -24,6 +24,8 @@ const Cashier = () => {
     data,
     refetch,
     isLoading: isProductListLoading,
+    isError,
+    error,
   } = useGetProductToSaleQuery({
     token,
     keyword,
@@ -244,6 +246,10 @@ const Cashier = () => {
       }
     });
   };
+
+  if (isError) {
+    return error;
+  }
 
   if (isProductListLoading) {
     return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   BsCart3,
   BsClipboard2Pulse,
@@ -24,6 +24,7 @@ import {
   useGetYearlyOverviewQuery,
 } from "../../services/authApi";
 import { Pagination } from "@mantine/core";
+import Swal from "sweetalert2";
 
 const StockReport = () => {
   // const [view, setView] = useState("list");
@@ -38,7 +39,11 @@ const StockReport = () => {
   const token = localStorage.getItem("token");
   const [filter, setFilter] = useState(0);
   const [keyword, setKeyword] = useState("");
-  const { data: stockLeveltable, refetch } = useGetStockLevelTableQuery({
+  const {
+    data: stockLeveltable,
+    refetch,
+    isError,
+  } = useGetStockLevelTableQuery({
     token,
     page,
     filter,
@@ -73,6 +78,28 @@ const StockReport = () => {
   const inStock = inW ? { width: `${inW}` } : "";
   const outOfStock = oW ? { width: `${oW}` } : "";
   const lowStock = lW ? { width: `${lW}` } : "";
+
+  const navigate = useNavigate();
+  // if (isError) {
+  //   Swal.fire({
+  //     title: "Something is wrong! <br/> Please try to  Login again",
+  //     icon: "error",
+  //     buttonsStyling: false,
+  //     color: "#bb86fc",
+  //     width: "25em",
+  //     background: "#1e1e1e",
+  //     showConfirmButton: true,
+  //     confirmButtonText: "Go to Login Page",
+  //     customClass: {
+  //       title: "text-primary",
+  //       confirmButton:
+  //         "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+  //     },
+  //   }).then((result) => {
+  //     navigate("/login");
+  //   });
+  // }
+
   return (
     <Rootlayout>
       <div className="mx-10 my-5">

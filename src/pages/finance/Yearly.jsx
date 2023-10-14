@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { PiExportBold, PiFilePdf } from "react-icons/pi";
 import DatePicker from "../../components/DatePicker";
 import { FiCopy, FiSearch } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { AiOutlineArrowRight, AiOutlineClose } from "react-icons/ai";
 import { useGetYearlySalesQuery } from "../../services/authApi";
 import { YearPickerInput } from "@mantine/dates";
 import { BaseColor } from "../../constant";
+import Swal from "sweetalert2";
 const Yearly = () => {
   const token = localStorage.getItem("token");
   const [page, setPage] = useState(1);
@@ -34,6 +35,27 @@ const Yearly = () => {
     setDateSearch(year);
     setPage(0);
   };
+
+  const navigate = useNavigate();
+  // if (isError) {
+  //   Swal.fire({
+  //     title: "Something is wrong! <br/> Please try to  Login again",
+  //     icon: "error",
+  //     buttonsStyling: false,
+  //     color: "#bb86fc",
+  //     width: "25em",
+  //     background: "#1e1e1e",
+  //     showConfirmButton: true,
+  //     confirmButtonText: "Go to Login Page",
+  //     customClass: {
+  //       title: "text-primary",
+  //       confirmButton:
+  //         "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+  //     },
+  //   }).then((result) => {
+  //     navigate("/login");
+  //   });
+  // }
 
   return (
     <Rootlayout>

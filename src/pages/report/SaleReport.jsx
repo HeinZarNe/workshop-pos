@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rootlayout from "../../layout/Rootlayout";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsClipboard2Pulse, BsThreeDotsVertical } from "react-icons/bs";
 import { HiArrowSmallUp } from "react-icons/hi2";
 import { Chart } from "primereact/chart";
@@ -16,6 +16,7 @@ import {
 } from "../../services/authApi";
 import { useTodaySaleQuery, useWeeklySaleQuery } from "../../services/authApi";
 import { Pagination } from "@mantine/core";
+import Swal from "sweetalert2";
 
 const SaleReport = () => {
   // const [view, setView] = useState("list");
@@ -30,7 +31,11 @@ const SaleReport = () => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
   const [urlLink, setUrlLink] = useState("weekly-report");
-  const { data: saleReport, refetch } = useGetSaleReportQuery({ token, page });
+  const {
+    data: saleReport,
+    refetch,
+    isError,
+  } = useGetSaleReportQuery({ token, page });
   // console.log(urlLink);
   // const [click, setClick] = useState(false);
   const { data: todaySale } = useTodaySaleQuery(token);
@@ -252,6 +257,28 @@ const SaleReport = () => {
   } else {
     lDate = sale?.lowestSale?.lowestSellingDate;
   }
+
+  const navigate = useNavigate();
+  // if (isError) {
+  //   Swal.fire({
+  //     title: "Something is wrong! <br/> Please try to  Login again",
+  //     icon: "error",
+  //     buttonsStyling: false,
+  //     color: "#bb86fc",
+  //     width: "25em",
+  //     background: "#1e1e1e",
+  //     showConfirmButton: true,
+  //     confirmButtonText: "Go to Login Page",
+  //     customClass: {
+  //       title: "text-primary",
+  //       confirmButton:
+  //         "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+  //     },
+  //   }).then((result) => {
+  //     navigate("/login");
+  //   });
+  // }
+
   return (
     <Rootlayout>
       <div className="mx-10 my-5">

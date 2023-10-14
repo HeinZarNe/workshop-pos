@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
@@ -20,7 +20,7 @@ import ManageBrand from "./pages/ManageBrand";
 import Recent from "./pages/Recent";
 import { useDispatch, useSelector } from "react-redux";
 import { addphoto } from "./services/mediaSlice";
-import { useGetPhotoQuery } from "./services/authApi";
+import { useGetPhotoQuery, useGetProductQuery } from "./services/authApi";
 import { useState } from "react";
 import Daily from "./pages/finance/Daily";
 import Monthly from "./pages/finance/Monthly";
@@ -30,12 +30,14 @@ import StockReport from "./pages/report/StockReport";
 import SaleReport from "./pages/report/SaleReport";
 import BannedUser from "./pages/BannedUser";
 import EditUser from "./pages/EditUser";
+import Swal from "sweetalert2";
 
 const App = () => {
-  // const token = localStorage.getItem("token");
+  const path = location?.pathname;
+  const token = localStorage.getItem("token");
   // const dispatch = useDispatch();
   // // const  data  = useGetPhotoQuery(token);
-  // const { data } = useGetPhotoQuery(token);
+  const { data, isError } = useGetProductQuery({ token });
   // const { photo } = useSelector((state) => state.media);
 
   // // useEffect(() => {
@@ -47,7 +49,49 @@ const App = () => {
   // //   });
   // // }, [data]);
   // // console.log(data);
-
+  const routesToProtect = [
+    "/",
+    "/media",
+    "/profile",
+    "/profile/edit",
+    "/users",
+    "/users/create",
+    "/users/banned",
+    "/products",
+    "/products/create",
+    "/products/details",
+    "/stock",
+    "/sale/cashier",
+    "/sale/recent",
+    "/checkout",
+    "/brand",
+    "/daily",
+    "/monthly",
+    "/yearly",
+    "/stock-report",
+    "/sale-report",
+    "/custom",
+  ];
+  const navigate = useNavigate();
+  if (token && isError && routesToProtect.includes(path)) {
+    Swal.fire({
+      title: "Something is wrong! <br/> Please try to  Login again",
+      icon: "error",
+      buttonsStyling: false,
+      color: "#bb86fc",
+      width: "25em",
+      background: "#1e1e1e",
+      showConfirmButton: true,
+      confirmButtonText: "Go to Login Page",
+      customClass: {
+        title: "text-primary",
+        confirmButton:
+          "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+      },
+    }).then((result) => {
+      navigate("/login");
+    });
+  }
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

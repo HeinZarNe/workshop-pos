@@ -18,7 +18,8 @@ import {
   useGetWeeklyOverviewQuery,
   useGetYearlyOverviewQuery,
 } from "../services/authApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // {
 //   "monthlySaleOverview": {
@@ -84,7 +85,27 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const ContentBoxClass = " p-4 border-[#535353] rounded-md border-[1px]";
   const token = localStorage.getItem("token");
-  const { data } = useGetOverviewDataQuery({ token });
+  const { data, isError, error } = useGetOverviewDataQuery({ token });
+  // const navigate = useNavigate();
+  // if (isError) {
+  //   Swal.fire({
+  //     title: "Something is wrong! <br/> Please try to  Login again",
+  //     icon: "error",
+  //     buttonsStyling: false,
+  //     color: "#bb86fc",
+  //     width: "25em",
+  //     background: "#1e1e1e",
+  //     showConfirmButton: true,
+  //     confirmButtonText: "Go to Login Page",
+  //     customClass: {
+  //       title: "text-primary",
+  //       confirmButton:
+  //         "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+  //     },
+  //   }).then((result) => {
+  //     navigate("/login");
+  //   });
+  // }
 
   return (
     <Rootlayout>

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
 import { useGetBrandReportQuery } from "../../services/authApi";
 const DonutChart = () => {
-
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-  
-  const {data:ch} = useGetBrandReportQuery(localStorage.getItem("token"));
+
+  const { data: ch } = useGetBrandReportQuery(localStorage.getItem("token"));
   // console.log(ch?.brandsInfo[0].count);
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);

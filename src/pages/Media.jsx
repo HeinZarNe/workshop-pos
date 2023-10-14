@@ -10,6 +10,8 @@ import { addphoto, deletePhoto } from "../services/mediaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "@mantine/core";
 import { BaseUrl } from "../utils/constant";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Media = () => {
   const token = localStorage.getItem("token");
@@ -17,10 +19,9 @@ const Media = () => {
   const [storePhoto] = useStorePhotoMutation();
   const [deletePhotoMutation] = useDeletePhotoMutation();
   const dispatch = useDispatch();
-  const { data: photo, refetch } = useGetPhotoQuery(token);
-
+  const { data: photo, refetch, isError, error } = useGetPhotoQuery(token);
+  const navigate = useNavigate();
   // const { photo } = useSelector((state) => state.media);
-  const photoList = photo && [...photo];
   // console.log(photoList)
 
   const handleFileChange = async (e) => {
@@ -59,6 +60,26 @@ const Media = () => {
     e.stopPropagation();
   };
 
+  // if (isError) {
+  //   Swal.fire({
+  //     title: "Something is wrong! <br/> Please try to  Login again",
+  //     icon: "error",
+  //     buttonsStyling: false,
+  //     color: "#bb86fc",
+  //     width: "25em",
+  //     background: "#1e1e1e",
+  //     showConfirmButton: true,
+  //     confirmButtonText: "Go to Login Page",
+  //     customClass: {
+  //       title: "text-primary",
+  //       confirmButton:
+  //         "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+  //     },
+  //   }).then((result) => {
+  //     navigate("/login");
+  //   });
+  // }
+
   return (
     <Rootlayout>
       <div className=" mx-10 my-5">
@@ -94,8 +115,8 @@ const Media = () => {
             Uploaded Photo
           </h1>
           <div className="flex flex-row gap-3 flex-wrap">
-            {photoList?.length > 0
-              ? photoList
+            {photo?.length > 0
+              ? photo
                   ?.sort((a, b) => b.id - a.id)
                   ?.map((photo, i) => (
                     <div
