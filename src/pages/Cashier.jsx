@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { Loader, Select } from "@mantine/core";
 import { BaseColor } from "./../constant";
 import closedIcon from "./closed.png";
+import milk from "./m.png";
 
 const Cashier = () => {
   const navigate = useNavigate();
@@ -376,11 +377,19 @@ const Cashier = () => {
                   onClick={() => handleProductClick(product.id)}
                 >
                   <div className="w-full object-fill">
-                    <img
-                      src={product.photo}
-                      className="object-cover object-center h-[190px] fit w-full"
-                      alt=""
-                    />
+                    {product.photo ? (
+                      <img
+                        src={product.photo}
+                        className="object-cover object-center h-[190px] fit w-full"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src={milk}
+                        className="object-cover object-center h-[190px] fit w-full"
+                        alt=""
+                      />
+                    )}
                   </div>
 
                   <div className="p-5 pt-3 pe-6 text-right">

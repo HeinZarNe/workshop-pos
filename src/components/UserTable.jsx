@@ -7,7 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import EditUser from "../pages/EditUser";
 import Swal from "sweetalert2";
 
-const UserTable = ({ users, banUser, refetch, setOpenModal }) => {
+const UserTable = ({ users,setAnother, banUser, refetch, setOpenModal }) => {
   // const del = () => {
   //   Swal.fire({
   //     title: "Are you sure?",
@@ -59,11 +59,15 @@ const UserTable = ({ users, banUser, refetch, setOpenModal }) => {
   //     }
   //   });
   // };
+  const userHandle =()=>{
+    
+  }
   const [editState, setEditState] = useState({ state: false });
   const handleEditCancle = () => {
     setEditState({ state: false });
     refetch();
   };
+
   const rows = users?.map((element) => (
     <tr key={element.id}>
       <td>{element.id}</td>
@@ -131,7 +135,13 @@ const UserTable = ({ users, banUser, refetch, setOpenModal }) => {
 
           <button
             className=" bg-primary rounded-full p-2"
-            onClick={(_) => setOpenModal({ state: true, id: element.id })}
+            // onClick={(_) => {setOpenModal({ state: true, id: element.id });setAnother(true)}
+            onClick={() => {
+              setOpenModal({ state: true, id: element.id });
+              setAnother(false);
+            }}
+
+            // onClick={()=>setAnother(false)}
           >
             <BsArrowRight />
           </button>

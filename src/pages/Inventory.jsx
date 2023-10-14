@@ -9,6 +9,7 @@ import AddStock from "../components/stock/AddStock";
 import { Loader, Pagination } from "@mantine/core";
 import { useGetProductQuery } from "../services/authApi";
 
+
 const Inventory = () => {
   const [view, setView] = useState("list");
   const [showSidebar, setShowSidebar] = useState(false);
@@ -143,7 +144,7 @@ const Inventory = () => {
             {view === "list" ? (
               <div className="">
                 <ProductTables
-                setPage={setPage}
+                  setPage={setPage}
                   totalPage={totalPage}
                   setShowSidebar={setShowSidebar}
                   addStock={addStock}
@@ -184,7 +185,6 @@ const Inventory = () => {
                     />
                   </div>
                 )}
-                
               </div>
             )}
 

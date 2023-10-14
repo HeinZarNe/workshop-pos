@@ -20,6 +20,10 @@ const Stock = () => {
     page,
     keyword,
   });
+  const ata= useGetStockQuery({
+    token
+  });
+  console.log(ata);
 
   return (
     <Rootlayout>

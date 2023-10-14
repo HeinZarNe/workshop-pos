@@ -508,14 +508,14 @@ const SaleReport = () => {
                         <div className="text-secondary">NAME</div>
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        <div className="text-secondary"> BRAND NO</div>
+                        <div className="text-secondary"> BRAND NAME</div>
                       </th>
                       <th scope="col" className="px-6 text-end py-3">
                         <div className="text-secondary">SALE PRICE</div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      {/* <th scope="col" className="px-6 py-3">
                         <span className="sr-only">Edit</span>
-                      </th>
+                      </th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -538,7 +538,7 @@ const SaleReport = () => {
                           <td className="px-6 py-4 text-tcolor text-end">
                             {data.sale_price}
                           </td>
-                          <td className="px-6 py-4 text-right">
+                          {/* <td className="px-6 py-4 text-right">
                             <NavLink
                               to={"/profile"}
                               className="font-medium flex ps-5 justify-center text-blue-600  hover:underline"
@@ -547,7 +547,7 @@ const SaleReport = () => {
                                 <AiOutlineArrowRight />
                               </button>
                             </NavLink>
-                          </td>
+                          </td> */}
                         </tr>
                       );
                     })}

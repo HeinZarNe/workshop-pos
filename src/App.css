@@ -24,6 +24,9 @@
 .active {
   color: #bb86fc;
 }
+* {
+font-family: 'Roboto', sans-serif;
+}
 
 .button {
   transition: all;

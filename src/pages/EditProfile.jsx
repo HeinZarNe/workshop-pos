@@ -56,9 +56,27 @@ const EditProfile = () => {
   useEffect(() => {
     isSuccess &&
       Swal.fire({
-        position: "center",
+        // position: "center",
+        // icon: "success",
+        // title: "User Information has been updated",
+
+        title: "Information updated!",
+        buttonsStyling: false,
         icon: "success",
-        title: "User Information has been updated",
+        showConfirmButton: true,
+        color: "#bb86fc",
+        width: "28em",
+        confirmButtonText: "OK",
+        background: "#1e1e1e",
+        customClass: {
+          title: "text-primary",
+          // htmlContainer: 'bg-secondary',
+          // action: '!mt-2',
+          confirmButton:
+            "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+        },
+
+        // confirmButtonText: "Go to User",
 
         allowOutsideClick: true,
       });
@@ -71,6 +89,15 @@ const EditProfile = () => {
         position: "center",
         title: "LOADING...",
         showConfirmButton: false,
+        background: "#1e1e1e",
+        customClass: {
+          title: "text-primary",
+          // htmlContainer: 'bg-secondary',
+          // action: '!mt-2',
+          // confirmButton:
+          //   "bg-primary text-secondary px-6 py-2 font-mono font-semibold rounded-lg",
+        },
+
         allowOutsideClick: false,
       });
   }, [updating]);
@@ -132,6 +159,7 @@ const EditProfile = () => {
       position: "center",
       icon: "warning",
       title: "You will need to login again after you had changed password.",
+      background: "#1e1e1e",
 
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -143,6 +171,7 @@ const EditProfile = () => {
         Swal.fire({
           position: "center",
           icon: "success",
+          background: "#1e1e1e",
           title: "You need to login again to continue.",
           allowOutsideClick: false,
           allowEscapeKey: false,
