@@ -195,7 +195,7 @@ const Cashier = () => {
         });
     });
   };
-
+// console.log(data?.products);
   const handleGoBack = () => {
     navigate("/sale/recent");
   };
@@ -368,7 +368,7 @@ const Cashier = () => {
           <div className="w-[100%] mx-auto ">
             <div className="flex p-2 flex-row h-[85vh] overflow-y-scroll pb-[150px] flex-wrap gap-5 justify-center items-start">
               {/* {test.map((product) => ( */}
-              {data?.products?.map((product) => (
+              {data?.products?.filter(e=>e.stocks > 0).map((product) => (
                 <div
                   key={product.id}
                   className={`product flex hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 flex-col justify-between cursor-pointer overflow-hidden  w-[23%] bg-secondary borde rounded-lg shadow " ${

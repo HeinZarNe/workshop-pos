@@ -46,11 +46,11 @@ const ModalPhoto = ({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className=" absolute h-screen p-10 overflow- top-0 left-0 inset-0 bg-black bg-opacity-70 flex z-[19999] justify-center"
+        className=" absolute h-auto overflow- top-0 left-0 inset-0 bg-black bg-opacity-70 flex z-[19999] items-center justify-center"
       >
-        <div className=" bg-[#323232] overflow-y-scroll p-10 rounded-lg w-[1000px] flex flex-col gap-10 items-center">
-          <h2 className="text-white text-[22px] font-[600] ">Choose photo</h2>
-          <div className="grid grid-cols-3 gap-20 flex-wrap">
+        <div className=" bg-[#323232] overflow-y-scroll p-10 rounded-lg w-[800px] h-[80vh] flex flex-col gap-10 items-center">
+          {/* <h2 className="text-white text-[22px] font-[600] ">Choose photo</h2> */}
+          <div className="grid grid-cols-3 gap-10 p-2 h-auto overflow-scroll flex-wrap">
             {Array.isArray(data)
               ? data?.map((image) => (
                   <div
@@ -60,7 +60,7 @@ const ModalPhoto = ({
                       clickedPhoto === image ? "border-4 border-white" : ""
                     } w-[200px] h-[200px]`}
                   >
-                    <img className="w-full h-full" src={image.url} alt="" />
+                    <img className="w-full h-full object-cover rounded-md object-center" src={image.url} alt="" />
                   </div>
                 ))
               : "There is currently no photo."}
