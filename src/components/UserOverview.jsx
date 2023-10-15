@@ -21,7 +21,6 @@ const UserOverview = () => {
   const [page, setPage] = useState("");
   const [openModal, setOpenModal] = useState({ state: false, id: 0 });
   const [another, setAnother] = useState(true);
-  console.log(openModal.id);
   const {
     data: users,
     refetch,
@@ -163,8 +162,15 @@ const UserOverview = () => {
     <div className=" mx-10 my-5">
       {/* header */}
       <div className="flex justify-between">
-        <h1 className=" text-2xl ms-3 mt-2 font-semibold text-white">Profile details</h1>
-        <div className="px-5 py-2 rounded-md font-semibold bg-primary text-secondary" onClick={()=>setAnother(true)}>BACK</div>
+        <h1 className=" text-2xl ms-3 mt-2 font-semibold text-white">
+          Profile details
+        </h1>
+        <div
+          className="px-5 py-2 rounded-md font-semibold bg-primary text-secondary"
+          onClick={() => setAnother(true)}
+        >
+          BACK
+        </div>
       </div>
       <div className=" flex items-end gap-10 mt-10 mx-5">
         {/* image */}

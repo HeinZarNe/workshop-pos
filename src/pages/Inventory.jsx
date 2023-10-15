@@ -9,7 +9,6 @@ import AddStock from "../components/stock/AddStock";
 import { Loader, Pagination } from "@mantine/core";
 import { useGetProductQuery } from "../services/authApi";
 
-
 const Inventory = () => {
   const [view, setView] = useState("list");
   const [showSidebar, setShowSidebar] = useState(false);
@@ -27,7 +26,6 @@ const Inventory = () => {
   useEffect(() => {
     setTotalPage(data?.last_page);
     refetch();
-    console.log("d");
     return () => {};
   }, [data]);
   useEffect(() => {

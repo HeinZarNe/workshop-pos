@@ -74,7 +74,6 @@ const StockReport = () => {
   const inW = stockLevelBar?.stock_lvl_bar?.in_stock[1];
   const lW = stockLevelBar?.stock_lvl_bar?.low_stock[1];
   const oW = stockLevelBar?.stock_lvl_bar?.out_of_stock[1];
-  console.log(stockLevelBar?.stock_lvl_bar);
   const inStock = inW ? { width: `${inW}` } : "";
   const outOfStock = oW ? { width: `${oW}` } : "";
   const lowStock = lW ? { width: `${lW}` } : "";

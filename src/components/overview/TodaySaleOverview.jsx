@@ -21,7 +21,6 @@ const TodaySaleOverview = () => {
   const { data: isSaleClose, refetch } = useGetProductToSaleQuery({
     token,
   });
-  console.log(isSaleClose?.is_sale_close);
   const handleSaleClose = () => {
     // Swal.fire({
     //   title: "Are you sure?",

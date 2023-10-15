@@ -72,7 +72,7 @@ const AddProduct = ({ editState = false, setEditState }) => {
     if (editState) {
       brands?.with_no_pagi.map(
         (brand) =>
-          brand.brand_name == product?.data.name && setBrand_name(brand?.id)
+          brand.name == product?.data.brand_name && setBrand_name(brand?.id)
       );
       setName(product?.data.name);
 
@@ -85,7 +85,6 @@ const AddProduct = ({ editState = false, setEditState }) => {
   }, [editState, product, brands]);
 
   const navigate = useNavigate();
-  console.log(section);
   const submitHandler = async (e) => {
     e.preventDefault();
     if (isLoading) return;
@@ -480,7 +479,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 </div>
                 <div className="space-y-4 text-tcolor">
                   <p>: {name}</p>
-                  <p>: {brand_name}</p>
+                  <p>
+                    :{" "}
+                    {brands.with_no_pagi.map(
+                      (item) => item.id === Number(brand_name || 1) && item.name
+                    )}
+                  </p>
                   <p>: {unit || "-"}</p>
                   <p>: {more_information || "-"}</p>
                 </div>
@@ -866,7 +870,12 @@ const AddProduct = ({ editState = false, setEditState }) => {
                 </div>
                 <div className="space-y-4 text-tcolor">
                   <p>: {name}</p>
-                  <p>: {brand_name}</p>
+                  <p>
+                    :{" "}
+                    {brands.with_no_pagi.map(
+                      (item) => item.id === Number(brand_name || 1) && item.name
+                    )}
+                  </p>
                   <p>: {unit || "-"}</p>
                   <p>: {more_information || "-"}</p>
                 </div>

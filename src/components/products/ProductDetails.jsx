@@ -15,19 +15,17 @@ const ProductDetails = () => {
   });
   const { data: users } = useGetUserQuery({ token });
   // console.log(users);
-  console.log(data);
   const navigate = useNavigate();
 
   useEffect(() => {
     !state?.id && navigate("/products");
     state.id && refetch();
   }, [state]);
-  console.log(data?.data?.photo);
   return (
     <Rootlayout>
       {isLoading && (
         <div className="flex items-center justify-center w-full h-[300px]">
-          <Loader variant="bars" size='xl' color="#bb86fc" />
+          <Loader variant="bars" size="xl" color="#bb86fc" />
         </div>
       )}
       {data && (
