@@ -117,7 +117,7 @@ const Media = () => {
           <div className="flex flex-row gap-3 flex-wrap">
             {photo?.length > 0
               ? photo
-                  ?.sort((a, b) => b.id - a.id)
+                  // ?.sort((a, b) => b.id - a.id)
                   ?.map((photo, i) => (
                     <div
                       key={i}
