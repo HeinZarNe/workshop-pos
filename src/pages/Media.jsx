@@ -102,7 +102,7 @@ const Media = () => {
             <input
               type="file"
               ref={fileRef}
-              accept="image/png, image/jpg"
+              accept=" image/jpeg,image/png"
               style={{ display: "none" }}
               multiple
               onChange={handleFileChange}
