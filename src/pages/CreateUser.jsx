@@ -60,7 +60,7 @@ const CreateUser = () => {
         icon: "success",
         buttonsStyling: false,
         color: "#bb86fc",
-        width: "25em",
+        width: "28em",
         background: "#1e1e1e",
         confirmButtonText: "Go to User",
         customClass: {

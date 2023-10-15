@@ -41,13 +41,41 @@ const Media = () => {
   };
 
   const handleDelete = async (photo) => {
-    const { id } = photo;
-    const res = await deletePhotoMutation({ token, id });
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      iconColor: "#bb86fc",
+      buttonsStyling: false,
+      width: "20em",
+      color: "#fafafa",
+      heightAuto: false,
+      background: "#1E1E1E",
+      focusConfirm: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      customClass: {
+        cancelButton:
+          "bg-primary text-secondary rounded-lg border-2 border-primary px-4 font-mono py-2",
+        confirmButton:
+          "bg-transparent text-primary rounded-lg border-2 border-primary px-7 font-mono py-2",
+        // htmlContainer: '!pb-0',
+        actions: " !mt-5 !w-[100%] flex justify-center gap-9",
+        icon: "!p-0",
+        title: "!mt-0 !pt-0",
+      },
+      // cancelButtonColor: "#bb86fc",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { id } = photo;
+        const res = await deletePhotoMutation({ token, id });
 
-    if (res.data.message == "A photo has been deleted") {
-      dispatch(deletePhoto(id));
-    }
-    refetch();
+        if (res.data.message == "A photo has been deleted") {
+          dispatch(deletePhoto(id));
+        }
+        refetch();
+      }
+    });
   };
 
   const handleDragOver = (e) => {
