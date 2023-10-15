@@ -406,7 +406,7 @@ const Cashier = () => {
           </div>
         </div>
         {/* keyboard  */}
-        <div className="flex relative  overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-primary max-h-screen">
+        <div className="flex relative  overflow-hidden flex-col h-auto w-[440px] ms-auto border-l border-l-primary max-h-screen">
           <div className="">
             <h1 className="text-3xl py-5 px-4 text-tcolor font-semibold border-b border-b-primary">
               RECEIVE
@@ -508,7 +508,6 @@ const Cashier = () => {
             </div>
             {/* keyboard layout  */}
             <div className="mb-12 w-full bg-secondary">
-              {/* <div className="absolute bottom-0 w-full bg-secondary"> */}
               <div className="buttons  text-gray-400">
                 <div className="grid grid-cols-2 h-12">
                   <button

@@ -16,7 +16,7 @@ const Sidebar = () => {
   // console.log(window.location.pathname)
   const pathName = window.location.pathname;
   return (
-    <div className="inline-block bg-secondary max-h-[calc(100vh-57px)] overflow-y-auto w-[240px]">
+    <div className="inline-block bg-back max-h-[calc(100vh-57px)] overflow-y-auto w-[240px]">
       {/* <div className=" inline-block w-[15%] bg-[#323232] h-[calc(100vh-57px)] overflow-auto"> */}
       {/* <Navbar /> */}
       <div className="">

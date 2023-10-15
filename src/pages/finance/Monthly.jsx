@@ -179,7 +179,7 @@ const Monthly = () => {
                         return (
                           <tr
                             key={data.id}
-                            className=" border-b hover:bg-white/10 "
+                            className=" border-b hover:bg-back "
                           >
                             <th
                               scope="row"
