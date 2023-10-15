@@ -8,7 +8,7 @@ import "./Media.css";
 import { useDeletePhotoMutation } from "../services/mediaApi";
 import { addphoto, deletePhoto } from "../services/mediaSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Pagination } from "@mantine/core";
+import { Loader, Pagination } from "@mantine/core";
 import { BaseUrl } from "../utils/constant";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -115,33 +115,37 @@ const Media = () => {
             Uploaded Photo
           </h1>
           <div className="flex flex-row gap-3 flex-wrap">
-            {photo?.length > 0
-              ? photo
-                  // ?.sort((a, b) => b.id - a.id)
-                  ?.map((photo, i) => (
-                    <div
-                      key={i}
-                      className="img-container p-2 border border-secondary hover:border-white relative"
-                    >
-                      <div className="action-btns absolute  flex-row gap-3 bottom-5 right-5">
-                        <button
-                          className="bg-secondary hover:border hover:border-white w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-white"
-                          onClick={(_) => handleDelete(photo)}
-                        >
-                          <AiOutlineDelete size={27} />
-                        </button>
-                        {/* <button className="bg-secondary hover:border hover:border-white w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-white">
+            {photo?.length > 0 ? (
+              photo
+                // ?.sort((a, b) => b.id - a.id)
+                ?.map((photo, i) => (
+                  <div
+                    key={i}
+                    className="img-container rounded-md overflow-hidden p-2 border border-secondary hover:border-primary relative"
+                  >
+                    <div className="action-btns absolute  flex-row gap-3 bottom-5 right-5">
+                      <button
+                        className="bg-primary hover:border hover:border-secondary w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-secondary"
+                        onClick={(_) => handleDelete(photo)}
+                      >
+                        <AiOutlineDelete size={27} />
+                      </button>
+                      {/* <button className="bg-secondary hover:border hover:border-white w-[33px] h-[33px] flex items-center p-2 rounded-full shadow-md text-white">
                           <GoCopy />
                         </button> */}
-                      </div>
-                      <img
-                        className=" h-[200px] w-[200px]"
-                        src={photo.url}
-                        alt=""
-                      />
                     </div>
-                  ))
-              : ""}
+                    <img
+                      className="rounded-md object-cover object-center h-[200px] w-[200px]"
+                      src={photo.url}
+                      alt=""
+                    />
+                  </div>
+                ))
+            ) : (
+              <div className="w-full flex h-[25vh] items-center justify-center ">
+                <Loader size="xl" variant="bars" color="#bb86fc" />
+              </div>
+            )}
           </div>
           {/* <div className="pagination ">
             <Pagination
