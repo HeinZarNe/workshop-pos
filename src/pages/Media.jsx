@@ -142,7 +142,7 @@ const Media = () => {
           <h1 className=" text-[20px] font-[500] text-stone-400 mb-10">
             Uploaded Photo
           </h1>
-          <div className="flex bg-red-300 flex-row gap-3 flex-wrap">
+          <div className="flex  flex-row gap-3 flex-wrap">
             {photo?.length > 0 ? (
               photo
                 // ?.sort((a, b) => b.id - a.id)
