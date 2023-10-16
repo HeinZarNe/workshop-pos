@@ -113,7 +113,7 @@ const AddBrand = ({
         initial={{ x: "350px" }}
         animate={{ x: 0 }}
         exit={{ x: "350px" }}
-        className=" absolute right-0 z-40 h-[calc(100vh-57px)] overflow-y-auto w-[300px] bg-[#323232] shadow-2xl"
+        className=" fixed right-0 z-40 h-[calc(100vh-57px)] overflow-y-auto w-[300px] bg-[#323232] shadow-2xl"
       >
         <form onSubmit={handleSubmit} action="">
           <div className="  px-10 py-6 flex flex-col gap-[10px]">

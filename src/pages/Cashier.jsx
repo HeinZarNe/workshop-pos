@@ -375,7 +375,7 @@ const Cashier = () => {
             </div>
           </div>
           <div className="w-[100%] mx-auto ">
-            <div className="flex p-2 flex-row h-[85vh] overflow-y-scroll pb-[150px] flex-wrap gap-5 justify-center items-start">
+            <div className="flex p-2 flex-row h-[86vh] overflow-y-scroll pb-[150px] flex-wrap gap-5 justify-center items-start">
               {/* {test.map((product) => ( */}
               {data?.products
                 ?.filter((e) => e.stocks > 0)
@@ -417,7 +417,7 @@ const Cashier = () => {
           </div>
         </div>
         {/* keyboard  */}
-        <div className="flex relative  overflow-hidden flex-col h-screen w-[440px] ms-auto border-l border-l-primary max-h-screen">
+        <div className="flex relative  overflow-hidden flex-col h-auto w-[440px] ms-auto border-l border-l-primary max-h-screen">
           <div className="">
             <h1 className="text-3xl py-5 px-4 text-tcolor font-semibold border-b border-b-primary">
               RECEIVE
@@ -519,7 +519,6 @@ const Cashier = () => {
             </div>
             {/* keyboard layout  */}
             <div className="mb-12 w-full bg-secondary">
-              {/* <div className="absolute bottom-0 w-full bg-secondary"> */}
               <div className="buttons  text-gray-400">
                 <div className="grid grid-cols-2 h-12">
                   <button

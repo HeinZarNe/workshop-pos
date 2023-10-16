@@ -161,7 +161,7 @@ const Daily = () => {
                         return (
                           <tr
                             key={data.id}
-                            className=" border-b hover:bg-white/10 "
+                            className=" border-b hover:bg-back "
                           >
                             <th
                               scope="row"
@@ -222,16 +222,17 @@ const Daily = () => {
                         </p>
                       </div>
                     </div>
-
-                    <Pagination
-                      total={dailySalesData?.daily_sales?.last_page}
-                      onChange={(e) => {
-                        setPage(e);
-                        refetch();
-                      }}
-                      value={page || 1}
-                      boundaries={1}
-                    />
+                    <div className="pagination">
+                      <Pagination
+                        total={dailySalesData?.daily_sales?.last_page}
+                        onChange={(e) => {
+                          setPage(e);
+                          refetch();
+                        }}
+                        value={page || 1}
+                        boundaries={1}
+                      />
+                    </div>
                   </div>
                 )}
               </div>

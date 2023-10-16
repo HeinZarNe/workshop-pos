@@ -421,10 +421,10 @@ const StockReport = () => {
                   </tr>
                 </thead>
                 {stockLeveltable && (
-                  <tbody>
+                  <tbody >
                     {stockLeveltable?.data.map((e) => {
                       return (
-                        <tr key={e.id} className=" border-b hover:bg-white/10 ">
+                        <tr key={e.id} className=" border-b hover:bg-back ">
                           <th
                             scope="row"
                             className="px-6 py-4 font-medium text-tcolor whitespace-nowra"
