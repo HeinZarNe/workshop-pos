@@ -21,6 +21,15 @@ const Cashier = () => {
   const [searchBrand, setSearchBrand] = useState(null);
 
   const { data: brands } = useGetBrandQuery({ token });
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const {
     data,
     refetch,
@@ -195,7 +204,7 @@ const Cashier = () => {
         });
     });
   };
-// console.log(data?.products);
+  // console.log(data?.products);
   const handleGoBack = () => {
     navigate("/sale/recent");
   };
@@ -368,40 +377,42 @@ const Cashier = () => {
           <div className="w-[100%] mx-auto ">
             <div className="flex p-2 flex-row h-[85vh] overflow-y-scroll pb-[150px] flex-wrap gap-5 justify-center items-start">
               {/* {test.map((product) => ( */}
-              {data?.products?.filter(e=>e.stocks > 0).map((product) => (
-                <div
-                  key={product.id}
-                  className={`product flex hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 flex-col justify-between cursor-pointer overflow-hidden  w-[23%] bg-secondary borde rounded-lg shadow " ${
-                    selectedProducts.includes(product.id) ? "active" : ""
-                  }`}
-                  onClick={() => handleProductClick(product.id)}
-                >
-                  <div className="w-full object-fill">
-                    {product.photo ? (
-                      <img
-                        src={product.photo}
-                        className="object-cover object-center h-[190px] fit w-full"
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        src={milk}
-                        className="object-cover object-center h-[190px] fit w-full"
-                        alt=""
-                      />
-                    )}
-                  </div>
+              {data?.products
+                ?.filter((e) => e.stocks > 0)
+                .map((product) => (
+                  <div
+                    key={product.id}
+                    className={`product flex hover:scale-105 border-2 border-gray-600 hover:border-primary duration-150 flex-col justify-between cursor-pointer overflow-hidden  w-[23%] bg-secondary borde rounded-lg shadow " ${
+                      selectedProducts.includes(product.id) ? "active" : ""
+                    }`}
+                    onClick={() => handleProductClick(product.id)}
+                  >
+                    <div className="w-full object-fill">
+                      {product.photo ? (
+                        <img
+                          src={product.photo}
+                          className="object-cover object-center h-[190px] fit w-full"
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          src={milk}
+                          className="object-cover object-center h-[190px] fit w-full"
+                          alt=""
+                        />
+                      )}
+                    </div>
 
-                  <div className="p-5 pt-3 pe-6 text-right">
-                    <h5 className=" text-xl font-semibold tracking-tight text-primary">
-                      {product.name}
-                    </h5>
-                    <p className=" font-normal  text-tscolor">
-                      {product.price} Kyats
-                    </p>
+                    <div className="p-5 pt-3 pe-6 text-right">
+                      <h5 className=" text-xl font-semibold tracking-tight text-primary">
+                        {product.name}
+                      </h5>
+                      <p className=" font-normal  text-tscolor">
+                        {product.price} Kyats
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
